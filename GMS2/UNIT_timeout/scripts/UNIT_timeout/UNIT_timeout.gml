@@ -30,12 +30,30 @@ function UNIT_timeoutAppend(_timeout, _time, _f, _data) {
 //					f = f(timeout, f, data)
 /// @function		UNIT_timeoutAppendLoop(timeout, time, f, [data]);
 function UNIT_timeoutAppendLoop(_timeout, _time, _f, _data) {
-	var _super = [_time, _f, _data];
 	static _append = method_get_index(function(_timeout, _f, _data) {
-		_data[1](_timeout, _data[1], _data[2]);
+		if (_data[1](_timeout, _data[1], _data[2])) return;
 		UNIT_timeoutAppend(_timeout, _data[0], _f, _data);
 	});
+	
+	var _super = [_time, _f, _data];
 	UNIT_timeoutAppend(_timeout, _time, _append, _super);
+}
+
+//					f = f(timeout, f, data)
+/// @function		UNIT_timeoutAppendRepeat(timeout, time, count, f, [data]);
+function UNIT_timeoutAppendRepeat(_timeout, _time, _count, _f, _data) {
+	static _append = method_get_index(function(_timeout, _f, _data) {
+		if (_data[1](_timeout, _data[1], _data[2])) return;
+		
+		if (--_data[@ 3] > 0)
+			UNIT_timeoutAppend(_timeout, _data[0], _f, _data);
+	});
+	
+	if (_count > 0) {
+		
+		var _super = [_time, _f, _data, _count];
+		UNIT_timeoutAppend(_timeout, _time, _append, _super);
+	}
 }
 
 /// @param			timeout
