@@ -1,4 +1,9 @@
 
+/*
+sourse:
+https://github.com/dicksonlaw583/LightweightDataStructures/blob/master/extensions/LightweightDataStructures/LightweightDataStructures.gml
+*/
+
 function UNIT_sort(_data, _reverse, _sort_begin, _sort_end, _set, _get, _compare) {
 	
 	if (_sort_end - _sort_begin < 2) return;
@@ -16,7 +21,7 @@ function UNIT_sort(_data, _reverse, _sort_begin, _sort_end, _set, _get, _compare
 		__UNIT_sort_kernel,
 		_sort_begin,
 		_sort_end,
-	]
+	];
 	ds_queue_enqueue(_queue, _frame);
 	
 	while (not ds_queue_empty(_queue)) {
@@ -154,9 +159,4 @@ function __UNIT_sort_merger(_main, _frame) {
 
 #endregion
 
-var _cmp = function(a, b) { return a > b; };
 
-ar = [1 , 23 ,42, 1, 234 , 25 ,234, 1020];
-UNIT_sort(ar, true, 0, array_length(ar), array_set, array_get, _cmp);
-
-show_message(ar);
