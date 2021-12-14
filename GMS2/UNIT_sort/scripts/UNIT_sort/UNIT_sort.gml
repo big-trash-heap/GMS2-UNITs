@@ -4,6 +4,7 @@ sourse:
 https://github.com/dicksonlaw583/LightweightDataStructures/blob/master/extensions/LightweightDataStructures/LightweightDataStructures.gml
 */
 
+/// @function		UNIT_sort(data, reverse, sort_begin, sort_end, f_set, f_get, f_compare);
 function UNIT_sort(_data, _reverse, _sort_begin, _sort_end, _set, _get, _compare) {
 	
 	if (_sort_end - _sort_begin < 2) return;
