@@ -14,7 +14,7 @@ function UNIT_pragma(_f, _priority=0, _data) {
 		return;
 	}
 	
-	show_error(____UNIT_pragma__error, true);
+	show_error(____UNIT_PRAGMA_ERROR, true);
 }
 
 function UNIT_pragmaExecute() {
@@ -39,13 +39,13 @@ function UNIT_pragmaExecute() {
 		return;
 	}
 	
-	show_error(____UNIT_pragma__error, true);
+	show_error(____UNIT_PRAGMA_ERROR, true);
 }
 
 
 #region __private
 
-#macro ____UNIT_pragma__error "UNIT::pragma -> очередь уже использована"
+#macro ____UNIT_PRAGMA_ERROR "UNIT::pragma -> очередь уже использована"
 
 function __UNIT_pragma() {
 	static _void = function() {
