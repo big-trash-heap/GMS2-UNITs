@@ -128,6 +128,17 @@ function UNIT_timeoutExists(_timeout) {
 	return (instanceof(_timeout) == "__UNIT_Timeout" && _timeout.__value.ds >= 0);
 }
 
+/// @param			timeout
+function UNIT_timeoutSize(_timeout) {
+	if (UNIT_TIMEOUT_ERROR) {
+	
+	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_timeout__error, true);
+	
+	}
+	
+	return ds_priority_size(_timeout.__value.ds);
+}
+
 
 #region __private
 
