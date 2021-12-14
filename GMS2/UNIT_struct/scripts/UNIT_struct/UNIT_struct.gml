@@ -10,16 +10,16 @@ function UNIT_structClear(_struct) {
 	while (_size > 0) variable_struct_remove(_struct, _keys[--_size]);
 }
 
-/// @function		UNIT_structMerge(struct_merge, struct, [union=false]);
+/// @function		UNIT_structMerge(struct_merge, struct, [replace=false]);
 /// @description	Добавление полей struct в struct_merge
-function UNIT_structMerge(_struct_merge, _struct, _union=false) {
+function UNIT_structMerge(_struct_merge, _struct, _replace=false) {
     
     var _keys = variable_struct_get_names(_struct);
     var _size = array_length(_keys), _key;
     while (_size > 0) {
         
         _key = _keys[--_size];
-        if (_union and variable_struct_exists(_struct_merge, _key)) continue;
+        if (!_replace and variable_struct_exists(_struct_merge, _key)) continue;
         _struct_merge[$ _key] = _struct[$ _key];
     }
 	

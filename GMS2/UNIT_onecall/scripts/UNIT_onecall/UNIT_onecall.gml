@@ -1,6 +1,6 @@
 /* может выделить память под ds_ */
 
-#macro UNIT_ONECALL_LOG	true
+#macro UNIT_PREPROCESSOR_ONECALL_LOG	true
 
 #macro UNIT_ONE		if(__UNIT_onecall(
 #macro UNIT_CALL	))exit
@@ -11,7 +11,7 @@ function UNIT_onecallFree() {
 		ds_map_destroy(global.__UNIT_onecall_data);
 		global.__UNIT_onecall_data = -1;
 		
-		if (UNIT_ONECALL_LOG) {
+		if (UNIT_PREPROCESSOR_ONECALL_LOG) {
 		
 		show_debug_message("UNIT::onecall -> память под словарь была освобождена");
 		
@@ -44,7 +44,7 @@ function __UNIT_onecallData(_value) {
 	static _void = function() {
 		global.__UNIT_onecall_data = ds_map_create();
 		
-		if (UNIT_ONECALL_LOG) {
+		if (UNIT_PREPROCESSOR_ONECALL_LOG) {
 		
 		show_debug_message("UNIT::onecall -> память под словарь была выделена");
 		
