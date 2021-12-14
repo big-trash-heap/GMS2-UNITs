@@ -10,6 +10,7 @@ function UNIT_timeoutCreateAsync() {
 	return new __UNIT_Timeout(__UNIT_TimeoutAsync);
 }
 
+//					f = f(timeout, f, data)
 /// @function		UNIT_timeoutAppend(timeout, time, f, [data]);
 function UNIT_timeoutAppend(_timeout, _time, _f, _data) {
 	if (UNIT_TIMEOUT_ERROR) {
@@ -24,6 +25,17 @@ function UNIT_timeoutAppend(_timeout, _time, _f, _data) {
 	
 	}
 	
+}
+
+//					f = f(timeout, f, data)
+/// @function		UNIT_timeoutAppendLoop(timeout, time, f, [data]);
+function UNIT_timeoutAppendLoop(_timeout, _time, _f, _data) {
+	var _super = [_time, _f, _data];
+	static _append = method_get_index(function(_timeout, _f, _data) {
+		_data[1](_timeout, _data[1], _data[2]);
+		UNIT_timeoutAppend(_timeout, _data[0], _f, _data);
+	});
+	UNIT_timeoutAppend(_timeout, _time, _append, _super);
 }
 
 /// @param			timeout
@@ -90,7 +102,7 @@ function UNIT_timeoutTick(_timeout) {
 	
 	}
 	
-	_timeout.__value.tick(self);
+	_timeout.__value.tick(_timeout, self);
 }
 
 /// @param			timeout
@@ -122,27 +134,29 @@ function __UNIT_TimeoutSync() constructor {
 	self.ds = ds_priority_create();
 	self.time = 0;
 	
-	static tick = function(_context) {
+	static tick = function(_timeout, _context) {
 		
-		var _ds = self.ds;
-		var _min;
+		var _ds   = self.ds;
+		var _time = self.time;
+		
+		with (_context) {
+		
+		var _min, _f;
 		while (not ds_priority_empty(_ds)) {
 			
 			_min = ds_priority_find_min(_ds);
-			if (ds_priority_find_priority(_ds, _min) < self.time) {
+			if (ds_priority_find_priority(_ds, _min) < _time) {
 				
-				with (_context) {
-				
-				_min[__UNIT_timeout__val.F](_min[__UNIT_timeout__val.DATA]);
-				
-				}
-				
+				_f = _min[__UNIT_timeout__val.F];
+				_f(_timeout, _f, _min[__UNIT_timeout__val.DATA]);
 				ds_priority_delete_value(_ds, _min);
 			}
 			else {
 				_ds = -1;
 				break;
 			}
+		}
+		
 		}
 		
 		if (_ds == -1)
@@ -167,26 +181,28 @@ function __UNIT_TimeoutAsync() constructor {
 	self.ds = ds_priority_create();
 	self.time = current_time;
 	
-	static tick = function(_context) {
+	static tick = function(_timeout, _context) {
 		self.time = current_time;
+		var _ds   = self.ds;
+		var _time = self.time;
 		
-		var _min;
-		while (not ds_priority_empty(self.ds)) {
+		with (_context) {
 		
-			_min = ds_priority_find_min(self.ds);
-			if (ds_priority_find_priority(self.ds, _min) < self.time) {
+		var _min, _f;
+		while (not ds_priority_empty(_ds)) {
+		
+			_min = ds_priority_find_min(_ds);
+			if (ds_priority_find_priority(_ds, _min) < _time) {
 			
-				with (_context) {
-				
-				_min[__UNIT_timeout__val.F](_min[__UNIT_timeout__val.DATA]);
-				
-				}
-				
-				ds_priority_delete_value(self.ds, _min);
+				_f = _min[__UNIT_timeout__val.F];
+				_f(_timeout, _f, _min[__UNIT_timeout__val.DATA]);
+				ds_priority_delete_value(_ds, _min);
 			}
 			else {
 				break;
 			}
+		}
+		
 		}
 	}
 	
