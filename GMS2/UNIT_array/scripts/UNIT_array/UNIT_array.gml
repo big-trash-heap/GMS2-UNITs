@@ -2,9 +2,9 @@
 
 #region modify
 
-/// @function		UNIT_arrayPlace(array, [index=size], ...value);
+/// @function		UNIT_arrPlace(array, [index=size], ...value);
 /// @description	Заменят (и добавляет) элементы в массиве
-function UNIT_arrayPlace(_array, _index) {
+function UNIT_arrPlace(_array, _index) {
 	var _count = argument_count - 2;
 	if (_count > 0) {
 		
@@ -17,10 +17,10 @@ function UNIT_arrayPlace(_array, _index) {
 	}
 }
 
-/// @function		UNIT_arrayInsEm(array, index, count, [value]);
+/// @function		UNIT_arrInsEm(array, index, count, [value]);
 /// @description	Смещает элементы в массиве и устанавливает
 //					значение value (если указанно) на их место
-function UNIT_arrayInsEm(_array, _index, _count) {
+function UNIT_arrInsEm(_array, _index, _count) {
     if (_count > 0) {
 		
         var _length = array_length(_array);
@@ -57,7 +57,7 @@ function UNIT_arrayInsEm(_array, _index, _count) {
 //					Если элементов нету, вернёт undefined
 //
 /// @param			array
-function UNIT_arrayShift(_array) {
+function UNIT_arrShift(_array) {
     if (array_length(_array)) {
 		
         var _value = array_get(_array, 0);
@@ -67,11 +67,11 @@ function UNIT_arrayShift(_array) {
     return undefined;
 }
 
-/// @function		UNIT_arrayUnshift(array, ...value);
+/// @function		UNIT_arrUnshift(array, ...value);
 /// @description	Вставит элементы в начало массива
-function UNIT_arrayUnshift(_array) {
+function UNIT_arrUnshift(_array) {
 	var _argSize = argument_count;
-    if (UNIT_arrayInsEm(_array, 0, _argSize - 1)) {
+    if (UNIT_arrInsEm(_array, 0, _argSize - 1)) {
 		
         var _i = 0;
         while (++_i < _argSize) 
@@ -83,7 +83,7 @@ function UNIT_arrayUnshift(_array) {
 }
 
 /// @param			array
-function UNIT_arrayShuffle(_array) {
+function UNIT_arrShuffle(_array) {
     var _size = array_length(_array);
     if (_size > 1) {
 		
@@ -98,10 +98,10 @@ function UNIT_arrayShuffle(_array) {
 	}
 }
 
-/// @function		UNIT_arrayCop(dest, dest_index, src, [src_index=0], [length=max]);
+/// @function		UNIT_arrCop(dest, dest_index, src, [src_index=0], [length=max]);
 /// @description	Аналог array_copy, поддерживающий копирование 
 //					в двух одинаковых (по ссылкам) массивам
-function UNIT_arrayCop(_dest, _destIndex, _src, _srcIndex=0, _length) {
+function UNIT_arrCop(_dest, _destIndex, _src, _srcIndex=0, _length) {
 	
     if (is_undefined(_length)) _length = array_length(_src) - _srcIndex;
     if (_length > 0) {
@@ -130,10 +130,10 @@ function UNIT_arrayCop(_dest, _destIndex, _src, _srcIndex=0, _length) {
     }
 }
 
-/// @function		UNIT_arrayIns(dest, dest_index, src, [src_index=0], [length=max]);
+/// @function		UNIT_arrIns(dest, dest_index, src, [src_index=0], [length=max]);
 /// @description	Вставка элементов, поддерживает вставку из
 //					двух одинаковых (по ссылкам) массивам
-function UNIT_arrayIns(_dest, _destIndex, _src, _srcIndex=0, _length) {
+function UNIT_arrIns(_dest, _destIndex, _src, _srcIndex=0, _length) {
 	
     if (is_undefined(_length)) _length = array_length(_src) - _srcIndex;
     if (_length > 0) {
@@ -170,12 +170,17 @@ function UNIT_arrayIns(_dest, _destIndex, _src, _srcIndex=0, _length) {
     }
 }
 
-/// @function		UNIT_arrayRemNOrd(array, index);
+/// @function		UNIT_arrRemNOrd(array, index);
 /// @description	Удаляет элемент меняя его местами с последним
-function UNIT_arrayRemNOrd(_array, _index) {
+function UNIT_arrRemNOrd(_array, _index) {
 	var _size = array_length(_array) - 1;
 	array_set(_array, _index, array_get(_array, _size));
 	array_resize(_array, _size);
+}
+
+/// @param			array
+function UNIT_arrClear(_array) {
+	array_resize(_array, 0);	
 }
 
 #endregion
@@ -183,7 +188,7 @@ function UNIT_arrayRemNOrd(_array, _index) {
 #region build
 
 /// @param			...value
-function UNIT_arrayBul() {
+function UNIT_arrBul() {
 	var _argSize  = argument_count;
 	var _arrayBul = array_create(_argSize);
 	for (var _i = 0; _i < _argSize; ++_i) 
@@ -194,7 +199,7 @@ function UNIT_arrayBul() {
 /// @param			...value
 /// @description	Функция для построение массива из
 //					массивов и значений
-function UNIT_arrayBulConcat() {
+function UNIT_arrBulConcat() {
 	var _argSize  = argument_count;
 	var _arrayBul = [];
 	if (_argSize > 0) {
@@ -227,7 +232,7 @@ function UNIT_arrayBulConcat() {
 
 /// @param			array
 /// @description	Клонирование массива с глубиной 1
-function UNIT_arrayBulDup1d(_array) {
+function UNIT_arrBulDup1d(_array) {
 	var _size = array_length(_array);
 	var _arrayBul = array_create(_size);
 	array_copy(_arrayBul, 0, _array, 0, _size);
@@ -238,8 +243,8 @@ function UNIT_arrayBulDup1d(_array) {
 
 #region find
 
-/// @function		UNIT_arrayFindInd(array, value, [index=0]);
-function UNIT_arrayFindInd(_array, _value, _index=0) {
+/// @function		UNIT_arrFindInd(array, value, [index=0]);
+function UNIT_arrFindInd(_array, _value, _index=0) {
 	
 	var _size = array_length(_array);
 	for (; _index < _size; ++_index)
@@ -248,30 +253,30 @@ function UNIT_arrayFindInd(_array, _value, _index=0) {
 	return -1;
 }
 
-/// @function		UNIT_arrayExists(array, value);
-function UNIT_arrayExists(_array, _value) {
-	return (UNIT_arrayFindInd(_array, _value) != -1);
+/// @function		UNIT_arrExists(array, value);
+function UNIT_arrExists(_array, _value) {
+	return (UNIT_arrFindInd(_array, _value) != -1);
 }
 
 #endregion
 
 #region range
 
-/// @function		UNIT_arrayRangeGet(array, index, size);
-function UNIT_arrayRangeGet(_array, _index, _length) {
+/// @function		UNIT_arrRangeGet(array, index, size);
+function UNIT_arrRangeGet(_array, _index, _length) {
 	var _range = array_create(_length);
 	array_copy(_range, 0, _array, _index, _length);
 	return _range;
 }
 
-/// @function		UNIT_arrayRangeSet(array, index, range);
-function UNIT_arrayRangeSet(_array, _index, _range) {
-	UNIT_arrayCop(_array, _index, _range);
+/// @function		UNIT_arrRangeSet(array, index, range);
+function UNIT_arrRangeSet(_array, _index, _range) {
+	UNIT_arrCop(_array, _index, _range);
 }
 
-/// @function		UNIT_arrayRangeInsert(array, index, range);
-function UNIT_arrayRangeInsert(_array, _index, _range) {
-	UNIT_arrayIns(_array, _index, _range);
+/// @function		UNIT_arrRangeInsert(array, index, range);
+function UNIT_arrRangeInsert(_array, _index, _range) {
+	UNIT_arrIns(_array, _index, _range);
 }
 
 #endregion
