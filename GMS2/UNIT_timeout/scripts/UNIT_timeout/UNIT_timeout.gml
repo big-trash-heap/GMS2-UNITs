@@ -3,14 +3,11 @@
 
 
 function UNIT_timeoutCreateSync() {
-	return new __UNIT_Timeout();
+	return new __UNIT_Timeout(__UNIT_TimeoutSync);
 }
 
 function UNIT_timeoutCreateAsync() {
-	var _timeout = new __UNIT_Timeout();
-	_timeout.__tick = __UNIT_timeoutAsync;
-	_timeout.__time = current_time;
-	return _timeout;
+	return new __UNIT_Timeout(__UNIT_TimeoutAsync);
 }
 
 /// @function		UNIT_timeoutAppend(timeout, time, f, [data]);
@@ -21,7 +18,12 @@ function UNIT_timeoutAppend(_timeout, _time, _f, _data) {
 	
 	}
 	
-	ds_priority_add(_timeout.__ds, [_f, _data], _timeout.__time + _time);
+	with (_timeout.__value) {
+	
+	ds_priority_add(self.ds, [_f, _data], self.time + _time);
+	
+	}
+	
 }
 
 /// @param			timeout
@@ -32,8 +34,12 @@ function UNIT_timeoutClear(_timeout) {
 	
 	}
 	
-	_timeout.__time = 0;
-	ds_priority_clear(_timeout.__ds);
+	with (_timeout.__value) {
+	
+	self.clear();
+	ds_priority_clear(self.ds);
+	
+	}
 }
 
 /// @param			timeout
@@ -44,15 +50,20 @@ function UNIT_timeoutExecute(_timeout) {
 	
 	}
 	
-	_timeout.__time = 0;
+	var _ds, _min;
+	with (_timeout.__value) {
 	
-	var _ds = _timeout.__ds;
-	var _min;
+	_ds = self.ds;
+	self.clear();
+	
+	}
+	
 	while (not ds_priority_empty(_ds)) {
 		
 		_min = ds_priority_delete_min(_ds);
 		_min[__UNIT_timeout__val.F](_min[__UNIT_timeout__val.DATA]);
 	}
+	
 }
 
 // @param			timeout
@@ -63,8 +74,12 @@ function UNIT_timeoutFree(_timeout) {
 	
 	}
 	
-	ds_priority_destroy(_timeout.__ds);
-	_timeout.__ds = -1;
+	with (_timeout.__value) {
+		
+	ds_priority_destroy(self.ds);
+	self.ds = -1;
+	
+	}
 }
 
 /// @param			timeout
@@ -75,12 +90,12 @@ function UNIT_timeoutTick(_timeout) {
 	
 	}
 	
-	_timeout.__tick();
+	_timeout.__value.tick(self);
 }
 
 /// @param			timeout
 function UNIT_timeoutExists(_timeout) {
-	return (instanceof(_timeout) == "__UNIT_Timeout" && _timeout.__ds >= 0);
+	return (instanceof(_timeout) == "__UNIT_Timeout" && _timeout.__value.ds >= 0);
 }
 
 
@@ -92,61 +107,98 @@ enum __UNIT_timeout__val { F, DATA };
 
 function UNIT_timeout() {};
 
-function __UNIT_Timeout() constructor {
+function __UNIT_Timeout(_constructor) constructor {
 	
-	self.__ds = ds_priority_create();
-	self.__time = 0;
-	
-	static __tick = __UNIT_timeoutSync;
+	self.__value = new _constructor();
 	
 	static toString = function() {
-		return ("UNIT::timeout" + (self.__tick == __UNIT_timeoutSync ? "Sync" : "Async"));
+		return self.__value.toString();	
 	}
 	
 }
 
-function __UNIT_timeoutSync() {
+function __UNIT_TimeoutSync() constructor {
 	
-	var _ds = self.__ds;
-	var _min;
-	while (not ds_priority_empty(_ds)) {
+	self.ds = ds_priority_create();
+	self.time = 0;
+	
+	static tick = function(_context) {
 		
-		_min = ds_priority_find_min(_ds);
-		if (ds_priority_find_priority(_ds, _min) < self.__time) {
+		var _ds = self.ds;
+		var _min;
+		while (not ds_priority_empty(_ds)) {
 			
-			_min[__UNIT_timeout__val.F](_min[__UNIT_timeout__val.DATA]);
-			ds_priority_delete_value(_ds, _min);
+			_min = ds_priority_find_min(_ds);
+			if (ds_priority_find_priority(_ds, _min) < self.time) {
+				
+				with (_context) {
+				
+				_min[__UNIT_timeout__val.F](_min[__UNIT_timeout__val.DATA]);
+				
+				}
+				
+				ds_priority_delete_value(_ds, _min);
+			}
+			else {
+				_ds = -1;
+				break;
+			}
 		}
-		else {
-			_ds = -1;
-			break;
-		}
+		
+		if (_ds == -1)
+			self.time += 1;
+		else
+			self.time = 0;
 	}
 	
-	if (_ds == -1)
-		self.__time += 1;
-	else
-		self.__time = 0;
+	static clear = function() {
+		self.time = 0;
+	}
+	
+	static toString = function() {
+		
+		return "UNIT::timeoutSync";
+	}
+	
 }
 
-function __UNIT_timeoutAsync() {
+function __UNIT_TimeoutAsync() constructor {
 	
-	self.__time = current_time;
+	self.ds = ds_priority_create();
+	self.time = current_time;
 	
-	var _ds = self.__ds;
-	var _min;
-	while (not ds_priority_empty(_ds)) {
+	static tick = function(_context) {
+		self.time = current_time;
 		
-		_min = ds_priority_find_min(_ds);
-		if (ds_priority_find_priority(_ds, _min) < self.__time) {
+		var _min;
+		while (not ds_priority_empty(self.ds)) {
+		
+			_min = ds_priority_find_min(self.ds);
+			if (ds_priority_find_priority(self.ds, _min) < self.time) {
 			
-			_min[__UNIT_timeout__val.F](_min[__UNIT_timeout__val.DATA]);
-			ds_priority_delete_value(_ds, _min);
-		}
-		else {
-			break;
+				with (_context) {
+				
+				_min[__UNIT_timeout__val.F](_min[__UNIT_timeout__val.DATA]);
+				
+				}
+				
+				ds_priority_delete_value(self.ds, _min);
+			}
+			else {
+				break;
+			}
 		}
 	}
+	
+	static clear = function() {
+		self.time = current_time;	
+	}
+	
+	static toString = function() {
+		
+		return "UNIT::timeoutAsync";
+	}
+	
 }
 
 #endregion
