@@ -1,7 +1,5 @@
 
 
-
-
 #region modify
 
 /// @param			struct

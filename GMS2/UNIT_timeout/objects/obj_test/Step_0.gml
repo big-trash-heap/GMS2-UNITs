@@ -1,2 +1,4 @@
 
-UNIT_timeoutTick(timeout);
+with {} 
+
+UNIT_timeoutTick(other.timeout);

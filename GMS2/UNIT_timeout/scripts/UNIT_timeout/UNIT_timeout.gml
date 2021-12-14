@@ -120,7 +120,8 @@ function UNIT_timeoutTick(_timeout) {
 	
 	}
 	
-	_timeout.__value.tick(_timeout, self);
+	var _tick = _timeout.__value.tick;
+	_tick(_timeout);
 }
 
 /// @param			timeout
@@ -163,12 +164,14 @@ function __UNIT_TimeoutSync() constructor {
 	self.ds = ds_priority_create();
 	self.time = 0;
 	
-	static tick = function(_timeout, _context) {
+	static tick = method_get_index(function(_timeout) {
+		
+		with (_timeout.__value) {
 		
 		var _ds   = self.ds;
 		var _time = self.time;
 		
-		with (_context) {
+		}
 		
 		var _min, _f;
 		while (not ds_priority_empty(_ds)) {
@@ -186,13 +189,11 @@ function __UNIT_TimeoutSync() constructor {
 			}
 		}
 		
-		}
-		
 		if (_ds == -1)
-			self.time += 1;
+			_timeout.__value.time += 1;
 		else
-			self.time = 0;
-	}
+			_timeout.__value.time = 0;
+	});
 	
 	static clear = function() {
 		self.time = 0;
@@ -210,12 +211,15 @@ function __UNIT_TimeoutAsync() constructor {
 	self.ds = ds_priority_create();
 	self.time = current_time;
 	
-	static tick = function(_timeout, _context) {
+	static tick = method_get_index(function(_timeout) {
+		
+		with (_timeout.__value) {
+		
 		self.time = current_time;
 		var _ds   = self.ds;
 		var _time = self.time;
 		
-		with (_context) {
+		}
 		
 		var _min, _f;
 		while (not ds_priority_empty(_ds)) {
@@ -231,9 +235,7 @@ function __UNIT_TimeoutAsync() constructor {
 				break;
 			}
 		}
-		
-		}
-	}
+	});
 	
 	static clear = function() {
 		self.time = current_time;	
