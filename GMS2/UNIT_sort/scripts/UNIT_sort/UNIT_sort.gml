@@ -7,7 +7,7 @@ https://github.com/dicksonlaw583/LightweightDataStructures/blob/master/extension
 //					f_set     = f_set(data, index, value);
 //					f_get     = f_get(data, index);
 //					f_compare = f_compare(value1, value2);
-/// @function		UNIT_sort(data, reverse, sort_begin, sort_end, f_set, f_get, f_compare);
+/// @function		UNIT_sort(data, reverse, sort_begin, sort_end, f_set, f_get, [f_compare=|>|]);
 function UNIT_sort(_data, _reverse, _sort_begin, _sort_end, _set, _get, _compare) {
 	
 	static _def_compare = method_get_index(function(_x, _y) {
@@ -18,19 +18,10 @@ function UNIT_sort(_data, _reverse, _sort_begin, _sort_end, _set, _get, _compare
 	if (_compare == undefined) _compare = _def_compare;
 	
 	var _stack = ds_stack_create();
-	var _main = [
-		_stack,
-		_data,
-		_reverse,
-		_set,
-		_get,
-		_compare,
-	];
-	
 	ds_stack_push(_stack, _sort_end, _sort_begin, __UNIT_sort_kernel);
 	
 	while (not ds_stack_empty(_stack))
-		ds_stack_pop(_stack)(_main);
+		ds_stack_pop(_stack)(_stack, _data, _reverse, _set, _get, _compare);
 	
 	ds_stack_destroy(_stack);
 }
@@ -47,9 +38,8 @@ enum __UNIT_SORT_MAIN {
 	COMPARE,
 };
 
-function __UNIT_sort_kernel(_main) {
+function __UNIT_sort_kernel(_stack, _data, _reverse, _set, _get, _compare) {
 	
-	var _stack = _main[__UNIT_SORT_MAIN.STACK];
 	var _begin = ds_stack_pop(_stack);
 	var _end   = ds_stack_pop(_stack);
 	
@@ -57,14 +47,9 @@ function __UNIT_sort_kernel(_main) {
 	if (_span < 2) return;
 	if (_span == 2) {
 		
-		var _data = _main[__UNIT_SORT_MAIN.DATA];
-		var _get  = _main[__UNIT_SORT_MAIN.GET];
-		
 		var _value1 = _get(_data, _begin);
 		var _value2 = _get(_data, _begin + 1);
-		if (_main[__UNIT_SORT_MAIN.REVERSE] == _main[__UNIT_SORT_MAIN.COMPARE](_value1, _value2)) {
-			
-			var _set = _main[__UNIT_SORT_MAIN.SET];
+		if (_reverse == _compare(_value1, _value2)) {
 			
 			_set(_data, _begin,     _value2);
 			_set(_data, _begin + 1, _value1);
@@ -83,21 +68,14 @@ function __UNIT_sort_kernel(_main) {
 	
 }
 
-function __UNIT_sort_merger(_main) {
+function __UNIT_sort_merger(_stack, _data, _reverse, _set, _get, _compare) {
 	
-	var _stack  = _main[__UNIT_SORT_MAIN.STACK];
 	var _begin  = ds_stack_pop(_stack);
 	var _end    = ds_stack_pop(_stack);
 	var _middle = ds_stack_pop(_stack);
 	
-	var _data    = _main[__UNIT_SORT_MAIN.DATA]; 
-	var _set     = _main[__UNIT_SORT_MAIN.SET];
-	var _get     = _main[__UNIT_SORT_MAIN.GET];
-	var _compare = _main[__UNIT_SORT_MAIN.COMPARE];
-	var _reverse = _main[__UNIT_SORT_MAIN.REVERSE];
-	
-	var _i = 0;
-	var _j = 0;
+	var _i     = 0;
+	var _j     = 0;
 	var _iSize = _middle - _begin;
 	var _jSize = _end - _middle;
 	var _ii    = -1;
@@ -143,3 +121,6 @@ function __UNIT_sort_merger(_main) {
 
 #endregion
 
+ar = [1, 7, 234, 123, 12, 346, 12, 745, 34, 865, 13516];
+UNIT_sort(ar, false, 0, array_length(ar), array_set, array_get);
+show_message(ar)
