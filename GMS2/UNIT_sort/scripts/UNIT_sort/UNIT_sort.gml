@@ -4,47 +4,42 @@ sourse:
 https://github.com/dicksonlaw583/LightweightDataStructures/blob/master/extensions/LightweightDataStructures/LightweightDataStructures.gml
 */
 
+//					f_set     = f_set(data, index, value);
+//					f_get     = f_get(data, index);
+//					f_compare = f_compare(value1, value2);
 /// @function		UNIT_sort(data, reverse, sort_begin, sort_end, f_set, f_get, f_compare);
 function UNIT_sort(_data, _reverse, _sort_begin, _sort_end, _set, _get, _compare) {
 	
-	if (_sort_end - _sort_begin < 2) return;
+	static _def_compare = method_get_index(function(_x, _y) {
+		return _x > _y;
+	});
 	
-	var _queue = ds_queue_create();
+	if (_sort_end - _sort_begin < 2) return;
+	if (_compare == undefined) _compare = _def_compare;
+	
+	var _stack = ds_stack_create();
 	var _main = [
-		_queue,
+		_stack,
 		_data,
 		_reverse,
 		_set,
 		_get,
 		_compare,
 	];
-	var _frame = [
-		__UNIT_sort_kernel,
-		_sort_begin,
-		_sort_end,
-	];
-	ds_queue_enqueue(_queue, _frame);
 	
-	while (not ds_queue_empty(_queue)) {
-		_frame = ds_queue_dequeue(_queue);
-		_frame[__UNIT_SORT_FRAME.FUNCTION](_main, _frame);
-	}
+	ds_stack_push(_stack, _sort_end, _sort_begin, __UNIT_sort_kernel);
 	
-	ds_queue_destroy(_queue);
+	while (not ds_stack_empty(_stack))
+		ds_stack_pop(_stack)(_main);
+	
+	ds_stack_destroy(_stack);
 }
 
 
 #region __private
 
-enum __UNIT_SORT_FRAME {
-	FUNCTION,
-	BEGIN,
-	END,
-	MIDDLE,
-};
-
 enum __UNIT_SORT_MAIN {
-	QUEUE,
+	STACK,
 	DATA,
 	REVERSE,
 	SET,
@@ -52,10 +47,11 @@ enum __UNIT_SORT_MAIN {
 	COMPARE,
 };
 
-function __UNIT_sort_kernel(_main, _frame) {
+function __UNIT_sort_kernel(_main) {
 	
-	var _begin = _frame[__UNIT_SORT_FRAME.BEGIN];
-	var _end   = _frame[__UNIT_SORT_FRAME.END];
+	var _stack = _main[__UNIT_SORT_MAIN.STACK];
+	var _begin = ds_stack_pop(_stack);
+	var _end   = ds_stack_pop(_stack);
 	
 	var _span = _end - _begin;
 	if (_span < 2) return;
@@ -77,35 +73,22 @@ function __UNIT_sort_kernel(_main, _frame) {
 	}
 	
 	var _halfSpan = _span div 2;
-	var _queue    = _main[__UNIT_SORT_MAIN.QUEUE];
 	var _middle   = _begin + _halfSpan;
 	
-	ds_queue_enqueue(_queue, [
-		__UNIT_sort_kernel,
-		_begin,
-		_middle,
-	]);
-	
-	ds_queue_enqueue(_queue, [
-		__UNIT_sort_kernel,
-		_middle,
-		_end,
-	]);
-	
-	ds_queue_enqueue(_queue, [
-		__UNIT_sort_merger,
-		_begin,
-		_end,
-		_middle,
-	]);
+	ds_stack_push(_stack,
+		_middle, _end, _begin, __UNIT_sort_merger,
+		_middle, _begin, __UNIT_sort_kernel,
+		_end, _middle, __UNIT_sort_kernel,
+	);
 	
 }
 
-function __UNIT_sort_merger(_main, _frame) {
+function __UNIT_sort_merger(_main) {
 	
-	var _begin   = _frame[__UNIT_SORT_FRAME.BEGIN];
-	var _middle  = _frame[__UNIT_SORT_FRAME.MIDDLE];
-	var _end     = _frame[__UNIT_SORT_FRAME.END];
+	var _stack  = _main[__UNIT_SORT_MAIN.STACK];
+	var _begin  = ds_stack_pop(_stack);
+	var _end    = ds_stack_pop(_stack);
+	var _middle = ds_stack_pop(_stack);
 	
 	var _data    = _main[__UNIT_SORT_MAIN.DATA]; 
 	var _set     = _main[__UNIT_SORT_MAIN.SET];
@@ -159,5 +142,4 @@ function __UNIT_sort_merger(_main, _frame) {
 }
 
 #endregion
-
 
