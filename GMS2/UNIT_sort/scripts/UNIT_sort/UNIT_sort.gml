@@ -29,15 +29,6 @@ function UNIT_sort(_data, _reverse, _sort_begin, _sort_end, _set, _get, _compare
 
 #region __private
 
-enum __UNIT_SORT_MAIN {
-	STACK,
-	DATA,
-	REVERSE,
-	SET,
-	GET,
-	COMPARE,
-};
-
 function __UNIT_sort_kernel(_stack, _data, _reverse, _set, _get, _compare) {
 	
 	var _begin = ds_stack_pop(_stack);
@@ -121,6 +112,3 @@ function __UNIT_sort_merger(_stack, _data, _reverse, _set, _get, _compare) {
 
 #endregion
 
-ar = [1, 7, 234, 123, 12, 346, 12, 745, 34, 865, 13516];
-UNIT_sort(ar, false, 0, array_length(ar), array_set, array_get);
-show_message(ar)
