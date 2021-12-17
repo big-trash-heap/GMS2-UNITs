@@ -1,4 +1,5 @@
 
+// Абстрактный класс
 function UNIT_Timer() constructor {
 	
 	#region __private
@@ -50,7 +51,9 @@ function UNIT_Timer() constructor {
 	
 }
 
-
+/// @param			timer
+/// @description	Отвяжет таймер от обработчика 
+//					и вернёт true, если таймер был отвязан
 function UNIT_timerRemove(_timer) {
 	static _map = __UNIT_timerHandler();
 	var _cell = _map[? _timer];
@@ -71,11 +74,16 @@ function UNIT_timerRemove(_timer) {
 	return true;
 }
 
+/// @param			timer
+/// @description	Вернёт привязан ли таймер к чему-то
 function UNIT_timerIsBind(_timer) {
 	static _map = __UNIT_timerHandler();
 	return ds_map_exists(_map, _timer);
 }
 
+/// @param			timer
+/// @description	Вернёт обработчик, к которому привязан таймер
+//					Если не привязан вернёт undefined
 function UNIT_timerGetHandler(_timer) {
 	static _map = __UNIT_timerHandler();
 	var _cell = _map[? _timer];
