@@ -33,6 +33,48 @@ function UNIT_dsListDel(_id, _index, _count) {
 	UNIT_dsListResize(_id, _idSize - _count);
 }
 
+/// @param			id
+/// @description	Вернёт и удалит последний элемент
+function UNIT_dsListPop(_id) {
+	var _size = ds_list_size(_id);
+	if (_size > 0) {
+		
+		var _value = _id[| --_size];
+		ds_list_delete(_value, _size);
+		return _value;
+	}
+}
+
+/// @param			id
+/// @description	Вернёт и удалит первый элемент
+function UNIT_dsListDequeue(_id) {
+	if (ds_list_size(_id) > 0) {
+		
+		var _value = _id[| 0];
+		ds_list_delete(_id, 0);
+		return _value;
+	}
+}
+
+/// @param			id
+/// @description	Вернёт первый элемент
+function UNIT_dsListHead(_id) {
+	if (ds_list_size(_id) > 0) {
+		
+		return _id[| 0];
+	}
+}
+
+/// @param			id
+/// @description	Вернёт последний элемент
+function UNIT_dsListTail(_id) {
+	var _size = ds_list_size(_id);
+	if (_size > 0) {
+		
+		return _id[| --_size];
+	}
+}
+
 #endregion
 
 #region build

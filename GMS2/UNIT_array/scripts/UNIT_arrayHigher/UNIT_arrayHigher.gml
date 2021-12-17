@@ -17,12 +17,12 @@ function UNIT_arrFilter(_array, _f, _data) {
 	var _size = array_length(_array);
 	if (_size > 0) {
 		
-		var _i = 0, _j = -1, _value;
+		var _i = 0, _j = 0, _value;
 		do {
 		
 			_value = _array[_i];
 			if (_f(_value, _i, _data))
-				_array[@ ++_j] = _value;
+				_array[@ _j++] = _value;
 		} until (++_i == _size);
 		array_resize(_array, _j);
 	}

@@ -31,7 +31,7 @@ function UNIT_TimersHandler() constructor {
 		return _timer;
 	}
 	
-	static tick = function() {
+	static tick = function(_super) {
 		
 		var _size = array_length(self.__timers);
 		if (_size > 0) {
@@ -43,7 +43,7 @@ function UNIT_TimersHandler() constructor {
 				if (_value[UNIT_TIMER_CELL.HANDLER] == self) {
 					
 					_timer = _value[UNIT_TIMER_CELL.TIMER];
-					if (not _timer.__tick(self, _timer)) {
+					if (not _timer.__tick(self, _timer, _super)) {
 						self.__timers[_j] = _value;
 						++_j;
 					}

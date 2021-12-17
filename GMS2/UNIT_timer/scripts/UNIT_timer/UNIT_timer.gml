@@ -3,9 +3,9 @@ function UNIT_Timer() constructor {
 	
 	#region __private
 	
-	static __init = UNIT_timer /* handler, timer, arg, */;
-	static __tick = UNIT_timer /* handler, timer       */;
-	static __kill = UNIT_timer /* handler, timer       */;
+	static __init = UNIT_timer /* handler, timer, arg   */;
+	static __tick = UNIT_timer /* handler, timer, super */;
+	static __kill = UNIT_timer /* handler, timer        */;
 	 
 	#endregion
 	
@@ -26,6 +26,26 @@ function UNIT_Timer() constructor {
 	
 	static toString = function() {
 		return ("UNIT::Timer::" + instanceof(self));
+	}
+	
+	
+	static set = function(_key, _value) {
+		self[$ _key] = _value;
+		return self;
+	}
+	
+	static impl = function(_struct, _replace=true) {
+		
+		var _keys = variable_struct_get_names(_struct);
+	    var _size = array_length(_keys), _key;
+	    while (_size > 0) {
+        
+	        _key = _keys[--_size];
+	        if (!_replace and variable_struct_exists(self, _key)) continue;
+	        self[$ _key] = _struct[$ _key];
+	    }
+		
+		return self;
 	}
 	
 }
