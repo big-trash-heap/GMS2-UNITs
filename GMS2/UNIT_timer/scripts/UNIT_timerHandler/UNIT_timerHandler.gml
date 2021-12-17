@@ -1,6 +1,6 @@
 
 
-function UNIT_TimerHandler() {
+function UNIT_TimersHandler() constructor {
 	
 	#region __private
 	
@@ -31,7 +31,7 @@ function UNIT_TimerHandler() {
 		return _timer;
 	}
 	
-	static iter = function() {
+	static tick = function() {
 		
 		var _size = array_length(self.__timers);
 		if (_size > 0) {
@@ -43,7 +43,7 @@ function UNIT_TimerHandler() {
 				if (_value[UNIT_TIMER_CELL.HANDLER] == self) {
 					
 					_timer = _value[UNIT_TIMER_CELL.TIMER];
-					if (_timer.__tick(self, _timer) == false) {
+					if (not _timer.__tick(self, _timer)) {
 						self.__timers[_j] = _value;
 						++_j;
 					}
