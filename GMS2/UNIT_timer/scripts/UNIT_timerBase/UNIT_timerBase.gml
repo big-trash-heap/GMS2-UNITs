@@ -123,21 +123,21 @@ function __UNIT_TimerBaseTimelapseExt(_steps, _ftick, _finit, _ffree) : __UNIT_T
 		return (abs(self.__step) / self.__max_step);
 	}
 	
-	static resetTime = function(_endPlay=false) {
+	static resetTime = function(_play=false) {
 		var _sign = sign(self.__step);
-		if (_sign == 0) _sign = (_endPlay ? -1 : 1);
+		if (_sign == 0) _sign = (_play ? 1 : -1);
 		self.__step = self.__max_step * _sign;
 		return self;
 	}
 	
 }
 
-function __UNIT_timerTickSync(_handler, _timer) {
+function __UNIT_timerTickSync(_handler, _timer, _super) {
 	
 	if (self.__step > 0) {
 		
 		--self.__step;
-		self.__ftick(_handler, _timer);
+		self.__ftick(_handler, _timer, _super);
 		return (self.__step == 0);
 	}
 }

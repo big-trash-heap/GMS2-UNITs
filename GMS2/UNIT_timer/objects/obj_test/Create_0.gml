@@ -80,8 +80,18 @@ UNIT_timerGl_loop(
 )._set("num", 1)._set("timer", undefined);
 
 self._fff = function() {
-	show_message("end");
+	timer = UNIT_timerGl_async(5000, function(_0, _timer, _1, _count) {
+		show_debug_message(["hello", _timer.getLeftCf(), _count]);
+	}, undefined, function(_0, _timer) {
+		show_debug_message("<< hello");
+		_timer.resetTime();
+		UNIT_timerGl_timer(_timer);
+	});
+	timer.pause();
+
+	UNIT_timerGl_asyncEnd(2500, function() {
+		show_message("hello");
+		timer.resume();
+	});
 }
 
-// 1, 1, 1, &2, 1, clear, &8, 222, 444, fff(), 444, 222, clearAll, 0, &8, 222, 444, fff()
-// 1, 1, 1, &2, 1, clear, &8, 222, 444, fff(), 444, 222, clearAll, 0, fff(), end
