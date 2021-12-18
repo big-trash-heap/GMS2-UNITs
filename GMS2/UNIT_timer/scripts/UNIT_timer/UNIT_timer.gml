@@ -30,12 +30,12 @@ function UNIT_Timer() constructor {
 	}
 	
 	
-	static set = function(_key, _value) {
+	static _set = function(_key, _value) {
 		self[$ _key] = _value;
 		return self;
 	}
 	
-	static impl = function(_struct, _replace=true) {
+	static _impl = function(_struct, _replace=true) {
 		
 		var _keys = variable_struct_get_names(_struct);
 	    var _size = array_length(_keys), _key;

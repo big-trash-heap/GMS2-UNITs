@@ -1,5 +1,5 @@
 
-#macro UNIT_PREPROCESSOR_PRAGMA_ERROR_APPEND	true
+#macro UNIT_PREPROCESSOR_TIMER_ERROR_APPEND	true
 
 function UNIT_TimersHandler() constructor {
 	
@@ -37,7 +37,7 @@ function UNIT_TimersHandler() constructor {
 		var _size = array_length(self.__timers);
 		if (_size > 0) {
 			
-			if (UNIT_PREPROCESSOR_PRAGMA_ERROR_APPEND) {
+			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
 				
 			if (self.__clear_j != -1) show_error("UNIT::timer -> нельзя вызывать tick во время вызова tick, clear, clearAll");
 			self.__clear_j = 0;
@@ -70,7 +70,7 @@ function UNIT_TimersHandler() constructor {
 			
 			array_resize(self.__timers, _j);
 			
-			if (UNIT_PREPROCESSOR_PRAGMA_ERROR_APPEND) {
+			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
 			
 			self.__clear_j = -1;
 			

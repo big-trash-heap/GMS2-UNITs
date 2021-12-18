@@ -1,7 +1,11 @@
 
+/// @function		UNIT_TimerLoop(ftick, finit, fkill);
+/// @description	Зацикленный таймер
 function UNIT_TimerLoop(_ftick, _finit, _fkill) : __UNIT_TimerBaseLoop(_ftick, _finit, _fkill) constructor {};
 
-function UNIT_TimerSync(_steps, _ftick, _finit, _fkill) : __UNIT_TimerBaseTimeout(_steps, _ftick, _finit, _fkill) constructor {
+/// @function		UNIT_TimerSync(steps, ftick, finit, fkill);
+/// @description	Синхронный таймер
+function UNIT_TimerSync(_steps, _ftick, _finit, _fkill) : __UNIT_TimerBaseTimelapse(_steps, _ftick, _finit, _fkill) constructor {
 	
 	#region __private
 	
@@ -11,7 +15,9 @@ function UNIT_TimerSync(_steps, _ftick, _finit, _fkill) : __UNIT_TimerBaseTimeou
 	
 }
 
-function UNIT_TimerSyncExt(_steps, _ftick, _finit, _fkill) : __UNIT_TimerBaseTimeoutExt(_steps, _ftick, _finit, _fkill) constructor {
+/// @function		UNIT_TimerSyncExt(steps, ftick, finit, fkill);
+/// @description	Синхронный таймер, с большим функционалом
+function UNIT_TimerSyncExt(_steps, _ftick, _finit, _fkill) : __UNIT_TimerBaseTimelapseExt(_steps, _ftick, _finit, _fkill) constructor {
 	
 	#region __private
 	
@@ -36,7 +42,7 @@ function __UNIT_TimerBaseLoop(_ftick=undefined, _finit=undefined, _fkill=undefin
 	
 }
 
-function __UNIT_TimerBaseTimeout(_steps, _ftick=undefined, _finit=undefined, _fkill=undefined) : UNIT_Timer() constructor {
+function __UNIT_TimerBaseTimelapse(_steps, _ftick=undefined, _finit=undefined, _fkill=undefined) : UNIT_Timer() constructor {
 	
 	#region __private
 	
@@ -84,7 +90,7 @@ function __UNIT_TimerBaseTimeout(_steps, _ftick=undefined, _finit=undefined, _fk
 	
 }
 
-function __UNIT_TimerBaseTimeoutExt(_steps, _ftick, _finit, _fkill) : __UNIT_TimerBaseTimeout(_steps, _ftick, _finit, _fkill) constructor {
+function __UNIT_TimerBaseTimelapseExt(_steps, _ftick, _finit, _fkill) : __UNIT_TimerBaseTimelapse(_steps, _ftick, _finit, _fkill) constructor {
 	
 	#region __private
 	
