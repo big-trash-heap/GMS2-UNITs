@@ -6,7 +6,7 @@ function UNIT_Timer() constructor {
 	
 	static __init = UNIT_timer /* handler, timer, arg   */;
 	static __tick = UNIT_timer /* handler, timer, super */;
-	static __kill = UNIT_timer /* handler, timer        */;
+	static __free = UNIT_timer /* handler, timer        */;
 	 
 	#endregion
 	
@@ -61,13 +61,13 @@ function UNIT_timerRemove(_timer) {
 	
 	ds_map_delete(_map, _timer);
 	
-	var _handler = _cell[UNIT_TIMER_CELL.HANDLER];
-	_cell[@ UNIT_TIMER_CELL.HANDLER] = undefined;
+	var _handler = _cell[__UNIT_TIMER_CELL.HANDLER];
+	_cell[@ __UNIT_TIMER_CELL.HANDLER] = undefined;
 	
 	with (_handler) {
 	
 	--self.__count;
-	_timer.__kill(self, _timer);
+	_timer.__free(self, _timer);
 	
 	}
 	
@@ -87,7 +87,7 @@ function UNIT_timerIsBind(_timer) {
 function UNIT_timerGetHandler(_timer) {
 	static _map = __UNIT_timerHandler();
 	var _cell = _map[? _timer];
-	if (_cell != undefined) return _cell[UNIT_TIMER_CELL.HANDLER];
+	if (_cell != undefined) return _cell[__UNIT_TIMER_CELL.HANDLER];
 }
 
 

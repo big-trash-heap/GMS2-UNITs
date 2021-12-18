@@ -1,12 +1,12 @@
 
 
-/// @function		UNIT_TimerLoop([ftick], [finit], [fkill]);
+/// @function		UNIT_TimerLoop([ftick], [finit], [ffree]);
 /// @description	Зацикленный таймер
-function UNIT_TimerLoop(_ftick, _finit, _fkill) : __UNIT_TimerBaseLoop(_ftick, _finit, _fkill) constructor {};
+function UNIT_TimerLoop(_ftick, _finit, _ffree) : __UNIT_TimerBaseLoop(_ftick, _finit, _ffree) constructor {};
 
-/// @function		UNIT_TimerSync(steps, [ftick], [finit], [fkill]);
+/// @function		UNIT_TimerSync(steps, [ftick], [finit], [ffree]);
 /// @description	Синхронный таймер
-function UNIT_TimerSync(_steps, _ftick, _finit, _fkill) : __UNIT_TimerBaseTimelapse(_steps, _ftick, _finit, _fkill) constructor {
+function UNIT_TimerSync(_steps, _ftick, _finit, _ffree) : __UNIT_TimerBaseTimelapse(_steps, _ftick, _finit, _ffree) constructor {
 	
 	#region __private
 	
@@ -16,9 +16,9 @@ function UNIT_TimerSync(_steps, _ftick, _finit, _fkill) : __UNIT_TimerBaseTimela
 	
 }
 
-/// @function		UNIT_TimerSyncExt(steps, [ftick], [finit], [fkill]);
+/// @function		UNIT_TimerSyncExt(steps, [ftick], [finit], [ffree]);
 /// @description	Синхронный таймер, с большим функционалом
-function UNIT_TimerSyncExt(_steps, _ftick, _finit, _fkill) : __UNIT_TimerBaseTimelapseExt(_steps, _ftick, _finit, _fkill) constructor {
+function UNIT_TimerSyncExt(_steps, _ftick, _finit, _ffree) : __UNIT_TimerBaseTimelapseExt(_steps, _ftick, _finit, _ffree) constructor {
 	
 	#region __private
 	
@@ -31,19 +31,19 @@ function UNIT_TimerSyncExt(_steps, _ftick, _finit, _fkill) : __UNIT_TimerBaseTim
 
 #region __private
 
-function __UNIT_TimerBaseLoop(_ftick=undefined, _finit=undefined, _fkill=undefined) : UNIT_Timer() constructor {
+function __UNIT_TimerBaseLoop(_ftick=undefined, _finit=undefined, _ffree=undefined) : UNIT_Timer() constructor {
 	
 	#region __private
 	
 	if (_finit != undefined) self.__init = _finit;
 	if (_ftick != undefined) self.__tick = _ftick;
-	if (_fkill != undefined) self.__kill = _fkill;
+	if (_ffree != undefined) self.__free = _ffree;
 	
 	#endregion
 	
 }
 
-function __UNIT_TimerBaseTimelapse(_steps, _ftick=undefined, _finit=undefined, _fkill=undefined) : UNIT_Timer() constructor {
+function __UNIT_TimerBaseTimelapse(_steps, _ftick=undefined, _finit=undefined, _ffree=undefined) : UNIT_Timer() constructor {
 	
 	#region __private
 	
@@ -52,7 +52,7 @@ function __UNIT_TimerBaseTimelapse(_steps, _ftick=undefined, _finit=undefined, _
 	self.__step = ceil(abs(_steps)) * sign(_steps);
 	
 	if (_finit != undefined) self.__init = _finit;
-	if (_fkill != undefined) self.__kill = _fkill;
+	if (_ffree != undefined) self.__free = _ffree;
 	
 	if (_ftick != undefined) self.__ftick = _ftick;
 	
@@ -91,7 +91,7 @@ function __UNIT_TimerBaseTimelapse(_steps, _ftick=undefined, _finit=undefined, _
 	
 }
 
-function __UNIT_TimerBaseTimelapseExt(_steps, _ftick, _finit, _fkill) : __UNIT_TimerBaseTimelapse(_steps, _ftick, _finit, _fkill) constructor {
+function __UNIT_TimerBaseTimelapseExt(_steps, _ftick, _finit, _ffree) : __UNIT_TimerBaseTimelapse(_steps, _ftick, _finit, _ffree) constructor {
 	
 	#region __private
 	

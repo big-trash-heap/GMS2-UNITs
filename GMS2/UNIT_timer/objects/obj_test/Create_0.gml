@@ -8,6 +8,7 @@ UNIT_timerGl_loop(
 		
 		show_message(1);
 		
+		
 		_timer.timer = UNIT_timerGl_loop(
 			function(_0, _timer) {
 				show_message(_timer.num);
