@@ -45,7 +45,7 @@ UNIT_timerGl_loop(
 							
 							self._fff = _save;
 							
-							_timer.remove();
+							return true;
 						}
 					}, undefined,
 					function(_0, _timer) {

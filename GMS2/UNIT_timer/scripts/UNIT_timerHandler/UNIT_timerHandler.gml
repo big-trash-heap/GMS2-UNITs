@@ -1,5 +1,6 @@
 
 #macro UNIT_PREPROCESSOR_TIMER_ERROR_APPEND	true
+#macro UNIT_PREPROCESSOR_TIMER_ERROR_TICK	true
 
 function UNIT_TimersHandler() constructor {
 	
@@ -7,12 +8,7 @@ function UNIT_TimersHandler() constructor {
 	
 	self.__timers = [];
 	self.__count  = 0;
-	
-	if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
-	
-	self.__clear = 0;
-	
-	}
+	self.__clear  = -1;
 	
 	static _map = __UNIT_timerHandler();
 	
@@ -40,10 +36,10 @@ function UNIT_TimersHandler() constructor {
 		var _size = array_length(self.__timers);
 		if (_size > 0) {
 			
-			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
+			if (UNIT_PREPROCESSOR_TIMER_ERROR_TICK) {
 				
-			if (self.__clear > 0) show_error("UNIT::timer -> нельзя вызывать tick во время вызова tick, clear, clearAll", true);
-			self.__clear += 1;
+			if (self.__clear != -1) show_error("UNIT::timer -> нельзя вызывать tick во время вызова tick, clear, clearAll", true);
+			self.__clear = -2;
 			
 			}
 			
@@ -59,7 +55,8 @@ function UNIT_TimersHandler() constructor {
 						++_j;
 					}
 					else
-					if (_value[UNIT_TIMER_CELL.HANDLER] == self)
+					//if (_value[UNIT_TIMER_CELL.HANDLER] == self) // entry-space
+					if (UNIT_timerGetHandler(_value[UNIT_TIMER_CELL.TIMER]) == self) // handler-space
 						UNIT_timerRemove(_timer);
 				}
 			} until (++_i == _size);
@@ -78,9 +75,9 @@ function UNIT_TimersHandler() constructor {
 			
 			array_resize(self.__timers, _j);
 			
-			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
+			if (UNIT_PREPROCESSOR_TIMER_ERROR_TICK) {
 			
-			self.__clear -= 1;
+			self.__clear = -1;
 			
 			}
 		}
@@ -91,27 +88,21 @@ function UNIT_TimersHandler() constructor {
 		var _size = array_length(self.__timers);
 		if (_size > 0) {
 			
-			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
+			self.__clear = max(0, self.__clear);
 			
-			self.__clear += 1;
-			
-			}
-			
-			var _i = 0, _value;
-			while (_i < _size) {
+			var _value;
+			while (self.__clear < _size) {
 				
-				_value = self.__timers[_i];
-				++_i;
+				_value = self.__timers[self.__clear];
+				++self.__clear;
 				
-				if (_value[UNIT_TIMER_CELL.HANDLER] == self)
-					UNIT_timerRemove(_value[UNIT_TIMER_CELL.TIMER]);
+				if (_value[UNIT_TIMER_CELL.HANDLER] == self && 
+					UNIT_timerRemove(_value[UNIT_TIMER_CELL.TIMER]) &&
+					self.__clear == -1)
+					return;
 			}
 			
-			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
-			
-			self.__clear -= 1;
-			
-			}
+			self.__clear = -1;
 		}
 	}
 	
@@ -119,27 +110,21 @@ function UNIT_TimersHandler() constructor {
 		
 		if (array_length(self.__timers) > 0) {
 			
-			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
+			self.__clear = max(0, self.__clear);
 			
-			self.__clear += 1;
-			
-			}
-			
-			var _i = 0, _value;
-			while (_i < array_length(self.__timers)) {
+			var _value;
+			while (self.__clear < array_length(self.__timers)) {
 				
-				_value = self.__timers[_i];
-				++_i;
+				_value = self.__timers[self.__clear];
+				++self.__clear;
 				
-				if (_value[UNIT_TIMER_CELL.HANDLER] == self)
-					UNIT_timerRemove(_value[UNIT_TIMER_CELL.TIMER]);
+				if (_value[UNIT_TIMER_CELL.HANDLER] == self && 
+					UNIT_timerRemove(_value[UNIT_TIMER_CELL.TIMER]) &&
+					self.__clear == -1)
+					return;
 			}
 			
-			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
-			
-			self.__clear -= 1;
-			
-			}
+			self.__clear = -1;
 		}
 	}
 	
