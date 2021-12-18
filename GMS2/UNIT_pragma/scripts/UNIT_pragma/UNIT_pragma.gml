@@ -24,7 +24,7 @@ function UNIT_pragmaExecute() {
 		while (!ds_priority_empty(global.__UNIT_pragma_data)) {
 			
 			_data = ds_priority_delete_min(global.__UNIT_pragma_data);
-			_data[__UNIT_PRAGMA_CELL.F](_data[__UNIT_PRAGMA_CELL.VALUE]);
+			_data[__UNIT_PRAGMA_CELL._F](_data[__UNIT_PRAGMA_CELL._VALUE]);
 		}
 		
 		ds_priority_destroy(global.__UNIT_pragma_data);
@@ -47,7 +47,7 @@ function UNIT_pragmaExecute() {
 
 #macro ____UNIT_PRAGMA_ERROR "UNIT::pragma -> очередь уже использована"
 
-enum __UNIT_PRAGMA_CELL { F, VALUE };
+enum __UNIT_PRAGMA_CELL { _F, _VALUE };
 
 function __UNIT_pragma() {
 	static _void = function() {

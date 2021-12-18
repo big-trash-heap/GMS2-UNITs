@@ -62,8 +62,8 @@ function UNIT_timerRemove(_timer) {
 	
 	ds_map_delete(_map, _timer);
 	
-	var _handler = _cell[__UNIT_TIMER_CELL.HANDLER];
-	_cell[@ __UNIT_TIMER_CELL.HANDLER] = undefined;
+	var _handler = _cell[__UNIT_TIMER_CELL._HANDLER];
+	_cell[@ __UNIT_TIMER_CELL._HANDLER] = undefined;
 	
 	with (_handler) {
 	
@@ -88,7 +88,7 @@ function UNIT_timerIsBind(_timer) {
 function UNIT_timerGetHandler(_timer) {
 	static _map = __UNIT_timerHandler();
 	var _cell = _map[? _timer];
-	if (_cell != undefined) return _cell[__UNIT_TIMER_CELL.HANDLER];
+	if (_cell != undefined) return _cell[__UNIT_TIMER_CELL._HANDLER];
 }
 
 
