@@ -1,4 +1,5 @@
 
+
 // Абстрактный класс
 function UNIT_Timer() constructor {
 	
@@ -35,7 +36,7 @@ function UNIT_Timer() constructor {
 		return self;
 	}
 	
-	static _impl = function(_struct, _replace=true) {
+	static _ext = function(_struct, _replace=true) {
 		
 		var _keys = variable_struct_get_names(_struct);
 	    var _size = array_length(_keys), _key;
