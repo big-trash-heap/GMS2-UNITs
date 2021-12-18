@@ -4,6 +4,7 @@
     {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},"order":0,},
     {"id":{"name":"UNIT_timer","path":"scripts/UNIT_timer/UNIT_timer.yy",},"order":1,},
     {"id":{"name":"room_test","path":"rooms/room_test/room_test.yy",},"order":1,},
+    {"id":{"name":"UNIT_timerGlobal","path":"scripts/UNIT_timerGlobal/UNIT_timerGlobal.yy",},"order":3,},
     {"id":{"name":"UNIT_timerHandler","path":"scripts/UNIT_timerHandler/UNIT_timerHandler.yy",},"order":0,},
   ],
   "Options": [

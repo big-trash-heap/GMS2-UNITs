@@ -1,2 +1,2 @@
 
-hand.tick();
+UNIT_timerGlobalTick();

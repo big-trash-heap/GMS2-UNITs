@@ -59,7 +59,7 @@ function UNIT_timerRemove(_timer) {
 	var _cell = _map[? _timer];
 	if (_cell == undefined) return false;
 	
-	ds_map_delete(_map, _cell);
+	ds_map_delete(_map, _timer);
 	
 	var _handler = _cell[UNIT_TIMER_CELL.HANDLER];
 	_cell[@ UNIT_TIMER_CELL.HANDLER] = undefined;

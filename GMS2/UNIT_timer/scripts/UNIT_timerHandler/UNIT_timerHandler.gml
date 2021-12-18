@@ -8,8 +8,11 @@ function UNIT_TimersHandler() constructor {
 	self.__timers = [];
 	self.__count  = 0;
 	
-	self.__clear_i = -1;
-	self.__clear_j = -1;
+	if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
+	
+	self.__clear = 0;
+	
+	}
 	
 	static _map = __UNIT_timerHandler();
 	
@@ -17,7 +20,7 @@ function UNIT_TimersHandler() constructor {
 	
 	static append = function(_timer, _argument) {
 		
-		if (ds_map_exists(self._map, _timer)) {
+		if (UNIT_timerGetHandler(_timer) == self) {
 			
 			show_error("UNIT::timer -> Таймер уже занят обработчиком", true);
 		}
@@ -39,8 +42,8 @@ function UNIT_TimersHandler() constructor {
 			
 			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
 				
-			if (self.__clear_j != -1) show_error("UNIT::timer -> нельзя вызывать tick во время вызова tick, clear, clearAll");
-			self.__clear_j = 0;
+			if (self.__clear > 0) show_error("UNIT::timer -> нельзя вызывать tick во время вызова tick, clear, clearAll", true);
+			self.__clear += 1;
 			
 			}
 			
@@ -56,23 +59,28 @@ function UNIT_TimersHandler() constructor {
 						++_j;
 					}
 					else
-					if (_value[UNIT_TIMER_CELL.HANDLER] == self) 
+					if (_value[UNIT_TIMER_CELL.HANDLER] == self)
 						UNIT_timerRemove(_timer);
 				}
 			} until (++_i == _size);
 			
 			_size = array_length(self.__timers);
 			while (_i != _size) {
-				self.__timers[_j] = self.__timers[_i];
-				++_j;
+				
+				_value = self.__timers[_i];
 				++_i;
+				
+				if (_value[UNIT_TIMER_CELL.HANDLER] == self) {
+					self.__timers[_j] = _value;
+					++_j;
+				}
 			}
 			
 			array_resize(self.__timers, _j);
 			
 			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
 			
-			self.__clear_j = -1;
+			self.__clear -= 1;
 			
 			}
 		}
@@ -83,36 +91,27 @@ function UNIT_TimersHandler() constructor {
 		var _size = array_length(self.__timers);
 		if (_size > 0) {
 			
-			if (self.__clear_i < 0) {
-				
-				if (self.__clear_i == -2) return;
-				self.__clear_i = 0;
+			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
+			
+			self.__clear += 1;
+			
 			}
 			
-			self.__clear_j = _size;
-			
-			var _value;
-			while (self.__clear_i != self.__clear_j) {
+			var _i = 0, _value;
+			while (_i < _size) {
 				
-				_value = self.__timers[self.__clear_i++];
+				_value = self.__timers[_i];
+				++_i;
+				
 				if (_value[UNIT_TIMER_CELL.HANDLER] == self)
 					UNIT_timerRemove(_value[UNIT_TIMER_CELL.TIMER]);
 			}
 			
-			if (self.__clear_i < 0) return;
-			_size = array_length(self.__timers);
+			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
 			
-			var _j = 0;
-			while (self.__clear_i != _size) {
-				self.__timers[_j] = self.__timers[self.__clear_i];
-				++_j;
-				++self.__clear_i;
+			self.__clear -= 1;
+			
 			}
-			
-			array_resize(self.__timers, _j);
-			
-			self.__clear_i = -1;
-			self.__clear_j = -1;
 		}
 	}
 	
@@ -120,20 +119,27 @@ function UNIT_TimersHandler() constructor {
 		
 		if (array_length(self.__timers) > 0) {
 			
-			self.__clear_i = -2;
-			self.__clear_j = -1;
+			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
+			
+			self.__clear += 1;
+			
+			}
 			
 			var _i = 0, _value;
-			do {
+			while (_i < array_length(self.__timers)) {
 				
 				_value = self.__timers[_i];
+				++_i;
+				
 				if (_value[UNIT_TIMER_CELL.HANDLER] == self)
 					UNIT_timerRemove(_value[UNIT_TIMER_CELL.TIMER]);
-			} until (++_i == array_length(self.__timers));
+			}
 			
-			array_resize(self.__timers, 0);
+			if (UNIT_PREPROCESSOR_TIMER_ERROR_APPEND) {
 			
-			self.__clear_i = -1;
+			self.__clear -= 1;
+			
+			}
 		}
 	}
 	
