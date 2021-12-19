@@ -1,4 +1,6 @@
 
+#macro UNIT_PREPROCESSOR_ANIMATOR_REPLAY	false
+
 enum UNIT_ANIMATOR_ACTION { _STOP, _AWAIT, _NEXT };
 enum UNIT_ANIMATOR_CODE   { _BREAK = -1, _STOP, _CALL };
 
@@ -106,7 +108,11 @@ function UNIT_Animator(_f, _data, _super) constructor {
 				}
 			}
 			
+			if (UNIT_PREPROCESSOR_ANIMATOR_REPLAY) {
+			
 			if (is_undefined(self.__render_actions)) return UNIT_ANIMATOR_CODE._CALL;
+			
+			}
 		} until (++_i == _size);
 			
 		if (_next) return self.__next();
@@ -195,6 +201,12 @@ function UNIT_Animator(_f, _data, _super) constructor {
 	
 	
 	static replay = function() {
+		
+		if (not UNIT_PREPROCESSOR_ANIMATOR_REPLAY) {
+		
+		show_error("UNIT::animator -> для работы функции UNIT_Animator.replay включите UNIT_PREPROCESSOR_ANIMATOR_REPLAY", true);
+		
+		}
 		
 		self.__render_run     = 0;
 		self.__render_actions = undefined;
