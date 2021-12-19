@@ -173,8 +173,11 @@ function UNIT_TimersHandler() constructor {
 		show_error(____UNIT_TIMER_ERROR, true);
 		
 		}
+		else {
 		
 		return (self == UNIT_timerGetHandler(self.__temp));
+		
+		}
 	}
 	
 	static _tick_isEntry = function() {
@@ -183,8 +186,11 @@ function UNIT_TimersHandler() constructor {
 		show_error(____UNIT_TIMER_ERROR, true);
 		
 		}
+		else {
 		
 		return (self == self.__temp[__UNIT_TIMER_CELL._HANDLER]);
+		
+		}
 	}
 	
 	#endregion

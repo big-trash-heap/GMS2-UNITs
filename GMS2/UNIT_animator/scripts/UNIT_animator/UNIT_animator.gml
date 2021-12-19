@@ -1,16 +1,18 @@
 
-#macro UNIT_PREPROCESSOR_ANIMATOR_REPLAY	false
+#macro UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE	false
+#macro UNIT_PREPROCESSOR_ANIMATOR_ERROR_TICK	true
 
 enum UNIT_ANIMATOR_ACTION { _STOP, _AWAIT, _NEXT };
 enum UNIT_ANIMATOR_CODE   { _BREAK = -1, _STOP, _CALL };
 
 function UNIT_Animator(_f, _data, _super) constructor {
 	
+	self.super = _super;
+	
 	#region __private
 	
 	if (_f != undefined) _f = [_f, _data];
 	
-	self.__super          = _super;
 	self.__frames         = [4, 0, [], _f];
 	self.__point_size     = 0;
 	
@@ -157,16 +159,23 @@ function UNIT_Animator(_f, _data, _super) constructor {
 	}
 	
 	
-	static _tick = self.__tick;
-	
 	static tick = function() {
 		
-		if (variable_struct_exists(self, "__save")) show_error("", true);
+		if (UNIT_PREPROCESSOR_ANIMATOR_ERROR_TICK) {
+		
+		if (variable_struct_exists(self, "__save")) show_error("UNIT::animator -> нельзя вызывать tick во время вызова tick", true);
 		self.__save = undefined;
 		
 		var _result = self.__tick();
 		variable_struct_remove(self, "__save");
 		return _result;
+		
+		}
+		else {
+			
+		return self.__tick();
+		
+		}
 	}
 	
 	static code = function() {
@@ -182,11 +191,11 @@ function UNIT_Animator(_f, _data, _super) constructor {
 	
 	
 	static get_super = function() {
-		return self.__super;
+		return self.super;
 	}
 	
 	static set_super = function(_super) {
-		self.__super = _super;
+		self.super = _super;
 		return self;
 	}
 	
@@ -200,18 +209,23 @@ function UNIT_Animator(_f, _data, _super) constructor {
 	}
 	
 	
-	static replay = function() {
+	static _replay = function() {
 		
-		if (not UNIT_PREPROCESSOR_ANIMATOR_REPLAY) {
+		if (not UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE) {
 		
 		show_error("UNIT::animator -> для работы функции UNIT_Animator.replay включите UNIT_PREPROCESSOR_ANIMATOR_REPLAY", true);
 		
 		}
+		else {
+		
+		show_debug_message("UNIT::animator -> UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE -> ._replay является не безопасной функцией");
 		
 		self.__render_run     = 0;
 		self.__render_actions = undefined;
 		
 		return self;
+		
+		}
 	}
 	
 }
