@@ -15,8 +15,6 @@
 	###############
 */
 
-#region auto
-
 /*
 	Ограничение и возможности данной реализации
 	1. Расположение тайлов нельзя изменить
@@ -31,13 +29,13 @@
 	
 	В отличие от тайлинга на 16, режим cd для автотайлинга 47, вводит дополнительную логику, 
 	которую нужно обязательно соблюдать (иначе это рантайм ошибки)
-	Я не могу описать эту логику, так как я жёстко её запрограммировал tilemapAuto47_set_cd
+	Я не могу описать эту логику, так как я жёстко её запрограммировал UNIT_tileAuto47_set_cd
 	
 	Здесь создаётся таблица для перевода из битов в индексы, и наоборот
 */
 
-/// @function		tilemapAuto47_set(tilemap_element_id, cell_x, cell_y);
-function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
+/// @function		UNIT_tileAuto47_set(tilemap_element_id, cell_x, cell_y);
+function UNIT_tileAuto47_set(_tilemapElementId, _cellX, _cellY) {
 	
 	//
 	if (tilemap_get(_tilemapElementId, _cellX, _cellY) > 0) exit;
@@ -70,7 +68,7 @@ function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
 			_centerBits |= 1;
 			_leftBits   |= 4;
 			_mathBits   |= 32;
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, __tilemapAuto47_reset, 303); // left-top
+			UNIT_tileModify(_tilemapElementId, _cellX - 1, _cellY - 1, __UNIT_tileAuto47_reset, 303); // left-top
 		}
 		
 		if (_state_r and tilemap_get(_tilemapElementId, _cellX + 1, _cellY - 1) > 1) {
@@ -78,10 +76,10 @@ function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
 			_centerBits |= 4;
 			_rightBits  |= 1;
 			_mathBits   |= 128;
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, __tilemapAuto47_reset, 407); // right-top
+			UNIT_tileModify(_tilemapElementId, _cellX + 1, _cellY - 1, __UNIT_tileAuto47_reset, 407); // right-top
 		}
 		
-		tilemapModify(_tilemapElementId, _cellX, _cellY - 1, __tilemapAuto47_reset_inv, _mathBits); // top
+		UNIT_tileModify(_tilemapElementId, _cellX, _cellY - 1, __UNIT_tileAuto47_reset_inv, _mathBits); // top
 	}
 	
 	if (tilemap_get(_tilemapElementId, _cellX, _cellY + 1) > 1) {
@@ -94,7 +92,7 @@ function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
 			_centerBits |= 32;
 			_leftBits   |= 128;
 			_mathBits   |= 1;
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, __tilemapAuto47_reset, 489); // left-down
+			UNIT_tileModify(_tilemapElementId, _cellX - 1, _cellY + 1, __UNIT_tileAuto47_reset, 489); // left-down
 		}
 		
 		if (_state_r and tilemap_get(_tilemapElementId, _cellX + 1, _cellY + 1) > 1) {
@@ -102,27 +100,27 @@ function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
 			_centerBits |= 128;
 			_rightBits  |= 32;
 			_mathBits   |= 4;
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, __tilemapAuto47_reset, 500); // right-down
+			UNIT_tileModify(_tilemapElementId, _cellX + 1, _cellY + 1, __UNIT_tileAuto47_reset, 500); // right-down
 		}
 		
-		tilemapModify(_tilemapElementId, _cellX, _cellY + 1, __tilemapAuto47_reset_inv, _mathBits); // bottom
+		UNIT_tileModify(_tilemapElementId, _cellX, _cellY + 1, __UNIT_tileAuto47_reset_inv, _mathBits); // bottom
 	}
 	
 	if (_state_l) {
 		
-		tilemapModify(_tilemapElementId, _cellX - 1, _cellY, __tilemapAuto47_reset_inv, _leftBits); // left
+		UNIT_tileModify(_tilemapElementId, _cellX - 1, _cellY, __UNIT_tileAuto47_reset_inv, _leftBits); // left
 	}
 	
 	if (_state_r) {
 		
-		tilemapModify(_tilemapElementId, _cellX + 1, _cellY, __tilemapAuto47_reset_inv, _rightBits); // right
+		UNIT_tileModify(_tilemapElementId, _cellX + 1, _cellY, __UNIT_tileAuto47_reset_inv, _rightBits); // right
 	}
 	
-	tilemapModify(_tilemapElementId, _cellX, _cellY, __tilemapAuto47_set, ~_centerBits & 511 | 256); // center
+	UNIT_tileModify(_tilemapElementId, _cellX, _cellY, __UNIT_tileAuto47_set, ~_centerBits & 511 | 256); // center
 }
 
-/// @function		tilemapAuto47_set_cd(tilemap_element_id, cell_x, cell_y);
-function tilemapAuto47_set_cd(_tilemapElementId, _cellX, _cellY) {
+/// @function		UNIT_tileAuto47_set_cd(tilemap_element_id, cell_x, cell_y);
+function UNIT_tileAuto47_set_cd(_tilemapElementId, _cellX, _cellY) {
 	
 	/*
 		Да этот код получился довольно страшным
@@ -184,7 +182,7 @@ function tilemapAuto47_set_cd(_tilemapElementId, _cellX, _cellY) {
 			_centerBits |= 1;
 			_leftBits   |= 4;
 			_mathBits   |= 32;
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, __tilemapAuto47_reset, 303); // left-top
+			UNIT_tileModify(_tilemapElementId, _cellX - 1, _cellY - 1, __UNIT_tileAuto47_reset, 303); // left-top
 		}
 		
 		if (_state_r and tilemap_get(_tilemapElementId, _cellX + 1, _cellY - 1) > 1) {
@@ -192,10 +190,10 @@ function tilemapAuto47_set_cd(_tilemapElementId, _cellX, _cellY) {
 			_centerBits |= 4;
 			_rightBits  |= 1;
 			_mathBits   |= 128;
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, __tilemapAuto47_reset, 407); // right-top
+			UNIT_tileModify(_tilemapElementId, _cellX + 1, _cellY - 1, __UNIT_tileAuto47_reset, 407); // right-top
 		}
 		
-		tilemapModify(_tilemapElementId, _cellX, _cellY - 1, __tilemapAuto47_reset_inv, _mathBits); // top
+		UNIT_tileModify(_tilemapElementId, _cellX, _cellY - 1, __UNIT_tileAuto47_reset_inv, _mathBits); // top
 	}
 	else
 	if (_state_t == -1) {
@@ -230,7 +228,7 @@ function tilemapAuto47_set_cd(_tilemapElementId, _cellX, _cellY) {
 			_centerBits |= 32;
 			_leftBits   |= 128;
 			_mathBits   |= 1;
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, __tilemapAuto47_reset, 489); // left-down
+			UNIT_tileModify(_tilemapElementId, _cellX - 1, _cellY + 1, __UNIT_tileAuto47_reset, 489); // left-down
 		}
 		
 		if (_state_r and tilemap_get(_tilemapElementId, _cellX + 1, _cellY + 1) > 1) {
@@ -238,10 +236,10 @@ function tilemapAuto47_set_cd(_tilemapElementId, _cellX, _cellY) {
 			_centerBits |= 128;
 			_rightBits  |= 32;
 			_mathBits   |= 4;
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, __tilemapAuto47_reset, 500); // right-down
+			UNIT_tileModify(_tilemapElementId, _cellX + 1, _cellY + 1, __UNIT_tileAuto47_reset, 500); // right-down
 		}
 		
-		tilemapModify(_tilemapElementId, _cellX, _cellY + 1, __tilemapAuto47_reset_inv, _mathBits); // bottom
+		UNIT_tileModify(_tilemapElementId, _cellX, _cellY + 1, __UNIT_tileAuto47_reset_inv, _mathBits); // bottom
 	}
 	else
 	if (_state_d == -1) {
@@ -269,20 +267,20 @@ function tilemapAuto47_set_cd(_tilemapElementId, _cellX, _cellY) {
 		
 		if (_state_l) {
 		
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY, __tilemapAuto47_reset_inv, _leftBits);
+			UNIT_tileModify(_tilemapElementId, _cellX - 1, _cellY, __UNIT_tileAuto47_reset_inv, _leftBits);
 		}
 		else {
 			
 			if (_state_t > 1) {
 				
 				_centerBits |= 1;
-				tilemapModify(_tilemapElementId, _cellX, _cellY - 1, __tilemapAuto47_reset, 479);
+				UNIT_tileModify(_tilemapElementId, _cellX, _cellY - 1, __UNIT_tileAuto47_reset, 479);
 			}
 			
 			if (_state_d > 1) {
 				
 				_centerBits |= 32;
-				tilemapModify(_tilemapElementId, _cellX, _cellY + 1, __tilemapAuto47_reset, 510);
+				UNIT_tileModify(_tilemapElementId, _cellX, _cellY + 1, __UNIT_tileAuto47_reset, 510);
 			}
 		}
 	}
@@ -295,31 +293,31 @@ function tilemapAuto47_set_cd(_tilemapElementId, _cellX, _cellY) {
 		
 		if (_state_r) {
 			
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY, __tilemapAuto47_reset_inv, _rightBits);
+			UNIT_tileModify(_tilemapElementId, _cellX + 1, _cellY, __UNIT_tileAuto47_reset_inv, _rightBits);
 		}
 		else {
 			
 			if (_state_t > 1) {
 				
 				_centerBits |= 4;
-				tilemapModify(_tilemapElementId, _cellX, _cellY - 1, __tilemapAuto47_reset, 383);
+				UNIT_tileModify(_tilemapElementId, _cellX, _cellY - 1, __UNIT_tileAuto47_reset, 383);
 			}
 			
 			if (_state_d > 1) {
 				
 				_centerBits |= 128;
-				tilemapModify(_tilemapElementId, _cellX, _cellY + 1, __tilemapAuto47_reset, 507);
+				UNIT_tileModify(_tilemapElementId, _cellX, _cellY + 1, __UNIT_tileAuto47_reset, 507);
 			}
 		}
 	}
 	
 	#endregion
 	
-	tilemapModify(_tilemapElementId, _cellX, _cellY, __tilemapAuto47_set, ~_centerBits & 511 | 256); // center
+	UNIT_tileModify(_tilemapElementId, _cellX, _cellY, __UNIT_tileAuto47_set, ~_centerBits & 511 | 256); // center
 }
 
-/// @function		tilemapAuto47_reset(tilemap_element_id, cell_x, cell_y);
-function tilemapAuto47_reset(_tilemapElementId, _cellX, _cellY) {
+/// @function		UNIT_tileAuto47_reset(tilemap_element_id, cell_x, cell_y);
+function UNIT_tileAuto47_reset(_tilemapElementId, _cellX, _cellY) {
 	
 	if (tilemap_get(_tilemapElementId, _cellX, _cellY) <= 0) exit;
 	tilemap_set(_tilemapElementId, 0, _cellX, _cellY);
@@ -329,90 +327,90 @@ function tilemapAuto47_reset(_tilemapElementId, _cellX, _cellY) {
 	
 	if (_state_l) {
 		
-		tilemapModify(_tilemapElementId, _cellX - 1, _cellY, __tilemapAuto47_set, 148); // left
+		UNIT_tileModify(_tilemapElementId, _cellX - 1, _cellY, __UNIT_tileAuto47_set, 148); // left
 	}
 	
 	if (_state_r) {
 		
-		tilemapModify(_tilemapElementId, _cellX + 1, _cellY, __tilemapAuto47_set, 41); // right
+		UNIT_tileModify(_tilemapElementId, _cellX + 1, _cellY, __UNIT_tileAuto47_set, 41); // right
 	}
 	
 	if (tilemap_get(_tilemapElementId, _cellX, _cellY - 1)) {
 		
-		tilemapModify(_tilemapElementId, _cellX, _cellY - 1, __tilemapAuto47_set, 224); // top
+		UNIT_tileModify(_tilemapElementId, _cellX, _cellY - 1, __UNIT_tileAuto47_set, 224); // top
 		
 		if (_state_l and tilemap_get(_tilemapElementId, _cellX - 1, _cellY - 1)) {
 			
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, __tilemapAuto47_set, 128); // left-top
+			UNIT_tileModify(_tilemapElementId, _cellX - 1, _cellY - 1, __UNIT_tileAuto47_set, 128); // left-top
 		}
 		
 		if (_state_r and tilemap_get(_tilemapElementId, _cellX + 1, _cellY - 1)) {
 			
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, __tilemapAuto47_set, 32); // right-top
+			UNIT_tileModify(_tilemapElementId, _cellX + 1, _cellY - 1, __UNIT_tileAuto47_set, 32); // right-top
 		}
 	}
 	
 	if (tilemap_get(_tilemapElementId, _cellX, _cellY + 1)) {
 		
-		tilemapModify(_tilemapElementId, _cellX, _cellY + 1, __tilemapAuto47_set, 7); // down
+		UNIT_tileModify(_tilemapElementId, _cellX, _cellY + 1, __UNIT_tileAuto47_set, 7); // down
 		
 		if (_state_l and tilemap_get(_tilemapElementId, _cellX - 1, _cellY + 1)) {
 			
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, __tilemapAuto47_set, 4); // left-down
+			UNIT_tileModify(_tilemapElementId, _cellX - 1, _cellY + 1, __UNIT_tileAuto47_set, 4); // left-down
 		}
 		
 		if (_state_r and tilemap_get(_tilemapElementId, _cellX + 1, _cellY + 1)) {
 			
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, __tilemapAuto47_set, 1); // right-down
+			UNIT_tileModify(_tilemapElementId, _cellX + 1, _cellY + 1, __UNIT_tileAuto47_set, 1); // right-down
 		}
 	}
 }
 
-/// @function		tilemapAuto47APix_set(tilemap_element_id, x, y);
-function tilemapAuto47APix_set(_tilemapElementId, _x, _y) {
-	__tilemapCallAPix(_tilemapElementId, _x, _y, tilemapAuto47_set);
+/// @function		UNIT_tileAuto47AtPix_set(tilemap_element_id, x, y);
+function UNIT_tileAuto47AtPix_set(_tilemapElementId, _x, _y) {
+	__UNIT_tileCallAPix(_tilemapElementId, _x, _y, UNIT_tileAuto47_set);
 }
 
-/// @function		tilemapAuto47APix_set_cd(tilemap_element_id, x, y);
-function tilemapAuto47APix_set_cd(_tilemapElementId, _x, _y) {
-	__tilemapCallAPix(_tilemapElementId, _x, _y, tilemapAuto47_set_cd);
+/// @function		UNIT_tileAuto47AtPix_set_cd(tilemap_element_id, x, y);
+function UNIT_tileAuto47AtPix_set_cd(_tilemapElementId, _x, _y) {
+	__UNIT_tileCallAPix(_tilemapElementId, _x, _y, UNIT_tileAuto47_set_cd);
 }
 
-/// @function		tilemapAuto47APix_reset(tilemap_element_id, x, y);
-function tilemapAuto47APix_reset(_tilemapElementId, _x, _y) {
-	__tilemapCallAPix(_tilemapElementId, _x, _y, tilemapAuto47_reset);
+/// @function		UNIT_tileAuto47AtPix_reset(tilemap_element_id, x, y);
+function UNIT_tileAuto47AtPix_reset(_tilemapElementId, _x, _y) {
+	__UNIT_tileCallAPix(_tilemapElementId, _x, _y, UNIT_tileAuto47_reset);
 }
 
-#endregion
 
+#region __private
 
-#region __handler47
-
-function __tilemapAuto47_set(_tile, _value) {
-	static _table = 
+function __UNIT_tileAuto47_set(_tile, _value) {
+	static _table = __UNIT_tileTable47();
 	
 	if (_tile > -1) {
 		
-		if (_tile == 0) return (global.__tilemapAuto47_table[? _value] + 1);
-		return (global.__tilemapAuto47_table[? _value | global.__tilemapAuto47_table[? _tile - 1]] + 1);
+		if (_tile == 0) return (_table[? _value] + 1);
+		return (_table[? _value | _table[? _tile - 1]] + 1);
 	}
 }
 
-function __tilemapAuto47_reset(_tile, _value) {
+function __UNIT_tileAuto47_reset(_tile, _value) {
+	static _table = __UNIT_tileTable47();
 	
 	if (_tile > -1) {
 		
-		if (_tile == 0) return (global.__tilemapAuto47_table[? _value] + 1);
-		return (global.__tilemapAuto47_table[? _value & global.__tilemapAuto47_table[? _tile - 1]] + 1);
+		if (_tile == 0) return (_table[? _value] + 1);
+		return (_table[? _value & _table[? _tile - 1]] + 1);
 	}
 }
 
-function __tilemapAuto47_reset_inv(_tile, _value) {
+function __UNIT_tileAuto47_reset_inv(_tile, _value) {
+	static _table = __UNIT_tileTable47();
 	
 	if (_tile > -1) {
 		
-		//if (_tile == 0) return (global.__tilemapAuto47_table[? ~_value & 511] + 1);
-		return (global.__tilemapAuto47_table[? ~_value & global.__tilemapAuto47_table[? _tile - 1]] + 1);
+		//if (_tile == 0) return (_table[? ~_value & 511] + 1);
+		return (_table[? ~_value & _table[? _tile - 1]] + 1);
 	}
 }
 
