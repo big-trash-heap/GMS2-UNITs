@@ -3,6 +3,7 @@
     {"id":{"name":"__UNIT_tilemapNote","path":"notes/__UNIT_tilemapNote/__UNIT_tilemapNote.yy",},"order":1,},
     {"id":{"name":"UNIT_tilemapAuto47","path":"scripts/UNIT_tilemapAuto47/UNIT_tilemapAuto47.yy",},"order":5,},
     {"id":{"name":"UNIT_tilemapAuto16","path":"scripts/UNIT_tilemapAuto16/UNIT_tilemapAuto16.yy",},"order":2,},
+    {"id":{"name":"UNIT_tilemapCollision","path":"scripts/UNIT_tilemapCollision/UNIT_tilemapCollision.yy",},"order":7,},
     {"id":{"name":"__UNIT_tilemapUtility","path":"scripts/__UNIT_tilemapUtility/__UNIT_tilemapUtility.yy",},"order":0,},
     {"id":{"name":"UNIT_tilemapAuto47_region","path":"scripts/UNIT_tilemapAuto47_region/UNIT_tilemapAuto47_region.yy",},"order":6,},
     {"id":{"name":"UNIT_tilemap","path":"scripts/UNIT_tilemap/UNIT_tilemap.yy",},"order":0,},

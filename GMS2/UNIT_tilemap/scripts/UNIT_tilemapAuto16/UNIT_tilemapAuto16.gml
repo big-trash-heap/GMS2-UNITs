@@ -212,5 +212,7 @@ function __UNIT_tileAuto16_reset(_tile, _value) {
 	}
 }
 
+function UNIT_tilemapAuto16() {};
+
 #endregion
 
