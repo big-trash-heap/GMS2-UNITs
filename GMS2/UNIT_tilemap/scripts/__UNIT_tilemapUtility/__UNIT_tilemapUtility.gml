@@ -2,7 +2,7 @@
 
 function __UNIT_tilemapUtility() {};
 
-function __UNIT_tileCallAPix(_tilemapElementId, _x, _y, _call) {
+function __UNIT_tileCallAtPix(_tilemapElementId, _x, _y, _call) {
 	
 	var _cellX = tilemap_get_cell_x_at_pixel(_tilemapElementId, _x, _y);
 	if (_cellX != -1) {

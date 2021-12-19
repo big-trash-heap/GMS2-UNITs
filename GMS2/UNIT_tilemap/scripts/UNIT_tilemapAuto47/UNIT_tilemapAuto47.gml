@@ -368,17 +368,17 @@ function UNIT_tileAuto47_reset(_tilemapElementId, _cellX, _cellY) {
 
 /// @function		UNIT_tileAuto47AtPix_set(tilemap_element_id, x, y);
 function UNIT_tileAuto47AtPix_set(_tilemapElementId, _x, _y) {
-	__UNIT_tileCallAPix(_tilemapElementId, _x, _y, UNIT_tileAuto47_set);
+	__UNIT_tileCallAtPix(_tilemapElementId, _x, _y, UNIT_tileAuto47_set);
 }
 
 /// @function		UNIT_tileAuto47AtPix_set_cd(tilemap_element_id, x, y);
 function UNIT_tileAuto47AtPix_set_cd(_tilemapElementId, _x, _y) {
-	__UNIT_tileCallAPix(_tilemapElementId, _x, _y, UNIT_tileAuto47_set_cd);
+	__UNIT_tileCallAtPix(_tilemapElementId, _x, _y, UNIT_tileAuto47_set_cd);
 }
 
 /// @function		UNIT_tileAuto47AtPix_reset(tilemap_element_id, x, y);
 function UNIT_tileAuto47AtPix_reset(_tilemapElementId, _x, _y) {
-	__UNIT_tileCallAPix(_tilemapElementId, _x, _y, UNIT_tileAuto47_reset);
+	__UNIT_tileCallAtPix(_tilemapElementId, _x, _y, UNIT_tileAuto47_reset);
 }
 
 

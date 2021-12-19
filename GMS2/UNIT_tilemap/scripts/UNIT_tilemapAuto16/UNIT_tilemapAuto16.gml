@@ -176,17 +176,17 @@ function UNIT_tileAuto16_reset(_tilemapElementId, _cellX, _cellY) {
 
 /// @function		tilemapAuto16APix_set(tilemap_element_id, x, y);
 function UNIT_tileAuto16APix_set(_tilemapElementId, _x, _y) {
-	__UNIT_tileCallAPix(_tilemapElementId, _x, _y, UNIT_tileAuto16_set);
+	__UNIT_tileCallAtPix(_tilemapElementId, _x, _y, UNIT_tileAuto16_set);
 }
 
 /// @function		tilemapAuto16APix_set_cd(tilemap_element_id, x, y);
 function UNIT_tileAuto16APix_set_cd(_tilemapElementId, _x, _y) {
-	__UNIT_tileCallAPix(_tilemapElementId, _x, _y, UNIT_tileAuto16_set_cd);
+	__UNIT_tileCallAtPix(_tilemapElementId, _x, _y, UNIT_tileAuto16_set_cd);
 }
 
 /// @function		tilemapAuto16APix_reset(tilemap_element_id, x, y);
 function UNIT_tileAuto16APix_reset(_tilemapElementId, _x, _y) {
-	__UNIT_tileCallAPix(_tilemapElementId, _x, _y, UNIT_tileAuto16_reset);
+	__UNIT_tileCallAtPix(_tilemapElementId, _x, _y, UNIT_tileAuto16_reset);
 }
 
 #endregion
