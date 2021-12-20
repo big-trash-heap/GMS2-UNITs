@@ -36,14 +36,14 @@ anim.add_after(function() {
 	show_message("на этом всё");
 });
 
-//var _new_anim = anim.clone();
+var _new_anim = anim._clone();
 
-//anim.add_after(function() {
-//	show_message("Привет");
-//});
+anim.add_after(function() {
+	show_message("Привет");
+});
 
-//_new_anim.add_after(function(_0, _data) {
-//	anim = _data;
-//}, anim);
+_new_anim.add_after(function(_0, _data) {
+	anim = _data;
+}, anim);
 
-//anim = _new_anim;
+anim = _new_anim;

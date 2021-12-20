@@ -3,18 +3,18 @@
 	Данный класс предполагает:
 	1. Экземпляр класса будет использован 1 раз, или будет зациклен (loop)
 	2. Экземпляр класса не будет модифицироватся во время его использования (tick)
-	3. Вы не будете использовать UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE (_replay)
+	3. Вы не будете использовать UNIT_PREPROCESSOR_ANIMATOR_ENABLE_REPLAY (_replay)
 	4. Вы не будете вызывать tick при вызове tick (в рамках одного экземпляра)
-	5. Вы не будете копировать данный экземпляр (clone, UNIT_Animator(clone))
+	5. Вы не будете копировать данный экземпляр (clone)
 */
 
 #macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE	true
+#macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_REPLAY	false
 
-#macro UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE	false
 #macro UNIT_PREPROCESSOR_ANIMATOR_ERROR_TICK	true
 #macro UNIT_PREPROCESSOR_ANIMATOR_LOG			true
 
-enum UNIT_ANIMATOR_ACTION { _STOP,       _AWAIT, _NEXT };
+enum UNIT_ANIMATOR_ACTION { _BREAK,      _AWAIT, _NEXT };
 enum UNIT_ANIMATOR_CODE   { _BREAK = -1, _STOP,  _CALL };
 
 //					f = f(animator, data)
@@ -145,7 +145,7 @@ function UNIT_Animator() constructor {
 				case UNIT_ANIMATOR_ACTION._NEXT:
 					break;
 					
-				case UNIT_ANIMATOR_ACTION._STOP:
+				case UNIT_ANIMATOR_ACTION._BREAK:
 					self.__render_run = UNIT_ANIMATOR_CODE._BREAK;
 					self.__render_actions = undefined;
 					return UNIT_ANIMATOR_CODE._BREAK;
@@ -159,7 +159,7 @@ function UNIT_Animator() constructor {
 				}
 			}
 			
-			if (UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE) {
+			if (UNIT_PREPROCESSOR_ANIMATOR_ENABLE_REPLAY) {
 			
 			if (is_undefined(self.__render_actions)) return UNIT_ANIMATOR_CODE._CALL;
 			
@@ -260,7 +260,7 @@ function UNIT_Animator() constructor {
 	
 	static _replay = function() {
 		
-		if (not UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE) {
+		if (not UNIT_PREPROCESSOR_ANIMATOR_ENABLE_REPLAY) {
 		
 		show_error("UNIT::animator -> для работы функции UNIT_Animator._replay включите UNIT_PREPROCESSOR_ANIMATOR_REPLAY", true);
 		
@@ -269,7 +269,7 @@ function UNIT_Animator() constructor {
 		
 		if (UNIT_PREPROCESSOR_ANIMATOR_LOG) {
 		
-		show_debug_message("UNIT::animator -> UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE -> UNIT_Animator._replay является не безопасной функцией");
+		show_debug_message("UNIT::animator -> UNIT_PREPROCESSOR_ANIMATOR_ENABLE_REPLAY -> UNIT_Animator._replay является не безопасной функцией");
 		
 		}
 		
@@ -281,7 +281,7 @@ function UNIT_Animator() constructor {
 		}
 	}
 	
-	static clone = function(_stateSave=false) {
+	static _clone = function(_stateSave=false) {
 		
 		if (UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE) {
 		
