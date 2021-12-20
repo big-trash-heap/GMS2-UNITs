@@ -8,13 +8,13 @@
 	5. Вы не будете копировать данный экземпляр (clone)
 */
 
-#macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE	true
+#macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE	false
 #macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_REPLAY	false
 
 #macro UNIT_PREPROCESSOR_ANIMATOR_ERROR_TICK	true
 #macro UNIT_PREPROCESSOR_ANIMATOR_LOG			true
 
-enum UNIT_ANIMATOR_ACTION { _BREAK,      _AWAIT, _NEXT };
+enum UNIT_ANIMATOR_ACTION { _BREAK = -1, _AWAIT, _NEXT };
 enum UNIT_ANIMATOR_CODE   { _BREAK = -1, _STOP,  _CALL };
 
 //					f = f(animator, data)
@@ -105,7 +105,7 @@ function UNIT_Animator() constructor {
 		}
 		
 		if (is_undefined(self.__render_actions)) {
-				
+			
 			var _first = self.__frames[self.__render_run + 3];
 			if (_first != undefined) {
 				if (_first[0](self, _first[1])) {
@@ -113,49 +113,48 @@ function UNIT_Animator() constructor {
 					return UNIT_ANIMATOR_CODE._BREAK;
 				}
 			}
-				
+			
 			var _size = self.__frames[self.__render_run + 1];
-			if (_size == 0)
-				return self.__next();
-				
+			if (_size == 0) return self.__next();
+			
 			self.__render_actions = array_create(_size);
 			array_copy(self.__render_actions, 0, self.__frames, self.__frames[self.__render_run], _size);
 		}
-			
+		
 		var _next = true;
 		var _size = array_length(self.__render_actions);
 		var _i = 0, _j = 0, _value;
 		do {
-				
+			
 			_value = self.__render_actions[_i];
 			if (_value[0]) {
-					
+				
 				if (_value[1](self, _value[2])) {
 					
 					self.__render_run = UNIT_ANIMATOR_CODE._BREAK;
 					self.__render_actions = undefined;
 					return UNIT_ANIMATOR_CODE._BREAK;
 				}
-					
+				
 				self.__render_actions[_j++] = _value;
 			}
 			else {
 				switch (_value[1](self, _value[2])) {
-					
+				
 				case UNIT_ANIMATOR_ACTION._NEXT:
 					break;
-					
+				
 				case UNIT_ANIMATOR_ACTION._BREAK:
 					self.__render_run = UNIT_ANIMATOR_CODE._BREAK;
 					self.__render_actions = undefined;
 					return UNIT_ANIMATOR_CODE._BREAK;
 					break;
-					
+				
 				default:
 					_next = false;
 					self.__render_actions[_j++] = _value;
 					break;
-					
+				
 				}
 			}
 			
@@ -165,10 +164,10 @@ function UNIT_Animator() constructor {
 			
 			}
 		} until (++_i == _size);
-			
+		
 		if (_next) return self.__next();
 		array_resize(self.__render_actions, _j);
-			
+		
 		return UNIT_ANIMATOR_CODE._CALL;
 	}
 	
@@ -345,7 +344,7 @@ function UNIT_Animator() constructor {
 		}
 		else {
 		
-		show_error("UNIT::animator -> клонирования экземпляра запрещено, включите UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE", true);
+		show_error("UNIT::animator -> для работы функции UNIT_Animator._clone включите UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE", true);
 		
 		}
 	}
