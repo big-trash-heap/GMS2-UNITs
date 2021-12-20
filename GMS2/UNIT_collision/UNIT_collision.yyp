@@ -1,8 +1,6 @@
 {
   "resources": [
-    {"id":{"name":"obj_tets","path":"objects/obj_tets/obj_tets.yy",},"order":1,},
-    {"id":{"name":"room_test","path":"rooms/room_test/room_test.yy",},"order":0,},
-    {"id":{"name":"UNIT_animator","path":"scripts/UNIT_animator/UNIT_animator.yy",},"order":0,},
+    {"id":{"name":"UNIT_collision","path":"scripts/UNIT_collision/UNIT_collision.yy",},"order":0,},
   ],
   "Options": [
     {"name":"Amazon Fire","path":"options/amazonfire/options_amazonfire.yy",},
@@ -22,12 +20,9 @@
     "name": "Default",
     "children": [],
   },
-  "RoomOrderNodes": [
-    {"roomId":{"name":"room_test","path":"rooms/room_test/room_test.yy",},},
-  ],
+  "RoomOrderNodes": [],
   "Folders": [
-    {"folderPath":"folders/UNIT::animator.yy","order":1,"resourceVersion":"1.0","name":"UNIT::animator","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/tests.yy","order":0,"resourceVersion":"1.0","name":"tests","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/UNIT::collision.yy","order":1,"resourceVersion":"1.0","name":"UNIT::collision","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
@@ -40,7 +35,7 @@
     "IDEVersion": "2.3.7.606",
   },
   "resourceVersion": "1.4",
-  "name": "UNIT_animator",
+  "name": "UNIT_collision",
   "tags": [],
   "resourceType": "GMProject",
 }

@@ -1,25 +1,126 @@
 
+/*
+	Данный класс предполагает:
+	1. Экземпляр класса будет использован 1 раз, или будет зациклен (loop)
+	2. Экземпляр класса не будет модифицироватся во время его использования (tick)
+	3. Вы не будете использовать UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE (_replay)
+	4. Вы не будете вызывать tick при вызове tick (в рамках одного экземпляра)
+	5. Вы не будете копировать данный экземпляр (clone, UNIT_Animator(clone))
+*/
+
+#macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE	false
+
 #macro UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE	false
 #macro UNIT_PREPROCESSOR_ANIMATOR_ERROR_TICK	true
+#macro UNIT_PREPROCESSOR_ANIMATOR_LOG			true
 
-enum UNIT_ANIMATOR_ACTION { _STOP, _AWAIT, _NEXT };
-enum UNIT_ANIMATOR_CODE   { _BREAK = -1, _STOP, _CALL };
+enum UNIT_ANIMATOR_ACTION { _STOP,       _AWAIT, _NEXT };
+enum UNIT_ANIMATOR_CODE   { _BREAK = -1, _STOP,  _CALL };
 
-function UNIT_Animator(_f, _data, _super) constructor {
+//					f = f(animator, data)
+/// @function		UNIT_Animator([f], [data], [super=undefined], [loop=false]);
+function UNIT_Animator() constructor {
 	
-	self.super = _super;
+	#region init
+	
+	if (not UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE) {
+	
+	if ((argument_count >= 1 && instanceof(argument[0]) == "UNIT_Animator")) {
+		
+		show_error("UNIT::animator -> клонирования экземпляра запрещено, включите UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE", true);
+	}
+	
+	}
+	
+	if (UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE && (argument_count >= 1 && instanceof(argument[0]) == "UNIT_Animator")) {
+		
+		var _obj       = argument[0];
+		var _stateSave = (argument_count == 1 ? false : argument[1]);
+		
+		if (UNIT_PREPROCESSOR_ANIMATOR_LOG) {
+		
+		show_debug_message("UNIT::animator -> клонирование экземпляра UNIT_Animator не является безопасным");
+		
+		if (_stateSave)
+		show_debug_message("UNIT::animator -> клонирование экземпляра UNIT_Animator с настройкой stateSave=true, крайне не безопасна");
+		
+		}
+		
+		self.super = _obj.super;
+		
+		var _size = array_length(_obj.__frames);
+		
+		self.__point_size = _obj.__point_size;
+		self.__loop       = _obj.__loop;
+		self.__frames     = array_create(_size);
+		
+		array_copy(self.__frames, 0, _obj.__frames, 0, _size);
+		
+		var _after_index = self.__point_size + 2;
+		var _after       = self.__frames[_after_index];
+		_size		     = array_length(_after);
+		var _after_new   = array_create(_size);
+		
+		array_copy(_after_new, 0, _after, 0, _size);
+		
+		self.__frames[_after_index] = _after_new;
+		
+		if (_stateSave) {
+			
+			self.__render_run     = _obj.__render_run;
+			self.__render_actions = undefined;
+			
+			var _actions = _obj.__render_actions;
+			if (_actions != undefined) {
+				
+				_size                 = array_length(_actions);
+				self.__render_actions = array_create(_actions);
+				
+				array_copy(self.__render_actions, 0, _actions, 0, _size);
+			}
+		}
+		else {
+			
+			self.__render_run     = 0;
+			self.__render_actions = undefined;
+		}
+	}
+	else {
+		
+		var _f     = undefined;
+		var _super = undefined;
+		var _loop  = false;
+		if (argument_count > 0) {
+		
+			if (argument_count > 1) {
+				
+				_f = [argument[0], argument[1]];
+				if (argument_count > 2) {
+					
+					_super = argument[2];
+					if (argument_count > 3) {
+						
+						_loop = argument[3];
+					}
+				}
+			}
+			else {
+				_f = [argument[0], undefined];	
+			}
+		}
+		
+		self.super = _super;
+		
+		self.__frames         = [4, 0, [], _f];
+		self.__point_size     = 0;
+		self.__loop           = _loop;
+		self.__render_run     = 0;
+		self.__render_actions = undefined;
+	}
+	
+	#endregion
 	
 	#region __private
-	
-	if (_f != undefined) _f = [_f, _data];
-	
-	self.__frames         = [4, 0, [], _f];
-	self.__point_size     = 0;
-	
-	self.__render_run     = 0;
-	self.__render_actions = undefined;
-	
-	self.__loop           = false;
 	
 	static __next = function() {
 		
@@ -110,7 +211,7 @@ function UNIT_Animator(_f, _data, _super) constructor {
 				}
 			}
 			
-			if (UNIT_PREPROCESSOR_ANIMATOR_REPLAY) {
+			if (UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE) {
 			
 			if (is_undefined(self.__render_actions)) return UNIT_ANIMATOR_CODE._CALL;
 			
@@ -218,7 +319,11 @@ function UNIT_Animator(_f, _data, _super) constructor {
 		}
 		else {
 		
+		if (UNIT_PREPROCESSOR_ANIMATOR_LOG) {
+		
 		show_debug_message("UNIT::animator -> UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE -> ._replay является не безопасной функцией");
+		
+		}
 		
 		self.__render_run     = 0;
 		self.__render_actions = undefined;
@@ -226,6 +331,10 @@ function UNIT_Animator(_f, _data, _super) constructor {
 		return self;
 		
 		}
+	}
+	
+	static clone = function(_stateSave=false) {
+		return new UNIT_Animator(self, _stateSave);
 	}
 	
 }
