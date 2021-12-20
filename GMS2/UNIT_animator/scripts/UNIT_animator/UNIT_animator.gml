@@ -8,7 +8,7 @@
 	5. Вы не будете копировать данный экземпляр (clone, UNIT_Animator(clone))
 */
 
-#macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE	false
+#macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE	true
 
 #macro UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE	false
 #macro UNIT_PREPROCESSOR_ANIMATOR_ERROR_TICK	true
@@ -23,67 +23,16 @@ function UNIT_Animator() constructor {
 	
 	#region init
 	
-	if (not UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE) {
-	
-	if ((argument_count >= 1 && instanceof(argument[0]) == "UNIT_Animator")) {
+	if (argument_count >= 1 && instanceof(argument[0]) == "__UNIT_Animator") {
 		
-		show_error("UNIT::animator -> клонирования экземпляра запрещено, включите UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE", true);
-	}
-	
-	}
-	
-	if (UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE && (argument_count >= 1 && instanceof(argument[0]) == "UNIT_Animator")) {
+		var _wrap = argument[0];
 		
-		var _obj       = argument[0];
-		var _stateSave = (argument_count == 1 ? false : argument[1]);
-		
-		if (UNIT_PREPROCESSOR_ANIMATOR_LOG) {
-		
-		show_debug_message("UNIT::animator -> клонирование экземпляра UNIT_Animator не является безопасным");
-		
-		if (_stateSave)
-		show_debug_message("UNIT::animator -> клонирование экземпляра UNIT_Animator с настройкой stateSave=true, крайне не безопасна");
-		
-		}
-		
-		self.super = _obj.super;
-		
-		var _size = array_length(_obj.__frames);
-		
-		self.__point_size = _obj.__point_size;
-		self.__loop       = _obj.__loop;
-		self.__frames     = array_create(_size);
-		
-		array_copy(self.__frames, 0, _obj.__frames, 0, _size);
-		
-		var _after_index = self.__point_size + 2;
-		var _after       = self.__frames[_after_index];
-		_size		     = array_length(_after);
-		var _after_new   = array_create(_size);
-		
-		array_copy(_after_new, 0, _after, 0, _size);
-		
-		self.__frames[_after_index] = _after_new;
-		
-		if (_stateSave) {
-			
-			self.__render_run     = _obj.__render_run;
-			self.__render_actions = undefined;
-			
-			var _actions = _obj.__render_actions;
-			if (_actions != undefined) {
-				
-				_size                 = array_length(_actions);
-				self.__render_actions = array_create(_actions);
-				
-				array_copy(self.__render_actions, 0, _actions, 0, _size);
-			}
-		}
-		else {
-			
-			self.__render_run     = 0;
-			self.__render_actions = undefined;
-		}
+		self.super            = _wrap.super;
+		self.__frames         = _wrap.__frames;
+		self.__point_size     = _wrap.__point_size;
+		self.__loop           = _wrap.__loop;   
+		self.__render_run     = _wrap.__render_run;
+		self.__render_actions = _wrap.__render_actions;
 	}
 	else {
 		
@@ -109,8 +58,7 @@ function UNIT_Animator() constructor {
 			}
 		}
 		
-		self.super = _super;
-		
+		self.super            = _super;
 		self.__frames         = [4, 0, [], _f];
 		self.__point_size     = 0;
 		self.__loop           = _loop;
@@ -314,14 +262,14 @@ function UNIT_Animator() constructor {
 		
 		if (not UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE) {
 		
-		show_error("UNIT::animator -> для работы функции UNIT_Animator.replay включите UNIT_PREPROCESSOR_ANIMATOR_REPLAY", true);
+		show_error("UNIT::animator -> для работы функции UNIT_Animator._replay включите UNIT_PREPROCESSOR_ANIMATOR_REPLAY", true);
 		
 		}
 		else {
 		
 		if (UNIT_PREPROCESSOR_ANIMATOR_LOG) {
 		
-		show_debug_message("UNIT::animator -> UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE -> ._replay является не безопасной функцией");
+		show_debug_message("UNIT::animator -> UNIT_PREPROCESSOR_ANIMATOR_EXTEND_CODE -> UNIT_Animator._replay является не безопасной функцией");
 		
 		}
 		
@@ -334,7 +282,72 @@ function UNIT_Animator() constructor {
 	}
 	
 	static clone = function(_stateSave=false) {
-		return new UNIT_Animator(self, _stateSave);
+		
+		if (UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE) {
+		
+		var _wrap = new __UNIT_Animator();
+		var _obj  = self;
+		
+		with (_wrap) {
+		
+		if (UNIT_PREPROCESSOR_ANIMATOR_LOG) {
+		
+		show_debug_message("UNIT::animator -> клонирование экземпляра UNIT_Animator не является безопасным");
+		
+		if (_stateSave)
+		show_debug_message("UNIT::animator -> клонирование экземпляра UNIT_Animator с настройкой stateSave=true, крайне не безопасна");
+		
+		}
+		
+		self.super = _obj.super;
+		
+		var _size = array_length(_obj.__frames);
+		
+		self.__point_size = _obj.__point_size;
+		self.__loop       = _obj.__loop;
+		self.__frames     = array_create(_size);
+		
+		array_copy(self.__frames, 0, _obj.__frames, 0, _size);
+		
+		var _after_index = self.__point_size + 2;
+		var _after       = self.__frames[_after_index];
+		_size		     = array_length(_after);
+		var _after_new   = array_create(_size);
+		
+		array_copy(_after_new, 0, _after, 0, _size);
+		
+		self.__frames[_after_index] = _after_new;
+		
+		if (_stateSave) {
+			
+			self.__render_run     = _obj.__render_run;
+			self.__render_actions = undefined;
+			
+			var _actions = _obj.__render_actions;
+			if (_actions != undefined) {
+				
+				_size                 = array_length(_actions);
+				self.__render_actions = array_create(_actions);
+				
+				array_copy(self.__render_actions, 0, _actions, 0, _size);
+			}
+		}
+		else {
+			
+			self.__render_run     = 0;
+			self.__render_actions = undefined;
+		}
+		
+		}
+		
+		return new UNIT_Animator(_wrap);
+		
+		}
+		else {
+		
+		show_error("UNIT::animator -> клонирования экземпляра запрещено, включите UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE", true);
+		
+		}
 	}
 	
 }
@@ -343,6 +356,8 @@ function UNIT_Animator() constructor {
 #region __private
 
 function UNIT_animator() {};
+
+function __UNIT_Animator() constructor {};
 
 #endregion
 
