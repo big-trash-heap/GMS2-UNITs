@@ -21,7 +21,7 @@ function UNIT_getterAny(_value) {
 //					g(value) -> value
 //
 //					Ключи доступа:
-//					|, # [x, y], ?, @, $
+//					|, # [x, y], ?, @, $,
 //					s - string
 //					i - variable_instance_get
 //					g - variable_global_get
@@ -77,7 +77,7 @@ function UNIT_getterAccess() {
 
 //					f = f(argument, data);
 /// @function		UNIT_getterCall(f, data);
-/// @description	Создаёт метод, которая вызывает другую функцию
+/// @description	Создаёт метод, который вызывает другую функцию
 //					Смещает контекст вызова, используйте методы
 //
 //					g(argument) -> value

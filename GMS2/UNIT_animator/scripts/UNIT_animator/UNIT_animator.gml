@@ -1,11 +1,12 @@
 
+
 /*
 	Данный класс предполагает:
 	1. Экземпляр класса будет использован 1 раз, или будет зациклен (loop)
 	2. Экземпляр класса не будет модифицироватся во время его использования (tick)
 	3. Вы не будете использовать UNIT_PREPROCESSOR_ANIMATOR_ENABLE_REPLAY (_replay)
 	4. Вы не будете вызывать tick при вызове tick (в рамках одного экземпляра)
-	5. Вы не будете копировать данный экземпляр (clone)
+	5. Вы не будете копировать данный экземпляр (_clone)
 */
 
 #macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE	false
@@ -16,6 +17,7 @@
 
 enum UNIT_ANIMATOR_ACTION { _BREAK = -1, _AWAIT, _NEXT };
 enum UNIT_ANIMATOR_CODE   { _BREAK = -1, _STOP,  _CALL };
+
 
 //					f = f(animator, data)
 /// @function		UNIT_Animator([f], [data], [super=undefined], [loop=false]);

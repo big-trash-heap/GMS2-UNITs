@@ -77,7 +77,9 @@ function UNIT_bufTxtClear(_buffer, _size) {
 function UNIT_bufTxtFree(_buffer, _read=true) {
 	
 	if (_read) {
-		var _string = UNIT_bufTxtRead(_buffer);
+		buffer_write(_buffer, buffer_u8, 0);
+		buffer_seek(_buffer, buffer_seek_start, 0);
+		var _string = buffer_read(_buffer, buffer_string);
 		buffer_delete(_buffer);
 		return _string;
 	}
