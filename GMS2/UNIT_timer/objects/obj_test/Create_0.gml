@@ -1,4 +1,26 @@
 
+timer_step = UNIT_timerGl_loopAsync(function(_0, _timer, _1, _step) {
+	show_debug_message(_step);
+	
+	if (keyboard_check_pressed(vk_space)) {
+		
+		UNIT_timerGl_timer(timer_switch);
+		return true;
+	}
+});
+
+timer_switch = UNIT_timerGl_loop(function() {
+	show_debug_message("pause");
+	
+	if (keyboard_check_pressed(vk_space)) {
+		
+		UNIT_timerGl_timer(timer_step);
+		return true;
+	}
+})._unbind();
+
+
+
 //timer = new UNIT_TimerAsyncExt(1000, 
 //	function(_handler, _timer) {
 //		show_debug_message(_timer.name);

@@ -45,6 +45,12 @@ function UNIT_Timer() constructor {
 	}
 	
 	
+	static _unbind = function() {
+		UNIT_timerUnbind(self);
+		return self;
+	}
+	
+	
 	static _set = function(_key, _value) {
 		self[$ _key] = _value;
 		return self;
