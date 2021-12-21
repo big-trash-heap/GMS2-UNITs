@@ -168,32 +168,41 @@ function UNIT_TimersHandler() constructor {
 	#region UNIT_PREPROCESSOR_TIMER_EXTEND_CODE
 	
 	static _tick_isBind = function() {
-		if (not UNIT_PREPROCESSOR_TIMER_EXTEND_CODE) {
+		if (UNIT_PREPROCESSOR_TIMER_EXTEND_CODE) {
 		
-		show_error(____UNIT_TIMER_ERROR, true);
+		return (self == UNIT_timerGetBind(self.__temp));
 		
 		}
 		else {
 		
-		return (self == UNIT_timerGetBind(self.__temp));
+		show_error(____UNIT_TIMER_ERROR, true);
 		
 		}
 	}
 	
 	static _tick_isEntry = function() {
-		if (not UNIT_PREPROCESSOR_TIMER_EXTEND_CODE) {
+		if (UNIT_PREPROCESSOR_TIMER_EXTEND_CODE) {
 		
-		show_error(____UNIT_TIMER_ERROR, true);
+		return (self == self.__temp[__UNIT_TIMER_CELL._HANDLER]);
 		
 		}
 		else {
 		
-		return (self == self.__temp[__UNIT_TIMER_CELL._HANDLER]);
+		show_error(____UNIT_TIMER_ERROR, true);
 		
 		}
 	}
 	
 	#endregion
+	
+	static _toArray = function() {
+		
+		var _size = array_length(self.__timers);
+		var _array = array_create(_size);
+		
+		array_copy(_array, 0, self.__timers, 0, _size);
+		return _array;
+	}
 	
 }
 
