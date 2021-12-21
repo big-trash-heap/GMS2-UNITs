@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "timers",
-    "path": "folders/UNIT::timer/timers.yy",
+    "name": "__private",
+    "path": "folders/UNIT::timer/timers/__private.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_timerBase",
+  "name": "__UNIT_timerTimelapse",
   "tags": [],
   "resourceType": "GMScript",
 }

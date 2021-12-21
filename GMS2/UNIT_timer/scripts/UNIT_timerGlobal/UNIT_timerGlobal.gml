@@ -20,9 +20,9 @@ function UNIT_timerGl_timer(_timer, _argument) {
 	return _handler.bind(_timer, _argument);
 }
 
-/// @function		UNIT_timerGl_loop(steps, [ftick], [finit], [ffree], [argument]);
+/// @function		UNIT_timerGl_loop([ftick], [finit], [ffree], [argument]);
 function UNIT_timerGl_loop(_ftick, _finit, _ffree, _argument) {
-	return UNIT_timerGl_timer(new UNIT_TimerLoop(_ftick, _finit, _ffree), _argument);
+	return UNIT_timerGl_timer(new UNIT_TimerLoopExt(_ftick, _finit, _ffree), _argument);
 }
 
 /// @function		UNIT_timerGl_sync(steps, [ftick], [finit], [ffree], [argument]);

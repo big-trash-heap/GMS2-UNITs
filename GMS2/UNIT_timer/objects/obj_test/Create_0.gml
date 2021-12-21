@@ -112,5 +112,14 @@ self._fff = function() {
 	});
 	
 	show_message(UNIT_timerGlobal()._toArray());
+	
+	var base = UNIT_timerGl_loop(function() {
+		show_debug_message("loop");	
+	}).pause();
+	
+	UNIT_timerGl_asyncEnd(15000, function(_0, _timer) {
+		
+		_timer.t.resume();
+	})._set("t", base);
 }
 
