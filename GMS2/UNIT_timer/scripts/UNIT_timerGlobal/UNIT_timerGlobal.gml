@@ -50,3 +50,8 @@ function UNIT_timerGl_asyncEnd(_milisec, _f) {
 	return UNIT_timerGl_timer(new UNIT_TimerAsyncExt(_milisec, undefined, undefined, _f), undefined);
 }
 
+/// @function		UNIT_timerGl_loopAsync([ftick], [finit], [ffree], [argument]);
+function UNIT_timerGl_loopAsync(_ftick, _finit, _ffree, _argument) {
+	return UNIT_timerGl_timer(new UNIT_TimerLoopAsyncExt(_ftick, _finit, _ffree), _argument);
+}
+
