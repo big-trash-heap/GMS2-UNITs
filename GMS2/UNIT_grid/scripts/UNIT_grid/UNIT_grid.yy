@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "UNIT::grid",
-    "path": "folders/UNIT::grid.yy",
+    "name": "UNIT::Grid",
+    "path": "folders/UNIT::Grid.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_grid",
+  "name": "UNIT_Grid",
   "tags": [],
   "resourceType": "GMScript",
 }

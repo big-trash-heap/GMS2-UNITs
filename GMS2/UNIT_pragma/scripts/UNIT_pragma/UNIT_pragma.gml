@@ -55,7 +55,7 @@ function __UNIT_pragma() {
 		
 		if (UNIT_PREPROCESSOR_PRAGMA_LOG) {
 		
-		show_debug_message("UNIT::pragma -> память под очередь было выделена");
+		show_debug_message("UNIT::pragma -> память под очередь была выделена");
 		
 		}
 	}();

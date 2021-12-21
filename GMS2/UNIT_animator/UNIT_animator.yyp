@@ -2,7 +2,7 @@
   "resources": [
     {"id":{"name":"obj_tets","path":"objects/obj_tets/obj_tets.yy",},"order":1,},
     {"id":{"name":"room_test","path":"rooms/room_test/room_test.yy",},"order":0,},
-    {"id":{"name":"UNIT_animator","path":"scripts/UNIT_animator/UNIT_animator.yy",},"order":0,},
+    {"id":{"name":"UNIT_Animator","path":"scripts/UNIT_Animator/UNIT_Animator.yy",},"order":0,},
   ],
   "Options": [
     {"name":"Amazon Fire","path":"options/amazonfire/options_amazonfire.yy",},
@@ -26,7 +26,7 @@
     {"roomId":{"name":"room_test","path":"rooms/room_test/room_test.yy",},},
   ],
   "Folders": [
-    {"folderPath":"folders/UNIT::animator.yy","order":1,"resourceVersion":"1.0","name":"UNIT::animator","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/UNIT::Animator.yy","order":1,"resourceVersion":"1.0","name":"UNIT::Animator","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/tests.yy","order":0,"resourceVersion":"1.0","name":"tests","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [

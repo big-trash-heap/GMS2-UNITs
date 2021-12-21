@@ -351,12 +351,14 @@ function UNIT_Animator() constructor {
 		}
 	}
 	
+	static toString = function() {
+		return ("UNIT::animator::" + instanceof(self));	
+	}
+	
 }
 
 
 #region __private
-
-function UNIT_animator() {};
 
 function __UNIT_Animator() constructor {};
 

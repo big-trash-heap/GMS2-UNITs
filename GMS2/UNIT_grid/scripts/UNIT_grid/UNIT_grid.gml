@@ -1,7 +1,8 @@
 
-#macro UNIT_PREPROCESSOR_GRID_ERROR	true
+#macro UNIT_PREPROCESSOR_GRID_CHECK_BOUND	true
 
-function UNIT_Grid(_w, _h, _value=0) constructor {
+/// @function		UNIT_Grid([w=0], [h=0], [value=0]);
+function UNIT_Grid(_w=0, _h=0, _value=0) constructor {
 	
 	#region __private
 	
@@ -45,7 +46,7 @@ function UNIT_Grid(_w, _h, _value=0) constructor {
 	static getHeight = function() { return self.__h; };
 	
 	static get = function(_x, _y) {
-		if (UNIT_PREPROCESSOR_GRID_ERROR) {
+		if (UNIT_PREPROCESSOR_GRID_CHECK_BOUND) {
 		
 		if (!self.exists(_x, _y)) show_error(____UNIT_GRID_ERROR, true);
 		
@@ -55,7 +56,7 @@ function UNIT_Grid(_w, _h, _value=0) constructor {
 	}
 	
 	static set = function(_x, _y, _value) {
-		if (UNIT_PREPROCESSOR_GRID_ERROR) {
+		if (UNIT_PREPROCESSOR_GRID_CHECK_BOUND) {
 		
 		if (!self.exists(_x, _y)) show_error(____UNIT_GRID_ERROR, true);
 		
@@ -90,14 +91,14 @@ function UNIT_Grid(_w, _h, _value=0) constructor {
 		}
 	}
 	
-	static clear = function(_value) {
+	static clear = function(_value=0) {
 		if (self.__a == undefined) return;
 		var _size = array_length(self.__a);
 		while (_size > 0) self.__a[--_size] = _value;
 	}
 	
 	static toString = function() {
-		return ("UNIT::grid<" + string(self.__w) + ", " + string(self.__h) + ">");	
+		return ("UNIT::grid<" + string(self.__w) + ", " + string(self.__h) + ">::" + instanceof(self));	
 	}
 	
 }
@@ -106,8 +107,6 @@ function UNIT_Grid(_w, _h, _value=0) constructor {
 #region __private
 
 #macro ____UNIT_GRID_ERROR "UNIT::grid -> выход за границу"
-
-function UNIT_grid() {};
 
 #endregion
 

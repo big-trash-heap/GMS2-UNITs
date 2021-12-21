@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "UNIT::animator",
-    "path": "folders/UNIT::animator.yy",
+    "name": "UNIT::Animator",
+    "path": "folders/UNIT::Animator.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_animator",
+  "name": "UNIT_Animator",
   "tags": [],
   "resourceType": "GMScript",
 }
