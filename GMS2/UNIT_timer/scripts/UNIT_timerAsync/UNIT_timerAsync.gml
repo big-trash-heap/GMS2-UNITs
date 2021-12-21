@@ -1,10 +1,17 @@
 
 /*
+	finit = finit(handler, timer, argument);
+	ftick = finit(handler, timer, super, milisec_step);
+	ffree = finit(handler, timer);
+*/
+
+/*
 	Изначально асинхронные таймеры, были реализованы через 1 функцию tick (точно так же как и синхронные)
 	У таких таймеров, было общее асинхронное время за 1 игровой кадр (что не совсем правильно, но очень красиво и просто)
 	
 	Я бы оставил старое решение, но я не могу его добавить, так как это вышло за предел UNIT-а
 */
+
 
 /// @function		UNIT_TimerAsync(milisec, [ftick], [finit], [ffree]);
 /// @description	Асинхронный таймер

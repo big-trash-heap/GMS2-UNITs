@@ -1,4 +1,10 @@
 
+/*
+	finit = finit(handler, timer, argument);
+	ftick = finit(handler, timer, super);
+	ffree = finit(handler, timer);
+*/
+
 
 /// @function		UNIT_TimerSync(steps, [ftick], [finit], [ffree]);
 /// @description	Синхронный таймер

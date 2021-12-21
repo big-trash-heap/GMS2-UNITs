@@ -36,7 +36,7 @@
     {"folderPath":"folders/test.yy","order":2,"resourceVersion":"1.0","name":"test","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/UNIT::timer/main.yy","order":2,"resourceVersion":"1.0","name":"main","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/UNIT::timer/timers.yy","order":0,"resourceVersion":"1.0","name":"timers","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/UNIT::timer/global.yy","order":1,"resourceVersion":"1.0","name":"global","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/UNIT::timer/_global.yy","order":1,"resourceVersion":"1.0","name":"_global","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/UNIT::timer/timers/__private.yy","order":3,"resourceVersion":"1.0","name":"__private","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [

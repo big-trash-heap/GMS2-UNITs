@@ -1,4 +1,10 @@
 
+/*
+	finit = finit(handler, timer, argument);
+	ftick = finit(handler, timer, super);
+	ffree = finit(handler, timer);
+*/
+
 
 /// @function		UNIT_TimerLoop([ftick], [finit], [ffree]);
 /// @description	Зацикленный таймер
@@ -20,7 +26,7 @@ function UNIT_TimerLoopExt(_ftick, _finit, _ffree) : UNIT_Timer() constructor {
 	
 	#region __private
 	
-	static __ftick = UNIT_timerSync;
+	static __ftick = UNIT_timerLoop;
 	
 	static __tick = function(_handler, _timer, _super) {
 		
