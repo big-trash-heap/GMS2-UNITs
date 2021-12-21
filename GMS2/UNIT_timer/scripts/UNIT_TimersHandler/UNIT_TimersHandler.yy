@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "UNIT::timer",
-    "path": "folders/UNIT::timer.yy",
+    "name": "main",
+    "path": "folders/UNIT::timer/main.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_timerHandler",
+  "name": "UNIT_TimersHandler",
   "tags": [],
   "resourceType": "GMScript",
 }

@@ -14,7 +14,7 @@ function UNIT_timerGlobalTick(_super) {
 /// @function		UNIT_timerGl_timer(timer, [argument]);
 function UNIT_timerGl_timer(_timer, _argument) {
 	static _handler = UNIT_timerGlobal();
-	return _handler.append(_timer, _argument);
+	return _handler.bind(_timer, _argument);
 }
 
 /// @function		UNIT_timerGl_loop(steps, [ftick], [finit], [ffree], [argument]);

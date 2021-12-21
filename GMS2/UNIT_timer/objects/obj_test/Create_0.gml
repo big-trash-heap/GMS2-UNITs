@@ -3,7 +3,7 @@ UNIT_timerGl_loop(
 	function(_0, _timer) {
 		
 		if (_timer.timer != undefined) {
-			_timer.timer.remove();
+			_timer.timer.unbind();
 		}
 		
 		show_message(1);
@@ -14,7 +14,7 @@ UNIT_timerGl_loop(
 				show_message(_timer.num);
 			}, undefined,
 			function(_0, _timer) {
-				_timer.timer.remove();
+				_timer.timer.unbind();
 				UNIT_timerGl_loop(
 					function(_0, _timer) {
 						var _text = "&" + string(_timer.num);
@@ -28,8 +28,8 @@ UNIT_timerGl_loop(
 								UNIT_timerGlobal().clearAll(); });
 							var _t4 = UNIT_timerGl_loop(undefined, undefined, function() { show_message(444); });
 							
-							_t2.remove();
-							_t4.remove();
+							_t2.unbind();
+							_t4.unbind();
 							
 							UNIT_timerGl_timer(_t4);
 							UNIT_timerGl_timer(_t2);

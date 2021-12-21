@@ -22,9 +22,9 @@ function UNIT_TimersHandler() constructor {
 	
 	#endregion
 	
-	static append = function(_timer, _argument) {
+	static bind = function(_timer, _argument) {
 		
-		if (UNIT_timerGetHandler(_timer) == self) {
+		if (UNIT_timerGetBind(_timer) == self) {
 			
 			show_error("UNIT::timer -> Таймер уже занят обработчиком", true);
 		}
@@ -70,8 +70,8 @@ function UNIT_TimersHandler() constructor {
 					}
 					else
 					//if (_value[__UNIT_TIMER_CELL._HANDLER] == self) // entry-space
-					if (UNIT_timerGetHandler(_timer) == self) // handler-space
-						UNIT_timerRemove(_timer);
+					if (UNIT_timerGetBind(_timer) == self) // handler-space
+						UNIT_timerUnbind(_timer);
 				}
 			} until (++_i == _size);
 			
@@ -117,7 +117,7 @@ function UNIT_TimersHandler() constructor {
 				++self.__clear;
 				
 				if (_value[__UNIT_TIMER_CELL._HANDLER] == self && 
-					UNIT_timerRemove(_value[__UNIT_TIMER_CELL._TIMER]) &&
+					UNIT_timerUnbind(_value[__UNIT_TIMER_CELL._TIMER]) &&
 					self.__clear == -1)
 					return;
 			}
@@ -139,7 +139,7 @@ function UNIT_TimersHandler() constructor {
 				++self.__clear;
 				
 				if (_value[__UNIT_TIMER_CELL._HANDLER] == self && 
-					UNIT_timerRemove(_value[__UNIT_TIMER_CELL._TIMER]) &&
+					UNIT_timerUnbind(_value[__UNIT_TIMER_CELL._TIMER]) &&
 					self.__clear == -1)
 					return;
 			}
@@ -158,7 +158,7 @@ function UNIT_TimersHandler() constructor {
 	
 	static isBind = function(_timer) {
 		
-		return (self == UNIT_timerGetHandler(_timer));
+		return (self == UNIT_timerGetBind(_timer));
 	}
 	
 	static toString = function() {
@@ -175,7 +175,7 @@ function UNIT_TimersHandler() constructor {
 		}
 		else {
 		
-		return (self == UNIT_timerGetHandler(self.__temp));
+		return (self == UNIT_timerGetBind(self.__temp));
 		
 		}
 	}
@@ -208,8 +208,6 @@ function __UNIT_timerHandler() {
 	static _map = ds_map_create();
 	return _map;
 }
-
-function UNIT_timerHandler() {};
 
 #endregion
 

@@ -11,9 +11,9 @@ function UNIT_Timer() constructor {
 	 
 	#endregion
 	
-	static remove = function() {
+	static unbind = function() {
 		
-		return UNIT_timerRemove(self);
+		return UNIT_timerUnbind(self);
 	}
 	
 	static isBind = function() {
@@ -21,13 +21,13 @@ function UNIT_Timer() constructor {
 		return UNIT_timerIsBind(self);
 	}
 	
-	static getHandler = function() {
+	static getBind = function() {
 		
-		return UNIT_timerGetHandler(self);
+		return UNIT_timerGetBind(self);
 	}
 	
 	static toString = function() {
-		return ("UNIT::Timer::" + instanceof(self));
+		return ("UNIT::timer::" + instanceof(self));
 	}
 	
 	
@@ -55,7 +55,7 @@ function UNIT_Timer() constructor {
 /// @param			timer
 /// @description	Отвяжет таймер от обработчика 
 //					и вернёт true, если таймер был отвязан
-function UNIT_timerRemove(_timer) {
+function UNIT_timerUnbind(_timer) {
 	static _map = __UNIT_timerHandler();
 	var _cell = _map[? _timer];
 	if (_cell == undefined) return false;
@@ -85,7 +85,7 @@ function UNIT_timerIsBind(_timer) {
 /// @param			timer
 /// @description	Вернёт обработчик, к которому привязан таймер
 //					Если не привязан вернёт undefined
-function UNIT_timerGetHandler(_timer) {
+function UNIT_timerGetBind(_timer) {
 	static _map = __UNIT_timerHandler();
 	var _cell = _map[? _timer];
 	if (_cell != undefined) return _cell[__UNIT_TIMER_CELL._HANDLER];
