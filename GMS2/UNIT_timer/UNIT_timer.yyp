@@ -6,7 +6,7 @@
     {"id":{"name":"UNIT_timer","path":"scripts/UNIT_timer/UNIT_timer.yy",},"order":0,},
     {"id":{"name":"room_test","path":"rooms/room_test/room_test.yy",},"order":1,},
     {"id":{"name":"__UNIT_timerTimelapse","path":"scripts/__UNIT_timerTimelapse/__UNIT_timerTimelapse.yy",},"order":0,},
-    {"id":{"name":"UNIT_timerAsync","path":"scripts/UNIT_timerAsync/UNIT_timerAsync.yy",},"order":0,},
+    {"id":{"name":"UNIT_timerAsync","path":"scripts/UNIT_timerAsync/UNIT_timerAsync.yy",},"order":1,},
     {"id":{"name":"UNIT_timerGlobal","path":"scripts/UNIT_timerGlobal/UNIT_timerGlobal.yy",},"order":0,},
     {"id":{"name":"UNIT_TimersHandler","path":"scripts/UNIT_TimersHandler/UNIT_TimersHandler.yy",},"order":1,},
   ],
@@ -36,7 +36,7 @@
     {"folderPath":"folders/test.yy","order":2,"resourceVersion":"1.0","name":"test","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/UNIT::timer/main.yy","order":2,"resourceVersion":"1.0","name":"main","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/UNIT::timer/timers.yy","order":0,"resourceVersion":"1.0","name":"timers","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/UNIT::timer/_global.yy","order":1,"resourceVersion":"1.0","name":"_global","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/UNIT::timer/_extend.yy","order":1,"resourceVersion":"1.0","name":"_extend","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/UNIT::timer/timers/__private.yy","order":3,"resourceVersion":"1.0","name":"__private","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
