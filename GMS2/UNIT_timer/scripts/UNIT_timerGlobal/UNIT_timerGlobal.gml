@@ -13,7 +13,7 @@ function UNIT_timerGlobal() {
 	return _handler;
 }
 
-/// @param			UNIT_timerGlobalTick(super);
+/// @param			super
 function UNIT_timerGlobalTick(_super) {
 	static _handler = UNIT_timerGlobal();
 	_handler.tick(_super);
