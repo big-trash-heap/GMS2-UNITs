@@ -154,7 +154,7 @@ function __UNIT_Timeout(_constructor) constructor {
 	self.__value = new _constructor();
 	
 	static toString = function() {
-		return self.__value.toString();	
+		return ("UNIT::timeout::" + self.__value.toString());	
 	}
 	
 }
@@ -201,7 +201,7 @@ function __UNIT_TimeoutSync() constructor {
 	
 	static toString = function() {
 		
-		return "UNIT::timeoutSync";
+		return "_sync";
 	}
 	
 }
@@ -243,7 +243,7 @@ function __UNIT_TimeoutAsync() constructor {
 	
 	static toString = function() {
 		
-		return "UNIT::timeoutAsync";
+		return "_async";
 	}
 	
 }
