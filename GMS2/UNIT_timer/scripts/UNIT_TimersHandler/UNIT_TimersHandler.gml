@@ -26,7 +26,7 @@ function UNIT_TimersHandler() constructor {
 		
 		if (UNIT_timerGetBind(_timer) == self) {
 			
-			show_error("UNIT::timer -> Таймер уже занят обработчиком", true);
+			show_error("UNIT::timer -> таймер уже занят обработчиком", true);
 		}
 		
 		var _cell = [self, _timer];
@@ -45,7 +45,7 @@ function UNIT_TimersHandler() constructor {
 		if (_size > 0) {
 			
 			if (UNIT_PREPROCESSOR_TIMER_ERROR_TICK) {
-				
+			
 			if (self.__clear != -1) show_error("UNIT::timer -> нельзя вызывать tick во время вызова tick, clear, clearAll", true);
 			self.__clear = -2;
 			
@@ -103,6 +103,7 @@ function UNIT_TimersHandler() constructor {
 		}
 	}
 	
+	// удалит текущие таймеры в очереди
 	static clear = function() {
 		
 		var _size = array_length(self.__timers);
@@ -167,6 +168,7 @@ function UNIT_TimersHandler() constructor {
 	
 	#region UNIT_PREPROCESSOR_TIMER_EXTEND_CODE
 	
+	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком
 	static _tick_isBind = function() {
 		if (UNIT_PREPROCESSOR_TIMER_EXTEND_CODE) {
 		
@@ -180,6 +182,8 @@ function UNIT_TimersHandler() constructor {
 		}
 	}
 	
+	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком,
+	// при условии, что он не менял очереди выполнения (был отвязан и привязан)
 	static _tick_isEntry = function() {
 		if (UNIT_PREPROCESSOR_TIMER_EXTEND_CODE) {
 		
@@ -197,10 +201,18 @@ function UNIT_TimersHandler() constructor {
 	
 	static _toArray = function() {
 		
-		var _size = array_length(self.__timers);
-		var _array = array_create(_size);
+		var _array = array_create(self.__count);
+		var _value;
 		
-		array_copy(_array, 0, self.__timers, 0, _size);
+		for (var _i = 0, _j = -1; _i < self.__count; ++_i) {
+			
+			do {
+				_value = self.__timers[++_j];
+			} until (_value[__UNIT_TIMER_CELL._HANDLER] == self);
+			
+			_array[_i] = _value[__UNIT_TIMER_CELL._TIMER];
+		}
+		
 		return _array;
 	}
 	

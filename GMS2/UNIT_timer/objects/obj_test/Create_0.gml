@@ -90,6 +90,9 @@ UNIT_timerGl_loop(
 )._set("num", 1)._set("timer", undefined);
 
 self._fff = function() {
+	
+	var _t;
+	
 	timer = UNIT_timerGl_async(5000, function(_0, _timer, _1, _count) {
 		show_debug_message(["hello", _timer.getLeftCf(), _count]);
 	}, undefined, function(_0, _timer) {
@@ -98,10 +101,16 @@ self._fff = function() {
 		UNIT_timerGl_timer(_timer);
 	});
 	timer.pause();
-
+	
+	UNIT_timerGl_async(5000).unbind();
+	UNIT_timerGl_async(5000).unbind();
+	UNIT_timerGl_async(5000).unbind();
+	
 	UNIT_timerGl_asyncEnd(2500, function() {
 		show_message("hello");
 		timer.resume();
 	});
+	
+	show_message(UNIT_timerGlobal()._toArray());
 }
 
