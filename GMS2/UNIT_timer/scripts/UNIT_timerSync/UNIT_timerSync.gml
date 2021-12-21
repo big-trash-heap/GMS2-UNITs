@@ -16,6 +16,10 @@ function UNIT_TimerSync(_steps, _ftick, _finit, _ffree) : __UNIT_TimerTimelapse(
 	
 	#endregion
 	
+	static _clone = function() {
+		return self.__clone(UNIT_TimerSync);
+	}
+	
 }
 
 /// @function		UNIT_TimerSyncExt(steps, [ftick], [finit], [ffree]);
@@ -27,6 +31,10 @@ function UNIT_TimerSyncExt(_steps, _ftick, _finit, _ffree) : __UNIT_TimerTimelap
 	static __tick = __UNIT_timerSyncTick;
 	
 	#endregion
+	
+	static _clone = function() {
+		return self.__clone(UNIT_TimerSyncExt);
+	}
 	
 }
 

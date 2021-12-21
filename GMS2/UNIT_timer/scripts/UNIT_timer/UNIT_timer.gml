@@ -9,6 +9,20 @@ function UNIT_Timer() constructor {
 	static __tick = UNIT_timer /* handler, timer, super */;
 	static __free = UNIT_timer /* handler, timer        */;
 	
+	static __copyn_ = function(_struct) {
+		
+		var _keys = variable_struct_get_names(_struct);
+		var _size = array_length(_keys), _key;
+		while (_size > 0) {
+			
+			_key = _keys[--_size];
+			if (string_char_at(_key, 1) != "_")
+				self[$ _key] = _struct[$ _key];
+		}
+		
+		return self;
+	}
+	
 	#endregion
 	
 	static unbind = function() {
@@ -61,6 +75,11 @@ function UNIT_Timer() constructor {
 	
 	static _get_ffree = function() {
 		return self.__free;
+	}
+	
+	
+	static _clone = function() {
+		show_error(@"UNIT::timer -> для класса " + instanceof(self) + " не определён метод _clone", true);
 	}
 	
 }

@@ -1,5 +1,9 @@
 
-#macro UNIT_PREPROCESSOR_TIMER_ERROR_APPEND	true
+/*
+	Запрещено создавать клоны UNIT_TimersHandler, но можно создавать клоны таймеров
+	Однако предполагается, что вы не будете клонировать таймеры, так как это не безопасно
+*/
+
 #macro UNIT_PREPROCESSOR_TIMER_ERROR_TICK	true
 
 #macro UNIT_PREPROCESSOR_TIMER_EXTEND_CODE	false

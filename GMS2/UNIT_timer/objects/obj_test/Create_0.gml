@@ -1,14 +1,20 @@
 
-//timer = new UNIT_TimerAsync(5000, function() {
-//	show_message(name);
-//})._set("name", "Kirill");
+//timer = new UNIT_TimerAsyncExt(1000, 
+//	function(_handler, _timer) {
+//		show_debug_message(_timer.name);
+//	}, undefined,
+//	function(_0, _timer) {
+		
+//		UNIT_timerGl_timer(_timer).resetTime();
+//	}
+//)._set("name", "Kirill");
 
-
+//timer2 = timer._clone()._set("name", "Dasha");
 
 //UNIT_timerGl_timer(timer);
 //UNIT_timerGl_timer(timer2);
 
-///*
+/*
 UNIT_timerGl_loop(
 	function(_0, _timer) {
 		

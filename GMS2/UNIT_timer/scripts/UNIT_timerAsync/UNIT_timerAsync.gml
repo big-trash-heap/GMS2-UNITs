@@ -30,7 +30,14 @@ function UNIT_TimerAsync(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTimelap
 	#endregion
 	
 	static resume = __UNIT_timerAsyncResume;
+	
+	
 	static _get_finit = __UNIT_timerAsync_finit;
+	
+	
+	static _clone = function() {
+		return self.__clone(UNIT_TimerAsync);
+	}
 	
 }
 
@@ -49,7 +56,6 @@ function UNIT_TimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTime
 	#endregion
 	
 	static resume = __UNIT_timerAsyncResume;
-	static _get_finit = __UNIT_timerAsync_finit;
 	
 	static resetTime = function(_play=true) {
 		var _sign = sign(self.__step);
@@ -57,6 +63,14 @@ function UNIT_TimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTime
 		if (self.__step <= 0 && _sign == 1) self.__ctime = current_time;
 		self.__step = self.__max_step * _sign;
 		return self;
+	}
+	
+	
+	static _get_finit = __UNIT_timerAsync_finit;
+	
+	
+	static _clone = function() {
+		return self.__clone(UNIT_TimerAsyncExt);
 	}
 	
 }
