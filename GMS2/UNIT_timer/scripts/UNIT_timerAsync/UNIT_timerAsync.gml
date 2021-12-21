@@ -78,6 +78,14 @@ function UNIT_TimerAsync(_milisec, _ftick=undefined, _finit=undefined, _ffree=un
 		return (self.__step == 0);
 	}
 	
+	static _get_finit = function() {
+		return self.__finit;
+	}
+	
+	static _get_ftick = function() {
+		return self.__ftick;
+	}
+	
 }
 
 /// @function		UNIT_TimerAsyncExt(milisec, [ftick], [finit], [ffree]);

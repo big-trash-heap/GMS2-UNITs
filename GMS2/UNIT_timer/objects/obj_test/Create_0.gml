@@ -1,4 +1,14 @@
 
+timer = new UNIT_TimerAsync(5000, function() {
+	show_message(name);
+})._set("name", "Kirill");
+
+
+
+UNIT_timerGl_timer(timer);
+UNIT_timerGl_timer(timer2);
+
+/*
 UNIT_timerGl_loop(
 	function(_0, _timer) {
 		

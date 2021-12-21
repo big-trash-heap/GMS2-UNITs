@@ -89,6 +89,11 @@ function __UNIT_TimerBaseTimelapse(_steps, _ftick=undefined, _finit=undefined, _
 		return (self.__step == 0);
 	}
 	
+	
+	static _get_ftick = function() {
+		return self.__ftick;
+	}
+	
 }
 
 function __UNIT_TimerBaseTimelapseExt(_steps, _ftick, _finit, _ffree) : __UNIT_TimerBaseTimelapse(_steps, _ftick, _finit, _ffree) constructor {

@@ -1,5 +1,35 @@
 
+anim = new UNIT_Animator()
+	.add_action(function() {
+		show_debug_message("press: space");
+		if (keyboard_check_pressed(vk_space)) {
+			
+			x += 100;
+			return UNIT_ANIMATOR_ACTION._NEXT;
+		}
+	})
+	.add_action(function() {
+		show_debug_message("press: enter");
+		if (keyboard_check_pressed(vk_enter)) {
+			
+			y += 100;
+			return UNIT_ANIMATOR_ACTION._NEXT;
+		}
+	})
+	.add_frame()
+	.add_action(function() {
+		show_debug_message("press: control");
+		if (keyboard_check_pressed(vk_control)) {
+			
+			x = 0;
+			y = 0;
+			return UNIT_ANIMATOR_ACTION._NEXT;
+		}
+	})
 
+
+
+/*
 anim = new UNIT_Animator(function() {
 	show_debug_message("begin");	
 });

@@ -8,7 +8,7 @@ function UNIT_Timer() constructor {
 	static __init = UNIT_timer /* handler, timer, arg   */;
 	static __tick = UNIT_timer /* handler, timer, super */;
 	static __free = UNIT_timer /* handler, timer        */;
-	 
+	
 	#endregion
 	
 	static unbind = function() {
@@ -48,6 +48,19 @@ function UNIT_Timer() constructor {
 	    }
 		
 		return self;
+	}
+	
+	
+	static _get_finit = function() {
+		return self.__init;
+	}
+	
+	static _get_ftick = function() {
+		return self.__tick;
+	}
+	
+	static _get_ffree = function() {
+		return self.__free;
 	}
 	
 }
@@ -90,7 +103,6 @@ function UNIT_timerGetBind(_timer) {
 	var _cell = _map[? _timer];
 	if (_cell != undefined) return _cell[__UNIT_TIMER_CELL._HANDLER];
 }
-
 
 #region __private
 

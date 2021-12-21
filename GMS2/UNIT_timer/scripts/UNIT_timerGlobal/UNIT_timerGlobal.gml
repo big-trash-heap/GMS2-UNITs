@@ -1,4 +1,7 @@
 
+/*
+	Глобальный интерфейс для удобной простой и удобной работы
+*/
 
 function UNIT_timerGlobal() {
 	static _handler = new UNIT_TimersHandler();
