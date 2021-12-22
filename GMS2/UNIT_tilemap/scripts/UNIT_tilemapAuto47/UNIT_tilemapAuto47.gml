@@ -414,7 +414,7 @@ function __UNIT_tileAuto47_reset_inv(_tile, _value) {
 	}
 }
 
-function UNIT_unit_tileAuto47() {};
+function UNIT_tilemapAuto47() {};
 
 #endregion
 
