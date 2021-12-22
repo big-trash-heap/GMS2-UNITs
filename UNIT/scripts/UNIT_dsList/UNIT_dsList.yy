@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "UNIT::dsList",
-    "path": "folders/UNIT::dsList.yy",
+    "path": "folders/UNITS/UNIT::dsList.yy",
   },
   "resourceVersion": "1.0",
   "name": "UNIT_dsList",

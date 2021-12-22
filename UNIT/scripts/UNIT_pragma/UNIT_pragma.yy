@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "UNIT::pragma",
-    "path": "folders/UNIT::pragma.yy",
+    "path": "folders/UNITS/UNIT::pragma.yy",
   },
   "resourceVersion": "1.0",
   "name": "UNIT_pragma",

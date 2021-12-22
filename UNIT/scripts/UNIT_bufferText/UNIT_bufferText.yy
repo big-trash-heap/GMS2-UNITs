@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "UNIT::bufferText",
-    "path": "folders/UNIT::bufferText.yy",
+    "path": "folders/UNITS/UNIT::bufferText.yy",
   },
   "resourceVersion": "1.0",
   "name": "UNIT_bufferText",

@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "sample",
-    "path": "folders/UNIT::simpleCollision/sample.yy",
+    "path": "folders/UNITS/UNIT::simpleCollision/sample.yy",
   },
   "resourceVersion": "1.0",
   "name": "UNIT_simpleCollisionJumpSample",

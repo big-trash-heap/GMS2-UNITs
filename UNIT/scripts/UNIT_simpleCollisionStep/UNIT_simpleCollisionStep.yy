@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "special",
-    "path": "folders/UNIT::simpleCollision/special.yy",
+    "path": "folders/UNITS/UNIT::simpleCollision/special.yy",
   },
   "resourceVersion": "1.0",
   "name": "UNIT_simpleCollisionStep",

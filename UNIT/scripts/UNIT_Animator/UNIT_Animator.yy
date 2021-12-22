@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "UNIT::Animator",
-    "path": "folders/UNIT::Animator.yy",
+    "path": "folders/UNITS/UNIT::Animator.yy",
   },
   "resourceVersion": "1.0",
   "name": "UNIT_Animator",
