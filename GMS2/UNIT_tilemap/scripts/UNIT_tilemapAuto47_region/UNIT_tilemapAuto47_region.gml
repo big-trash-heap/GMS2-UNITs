@@ -295,7 +295,7 @@ function __UNIT_tileAuto47_region_is_cd(_tilemapElementId, _cellX, _cellY) {
 	return _tilemapElementId;
 }
 
-function UNIT_tilemapAuto47_region() {};
+function UNIT_unit_tileAuto47_region() {};
 
 #endregion
 

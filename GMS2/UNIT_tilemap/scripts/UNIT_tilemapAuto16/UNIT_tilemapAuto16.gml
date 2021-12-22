@@ -174,18 +174,18 @@ function UNIT_tileAuto16_reset(_tilemapElementId, _cellX, _cellY) {
 	UNIT_tileModify(_tilemapElementId, _cellX + 1, _cellY, __UNIT_tileAuto16_reset, 5);  // right
 }
 
-/// @function		tilemapAuto16APix_set(tilemap_element_id, x, y);
-function UNIT_tileAuto16APix_set(_tilemapElementId, _x, _y) {
+/// @function		UNIT_tileAuto16AtPix_set(tilemap_element_id, x, y);
+function UNIT_tileAuto16AtPix_set(_tilemapElementId, _x, _y) {
 	__UNIT_tileCallAtPix(_tilemapElementId, _x, _y, UNIT_tileAuto16_set);
 }
 
-/// @function		tilemapAuto16APix_set_cd(tilemap_element_id, x, y);
-function UNIT_tileAuto16APix_set_cd(_tilemapElementId, _x, _y) {
+/// @function		UNIT_tileAuto16AtPix_set_cd(tilemap_element_id, x, y);
+function UNIT_tileAuto16AtPix_set_cd(_tilemapElementId, _x, _y) {
 	__UNIT_tileCallAtPix(_tilemapElementId, _x, _y, UNIT_tileAuto16_set_cd);
 }
 
-/// @function		tilemapAuto16APix_reset(tilemap_element_id, x, y);
-function UNIT_tileAuto16APix_reset(_tilemapElementId, _x, _y) {
+/// @function		UNIT_tileAuto16AtPix_reset(tilemap_element_id, x, y);
+function UNIT_tileAuto16AtPix_reset(_tilemapElementId, _x, _y) {
 	__UNIT_tileCallAtPix(_tilemapElementId, _x, _y, UNIT_tileAuto16_reset);
 }
 
@@ -212,7 +212,7 @@ function __UNIT_tileAuto16_reset(_tile, _value) {
 	}
 }
 
-function UNIT_tilemapAuto16() {};
+function UNIT_unit_tileAuto16() {};
 
 #endregion
 

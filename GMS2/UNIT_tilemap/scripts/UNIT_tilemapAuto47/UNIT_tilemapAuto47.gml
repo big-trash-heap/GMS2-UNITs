@@ -2,9 +2,9 @@
 
 /*
 	Смотри __UNIT_tilemapNote
-	Предварительно смотрите UNIT_tilemapAuto16
+	Предварительно смотрите UNIT_unit_tileAuto16
 
-	Аналогично UNIT_tilemapAuto16
+	Аналогично UNIT_unit_tileAuto16
 	Мы ставим в каждый не пустой тайл на 8 бит 1
 	Установка ставит 1, а удаление 0
 	
@@ -414,7 +414,7 @@ function __UNIT_tileAuto47_reset_inv(_tile, _value) {
 	}
 }
 
-function UNIT_tilemapAuto47() {};
+function UNIT_unit_tileAuto47() {};
 
 #endregion
 
