@@ -85,7 +85,7 @@ function UNIT_Timer() constructor {
 	
 	
 	static _clone = function() {
-		show_error(@"UNIT::timer -> для класса " + instanceof(self) + " не определён метод _clone", true);
+		show_error("UNIT::timer -> для класса " + instanceof(self) + " не определён метод _clone", true);
 	}
 	
 }
