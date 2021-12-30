@@ -1,23 +1,23 @@
 
-timer_step = UNIT_timerGl_loopAsync(function(_0, _timer, _1, _step) {
-	show_debug_message(_step);
+//timer_step = UNIT_timerGl_loopAsync(function(_0, _timer, _1, _step) {
+//	show_debug_message(_step);
 	
-	if (keyboard_check_pressed(vk_space)) {
+//	if (keyboard_check_pressed(vk_space)) {
 		
-		UNIT_timerGl_timer(timer_switch);
-		return true;
-	}
-});
+//		UNIT_timerGl_timer(timer_switch);
+//		return true;
+//	}
+//});
 
-timer_switch = UNIT_timerGl_loop(function() {
-	show_debug_message("pause");
+//timer_switch = UNIT_timerGl_loop(function() {
+//	show_debug_message("pause");
 	
-	if (keyboard_check_pressed(vk_space)) {
+//	if (keyboard_check_pressed(vk_space)) {
 		
-		UNIT_timerGl_timer(timer_step);
-		return true;
-	}
-})._unbind();
+//		UNIT_timerGl_timer(timer_step);
+//		return true;
+//	}
+//})._unbind();
 
 
 
@@ -36,7 +36,7 @@ timer_switch = UNIT_timerGl_loop(function() {
 //UNIT_timerGl_timer(timer);
 //UNIT_timerGl_timer(timer2);
 
-/*
+
 UNIT_timerGl_loop(
 	function(_0, _timer) {
 		
@@ -134,7 +134,7 @@ self._fff = function() {
 	UNIT_timerGl_async(5000).unbind();
 	UNIT_timerGl_async(5000).unbind();
 	
-	UNIT_timerGl_asyncEnd(2500, function() {
+	UNIT_timerGl_endAsync(2500, function() {
 		show_message("hello");
 		timer.resume();
 	});
@@ -145,7 +145,7 @@ self._fff = function() {
 		show_debug_message("loop");	
 	}).pause();
 	
-	UNIT_timerGl_asyncEnd(15000, function(_0, _timer) {
+	UNIT_timerGl_endAsync(15000, function(_0, _timer) {
 		
 		_timer.t.resume();
 	})._set("t", base);

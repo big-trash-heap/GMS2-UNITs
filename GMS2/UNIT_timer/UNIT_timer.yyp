@@ -5,6 +5,7 @@
     {"id":{"name":"UNIT_timerLoopAsync","path":"scripts/UNIT_timerLoopAsync/UNIT_timerLoopAsync.yy",},"order":2,},
     {"id":{"name":"UNIT_timerLoop","path":"scripts/UNIT_timerLoop/UNIT_timerLoop.yy",},"order":2,},
     {"id":{"name":"UNIT_timer","path":"scripts/UNIT_timer/UNIT_timer.yy",},"order":0,},
+    {"id":{"name":"UNIT_TimersHandlerSimple","path":"scripts/UNIT_TimersHandlerSimple/UNIT_TimersHandlerSimple.yy",},"order":3,},
     {"id":{"name":"room_test","path":"rooms/room_test/room_test.yy",},"order":1,},
     {"id":{"name":"__UNIT_timerTimelapse","path":"scripts/__UNIT_timerTimelapse/__UNIT_timerTimelapse.yy",},"order":0,},
     {"id":{"name":"UNIT_timerAsync","path":"scripts/UNIT_timerAsync/UNIT_timerAsync.yy",},"order":1,},
