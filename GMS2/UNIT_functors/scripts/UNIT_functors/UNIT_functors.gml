@@ -22,6 +22,11 @@ function UNIT_functorArr(_value) {
 	return (is_array(_value) ? _value : [_value]);
 }
 
+/// @param			value
+function UNIT_functorInv(_value) {
+	return (not _value);
+}
+
 #endregion
 
 #region method
