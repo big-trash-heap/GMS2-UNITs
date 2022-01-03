@@ -25,7 +25,7 @@
 	(под свободной я подразумеваю, скорость при которой столкновения нету)
 */
 
-// check = check(speed, data)
+// check = function(speed, data)
 
 /// @function		UNIT_simcollMove_single(speed, accuracy, check, [data]);
 function UNIT_simcollMove_single(_speed, _accuracy, _check, _data) {

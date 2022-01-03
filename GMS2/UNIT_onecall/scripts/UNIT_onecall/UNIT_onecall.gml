@@ -5,6 +5,10 @@
 #macro UNIT_ONE		if(__UNIT_onecall(
 #macro UNIT_CALL	))exit
 
+/*
+	Эта функция очистит память
+	Вы должны использовать её только 1 раз, и только в объектах
+*/
 function UNIT_onecallFree() {
 	if (__UNIT_onecallData()) {
 		

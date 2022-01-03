@@ -30,7 +30,7 @@ function UNIT_Animator() constructor {
 	
 	#region init
 	
-	if (argument_count >= 1 && instanceof(argument[0]) == "__UNIT_Animator") {
+	if (argument_count == 1 && instanceof(argument[0]) == "__UNIT_Animator") {
 		
 		var _wrap = argument[0];
 		

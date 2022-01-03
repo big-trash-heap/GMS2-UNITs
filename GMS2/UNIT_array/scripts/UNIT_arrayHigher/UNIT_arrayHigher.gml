@@ -82,9 +82,9 @@ function UNIT_arrForEach(_array, _f, _data) {
 /// @function		UNIT_arrSplit([valid=true], [data], ...args);
 function UNIT_arrSplit(_valid, _data) {
 	
-	static _validTrue = function() {
+	static _validTrue = method_get_index(function() {
 		return true;
-	}
+	});
 	
 	_valid ??= _validTrue;
 	
@@ -146,7 +146,3 @@ function UNIT_arrayHigher() {};
 
 #endregion
 
-show_message(UNIT_arrSplit(undefined, undefined, 1, 2, 3, [5, 6, [7, 8], [], [[[[9]]], 10],
-
-	[11, [12, [13, [14], 15], 16], 20], 21
-]));

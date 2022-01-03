@@ -1,8 +1,8 @@
 
 /*
-	finit = finit(handler, timer, argument);
-	ftick = finit(handler, timer, super);
-	ffree = finit(handler, timer);
+	finit = function(handler, timer, argument);
+	ftick = function(handler, timer, super);
+	ffree = function(handler, timer);
 */
 
 

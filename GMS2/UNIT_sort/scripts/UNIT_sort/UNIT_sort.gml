@@ -8,8 +8,8 @@ https://github.com/dicksonlaw583/LightweightDataStructures/blob/master/extension
 	Если f_compare(a, b) вернёт true, то 'a' будет сдвинута влево (к началу контейнера)
 */
 
-//					f_set     = f_set(data, index, value);
-//					f_get     = f_get(data, index);
+//					f_set     = function(data, index, value);
+//					f_get     = function(data, index);
 //					f_compare = function(a, b);
 /// @function		UNIT_sort(data, reverse, sort_begin, sort_end, f_set, f_get, [f_compare=|>|]);
 function UNIT_sort(_data, _reverse, _sort_begin, _sort_end, _set, _get, _compare) {
@@ -115,13 +115,3 @@ function __UNIT_sort_merger(_stack, _data, _reverse, _set, _get, _compare) {
 
 #endregion
 
-var _f = function(a, b) {
-	if ((a & 1) == (b & 1)) return a > b;
-	if ((a & 1) == 0)		return true;
-	return false;
-}
-
-ar = [2, 2, 1, 236, 1, 123, 62, 12 , 321];
-UNIT_sort(ar, false, 0, array_length(ar), array_set, array_get, _f);
-
-show_message(ar);

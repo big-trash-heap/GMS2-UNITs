@@ -17,6 +17,11 @@ function UNIT_pragma(_f, _priority=0, _data) {
 	show_error(____UNIT_PRAGMA_ERROR, true);
 }
 
+/*
+	Эта функция вызовет весь добавленный в очередь код
+	Она также освободит память
+	Вы должны использовать её только 1 раз, и только в объектах
+*/
 function UNIT_pragmaExecute() {
 	if (__UNIT_pragma()) {
 		

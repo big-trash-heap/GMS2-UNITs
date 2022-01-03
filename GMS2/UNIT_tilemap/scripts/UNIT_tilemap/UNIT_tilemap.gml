@@ -2,7 +2,7 @@
 
 #region for
 
-//				callback = callback(tilemap_element_id, cell_x, cell_y, data)
+//				callback = function(tilemap_element_id, cell_x, cell_y, data)
 /// @function	UNIT_tileForRect(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2, callback, [data]);
 function UNIT_tileForRect(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _callback, _data) {
 	
@@ -35,7 +35,7 @@ function UNIT_tileEntryAtPix(_tilemapElementId, _x, _y) {
 	return (tilemap_get_cell_x_at_pixel(_tilemapElementId, _x, _y) != -1);
 }
 
-//					handler = handler(tile_data, data)
+//					handler = function(tile_data, data)
 /// @function		UNIT_tileModify(tilemap_element_id, cell_x, cell_y, handler, [data]);
 function UNIT_tileModify(_tilemapElementId, _cellX, _cellY, _handler, _data) {
 	
@@ -67,7 +67,7 @@ function UNIT_tileDebugExists(_tilemapElementId) {
 	return false;
 }
 
-//					draw_cell = draw_cell(tile_data, x1, y1, x2, y2, data)
+//					draw_cell = function(tile_data, x1, y1, x2, y2, data)
 /// @function		UNIT_tileDebugDraw(tilemap_element_id, offset_x, offset_y, draw_cell, [data]);
 function UNIT_tileDebugDraw(_tilemapElementId, _offsetX, _offsetY, _drawCell, _data) {
 	

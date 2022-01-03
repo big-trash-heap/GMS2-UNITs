@@ -1,5 +1,5 @@
 
-// check = check(inst, data)
+// check = function(inst, data)
 
 /// @function		UNIT_simcollStepW(x, y, object, speed, [check], [data]);
 function UNIT_simcollStepW(_x, _y, _object, _speed, _check, _data) {

@@ -1,5 +1,6 @@
 
 
+//					f = function(number) // floor/round/ceil/...
 /// @function		UNIT_mthAbsRound(number, [f=floor]);
 function UNIT_mthAbsRound(_number, _f=floor) {
 	return (sign(_number) * _f(abs(_number)));

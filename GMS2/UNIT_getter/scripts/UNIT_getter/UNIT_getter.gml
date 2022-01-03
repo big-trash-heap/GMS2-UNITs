@@ -51,7 +51,7 @@ function UNIT_getterAccess() {
 		return _table;
 	}();
 	
-	static _read = function(_value) {
+	static _read = method_get_index(function(_value) {
 		
 		var _size = array_length(self.array);
 		var _state;
@@ -62,7 +62,7 @@ function UNIT_getterAccess() {
 		}
 		
 		return _value;
-	}
+	});
 	
 	var _argSize = argument_count div 2;
 	var _array = array_create(_argSize);
@@ -75,7 +75,7 @@ function UNIT_getterAccess() {
 	return method({ array: _array }, _read);
 }
 
-//					f = f(argument, data);
+//					f = function(argument, data);
 /// @function		UNIT_getterCall(f, data);
 /// @description	Создаёт метод, который вызывает другую функцию
 //					Смещает контекст вызова, используйте методы

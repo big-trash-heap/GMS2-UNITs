@@ -10,7 +10,7 @@ function UNIT_timeoutCreateAsync() {
 	return new __UNIT_Timeout(__UNIT_TimeoutAsync);
 }
 
-//					f = f(timeout, f, data)
+//					f = function(timeout, f, data)
 /// @function		UNIT_timeoutAppend(timeout, time, f, [data]);
 function UNIT_timeoutAppend(_timeout, _time, _f, _data) {
 	if (UNIT_PREPROCESSOR_TIMEOUT_ERROR) {
@@ -27,7 +27,7 @@ function UNIT_timeoutAppend(_timeout, _time, _f, _data) {
 	
 }
 
-//					f = f(timeout, f, data)
+//					f = function(timeout, f, data)
 /// @function		UNIT_timeoutAppendLoop(timeout, time, f, [data]);
 function UNIT_timeoutAppendLoop(_timeout, _time, _f, _data) {
 	static _append = method_get_index(function(_timeout, _f, _data) {
@@ -39,7 +39,7 @@ function UNIT_timeoutAppendLoop(_timeout, _time, _f, _data) {
 	UNIT_timeoutAppend(_timeout, _time, _append, _super);
 }
 
-//					f = f(timeout, f, data)
+//					f = function(timeout, f, data)
 /// @function		UNIT_timeoutAppendRepeat(timeout, time, count, f, [data]);
 function UNIT_timeoutAppendRepeat(_timeout, _time, _count, _f, _data) {
 	static _append = method_get_index(function(_timeout, _f, _data) {

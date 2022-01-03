@@ -6,7 +6,7 @@
 */
 #macro UNIT_SIMPLE_COLLISION_MOVE_DEFAULT_ACCURACY	0.8
 
-//					check = check(speed, data)
+//					check = function(speed, data)
 /// @function		UNIT_simcollJump(speed, check, [data], [accuracy]);
 /// @description	Вернёт true, при наличии столкновения, а так же запишет в
 //					global.UNIT_simcollDist "свободную" скорость

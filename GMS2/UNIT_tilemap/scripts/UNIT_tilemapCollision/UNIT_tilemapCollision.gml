@@ -14,7 +14,7 @@
 	(tilemap_get_x + layer_get_x ...)
 */
 
-//					callback_check = callback_check(tile_data, data, x1, y1, x2, y2)
+//					callback_check = function(tile_data, data, x1, y1, x2, y2)
 
 /// @function		UNIT_tileCollsRect(tilemap_element_id, x1, y1, x2, y2, [callback_check=FunctorId], [callback_data], [offset_x=tilemap_get_x], [offset_y=tilemap_get_y]);
 function UNIT_tileCollsRect(

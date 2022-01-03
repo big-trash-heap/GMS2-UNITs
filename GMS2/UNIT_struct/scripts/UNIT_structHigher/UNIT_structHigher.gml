@@ -2,7 +2,7 @@
 
 #region modify
 
-//					f = f(struct, key, data)
+//					f = function(struct, key, data)
 /// @function		UNIT_structForEach(struct, f, [data]);
 function UNIT_structForEach(_struct, _f, _data) {
     
@@ -12,7 +12,7 @@ function UNIT_structForEach(_struct, _f, _data) {
 	
 }
 
-//					f = f(struct, key, data)
+//					f = function(struct, key, data)
 /// @function		UNIT_structFind(struct, f, [data]);
 function UNIT_structFind(_struct, _f, _data) {
     
