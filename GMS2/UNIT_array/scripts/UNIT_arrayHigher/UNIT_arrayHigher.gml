@@ -78,6 +78,65 @@ function UNIT_arrForEach(_array, _f, _data) {
 		if (_f(_array[_i], _i, _data)) return;
 }
 
+//					valid = function(value, data)
+/// @function		UNIT_arrSplit([valid=true], [data], ...args);
+function UNIT_arrSplit(_valid, _data) {
+	
+	static _validTrue = function() {
+		return true;
+	}
+	
+	_valid ??= _validTrue;
+	
+	var _stack   = ds_stack_create();
+	var _argSize = argument_count;
+	var _build   = [];
+	
+	var _jsize, _j, _value;
+	var _pack, _array;
+	
+	for (var _i = 2; _i < _argSize; ++_i) {
+		
+		_value = argument[_i];
+		if (is_array(_value)) {
+			
+			ds_stack_push(_stack, [0, _value]);
+			do {
+				
+				_pack = ds_stack_top(_stack);
+				_array = _pack[1];
+				_jsize = array_length(_array);
+				
+				for (_j = _pack[0]; _j < _jsize; ++_j) {
+					
+					_value = _array[_j];
+					if (is_array(_value)) {
+						ds_stack_push(_stack, [0, _value]);
+						
+						_pack[@ 0] = _j + 1;
+						_j = -1;
+						break;
+					}
+					else
+					if (_valid(_value, _data)) {
+						array_push(_build, _value);	
+					}
+				}
+				
+				if (_j != -1) ds_stack_pop(_stack);
+			} until (ds_stack_empty(_stack));
+		}
+		else
+		if (_valid(_value, _data)) {
+			
+			array_push(_build, _value);	
+		}
+	}
+	
+	ds_stack_destroy(_stack);
+	return _build;
+}
+
 #endregion
 
 
@@ -87,3 +146,7 @@ function UNIT_arrayHigher() {};
 
 #endregion
 
+show_message(UNIT_arrSplit(undefined, undefined, 1, 2, 3, [5, 6, [7, 8], [], [[[[9]]], 10],
+
+	[11, [12, [13, [14], 15], 16], 20], 21
+]));
