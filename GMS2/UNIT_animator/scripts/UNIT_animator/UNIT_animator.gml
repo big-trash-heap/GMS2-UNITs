@@ -9,11 +9,11 @@
 	5. Вы не будете вызывать tick при вызове tick (в рамках одного экземпляра)
 */
 
-#macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE	false
-#macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_REPLAY	false
+#macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE				false
+#macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_REPLAY				false
 
-#macro UNIT_PREPROCESSOR_ANIMATOR_ERROR_TICK	true
-#macro UNIT_PREPROCESSOR_ANIMATOR_LOG			true
+#macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CHECK_ERROR_TICK	true
+#macro UNIT_PREPROCESSOR_ANIMATOR_LOG						true
 
 enum UNIT_ANIMATOR_ACTION { _BREAK = -1, _AWAIT, _NEXT };
 enum UNIT_ANIMATOR_CODE   { _BREAK = -1, _STOP,  _CALL };
@@ -76,6 +76,12 @@ function UNIT_Animator() constructor {
 	#endregion
 	
 	#region __private
+	
+	if (UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CHECK_ERROR_TICK) {
+	
+	self.__calltick = false;
+	
+	}
 	
 	static __next = function() {
 		
@@ -216,13 +222,14 @@ function UNIT_Animator() constructor {
 	
 	static tick = function() {
 		
-		if (UNIT_PREPROCESSOR_ANIMATOR_ERROR_TICK) {
+		if (UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CHECK_ERROR_TICK) {
 		
-		if (variable_struct_exists(self, "__save")) show_error("UNIT::animator -> нельзя вызывать tick во время вызова tick", true);
-		self.__save = undefined;
+		if (self.__calltick) show_error("UNIT::animator -> нельзя вызывать tick во время вызова tick", true);
 		
+		self.__calltick = true;
 		var _result = self.__tick();
-		variable_struct_remove(self, "__save");
+		self.__calltick = false;
+		
 		return _result;
 		
 		}

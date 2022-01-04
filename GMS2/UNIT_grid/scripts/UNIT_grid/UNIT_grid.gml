@@ -1,5 +1,5 @@
 
-#macro UNIT_PREPROCESSOR_GRID_CHECK_BOUND	true
+#macro UNIT_PREPROCESSOR_GRID_ENABLE_CHECK_BOUND	true
 
 /// @function		UNIT_Grid([w=0], [h=0], [value=0]);
 function UNIT_Grid(_w=0, _h=0, _value=0) constructor {
@@ -46,7 +46,7 @@ function UNIT_Grid(_w=0, _h=0, _value=0) constructor {
 	static getHeight = function() { return self.__h; };
 	
 	static get = function(_x, _y) {
-		if (UNIT_PREPROCESSOR_GRID_CHECK_BOUND) {
+		if (UNIT_PREPROCESSOR_GRID_ENABLE_CHECK_BOUND) {
 		
 		if (!self.exists(_x, _y)) show_error(____UNIT_GRID_ERROR, true);
 		
@@ -56,7 +56,7 @@ function UNIT_Grid(_w=0, _h=0, _value=0) constructor {
 	}
 	
 	static set = function(_x, _y, _value) {
-		if (UNIT_PREPROCESSOR_GRID_CHECK_BOUND) {
+		if (UNIT_PREPROCESSOR_GRID_ENABLE_CHECK_BOUND) {
 		
 		if (!self.exists(_x, _y)) show_error(____UNIT_GRID_ERROR, true);
 		

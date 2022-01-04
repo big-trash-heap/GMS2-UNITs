@@ -1,5 +1,5 @@
 
-#macro UNIT_PREPROCESSOR_TIMEOUT_ERROR	true
+#macro UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS	true
 
 
 function UNIT_timeoutCreateSync() {
@@ -13,7 +13,7 @@ function UNIT_timeoutCreateAsync() {
 //					f = function(timeout, f, data)
 /// @function		UNIT_timeoutAppend(timeout, time, f, [data]);
 function UNIT_timeoutAppend(_timeout, _time, _f, _data) {
-	if (UNIT_PREPROCESSOR_TIMEOUT_ERROR) {
+	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
 	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_TIMEOUT_ERROR, true);
 	
@@ -58,7 +58,7 @@ function UNIT_timeoutAppendRepeat(_timeout, _time, _count, _f, _data) {
 
 /// @param			timeout
 function UNIT_timeoutClear(_timeout) {
-	if (UNIT_PREPROCESSOR_TIMEOUT_ERROR) {
+	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
 	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_TIMEOUT_ERROR, true);
 	
@@ -74,7 +74,7 @@ function UNIT_timeoutClear(_timeout) {
 
 /// @param			timeout
 function UNIT_timeoutExecute(_timeout) {
-	if (UNIT_PREPROCESSOR_TIMEOUT_ERROR) {
+	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
 	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_TIMEOUT_ERROR, true);
 	
@@ -98,7 +98,7 @@ function UNIT_timeoutExecute(_timeout) {
 
 // @param			timeout
 function UNIT_timeoutFree(_timeout) {
-	if (UNIT_PREPROCESSOR_TIMEOUT_ERROR) {
+	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
 	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_TIMEOUT_ERROR, true);
 	
@@ -114,7 +114,7 @@ function UNIT_timeoutFree(_timeout) {
 
 /// @param			timeout
 function UNIT_timeoutTick(_timeout) {
-	if (UNIT_PREPROCESSOR_TIMEOUT_ERROR) {
+	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
 	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_TIMEOUT_ERROR, true);
 	
@@ -131,7 +131,7 @@ function UNIT_timeoutExists(_timeout) {
 
 /// @param			timeout
 function UNIT_timeoutSize(_timeout) {
-	if (UNIT_PREPROCESSOR_TIMEOUT_ERROR) {
+	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
 	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_TIMEOUT_ERROR, true);
 	
