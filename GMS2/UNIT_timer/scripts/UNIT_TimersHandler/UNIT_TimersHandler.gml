@@ -4,9 +4,9 @@
 	Однако предполагается, что вы не будете клонировать таймеры, так как это не безопасно
 */
 
-#macro UNIT_PREPROCESSOR_TIMER_ERROR_TICK	true
+#macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK	true
 
-#macro UNIT_PREPROCESSOR_TIMER_EXTEND_CODE	false
+#macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK				false
 
 function UNIT_TimersHandler() constructor {
 	
@@ -18,7 +18,7 @@ function UNIT_TimersHandler() constructor {
 	self.__count  = 0;
 	self.__clear  = -1;
 	
-	if (UNIT_PREPROCESSOR_TIMER_EXTEND_CODE) {
+	if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
 	
 	self.__temp = undefined;
 	
@@ -48,7 +48,7 @@ function UNIT_TimersHandler() constructor {
 		var _size = array_length(self.__timers);
 		if (_size > 0) {
 			
-			if (UNIT_PREPROCESSOR_TIMER_ERROR_TICK) {
+			if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK) {
 			
 			if (self.__clear != -1) show_error("UNIT::timer -> нельзя вызывать tick во время вызова tick, clear, clearAll", true);
 			self.__clear = -2;
@@ -61,7 +61,7 @@ function UNIT_TimersHandler() constructor {
 				_value = self.__timers[_i];
 				if (_value[__UNIT_TIMER_CELL._HANDLER] == self) {
 					
-					if (UNIT_PREPROCESSOR_TIMER_EXTEND_CODE) {
+					if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
 					
 					self.__temp = _value;
 					
@@ -91,7 +91,7 @@ function UNIT_TimersHandler() constructor {
 				}
 			}
 			
-			if (UNIT_PREPROCESSOR_TIMER_EXTEND_CODE) {
+			if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
 			
 			delete self.__temp;
 			
@@ -99,7 +99,7 @@ function UNIT_TimersHandler() constructor {
 			
 			array_resize(self.__timers, _j);
 			
-			if (UNIT_PREPROCESSOR_TIMER_ERROR_TICK) {
+			if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK) {
 			
 			self.__clear = -1;
 			
@@ -170,38 +170,6 @@ function UNIT_TimersHandler() constructor {
 		return ("UNIT::timer::" + instanceof(self) + "; number of timers: " + string(self.__count));
 	}
 	
-	#region UNIT_PREPROCESSOR_TIMER_EXTEND_CODE
-	
-	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком
-	static _tick_isBind = function() {
-		if (UNIT_PREPROCESSOR_TIMER_EXTEND_CODE) {
-		
-		return (self == UNIT_timerGetBind(self.__temp[__UNIT_TIMER_CELL._TIMER]));
-		
-		}
-		else {
-		
-		show_error(____UNIT_TIMER_ERROR, true);
-		
-		}
-	}
-	
-	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком,
-	// при условии, что он не менял очереди выполнения (был отвязан и привязан)
-	static _tick_isEntry = function() {
-		if (UNIT_PREPROCESSOR_TIMER_EXTEND_CODE) {
-		
-		return (self == self.__temp[__UNIT_TIMER_CELL._HANDLER]);
-		
-		}
-		else {
-		
-		show_error(____UNIT_TIMER_ERROR, true);
-		
-		}
-	}
-	
-	#endregion
 	
 	static _toArray = function() {
 		
@@ -220,14 +188,47 @@ function UNIT_TimersHandler() constructor {
 		return _array;
 	}
 	
+	#region UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK
+	
+	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком
+	static _tick_isBind = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
+		
+		return (self == UNIT_timerGetBind(self.__temp[__UNIT_TIMER_CELL._TIMER]));
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMERS_HANDLER, true);
+		
+		}
+	}
+	
+	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком,
+	// при условии, что он не менял очереди выполнения (был отвязан и привязан)
+	static _tick_isEntry = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
+		
+		return (self == self.__temp[__UNIT_TIMER_CELL._HANDLER]);
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMERS_HANDLER, true);
+		
+		}
+	}
+	
+	#endregion
+	
 }
 
 
 #region __private
 
-#macro ____UNIT_TIMER_ERROR "UNIT::timer -> UNIT_PREPROCESSOR_TIMER_EXTEND_CODE отключена"
+#macro ____UNIT_TIMER_ERROR_TIMERS_HANDLER "UNIT::timer -> UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK отключена"
 
-enum __UNIT_TIMER_CELL { _HANDLER, _TIMER, _MARK };
+enum __UNIT_TIMER_CELL { _HANDLER, _TIMER };
 
 function __UNIT_timerHandler() {
 	static _map = ds_map_create();

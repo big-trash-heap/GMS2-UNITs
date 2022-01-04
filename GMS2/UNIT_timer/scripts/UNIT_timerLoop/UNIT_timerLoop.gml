@@ -19,7 +19,16 @@ function UNIT_TimerLoop(_ftick, _finit, _ffree) : UNIT_Timer() constructor {
 	#endregion
 	
 	static _clone = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		
 		return new UNIT_TimerLoop(self.__tick, self.__init, self.__free).__copyn_(self);
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		
+		}
 	}
 	
 }
@@ -71,9 +80,18 @@ function UNIT_TimerLoopExt(_ftick, _finit, _ffree) : UNIT_Timer() constructor {
 	
 	
 	static _clone = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		
 		var _timer = new UNIT_TimerLoopExt(self.__ftick, self.__init, self.__free);
 		_timer.__play = self.__play;
 		return _timer.__copyn_(self);
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		
+		}
 	}
 	
 }

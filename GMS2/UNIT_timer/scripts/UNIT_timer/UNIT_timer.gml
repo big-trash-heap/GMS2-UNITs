@@ -1,15 +1,24 @@
 
+#macro UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK	false
+#macro UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE	false
 
 // Абстрактный класс
 function UNIT_Timer() constructor {
 	
 	#region __private
 	
+	if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK) {
+	
+	self.__mark = weak_ref_create(self);
+	
+	}
+	
 	static __init = UNIT_timer /* handler, timer, arg   */;
 	static __tick = UNIT_timer /* handler, timer, super */;
 	static __free = UNIT_timer /* handler, timer        */;
 	
 	static __copyn_ = function(_struct) {
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
 		
 		var _keys = variable_struct_get_names(_struct);
 		var _size = array_length(_keys), _key;
@@ -21,6 +30,13 @@ function UNIT_Timer() constructor {
 		}
 		
 		return self;
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		
+		}
 	}
 	
 	#endregion
@@ -85,22 +101,39 @@ function UNIT_Timer() constructor {
 	
 	
 	static _clone = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		
 		show_error("UNIT::timer -> для класса " + instanceof(self) + " не определён метод _clone", true);
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		
+		}
 	}
 	
 	
 	static _mark = function() {
-		static _map = __UNIT_timerHandler();
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK) {
 		
-		var _cell = _map[? self];
+		var _cell = __UNIT_timerHandler()[? self];
 		if (_cell != undefined) {
 			
 			if (array_length(_cell) == 2) {
 				
-				_cell[@ __UNIT_TIMER_CELL._MARK] = weak_ref_create(_cell[__UNIT_TIMER_CELL._HANDLER]);
+				_cell[@ 2] = weak_ref_create(self);
 			}
 			
-			return _cell[__UNIT_TIMER_CELL._MARK];
+			return _cell[2];
+		}
+		return self.__mark;
+		
+		}
+		else {
+		
+		show_error("UNIT::timer -> UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK отключена", true);
+		
 		}
 	}
 	
@@ -115,6 +148,12 @@ function UNIT_timerUnbind(_timer) {
 	if (_cell == undefined) return false;
 	
 	ds_map_delete(_map, _timer);
+	
+	if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK) {
+	
+	_timer.__mark = weak_ref_create(_timer);
+	
+	}
 	
 	var _handler = _cell[__UNIT_TIMER_CELL._HANDLER];
 	_cell[@ __UNIT_TIMER_CELL._HANDLER] = undefined;
@@ -147,6 +186,8 @@ function UNIT_timerGetBind(_timer) {
 
 
 #region __private
+
+#macro ____UNIT_TIMER_ERROR_TIMER "UNIT::timer -> UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE отключена"
 
 function UNIT_timer() {};
 

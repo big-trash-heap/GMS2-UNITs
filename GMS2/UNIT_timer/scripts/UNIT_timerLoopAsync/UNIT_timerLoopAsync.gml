@@ -39,7 +39,16 @@ function UNIT_TimerLoopAsync(_ftick, _finit, _ffree) : UNIT_TimerLoop(undefined,
 	
 	
 	static _clone = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		
 		return new UNIT_TimerLoopAsync(self.__tick, self.__init, self.__free).__copyn_(self);
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		
+		}
 	}
 	
 }
@@ -83,9 +92,18 @@ function UNIT_TimerLoopAsyncExt(_ftick, _finit, _ffree) : UNIT_TimerLoopExt(_fti
 	static _get_finit = __UNIT_timerLoopAsync_finit;
 	
 	static _clone = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		
 		var _timer = new UNIT_TimerLoopAsyncExt(self.__ftick, self.__init, self.__free);
 		_timer.__play = self.__play;
 		return _timer.__copyn_(self);
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		
+		}
 	}
 	
 }

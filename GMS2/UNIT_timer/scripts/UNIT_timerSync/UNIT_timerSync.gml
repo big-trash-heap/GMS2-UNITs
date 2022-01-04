@@ -17,7 +17,16 @@ function UNIT_TimerSync(_steps, _ftick, _finit, _ffree) : __UNIT_TimerTimelapse(
 	#endregion
 	
 	static _clone = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		
 		return self.__clone(UNIT_TimerSync);
+		
+		}
+		else {
+			
+		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		
+		}
 	}
 	
 }
@@ -33,7 +42,16 @@ function UNIT_TimerSyncExt(_steps, _ftick, _finit, _ffree) : __UNIT_TimerTimelap
 	#endregion
 	
 	static _clone = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		
 		return self.__clone(UNIT_TimerSyncExt);
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		
+		}
 	}
 	
 }

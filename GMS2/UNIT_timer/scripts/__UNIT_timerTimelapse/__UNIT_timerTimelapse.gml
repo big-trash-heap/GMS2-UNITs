@@ -19,7 +19,16 @@ function __UNIT_TimerTimelapse(_steps, _ftick=undefined, _finit=undefined, _ffre
 	if (_ftick != undefined) self.__ftick = _ftick;
 	
 	static __clone = function(_constructor) {
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		
 		return new _constructor(self.__step, self._get_ftick(), self._get_finit(), self._get_ffree()).__copyn_(self);
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		
+		}
 	}
 	
 	#endregion

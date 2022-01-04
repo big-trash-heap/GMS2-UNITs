@@ -36,7 +36,16 @@ function UNIT_TimerAsync(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTimelap
 	
 	
 	static _clone = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		
 		return self.__clone(UNIT_TimerAsync);
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		
+		}
 	}
 	
 }
@@ -70,7 +79,16 @@ function UNIT_TimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTime
 	
 	
 	static _clone = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		
 		return self.__clone(UNIT_TimerAsyncExt);
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		
+		}
 	}
 	
 }

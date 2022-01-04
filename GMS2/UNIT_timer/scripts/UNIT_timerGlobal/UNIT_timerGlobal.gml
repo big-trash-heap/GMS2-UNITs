@@ -10,7 +10,7 @@
 
 /// @description	Получение глобального обработчика
 function UNIT_timerGlobal() {
-	static _handler = new UNIT_TimersHandlerSimpleExt();
+	static _handler = new __UNIT_TimersHandlerGlobal();
 	return _handler;
 }
 
@@ -57,4 +57,11 @@ function UNIT_timerGl_endSync(_steps, _f) {
 function UNIT_timerGl_endAsync(_milisec, _f) {
 	return UNIT_timerGlobal().newEndAsync(_milisec, _f);
 }
+
+
+#region __private
+
+function __UNIT_TimersHandlerGlobal() : UNIT_TimersHandlerSimpleExt() constructor {};
+
+#endregion
 
