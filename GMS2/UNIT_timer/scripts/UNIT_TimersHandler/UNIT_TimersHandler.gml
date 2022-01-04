@@ -227,7 +227,7 @@ function UNIT_TimersHandler() constructor {
 
 #macro ____UNIT_TIMER_ERROR "UNIT::timer -> UNIT_PREPROCESSOR_TIMER_EXTEND_CODE отключена"
 
-enum __UNIT_TIMER_CELL { _HANDLER, _TIMER };
+enum __UNIT_TIMER_CELL { _HANDLER, _TIMER, _MARK };
 
 function __UNIT_timerHandler() {
 	static _map = ds_map_create();

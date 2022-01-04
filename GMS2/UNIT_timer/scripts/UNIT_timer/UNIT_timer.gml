@@ -88,6 +88,22 @@ function UNIT_Timer() constructor {
 		show_error("UNIT::timer -> для класса " + instanceof(self) + " не определён метод _clone", true);
 	}
 	
+	
+	static _mark = function() {
+		static _map = __UNIT_timerHandler();
+		
+		var _cell = _map[? self];
+		if (_cell != undefined) {
+			
+			if (array_length(_cell) == 2) {
+				
+				_cell[@ __UNIT_TIMER_CELL._MARK] = weak_ref_create(_cell[__UNIT_TIMER_CELL._HANDLER]);
+			}
+			
+			return _cell[__UNIT_TIMER_CELL._MARK];
+		}
+	}
+	
 }
 
 /// @param			timer
