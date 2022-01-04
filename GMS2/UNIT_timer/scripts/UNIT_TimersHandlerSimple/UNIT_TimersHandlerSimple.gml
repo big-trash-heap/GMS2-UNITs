@@ -38,11 +38,6 @@ function UNIT_TimersHandlerSimple() : UNIT_TimersHandler() constructor {
 		return self.bind(new __timer_Async(_milisec, undefined, undefined, _f), undefined);
 	}
 	
-	static tick_end = function(_super) {
-		if (self.__count == 0) return true;
-		self.tick(_super);
-	}
-	
 }
 
 function UNIT_TimersHandlerSimpleExt() : UNIT_TimersHandlerSimple() constructor {

@@ -188,6 +188,11 @@ function UNIT_TimersHandler() constructor {
 		return _array;
 	}
 	
+	static _tick_end = function(_super) {
+		if (self.__count == 0) return true;
+		self.tick(_super);
+	}
+	
 	#region UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK
 	
 	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком
