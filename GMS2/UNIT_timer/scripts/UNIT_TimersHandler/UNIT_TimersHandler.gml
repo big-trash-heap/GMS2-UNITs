@@ -176,7 +176,7 @@ function UNIT_TimersHandler() constructor {
 	static _tick_isBind = function() {
 		if (UNIT_PREPROCESSOR_TIMER_EXTEND_CODE) {
 		
-		return (self == UNIT_timerGetBind(self.__temp));
+		return (self == UNIT_timerGetBind(self.__temp[__UNIT_TIMER_CELL._TIMER]));
 		
 		}
 		else {
