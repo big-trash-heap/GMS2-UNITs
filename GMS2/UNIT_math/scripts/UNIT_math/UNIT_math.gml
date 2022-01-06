@@ -17,11 +17,6 @@ function UNIT_mthSign(_number, _positive=true) {
 	return (_number != 0 ? _number : (_positive ? 1 : -1));
 }
 
-///// @param			angle
-//function UNIT_mthAngleWrap(_angle) {
-//	return (_angle + ceil(-_angle / 360) * 360);
-//}
-
 
 #region __private
 
