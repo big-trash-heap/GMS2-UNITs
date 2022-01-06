@@ -61,7 +61,13 @@ function UNIT_timerGl_endAsync(_milisec, _f) {
 
 #region __private
 
-function __UNIT_TimersHandlerGlobal() : UNIT_TimersHandlerSimpleExt() constructor {};
+function __UNIT_TimersHandlerGlobal() : UNIT_TimersHandlerSimpleExt() constructor {
+	
+	static toString = function() {
+		return ("UNIT::timer::UNIT_timerGlobal; number of timers: " + string(self.__count));
+	}
+
+}
 
 #endregion
 

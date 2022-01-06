@@ -1,5 +1,6 @@
 
 
+/// @function		UNIT_Angle([angle=0]);
 function UNIT_Angle(_angle=0) constructor {
 	
 	#region __private
@@ -29,8 +30,13 @@ function UNIT_Angle(_angle=0) constructor {
 		return self;
 	}
 	
+	static toString = function() {
+		return ("UNIT::angle::UNIT_Angle(angle: " + string(self.__angle) + ")");	
+	}
+	
 }
 
+/// @function		UNIT_AngleTwist([twist=0], [angle=0]);
 function UNIT_AngleTwist(_twist=0, _angle) : UNIT_Angle(_angle) constructor {
 	
 	#region __private
@@ -53,24 +59,41 @@ function UNIT_AngleTwist(_twist=0, _angle) : UNIT_Angle(_angle) constructor {
 		return self.__twist;
 	}
 	
-	static getAngle = function() {
-		return UNIT_angleWrap(self.__angle + self.__twist);	
+	
+	static setTwistNoAngle = function(_twist) {
+		var _diff    = self.__twist - _twist;
+		self.__twist = UNIT_angleWrap(_twist);
+		self.__angle = UNIT_angleWrap(self.__angle + _diff);
+		return self;
 	}
 	
-	static setAngleNoTwist = function(_angle) {
+	static addTwistNoAngle = function(_twist) {
+		self.__twist = UNIT_angleWrap(self.__twist + _twist);
+		self.__angle = UNIT_angleWrap(self.__angle - _twist);
+		return self;
+	}
+	
+	
+	static setAngleTwist = function(_angle) {
 		self.__angle = UNIT_angleWrap(_angle - self.__twist);
 		return self;
 	}
 	
-	static getAngleNoTwist = function() {
-		return self.__angle;
+	static getAngleTwist = function() {
+		return UNIT_angleWrap(self.__angle + self.__twist);
 	}
 	
-	static rotateAngleNoTwist = function(_angleRequired, _speed, _accuracy) {
+	static rotateAngleTwist = function(_angleRequired, _speed, _accuracy) {
 		self.__angle = UNIT_angleWrap(UNIT_angleRotate(self.__angle + self.__twist,
 			_angleRequired, _speed, _accuracy
 		) - self.__twist);
 		return self;
+	}
+	
+	static toString = function() {
+		return ("UNIT::angle::UNIT_AngleTwist(angle: " + string(self.__angle) +
+			", twist: " + string(self.__angle) + ", angleTwist: " + string(self.getAngleTwist()) + ")"
+		);
 	}
 	
 }
