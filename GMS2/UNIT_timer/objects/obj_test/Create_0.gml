@@ -13,14 +13,13 @@ timer = new UNIT_TimerLoopAsync(
 
 timer2 = timer._clone()._set("name", "Dasha");
 
-//UNIT_timerGl_timer(timer);
+UNIT_timerGl_timer(timer);
 UNIT_timerGl_timer(timer2);
-//show_message([
-	
-//	timer._get_finit() == timer2._get_finit(),
-//	timer._get_ftick() == timer2._get_ftick(),
-//	timer._get_ffree() == timer2._get_ffree(),
-//]);
+
+handler = UNIT_timerGlobal()._clone();
+
+UNIT_timerGlobal().clearAll();
+
 
 
 //timer_step = UNIT_timerGl_loopAsync(function(_0, _timer, _1, _step) {

@@ -33,11 +33,22 @@ function UNIT_Timer() constructor {
 		if (instanceof(self) == instanceof(_struct) && (
 			self._get_ftick() != _struct._get_ftick() ||
 			self._get_finit() != _struct._get_finit() ||
-			self._get_ffree() != _struct._get_ffree()))
+			self._get_ffree() != _struct._get_ffree())) {
+			
 			show_debug_message("UNIT::timer -> вероятно не верная реализация метода _clone в классе " + instanceof(self)
-			+ "\n\t; экземпляр, который был клонирован: " + string(_struct) +
+			+ "\n\t; экземпляр, который был клонирован: " + string(_struct)
 			+ "\n\t; клон: " + string(self)
+			+ "\n\t; callstack: " 
 			);
+			
+			var _callstack = debug_get_callstack();
+			var _size = array_length(_callstack);
+			for (var _i = 0; _i < _size; ++_i) {
+				
+				show_debug_message("\n\t;" + string(_callstack[_i]));
+			}
+			
+		}
 		
 		}
 		

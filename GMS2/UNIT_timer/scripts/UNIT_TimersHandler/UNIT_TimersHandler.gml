@@ -1,7 +1,9 @@
 
 /*
-	Запрещено создавать клоны UNIT_TimersHandler, но можно создавать клоны таймеров
-	Однако предполагается, что вы не будете клонировать таймеры, так как это не безопасно
+	Предполагается, что вы не будете использовать:
+	1. UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE
+	2. UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK
+	3. UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK
 */
 
 #macro UNIT_PREPROCESSOR_TIMER_ENABLE_LOG								true
