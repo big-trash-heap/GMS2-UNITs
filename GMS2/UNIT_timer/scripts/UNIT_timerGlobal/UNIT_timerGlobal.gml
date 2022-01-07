@@ -68,18 +68,18 @@ function __UNIT_TimersHandlerGlobal() : UNIT_TimersHandlerSimpleExt() constructo
 	}
 	
 	
-	//static _clone = function() {
-	//	if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+	static _clone = function() {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
-	//	show_error("UNIT::timer::UNIT_timerGlobal -> клонирование запрещено", true);
+		show_error("UNIT::timer::UNIT_timerGlobal -> клонирование запрещено", true);
 		
-	//	}
-	//	else {
+		}
+		else {
 		
-	//	show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
 		
-	//	}
-	//}
+		}
+	}
 	
 }
 
