@@ -1,3 +1,3 @@
 
 UNIT_timerGlobalTick();
-handler.tick();
+//handler.tick();

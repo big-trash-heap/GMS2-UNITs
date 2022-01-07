@@ -1,4 +1,26 @@
 
+timer = new UNIT_TimerAsyncExt(100,
+	function(_handler, _timer) {
+		show_debug_message(_timer.name);
+	},
+	function() {
+		
+	},
+	function() {
+		
+	},
+)._set("name", "Kirill");
+
+timer2 = timer._clone()._set("name", "Dasha");
+
+//UNIT_timerGl_timer(timer);
+UNIT_timerGl_timer(timer2);
+//show_message([
+	
+//	timer._get_finit() == timer2._get_finit(),
+//	timer._get_ftick() == timer2._get_ftick(),
+//	timer._get_ffree() == timer2._get_ffree(),
+//]);
 
 
 //timer_step = UNIT_timerGl_loopAsync(function(_0, _timer, _1, _step) {
@@ -37,7 +59,7 @@
 
 //UNIT_timerGl_timer(timer);
 //UNIT_timerGl_timer(timer2);
-
+/*
 
 UNIT_timerGl_loop(
 	function(_0, _timer) {
