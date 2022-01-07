@@ -6,7 +6,7 @@
     "path": "folders/UNIT::timer/timers.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_timerLoop",
+  "name": "UNIT_TimerLoop",
   "tags": [],
   "resourceType": "GMScript",
 }

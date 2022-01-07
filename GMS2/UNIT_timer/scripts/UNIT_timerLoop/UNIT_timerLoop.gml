@@ -1,6 +1,6 @@
 
 /*
-	finit = function(handler, timer, argument);
+	finit = function(handler, timer);
 	ftick = function(handler, timer, super);
 	ffree = function(handler, timer);
 */
@@ -19,14 +19,14 @@ function UNIT_TimerLoop(_ftick, _finit, _ffree) : UNIT_Timer() constructor {
 	#endregion
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
 		return new UNIT_TimerLoop(self.__tick, self.__init, self.__free).__copyn_(self);
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
 		
 		}
 	}
@@ -39,7 +39,7 @@ function UNIT_TimerLoopExt(_ftick, _finit, _ffree) : UNIT_Timer() constructor {
 	
 	#region __private
 	
-	static __ftick = UNIT_timerLoop;
+	static __ftick = __UNIT_timerVoid;
 	
 	static __tick = function(_handler, _timer, _super) {
 		
@@ -80,7 +80,7 @@ function UNIT_TimerLoopExt(_ftick, _finit, _ffree) : UNIT_Timer() constructor {
 	
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
 		var _timer = new UNIT_TimerLoopExt(self.__ftick, self.__init, self.__free);
 		_timer.__play = self.__play;
@@ -89,17 +89,10 @@ function UNIT_TimerLoopExt(_ftick, _finit, _ffree) : UNIT_Timer() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
 		
 		}
 	}
 	
 }
-
-
-#region __private
-
-function UNIT_timerLoop() {};
-
-#endregion
 

@@ -14,28 +14,28 @@ function UNIT_TimersHandlerSimple() : UNIT_TimersHandler() constructor {
 	
 	#endregion
 	
-	static newLoop = function(_ftick, _finit, _ffree, _argument) {
-		return self.bind(new __timer_Loop(_ftick, _finit, _ffree), _argument);
+	static newLoop = function(_ftick, _finit, _ffree) {
+		return self.bind(new __timer_Loop(_ftick, _finit, _ffree));
 	}
 	
-	static newLoopAsync = function(_ftick, _finit, _ffree, _argument) {
-		return self.bind(new __timer_LoopAsync(_ftick, _finit, _ffree), _argument);
+	static newLoopAsync = function(_ftick, _finit, _ffree) {
+		return self.bind(new __timer_LoopAsync(_ftick, _finit, _ffree));
 	}
 	
-	static newSync = function(_steps, _ftick, _finit, _ffree, _argument) {
-		return self.bind(new __timer_Sync(_steps, _ftick, _finit, _ffree), _argument);
+	static newSync = function(_steps, _ftick, _finit, _ffree) {
+		return self.bind(new __timer_Sync(_steps, _ftick, _finit, _ffree));
 	}
 	
-	static newAsync = function(_milisec, _ftick, _finit, _ffree, _argument) {
-		return self.bind(new __timer_Async(_milisec, _ftick, _finit, _ffree), _argument);
+	static newAsync = function(_milisec, _ftick, _finit, _ffree) {
+		return self.bind(new __timer_Async(_milisec, _ftick, _finit, _ffree));
 	}
 	
 	static newEndSync = function(_steps, _f) {
-		return self.bind(new __timer_Sync(_steps, undefined, undefined, _f), undefined);
+		return self.bind(new __timer_Sync(_steps, undefined, undefined, _f));
 	}
 	
 	static newEndAsync = function(_milisec, _f) {
-		return self.bind(new __timer_Async(_milisec, undefined, undefined, _f), undefined);
+		return self.bind(new __timer_Async(_milisec, undefined, undefined, _f));
 	}
 	
 }

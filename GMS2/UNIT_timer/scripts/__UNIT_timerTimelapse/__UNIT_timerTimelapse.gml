@@ -3,13 +3,11 @@
 	Идея в том, что тут необходимо переопределить только метод tick
 */
 
-function __UNIT_timerTimelapse() {};
-
 function __UNIT_TimerTimelapse(_steps, _ftick=undefined, _finit=undefined, _ffree=undefined) : UNIT_Timer() constructor {
 	
 	#region __private
 	
-	static __ftick = __UNIT_timerTimelapse;
+	static __ftick = __UNIT_timerVoid;
 	
 	self.__step = ceil(abs(_steps)) * sign(_steps);
 	
@@ -19,14 +17,14 @@ function __UNIT_TimerTimelapse(_steps, _ftick=undefined, _finit=undefined, _ffre
 	if (_ftick != undefined) self.__ftick = _ftick;
 	
 	static __clone = function(_constructor) {
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
 		return new _constructor(self.__step, self._get_ftick(), self._get_finit(), self._get_ffree()).__copyn_(self);
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
 		
 		}
 	}

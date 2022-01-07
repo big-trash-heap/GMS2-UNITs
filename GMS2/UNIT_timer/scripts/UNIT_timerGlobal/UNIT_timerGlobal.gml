@@ -14,7 +14,7 @@ function UNIT_timerGlobal() {
 	return _handler;
 }
 
-/// @param			super
+/// @param			[super]
 /// @description	Итератор глобального обработчика
 function UNIT_timerGlobalTick(_super) {
 	static _handler = UNIT_timerGlobal();
@@ -23,29 +23,29 @@ function UNIT_timerGlobalTick(_super) {
 
 
 
-/// @function		UNIT_timerGl_timer(timer, [argument]);
-function UNIT_timerGl_timer(_timer, _argument) {
-	return UNIT_timerGlobal().bind(_timer, _argument);
+/// @function		UNIT_timerGl_timer(timer);
+function UNIT_timerGl_timer(_timer) {
+	return UNIT_timerGlobal().bind(_timer);
 }
 
-/// @function		UNIT_timerGl_loop([ftick], [finit], [ffree], [argument]);
-function UNIT_timerGl_loop(_ftick, _finit, _ffree, _argument) {
-	return UNIT_timerGlobal().newLoop(_ftick, _finit, _ffree, _argument);
+/// @function		UNIT_timerGl_loop([ftick], [finit], [ffree]);
+function UNIT_timerGl_loop(_ftick, _finit, _ffree) {
+	return UNIT_timerGlobal().newLoop(_ftick, _finit, _ffree);
 }
 
-/// @function		UNIT_timerGl_loopAsync([ftick], [finit], [ffree], [argument]);
-function UNIT_timerGl_loopAsync(_ftick, _finit, _ffree, _argument) {
-	return UNIT_timerGlobal().newLoopAsync(_ftick, _finit, _ffree, _argument);
+/// @function		UNIT_timerGl_loopAsync([ftick], [finit], [ffree]);
+function UNIT_timerGl_loopAsync(_ftick, _finit, _ffree) {
+	return UNIT_timerGlobal().newLoopAsync(_ftick, _finit, _ffree);
 }
 
-/// @function		UNIT_timerGl_sync(steps, [ftick], [finit], [ffree], [argument]);
-function UNIT_timerGl_sync(_steps, _ftick, _finit, _ffree, _argument) {
-	return UNIT_timerGlobal().newSync(_steps, _ftick, _finit, _ffree, _argument);
+/// @function		UNIT_timerGl_sync(steps, [ftick], [finit], [ffree]);
+function UNIT_timerGl_sync(_steps, _ftick, _finit, _ffree) {
+	return UNIT_timerGlobal().newSync(_steps, _ftick, _finit, _ffree);
 }
 
-/// @function		UNIT_timerGl_async(milisec, [ftick], [finit], [ffree], [argument]);
-function UNIT_timerGl_async(_milisec, _ftick, _finit, _ffree, _argument) {
-	return UNIT_timerGlobal().newAsync(_milisec, _ftick, _finit, _ffree, _argument);
+/// @function		UNIT_timerGl_async(milisec, [ftick], [finit], [ffree]);
+function UNIT_timerGl_async(_milisec, _ftick, _finit, _ffree) {
+	return UNIT_timerGlobal().newAsync(_milisec, _ftick, _finit, _ffree);
 }
 
 /// @function		UNIT_timerGl_endSync(steps, f);
@@ -66,7 +66,21 @@ function __UNIT_TimersHandlerGlobal() : UNIT_TimersHandlerSimpleExt() constructo
 	static toString = function() {
 		return ("UNIT::timer::UNIT_timerGlobal; number of timers: " + string(self.__count));
 	}
-
+	
+	
+	//static _clone = function() {
+	//	if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		
+	//	show_error("UNIT::timer::UNIT_timerGlobal -> клонирование запрещено", true);
+		
+	//	}
+	//	else {
+		
+	//	show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		
+	//	}
+	//}
+	
 }
 
 #endregion

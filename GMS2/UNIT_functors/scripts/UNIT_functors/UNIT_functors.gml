@@ -3,7 +3,7 @@
 #region basic
 
 /// @param			...values
-function UNIT_functorEm() {
+function UNIT_functorVoid() {
 	return undefined;
 }
 

@@ -1,6 +1,5 @@
 
 #macro UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK	false
-#macro UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE	false
 
 // Абстрактный класс
 function UNIT_Timer() constructor {
@@ -13,12 +12,12 @@ function UNIT_Timer() constructor {
 	
 	}
 	
-	static __init = UNIT_timer /* handler, timer, arg   */;
-	static __tick = UNIT_timer /* handler, timer, super */;
-	static __free = UNIT_timer /* handler, timer        */;
+	static __init = __UNIT_timerVoid /* handler, timer        */;
+	static __tick = __UNIT_timerVoid /* handler, timer, super */;
+	static __free = __UNIT_timerVoid /* handler, timer        */;
 	
 	static __copyn_ = function(_struct) {
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
 		var _keys = variable_struct_get_names(_struct);
 		var _size = array_length(_keys), _key;
@@ -34,7 +33,7 @@ function UNIT_Timer() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
 		
 		}
 	}
@@ -101,14 +100,14 @@ function UNIT_Timer() constructor {
 	
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
 		show_error("UNIT::timer -> для класса " + instanceof(self) + " не определён метод _clone", true);
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
 		
 		}
 	}
@@ -117,7 +116,7 @@ function UNIT_Timer() constructor {
 	static _mark = function() {
 		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK) {
 		
-		var _cell = __UNIT_timerHandler()[? self];
+		var _cell = __UNIT_timersHandlerMap()[? self];
 		if (_cell != undefined) {
 			
 			if (array_length(_cell) == 2) {
@@ -143,7 +142,7 @@ function UNIT_Timer() constructor {
 /// @description	Отвяжет таймер от обработчика 
 //					и вернёт true, если таймер был отвязан
 function UNIT_timerUnbind(_timer) {
-	static _map = __UNIT_timerHandler();
+	static _map = __UNIT_timersHandlerMap();
 	var _cell = _map[? _timer];
 	if (_cell == undefined) return false;
 	
@@ -171,7 +170,7 @@ function UNIT_timerUnbind(_timer) {
 /// @param			timer
 /// @description	Вернёт привязан ли таймер к чему-то
 function UNIT_timerIsBind(_timer) {
-	static _map = __UNIT_timerHandler();
+	static _map = __UNIT_timersHandlerMap();
 	return ds_map_exists(_map, _timer);
 }
 
@@ -179,7 +178,7 @@ function UNIT_timerIsBind(_timer) {
 /// @description	Вернёт обработчик, к которому привязан таймер
 //					Если не привязан вернёт undefined
 function UNIT_timerGetBind(_timer) {
-	static _map = __UNIT_timerHandler();
+	static _map = __UNIT_timersHandlerMap();
 	var _cell = _map[? _timer];
 	if (_cell != undefined) return _cell[__UNIT_TIMER_CELL._HANDLER];
 }
@@ -187,9 +186,7 @@ function UNIT_timerGetBind(_timer) {
 
 #region __private
 
-#macro ____UNIT_TIMER_ERROR_TIMER "UNIT::timer -> UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE отключена"
-
-function UNIT_timer() {};
+function __UNIT_timerVoid() {};
 
 #endregion
 

@@ -4,15 +4,16 @@
 	Однако предполагается, что вы не будете клонировать таймеры, так как это не безопасно
 */
 
-#macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK	true
+#macro UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE								true
 
+#macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK	true
 #macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK				false
 
 function UNIT_TimersHandler() constructor {
 	
 	#region __private
 	
-	static _map = __UNIT_timerHandler();
+	static _map = __UNIT_timersHandlerMap();
 	
 	self.__timers = [];
 	self.__count  = 0;
@@ -24,9 +25,35 @@ function UNIT_TimersHandler() constructor {
 	
 	}
 	
+	
+	static __clone = function(_constructor) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		
+		var _handler = new _constructor();
+		var _value;
+		
+		for (var _i = 0, _j = -1; _i < self.__count; ++_i) {
+			
+			do {
+				_value = self.__timers[++_j];
+			} until (_value[__UNIT_TIMER_CELL._HANDLER] == self);
+			
+			_handler.bind(_value[__UNIT_TIMER_CELL._TIMER]._clone());
+		}
+		
+		return _handler;
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		
+		}
+	}
+	
 	#endregion
 	
-	static bind = function(_timer, _argument) {
+	static bind = function(_timer) {
 		
 		if (UNIT_timerGetBind(_timer) == self) {
 			
@@ -39,7 +66,7 @@ function UNIT_TimersHandler() constructor {
 		++self.__count;
 		array_push(self.__timers, _cell);
 		
-		_timer.__init(_timer, _argument, self);
+		_timer.__init(self, _timer);
 		return _timer;
 	}
 	
@@ -171,6 +198,19 @@ function UNIT_TimersHandler() constructor {
 	}
 	
 	
+	static _clone = function() {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		
+		return self.__clone(asset_get_index(instanceof(self)));
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		
+		}
+	}
+	
 	static _toArray = function() {
 		
 		var _array = array_create(self.__count);
@@ -231,11 +271,12 @@ function UNIT_TimersHandler() constructor {
 
 #region __private
 
-#macro ____UNIT_TIMER_ERROR_TIMERS_HANDLER "UNIT::timer -> UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK отключена"
+#macro ____UNIT_TIMER_ERROR_CLONE			"UNIT::timer -> UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE отключена"
+#macro ____UNIT_TIMER_ERROR_TIMERS_HANDLER	"UNIT::timer -> UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK отключена"
 
 enum __UNIT_TIMER_CELL { _HANDLER, _TIMER };
 
-function __UNIT_timerHandler() {
+function __UNIT_timersHandlerMap() {
 	static _map = ds_map_create();
 	return _map;
 }

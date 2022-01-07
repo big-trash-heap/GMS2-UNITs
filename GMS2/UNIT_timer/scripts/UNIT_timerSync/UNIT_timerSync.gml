@@ -1,6 +1,6 @@
 
 /*
-	finit = function(handler, timer, argument);
+	finit = function(handler, timer);
 	ftick = function(handler, timer, super);
 	ffree = function(handler, timer);
 */
@@ -17,14 +17,14 @@ function UNIT_TimerSync(_steps, _ftick, _finit, _ffree) : __UNIT_TimerTimelapse(
 	#endregion
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
 		return self.__clone(UNIT_TimerSync);
 		
 		}
 		else {
 			
-		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
 		
 		}
 	}
@@ -42,14 +42,14 @@ function UNIT_TimerSyncExt(_steps, _ftick, _finit, _ffree) : __UNIT_TimerTimelap
 	#endregion
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
 		return self.__clone(UNIT_TimerSyncExt);
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
 		
 		}
 	}
@@ -68,8 +68,6 @@ function __UNIT_timerSyncTick(_handler, _timer, _super) {
 		return (self.__step == 0);
 	}
 }
-
-function UNIT_timerSync() {};
 
 #endregion
 

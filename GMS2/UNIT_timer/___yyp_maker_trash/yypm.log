@@ -1,0 +1,179 @@
+You are using YYP Maker v1.1.2, released in 11-04-2021
+
+
+
+[08-01-2022 01:26:03] Initialized GameMaker Project: UNIT_timer.yyp
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/animcurves
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/datafiles
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/extensions
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/fonts
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/notes
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/objects
+[08-01-2022 01:26:03] Checking obj_test
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/objects/obj_test
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/objects/obj_test
+[08-01-2022 01:26:03] Checking Step_0.gml
+[08-01-2022 01:26:03] Checking obj_test.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/objects/obj_test/obj_test.yy
+[08-01-2022 01:26:03] Invalid .yy file: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/objects/obj_test/obj_test.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/objects/obj_test/obj_test.yy
+[08-01-2022 01:26:03] Invalid file: obj_test.yy, will be moved to ___yyp_maker_trash
+[08-01-2022 01:26:03] Checking Create_0.gml
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options
+[08-01-2022 01:26:03] Checking windows
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/windows
+[08-01-2022 01:26:03] Checking tvos
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/tvos
+[08-01-2022 01:26:03] Checking operagx
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/operagx
+[08-01-2022 01:26:03] Checking main
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/main
+[08-01-2022 01:26:03] Checking mac
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/mac
+[08-01-2022 01:26:03] Checking linux
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/linux
+[08-01-2022 01:26:03] Checking ios
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/ios
+[08-01-2022 01:26:03] Checking android
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/android
+[08-01-2022 01:26:03] Checking amazonfire
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/amazonfire
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/amazonfire
+[08-01-2022 01:26:03] Checking options_amazonfire.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/amazonfire/options_amazonfire.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/amazonfire/options_amazonfire.yy
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/android
+[08-01-2022 01:26:03] Checking options_android.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/android/options_android.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/android/options_android.yy
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/ios
+[08-01-2022 01:26:03] Checking options_ios.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/ios/options_ios.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/ios/options_ios.yy
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/linux
+[08-01-2022 01:26:03] Checking options_linux.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/linux/options_linux.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/linux/options_linux.yy
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/mac
+[08-01-2022 01:26:03] Checking options_mac.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/mac/options_mac.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/mac/options_mac.yy
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/main
+[08-01-2022 01:26:03] Checking options_main.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/main/options_main.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/main/options_main.yy
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/operagx
+[08-01-2022 01:26:03] Checking options_operagx.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/operagx/options_operagx.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/operagx/options_operagx.yy
+[08-01-2022 01:26:03] Invalid file: options_operagx.yy, will be moved to ___yyp_maker_trash
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/tvos
+[08-01-2022 01:26:03] Checking options_tvos.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/tvos/options_tvos.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/tvos/options_tvos.yy
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/windows
+[08-01-2022 01:26:03] Checking options_windows.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/windows/options_windows.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/options/windows/options_windows.yy
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/paths
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/rooms
+[08-01-2022 01:26:03] Checking room_test
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/rooms/room_test
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/rooms/room_test
+[08-01-2022 01:26:03] Checking room_test.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/rooms/room_test/room_test.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/rooms/room_test/room_test.yy
+[08-01-2022 01:26:03] Par: "folders/test" at dir: "D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/rooms/room_test/room_test.yy"
+[08-01-2022 01:26:03] Found Room: room_test
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts
+[08-01-2022 01:26:03] Checking __UNIT_TimerTimelapse
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/__UNIT_TimerTimelapse
+[08-01-2022 01:26:03] Checking UNIT_TimerSync
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerSync
+[08-01-2022 01:26:03] Checking UNIT_TimersHandlerSimple
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimersHandlerSimple
+[08-01-2022 01:26:03] Checking UNIT_TimersHandler
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimersHandler
+[08-01-2022 01:26:03] Checking UNIT_TimerLoopAsync
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerLoopAsync
+[08-01-2022 01:26:03] Checking UNIT_TimerLoop
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerLoop
+[08-01-2022 01:26:03] Checking UNIT_timerGlobal
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_timerGlobal
+[08-01-2022 01:26:03] Checking UNIT_TimerAsync
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerAsync
+[08-01-2022 01:26:03] Checking UNIT_Timer
+[08-01-2022 01:26:03] Directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_Timer
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_Timer
+[08-01-2022 01:26:03] Checking UNIT_Timer.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_Timer/UNIT_Timer.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_Timer/UNIT_Timer.yy
+[08-01-2022 01:26:03] Par: "folders/UNIT::timer/main" at dir: "D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_Timer/UNIT_Timer.yy"
+[08-01-2022 01:26:03] Found Script: UNIT_Timer
+[08-01-2022 01:26:03] Checking UNIT_Timer.gml
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerAsync
+[08-01-2022 01:26:03] Checking UNIT_TimerAsync.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerAsync/UNIT_TimerAsync.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerAsync/UNIT_TimerAsync.yy
+[08-01-2022 01:26:03] Par: "folders/UNIT::timer/_extend" at dir: "D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerAsync/UNIT_TimerAsync.yy"
+[08-01-2022 01:26:03] Found Script: UNIT_TimerAsync
+[08-01-2022 01:26:03] Checking UNIT_TimerAsync.gml
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_timerGlobal
+[08-01-2022 01:26:03] Checking UNIT_timerGlobal.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_timerGlobal/UNIT_timerGlobal.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_timerGlobal/UNIT_timerGlobal.yy
+[08-01-2022 01:26:03] Par: "folders/UNIT::timer/_extend" at dir: "D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_timerGlobal/UNIT_timerGlobal.yy"
+[08-01-2022 01:26:03] Found Script: UNIT_timerGlobal
+[08-01-2022 01:26:03] Checking UNIT_timerGlobal.gml
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerLoop
+[08-01-2022 01:26:03] Checking UNIT_TimerLoop.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerLoop/UNIT_TimerLoop.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerLoop/UNIT_TimerLoop.yy
+[08-01-2022 01:26:03] Par: "folders/UNIT::timer/timers" at dir: "D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerLoop/UNIT_TimerLoop.yy"
+[08-01-2022 01:26:03] Found Script: UNIT_TimerLoop
+[08-01-2022 01:26:03] Checking UNIT_TimerLoop.gml
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerLoopAsync
+[08-01-2022 01:26:03] Checking UNIT_TimerLoopAsync.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerLoopAsync/UNIT_TimerLoopAsync.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerLoopAsync/UNIT_TimerLoopAsync.yy
+[08-01-2022 01:26:03] Par: "folders/UNIT::timer/_extend" at dir: "D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerLoopAsync/UNIT_TimerLoopAsync.yy"
+[08-01-2022 01:26:03] Found Script: UNIT_TimerLoopAsync
+[08-01-2022 01:26:03] Checking UNIT_TimerLoopAsync.gml
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimersHandler
+[08-01-2022 01:26:03] Checking UNIT_TimersHandler.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimersHandler/UNIT_TimersHandler.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimersHandler/UNIT_TimersHandler.yy
+[08-01-2022 01:26:03] Par: "folders/UNIT::timer/main" at dir: "D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimersHandler/UNIT_TimersHandler.yy"
+[08-01-2022 01:26:03] Found Script: UNIT_TimersHandler
+[08-01-2022 01:26:03] Checking UNIT_TimersHandler.gml
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimersHandlerSimple
+[08-01-2022 01:26:03] Checking UNIT_TimersHandlerSimple.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimersHandlerSimple/UNIT_TimersHandlerSimple.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimersHandlerSimple/UNIT_TimersHandlerSimple.yy
+[08-01-2022 01:26:03] Par: "folders/UNIT::timer/_extend" at dir: "D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimersHandlerSimple/UNIT_TimersHandlerSimple.yy"
+[08-01-2022 01:26:03] Found Script: UNIT_TimersHandlerSimple
+[08-01-2022 01:26:03] Checking UNIT_TimersHandlerSimple.gml
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerSync
+[08-01-2022 01:26:03] Checking UNIT_TimerSync.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerSync/UNIT_TimerSync.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerSync/UNIT_TimerSync.yy
+[08-01-2022 01:26:03] Par: "folders/UNIT::timer/timers" at dir: "D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/UNIT_TimerSync/UNIT_TimerSync.yy"
+[08-01-2022 01:26:03] Found Script: UNIT_TimerSync
+[08-01-2022 01:26:03] Checking UNIT_TimerSync.gml
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/__UNIT_TimerTimelapse
+[08-01-2022 01:26:03] Checking __UNIT_TimerTimelapse.yy
+[08-01-2022 01:26:03] Parsing D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/__UNIT_TimerTimelapse/__UNIT_TimerTimelapse.yy
+[08-01-2022 01:26:03] Reading D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/__UNIT_TimerTimelapse/__UNIT_TimerTimelapse.yy
+[08-01-2022 01:26:03] Par: "folders/UNIT::timer/timers/__private" at dir: "D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/scripts/__UNIT_TimerTimelapse/__UNIT_TimerTimelapse.yy"
+[08-01-2022 01:26:03] Found Script: __UNIT_TimerTimelapse
+[08-01-2022 01:26:03] Checking __UNIT_TimerTimelapse.gml
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/sequences
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/shaders
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/sounds
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/sprites
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/tilesets
+[08-01-2022 01:26:03] Current parent directory: D:/GMS/__unit__/__unit__/GMS2/UNIT_timer/timelines
+[08-01-2022 01:26:03] Moving files to trash...
+[08-01-2022 01:26:03] Files yeeted successfully!
+[08-01-2022 01:26:03] Generating YYP...
+[08-01-2022 01:26:03] UNIT_timer.yyp created successfully!

@@ -1,6 +1,6 @@
 
 /*
-	finit = function(handler, timer, argument);
+	finit = function(handler, timer);
 	ftick = function(handler, timer, super, milisec_step);
 	ffree = function(handler, timer);
 */
@@ -16,7 +16,7 @@ function UNIT_TimerLoopAsync(_ftick, _finit, _ffree) : UNIT_TimerLoop(undefined,
 	
 	#region __private
 	
-	static __finit = UNIT_timerLoopAsync;
+	static __finit = __UNIT_timerVoid;
 	
 	if (_finit != undefined) self.__finit = _finit;
 	if (_ftick != undefined) self.__ftick = _ftick;
@@ -39,14 +39,14 @@ function UNIT_TimerLoopAsync(_ftick, _finit, _ffree) : UNIT_TimerLoop(undefined,
 	
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
 		return new UNIT_TimerLoopAsync(self.__tick, self.__init, self.__free).__copyn_(self);
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
 		
 		}
 	}
@@ -59,7 +59,7 @@ function UNIT_TimerLoopAsyncExt(_ftick, _finit, _ffree) : UNIT_TimerLoopExt(_fti
 	
 	#region __private
 	
-	static __finit = UNIT_timerLoopAsync;
+	static __finit = __UNIT_timerVoid;
 	
 	if (_finit != undefined) self.__finit = _finit;
 	if (_ftick != undefined) self.__ftick = _ftick;
@@ -92,7 +92,7 @@ function UNIT_TimerLoopAsyncExt(_ftick, _finit, _ffree) : UNIT_TimerLoopExt(_fti
 	static _get_finit = __UNIT_timerLoopAsync_finit;
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
 		var _timer = new UNIT_TimerLoopAsyncExt(self.__ftick, self.__init, self.__free);
 		_timer.__play = self.__play;
@@ -101,7 +101,7 @@ function UNIT_TimerLoopAsyncExt(_ftick, _finit, _ffree) : UNIT_TimerLoopExt(_fti
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
 		
 		}
 	}
@@ -111,16 +111,14 @@ function UNIT_TimerLoopAsyncExt(_ftick, _finit, _ffree) : UNIT_TimerLoopExt(_fti
 
 #region __private
 
-function __UNIT_timerLoopAsyncInit(_handler, _timer, _argument) {
+function __UNIT_timerLoopAsyncInit(_handler, _timer) {
 	self.__ctime = current_time;
-	self.__finit(_handler, _timer, _argument);
+	self.__finit(_handler, _timer);
 }
 
 function __UNIT_timerLoopAsync_finit() {
 	return self.__finit;
 }
-
-function UNIT_timerLoopAsync() {};
 
 #endregion
 

@@ -1,6 +1,6 @@
 
 /*
-	finit = function(handler, timer, argument);
+	finit = function(handler, timer);
 	ftick = function(handler, timer, super, milisec_step);
 	ffree = function(handler, timer);
 */
@@ -21,7 +21,7 @@ function UNIT_TimerAsync(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTimelap
 	
 	#region __private
 	
-	static __finit = UNIT_timerAsync;
+	static __finit = __UNIT_timerVoid;
 	if (_finit != undefined) self.__finit = _finit;
 	
 	static __init = __UNIT_timerAsyncInit;
@@ -36,14 +36,14 @@ function UNIT_TimerAsync(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTimelap
 	
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
 		return self.__clone(UNIT_TimerAsync);
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
 		
 		}
 	}
@@ -56,7 +56,7 @@ function UNIT_TimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTime
 	
 	#region __private
 	
-	static __finit = UNIT_timerAsync;
+	static __finit = __UNIT_timerVoid;
 	if (_finit != undefined) self.__finit = _finit;
 	
 	static __init = __UNIT_timerAsyncInit;
@@ -79,14 +79,14 @@ function UNIT_TimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTime
 	
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
 		return self.__clone(UNIT_TimerAsyncExt);
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_TIMER, true);
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
 		
 		}
 	}
@@ -96,9 +96,9 @@ function UNIT_TimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTime
 
 #region __private
 
-function __UNIT_timerAsyncInit(_handler, _timer, _argument) {
+function __UNIT_timerAsyncInit(_handler, _timer) {
 	self.__ctime = current_time;
-	self.__finit(_handler, _timer, _argument);
+	self.__finit(_handler, _timer);
 }
 
 function __UNIT_timerAsyncTick(_handler, _timer, _super) {
@@ -132,8 +132,6 @@ function __UNIT_timerAsyncResume() {
 function __UNIT_timerAsync_finit() {
 	return self.__finit;
 }
-
-function UNIT_timerAsync() {};
 
 #endregion
 
