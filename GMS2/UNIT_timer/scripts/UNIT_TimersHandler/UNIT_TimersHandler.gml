@@ -4,6 +4,7 @@
 	Однако предполагается, что вы не будете клонировать таймеры, так как это не безопасно
 */
 
+#macro UNIT_PREPROCESSOR_TIMER_ENABLE_LOG								true
 #macro UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE								true
 
 #macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK	true
@@ -158,7 +159,14 @@ function UNIT_TimersHandler() constructor {
 		}
 	}
 	
+	// очень опасный метод
 	static clearAll = function() {
+		
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
+		
+		show_debug_message("UNIT::timer -> вы вызвали TimersHandler.clearAll это может быть опасно. Избегайте его вызова");
+		
+		}
 		
 		if (array_length(self.__timers) > 0) {
 			
@@ -200,6 +208,12 @@ function UNIT_TimersHandler() constructor {
 	
 	static _clone = function() {
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
+		
+		show_debug_message("UNIT::timer -> осторожно, класс " + instanceof(self) + " использует базовую версию метода _clone");
+		
+		}
 		
 		return self.__clone(asset_get_index(instanceof(self)));
 		

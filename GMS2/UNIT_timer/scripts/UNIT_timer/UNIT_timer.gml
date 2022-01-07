@@ -28,6 +28,19 @@ function UNIT_Timer() constructor {
 				self[$ _key] = _struct[$ _key];
 		}
 		
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
+		
+		if (instanceof(self) == instanceof(_struct) && (
+			self._get_ftick() != _struct._get_ftick() ||
+			self._get_finit() != _struct._get_finit() ||
+			self._get_ffree() != _struct._get_ffree()))
+			show_debug_message("UNIT::timer -> вероятно не верная реализация метода _clone в классе " + instanceof(self)
+			+ "\n\t; экземпляр, который был клонирован: " + string(_struct) +
+			+ "\n\t; клон: " + string(self)
+			);
+		
+		}
+		
 		return self;
 		
 		}

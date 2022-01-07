@@ -1,5 +1,5 @@
 
-timer = new UNIT_TimerAsyncExt(100,
+timer = new UNIT_TimerLoopAsync(
 	function(_handler, _timer) {
 		show_debug_message(_timer.name);
 	},
