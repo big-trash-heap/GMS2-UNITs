@@ -1,10 +1,17 @@
 
+// Я использовал свой старый код, который тоже можно скачать (но не с github)
+// https://marketplace.yoyogames.com/assets/5621/smooth-rotation-and-arc
 
 #region main
 
 /// @param			angle
 function UNIT_angleWrap(_angle) {
 	
+	// source
+	// LICENSE: https://github.com/kraifpatrik/CE/blob/master/LICENSE (Creative Commons Zero v1.0 Universal)
+	// LINK   : https://github.com/kraifpatrik/CE/blob/4a97fe6c14955e7ac7253a323c3adb6190a99c0f/scripts/ce_math_misc/ce_math_misc.gml#L109
+	
+	// В отличии от моего варианта, тут мы сохраняем дробную часть
 	return (_angle + ceil(-_angle / 360) * 360);
 }
 
@@ -48,6 +55,17 @@ function UNIT_angleArcNearestLimit(_angle, _arcAngle, _arcLengthHalf) {
 	
 }
 
+/// @function		UNIT_angleArcFurtherLimit(angle, arcAngle, arcLengthHalf);
+function UNIT_angleArcFurtherLimit(_angle, _arcAngle, _arcLengthHalf) {
+	
+	if (sign(_arcLengthHalf) < 1) return UNIT_angleWrap(_arcAngle);
+	
+	if (sign(angle_difference(_angle, _arcAngle)) > 0)
+		return UNIT_angleWrap(_arcAngle - _arcLengthHalf);
+	else
+		return UNIT_angleWrap(_arcAngle + _arcLengthHalf);
+}
+
 /// @function		UNIT_angleArcRotate(angleCurrent, angleRequired, speed, arcAngle, arcLengthHalf, [accuracy]);
 function UNIT_angleArcRotate(_angleCurrent, _angleRequired, _speed, _arcAngle, _arcLengthHalf, _accuracy) {
 	
@@ -65,6 +83,9 @@ function UNIT_angleArcIn(_angleTest, _arcAngle, _arcLengthHalf) {
 #endregion
 
 #region special
+
+// Для вращения можно использовать скорость, но это может привести к не точности (так как мы работаем с double)...
+// ... поэтому для вращения лучше использовать UNIT_angleRotate, UNIT_angleArcRotate, UNIT_angleArcRotateWrap
 
 /// @function		UNIT_angleSpeedRotate(angleCurrent, angleRequired, speed);
 function UNIT_angleSpeedRotate(_angleCurrent, _angleRequired, _speed) {

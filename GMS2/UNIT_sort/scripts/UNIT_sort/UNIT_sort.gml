@@ -1,10 +1,5 @@
 
 /*
-sourse:
-https://github.com/dicksonlaw583/LightweightDataStructures/blob/master/extensions/LightweightDataStructures/LightweightDataStructures.gml
-*/
-
-/*
 	Если f_compare(a, b) вернёт true, то 'a' будет сдвинута влево (к началу контейнера)
 */
 
@@ -34,6 +29,12 @@ function UNIT_sort(_data, _reverse, _sort_begin, _sort_end, _set, _get, _compare
 
 
 #region __private
+
+// sourse
+// LICENSE: https://github.com/dicksonlaw583/LightweightDataStructures/blob/master/LICENSE (MIT License)
+// LINK   : https://github.com/dicksonlaw583/LightweightDataStructures/blob/master/extensions/LightweightDataStructures/LightweightDataStructures.gml
+
+// В отличие от оригинала я добавил виртуальный стек
 
 function __UNIT_sort_kernel(_stack, _data, _reverse, _set, _get, _compare) {
 	
