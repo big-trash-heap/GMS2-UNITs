@@ -30,6 +30,7 @@ function UNIT_Angle(_angle=0) constructor {
 		return self;
 	}
 	
+	
 	static toString = function() {
 		return ("UNIT::angle::UNIT_Angle(angle: " + string(self.__angle) + ")");	
 	}
@@ -89,6 +90,7 @@ function UNIT_AngleTwist(_twist=0, _angle) : UNIT_Angle(_angle) constructor {
 		) - self.__twist);
 		return self;
 	}
+	
 	
 	static toString = function() {
 		return ("UNIT::angle::UNIT_AngleTwist(angle: " + string(self.__angle) +
