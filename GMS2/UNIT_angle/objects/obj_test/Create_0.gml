@@ -1,2 +1,2 @@
 
-rot = new UNIT_AngleArc(0, 180);
+rot = new UNIT_AngleTwistArc(180, 0);

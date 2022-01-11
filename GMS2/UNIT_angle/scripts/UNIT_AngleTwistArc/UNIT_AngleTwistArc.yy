@@ -6,7 +6,7 @@
     "path": "folders/UNIT::angle/_extend.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_AngleArc",
+  "name": "UNIT_AngleTwistArc",
   "tags": [],
   "resourceType": "GMScript",
 }

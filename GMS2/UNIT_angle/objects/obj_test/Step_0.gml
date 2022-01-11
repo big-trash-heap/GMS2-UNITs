@@ -2,7 +2,7 @@
 var _mouseDir = point_direction(x, y, mouse_x, mouse_y);
 var _rotate = 0.78 * (keyboard_check(ord("A")) - keyboard_check(ord("D")));
 
-rot.addArcAngle(_rotate);
+rot.addTwist(_rotate);
 
 //rot.setTwist(rot.getTwist() + _rotate);
 //rot.setTwistNoAngle(rot.getTwist() + _rotate);
@@ -10,7 +10,7 @@ rot.addArcAngle(_rotate);
 rot.rotateAngleTwist(_mouseDir, 0.7);
 //rot.setAngleTwist(_mouseDir);
 
-direction   = rot.getArcAngle();
+direction   = rot.getTwist();
 image_angle = rot.getAngleTwist();
 
 show_debug_message(["direction: ", direction]);
