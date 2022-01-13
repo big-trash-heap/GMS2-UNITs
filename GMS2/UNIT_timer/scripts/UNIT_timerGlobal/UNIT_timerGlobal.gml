@@ -80,6 +80,24 @@ function __UNIT_TimersHandlerGlobal() : UNIT_TimersHandlerSimpleExt() constructo
 		}
 	}
 	
+	static __bind = function(_timer) {
+		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING
+			&& UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
+		
+		show_debug_message("UNIT::timer::UNIT_timerGlobal.bind(" + string(_timer) + ");");
+		
+		}
+	}
+	
+	static __unbind = function(_timer) {
+		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING
+			&& UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
+		
+		show_debug_message("UNIT::timer::UNIT_timerGlobal.unbind(" + string(_timer) + ");");
+		
+		}
+	}
+	
 }
 
 #endregion

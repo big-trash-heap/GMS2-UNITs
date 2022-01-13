@@ -202,6 +202,12 @@ function UNIT_timerUnbind(_timer) {
 	
 	}
 	
+	if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING) {
+	
+	_handler.__unbind(_timer);
+	
+	}
+	
 	return true;
 }
 

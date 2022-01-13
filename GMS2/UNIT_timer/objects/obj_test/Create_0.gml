@@ -6,6 +6,10 @@ _handler.newLoop(function() {
 
 _handler._clone().newLoop();
 
+UNIT_timerGl_async(1500, function() {
+	show_debug_message("async");
+});
+
 /*
 timer = new UNIT_TimerLoopAsync(
 	function(_handler, _timer) {

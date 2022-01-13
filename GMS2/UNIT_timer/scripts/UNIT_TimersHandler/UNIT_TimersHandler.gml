@@ -11,6 +11,7 @@
 
 #macro UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE								true
 
+#macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING	true
 #macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK	true
 #macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK				false
 
@@ -35,6 +36,10 @@ function UNIT_TimersHandler() constructor {
 	self.__debug_time = 0;
 	
 	}
+	
+	
+	static __bind   = __UNIT_timerVoid;
+	static __unbind = __UNIT_timerVoid;
 	
 	
 	static __clone = function(_constructor) {
@@ -85,6 +90,13 @@ function UNIT_TimersHandler() constructor {
 		array_push(self.__timers, _cell);
 		
 		_timer.__init(self, _timer);
+		
+		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING) {
+		
+		self.__bind(_timer);
+		
+		}
+		
 		return _timer;
 	}
 	
