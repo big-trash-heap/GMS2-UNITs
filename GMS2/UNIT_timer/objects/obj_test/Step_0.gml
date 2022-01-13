@@ -1,3 +1,5 @@
 
 UNIT_timerGlobalTick();
-handler.tick();
+//handler.tick();
+
+UNIT_timersHandlerDebugErrorMemory();

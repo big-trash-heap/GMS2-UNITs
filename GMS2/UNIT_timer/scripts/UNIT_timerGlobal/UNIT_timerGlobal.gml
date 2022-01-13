@@ -22,7 +22,6 @@ function UNIT_timerGlobalTick(_super) {
 }
 
 
-
 /// @function		UNIT_timerGl_timer(timer);
 function UNIT_timerGl_timer(_timer) {
 	return UNIT_timerGlobal().bind(_timer);

@@ -1,4 +1,10 @@
 
+var _handler = new UNIT_TimersHandlerSimple();
+_handler.newLoop(function() {
+	show_debug_message("loop");	
+});
+
+/*
 timer = new UNIT_TimerLoopAsync(
 	function(_handler, _timer) {
 		show_debug_message(_timer.name);
@@ -18,7 +24,7 @@ UNIT_timerGl_timer(timer2);
 
 handler = UNIT_timerGlobal()._clone();
 
-UNIT_timerGlobal().clearAll();
+UNIT_timerGlobal().clearAll(); */
 
 
 

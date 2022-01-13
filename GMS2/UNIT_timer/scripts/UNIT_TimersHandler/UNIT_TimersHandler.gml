@@ -7,6 +7,8 @@
 */
 
 #macro UNIT_PREPROCESSOR_TIMER_ENABLE_LOG								true
+#macro UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG								true
+
 #macro UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE								true
 
 #macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK	true
@@ -25,6 +27,12 @@ function UNIT_TimersHandler() constructor {
 	if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
 	
 	self.__temp = undefined;
+	
+	}
+	
+	if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+	
+	self.__debug_time = 0;
 	
 	}
 	
@@ -63,6 +71,13 @@ function UNIT_TimersHandler() constructor {
 			show_error("UNIT::timer -> таймер уже занят обработчиком", true);
 		}
 		
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+		
+		self.__debug_time = 0;
+		_timer.__debug_time = 0;
+		
+		}
+		
 		var _cell = [self, _timer];
 		self._map[? _timer] = _cell;
 		
@@ -74,6 +89,12 @@ function UNIT_TimersHandler() constructor {
 	}
 	
 	static tick = function(_super) {
+		
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+		
+		self.__debug_time = 0;
+		
+		}
 		
 		var _size = array_length(self.__timers);
 		if (_size > 0) {
@@ -98,6 +119,13 @@ function UNIT_TimersHandler() constructor {
 					}
 					
 					_timer = _value[__UNIT_TIMER_CELL._TIMER];
+					
+					if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+					
+					_timer.__debug_time = 0;
+					
+					}
+					
 					if (not _timer.__tick(self, _timer, _super)) {
 						self.__timers[_j] = _value;
 						++_j;
@@ -284,6 +312,99 @@ function UNIT_TimersHandler() constructor {
 	
 }
 
+function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*30, _f_handlers, _f_timers) {
+	static _memoryTime = 0;
+	
+	if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+	
+	var _interval = max(room_speed * 5, _step);
+	if (++_memoryTime > _interval) {
+		_memoryTime = 0;
+	}
+	else exit;
+	
+	_f_handlers ??= function(_handler) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+		
+		show_debug_message(@"UNIT::timer -> обнаружен обработчик, который не используется "
+		+ string(_handler.__debug_time) + " frames; ~" + string(_handler.__debug_time / room_speed * 1000) + " ms;"
+		+ "\n\tUNIT::timer -> вероятная утечка памяти"
+		+ "\n\tUNIT::timer -> inst: " + string(_handler)
+		);
+		
+		}
+	}
+	
+	_f_timers ??= function(_timer) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+		
+		show_debug_message(@"UNIT::timer -> обнаружен таймер, который не используется "
+		+ string(_timer.__debug_time) + " frames; ~" + string(_timer.__debug_time / room_speed * 1000) + " ms;"
+		+ "\n\tUNIT::timer -> вероятная утечка памяти"
+		+ "\n\tUNIT::timer -> inst: " + string(_timer)
+		);
+		
+		}
+	}
+	
+	var _handlers = ds_map_create();
+	var _map = __UNIT_timersHandlerMap();
+	
+	var _key = ds_map_find_first(_map);
+	var _val, _timer, _handler, _time;
+	var _list;
+	
+	repeat ds_map_size(_map) {
+		
+		_val = _map[? _key];
+		_key = ds_map_find_next(_map, _key);
+		
+		_handler = _val[__UNIT_TIMER_CELL._HANDLER];
+		_timer   = _val[__UNIT_TIMER_CELL._TIMER];
+		
+		_list = _handlers[? _handler];
+		if (_list == undefined) {
+			_list = ds_list_create();
+			ds_map_add_list(_handlers, _handler, _list);
+		}
+		
+		_timer.__debug_time += _interval;
+		if (_timer.__debug_time > _step) {
+			
+			if (_f_timers(_timer)) ds_map_delete(_map, _timer);
+		}
+		
+		if (ds_map_exists(_map, _timer)) {
+			
+			ds_list_add(_list, _timer);
+		}
+	}
+	
+	_key = ds_map_find_first(_handlers);
+	repeat ds_map_size(_handlers) {
+		
+		_val = _handlers[? _key];
+		
+		_handler = _key;
+		_timer   = _val
+		
+		_key = ds_map_find_next(_handlers, _key);
+		
+		_handler.__debug_time += _interval;
+		if (_handler.__debug_time > _step) {
+			
+			if (_f_handlers(_handler)) {
+				
+				var _size = ds_list_size(_timer);
+				while (_size > 0) ds_map_delete(_map, _timer[| --_size]);
+			}
+		}
+	}
+	
+	ds_map_destroy(_handlers);
+	
+	}
+}
 
 #region __private
 

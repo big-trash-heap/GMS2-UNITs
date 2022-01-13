@@ -12,6 +12,13 @@ function UNIT_Timer() constructor {
 	
 	}
 	
+	if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+	
+	self.__debug_time = 0;
+	
+	}
+	
+	
 	static __init = __UNIT_timerVoid /* handler, timer        */;
 	static __tick = __UNIT_timerVoid /* handler, timer, super */;
 	static __free = __UNIT_timerVoid /* handler, timer        */;
@@ -180,6 +187,13 @@ function UNIT_timerUnbind(_timer) {
 	
 	var _handler = _cell[__UNIT_TIMER_CELL._HANDLER];
 	_cell[@ __UNIT_TIMER_CELL._HANDLER] = undefined;
+	
+	if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+	
+	_timer.__debug_time = 0;
+	_handler.__debug_time = 0;
+	
+	}
 	
 	with (_handler) {
 	
