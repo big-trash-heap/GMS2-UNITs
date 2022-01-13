@@ -4,6 +4,8 @@ _handler.newLoop(function() {
 	show_debug_message("loop");	
 });
 
+_handler._clone().newLoop();
+
 /*
 timer = new UNIT_TimerLoopAsync(
 	function(_handler, _timer) {

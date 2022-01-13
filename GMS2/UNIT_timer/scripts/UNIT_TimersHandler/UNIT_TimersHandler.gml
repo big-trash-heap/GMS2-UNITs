@@ -312,25 +312,35 @@ function UNIT_TimersHandler() constructor {
 	
 }
 
-function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*30, _f_handlers, _f_timers) {
+/// @function		UNIT_timersHandlerDebugErrorMemory([step=~10sec], [f_handlers=log], [f_timers=log]);
+function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f_timers) {
 	static _memoryTime = 0;
 	
 	if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
 	
-	var _interval = max(room_speed * 5, _step);
+	var _interval = max(room_speed * 5 - 1, _step - 1);
 	if (++_memoryTime > _interval) {
 		_memoryTime = 0;
 	}
 	else exit;
 	
+	show_debug_message("\nUNIT::timer::UNIT_timersHandlerDebugErrorMemory();\n\n");
+	
 	_f_handlers ??= function(_handler) {
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
 		
 		show_debug_message(@"UNIT::timer -> обнаружен обработчик, который не используется "
-		+ string(_handler.__debug_time) + " frames; ~" + string(_handler.__debug_time / room_speed * 1000) + " ms;"
+		+ string(_handler.__debug_time) + " frames; ~" + string(_handler.__debug_time / room_speed) + " seconds;"
 		+ "\n\tUNIT::timer -> вероятная утечка памяти"
 		+ "\n\tUNIT::timer -> inst: " + string(_handler)
+		+ "\n\tUNIT::timer -> timers-list:"
 		);
+		
+		var _timers = _handler._toArray();
+		var _size = array_length(_timers);
+		for (var _i = 0; _i < _size; ++_i) {
+			show_debug_message("\t" + string(_i + 1) + ". " + string(_timers[_i]));
+		}
 		
 		}
 	}
@@ -339,9 +349,9 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*30, _f_handlers, _f
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
 		
 		show_debug_message(@"UNIT::timer -> обнаружен таймер, который не используется "
-		+ string(_timer.__debug_time) + " frames; ~" + string(_timer.__debug_time / room_speed * 1000) + " ms;"
+		+ string(_timer.__debug_time) + " frames; ~" + string(_timer.__debug_time / room_speed) + " seconds;"
 		+ "\n\tUNIT::timer -> вероятная утечка памяти"
-		+ "\n\tUNIT::timer -> inst: " + string(_timer)
+		+ "\n\tUNIT::timer -> inst: " + string(_timer) + "\n"
 		);
 		
 		}
