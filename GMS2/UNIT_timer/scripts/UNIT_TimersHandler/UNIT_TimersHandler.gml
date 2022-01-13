@@ -324,8 +324,6 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 	}
 	else exit;
 	
-	show_debug_message("\nUNIT::timer::UNIT_timersHandlerDebugErrorMemory();\n\n");
-	
 	_f_handlers ??= function(_handler) {
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
 		
@@ -341,6 +339,8 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 		for (var _i = 0; _i < _size; ++_i) {
 			show_debug_message("\t" + string(_i + 1) + ". " + string(_timers[_i]));
 		}
+		
+		show_debug_message("\n");
 		
 		}
 	}
@@ -363,6 +363,8 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 	var _key = ds_map_find_first(_map);
 	var _val, _timer, _handler, _time;
 	var _list;
+	
+	show_debug_message("\nUNIT::timer::UNIT_timersHandlerDebugErrorMemory(); // section: timers\n\n");
 	
 	repeat ds_map_size(_map) {
 		
@@ -389,6 +391,8 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 			ds_list_add(_list, _timer);
 		}
 	}
+	
+	show_debug_message("UNIT::timer::UNIT_timersHandlerDebugErrorMemory(); // section: handlers\n\n");
 	
 	_key = ds_map_find_first(_handlers);
 	repeat ds_map_size(_handlers) {
