@@ -1,4 +1,5 @@
 
+// extend
 #macro UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK	false
 
 // Абстрактный класс
@@ -132,6 +133,7 @@ function UNIT_Timer() constructor {
 	
 	
 	// UNIT_PREPROCESSOR
+	
 	
 	static _clone = function() {
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
