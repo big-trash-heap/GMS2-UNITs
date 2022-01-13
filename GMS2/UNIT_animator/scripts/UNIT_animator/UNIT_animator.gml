@@ -1,4 +1,171 @@
 
+enum UNIT_ANIMATOR_ACTION { _BREAK = -1, _AWAIT = 0, _NEXT };
+enum UNIT_ANIMATOR_CODE { 
+		_BREAK = 1 << 0,
+		_END   = 1 << 1,
+		_PLAY  = 1 << 2,
+		_PAUSE = 1 << 3,
+};
+
+/*
+	f = function(animator, data)
+	
+	controller = object {
+		done  : function(animator) -> UNIT_ANIMATOR_ACTION
+		pause : function(animator)
+		resume: function(animator)
+		clear : function(animator)
+		clone : function(animator)
+		append: function(animator, assignment_data)
+	}
+	
+	stream:
+		FRAME -> BREAK ?? LOOP:
+			ASSIGNMENT -> ACTION -> AWAIT -> LOOP ?? BREAK ?? NEXT:
+				AFTER -> BREAK ?? NEXT_FRAME -> FRAME
+	
+*/
+
+function UNIT_Animator(_f, _data) {
+	
+	#region __private
+	
+	self.__frames = [];
+	self.__lastFrame = undefined;
+	
+	self.__play = UNIT_ANIMATOR_CODE._PLAY;
+	self.__controllers = {};
+	
+	self.__frame_index       = 0;
+	self.__frame_data        = undefined;
+	self.__frame_actions     = undefined;
+	self.__frame_assignments = undefined;
+	
+	enum __UNIT_ANIMATOR_DATA {
+		
+		_EV_ACTIONS     = 0,
+		_EV_AWAITS      = 1,
+		_EV_AFTERS      = 2,
+		_EV_ASSIGNMENTS = 3,
+		_EV_FRAME_F     = 4,
+		_EV_FRAME_DATA  = 5,
+		
+		_ACTION_F    = 0,
+		_ACTION_DATA = 1,
+		
+		_AWAIT_F    = 0,
+		_AWAIT_DATA = 1,
+		
+		_AFTER_F	= 0,
+		_AFTER_DATA = 1,
+	}
+	
+	static __push = function(_index) {
+		
+		var _array = self.__lastFrame[_index];
+		if (_array == undefined) {
+			
+			_array = [];
+			self.__lastFrame[@ _index] = _array;
+		}
+		
+		var _argSize = argument_count;
+		for (var _i = 1; _i < _argSize; ++_i)
+			array_push(_array, argument[_i]);
+	}
+	
+	static __tick = function() {
+		
+		if (self.__play != UNIT_ANIMATOR_CODE._PLAY) return self.__play;
+	}
+	
+	#endregion
+	
+	
+	static add_frame = function(_f, _data) {
+		
+		if (_f == undefined)
+			self.__lastFrame = [ undefined, undefined, undefined, undefined ];
+		else
+			self.__lastFrame = [ undefined, undefined, undefined, undefined, _f, _data ];
+		
+		array_push(self.__frames, self.__lastFrame);
+		return self;
+	}
+	
+	static add_action = function(_f, _data) {
+		
+		self.__push(__UNIT_ANIMATOR_DATA._EV_ACTIONS, _f, _data);
+		return self;
+	}
+	
+	static add_await = function(_f, _data) {
+		
+		self.__push(__UNIT_ANIMATOR_DATA._EV_AWAITS, _f, _data);
+		return self;
+	}
+	
+	static add_after = function(_f, _data) {
+		
+		self.__push(__UNIT_ANIMATOR_DATA._EV_AFTERS, _f, _data);
+		return self;
+	}
+	
+	static add_assignment = function(_name_controller, _assignment_data) {
+		
+		self.__push(__UNIT_ANIMATOR_DATA._EV_ASSIGNMENTS, _name_controller, _assignment_data);
+		return self;
+	}
+	
+	static bind_controller = function(_name_contoller, _controller) {
+		
+		self.__controllers[$ _name_contoller] = _controller;
+		return self;
+	}
+	
+	
+	static pause = function() {
+		if (self.__play == UNIT_ANIMATOR_CODE._PLAY) {
+			
+		}
+	}
+	
+	static resume = function() {
+		if (self.__play == UNIT_ANIMATOR_CODE._PAUSE) {
+			
+		}
+	}
+	
+	
+	static getCode = function() {
+		return self.__play;	
+	}
+	
+	static isBreak = function() {
+		return (self.__play == UNIT_ANIMATOR_CODE._BREAK);
+	}
+	
+	static isEnd = function() {
+		return (self.__play == UNIT_ANIMATOR_CODE._END);
+	}
+	
+	static isPlay = function() {
+		return (self.__play == UNIT_ANIMATOR_CODE._PLAY);
+	}
+	
+	static isPause = function() {
+		return (self.__play == UNIT_ANIMATOR_CODE._PAUSE);
+	}
+	
+	
+	#region init
+	
+	self.add_frame(_f, _data);
+	
+	#endregion
+	
+}
+
 
 /*
 	Данный класс предполагает:
@@ -8,7 +175,7 @@
 	4. Вы не будете использовать UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE (_clone)
 	5. Вы не будете вызывать tick при вызове tick (в рамках одного экземпляра)
 */
-
+/*
 #macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_CLONE				false
 #macro UNIT_PREPROCESSOR_ANIMATOR_ENABLE_REPLAY				false
 
@@ -23,7 +190,7 @@ enum UNIT_ANIMATOR_CODE   { _BREAK = -1, _STOP,  _CALL };
 	UNIT_Animator([f], ...)
 	В данном случаи f это функция, которая будет вызыватся самой первой при итерирование аниматора
 */
-
+/*
 //					f = function(animator, data)
 /// @function		UNIT_Animator([f], [data], [super=undefined], [loop=false]);
 function UNIT_Animator() constructor {
