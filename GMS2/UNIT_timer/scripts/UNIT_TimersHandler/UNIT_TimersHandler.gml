@@ -10,6 +10,7 @@
 #macro UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG								true
 
 #macro UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE								true
+#macro UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH						true
 
 #macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING	true
 #macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK	true
@@ -74,6 +75,13 @@ function UNIT_TimersHandler() constructor {
 		if (UNIT_timerGetBind(_timer) == self) {
 			
 			show_error("UNIT::timer -> таймер уже занят обработчиком", true);
+		}
+		
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH) {
+		
+		if (not _timer._bindCan())
+			show_error("UNIT::timer -> таймер отключил возможность привязыватся, используйте ._binCan(), чтобы проверить возможность привязать таймер к обработчику", true);
+		
 		}
 		
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
@@ -435,6 +443,7 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 #region __private
 
 #macro ____UNIT_TIMER_ERROR_CLONE			"UNIT::timer -> UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE отключена"
+#macro ____UNIT_TIMER_ERROR_BIND_SWITCH		"UNIT::timer -> UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH отключена"
 #macro ____UNIT_TIMER_ERROR_TIMERS_HANDLER	"UNIT::timer -> UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK отключена"
 
 enum __UNIT_TIMER_CELL { _HANDLER, _TIMER };

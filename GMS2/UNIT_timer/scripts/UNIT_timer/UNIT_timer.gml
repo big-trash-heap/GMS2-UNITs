@@ -23,6 +23,7 @@ function UNIT_Timer() constructor {
 	static __tick = __UNIT_timerVoid /* handler, timer, super */;
 	static __free = __UNIT_timerVoid /* handler, timer        */;
 	
+	// этот метод нельзя переопределять
 	static __copyn_ = function(_struct) {
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
@@ -130,6 +131,8 @@ function UNIT_Timer() constructor {
 	}
 	
 	
+	// UNIT_PREPROCESSOR
+	
 	static _clone = function() {
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
 		
@@ -163,6 +166,48 @@ function UNIT_Timer() constructor {
 		else {
 		
 		show_error("UNIT::timer -> UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK отключена", true);
+		
+		}
+	}
+	
+	
+	static _bindCan = function() {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH) {
+		
+		return !variable_struct_exists(self, "__");
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_BIND_SWITCH, true);
+		
+		}
+	}
+	
+	static _bindEnable = function() {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH) {
+		
+		variable_struct_remove(self, "__");
+		return self;
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_BIND_SWITCH, true);
+		
+		}
+	}
+	
+	static _bindDisable = function() {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH) {
+		
+		self.__ = undefined;
+		return self;
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_BIND_SWITCH, true);
 		
 		}
 	}

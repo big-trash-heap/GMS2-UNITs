@@ -6,6 +6,11 @@ _handler.newLoop(function() {
 
 _handler._clone().newLoop();
 
+var _timer = new UNIT_TimerAsync(1500, function() {
+	show_debug_message("_timer");
+})._bindDisable()._bindEnable();
+
+UNIT_timerGl_timer(_timer);
 UNIT_timerGl_async(1500, function() {
 	show_debug_message("async");
 });
