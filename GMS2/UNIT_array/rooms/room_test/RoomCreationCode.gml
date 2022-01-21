@@ -543,65 +543,65 @@ show_debug_message("\t UNIT_arrIns  \t\t\tis work");
 		
 #endregion
 		
-#region UNIT_arrBulConcat
+//#region UNIT_arrBulConcat
 		
-_array = UNIT_arrBulConcat(1, 2, [3, 4, 5], 6);
-apiDebugAssert(
-	array_equals(
-		_array, 
-		[1, 2, 3, 4, 5, 6]
-	),
-	"<UNIT_arrBulConcat 0>"
-);
+//_array = UNIT_arrBulConcat(1, 2, [3, 4, 5], 6);
+//apiDebugAssert(
+//	array_equals(
+//		_array, 
+//		[1, 2, 3, 4, 5, 6]
+//	),
+//	"<UNIT_arrBulConcat 0>"
+//);
 		
-_array = UNIT_arrBulConcat([1, 2, 3], 9, [4, 5], 8);
-apiDebugAssert(
-	array_equals(
-		_array, 
-		[1, 2, 3, 9, 4, 5, 8]
-	),
-	"<UNIT_arrBulConcat 1>"
-);
+//_array = UNIT_arrBulConcat([1, 2, 3], 9, [4, 5], 8);
+//apiDebugAssert(
+//	array_equals(
+//		_array, 
+//		[1, 2, 3, 9, 4, 5, 8]
+//	),
+//	"<UNIT_arrBulConcat 1>"
+//);
 		
-_array = UNIT_arrBulConcat(1, 2, 3);
-apiDebugAssert(
-	array_equals(
-		_array, 
-		[1, 2, 3]
-	),
-	"<UNIT_arrBulConcat 2>"
-);
+//_array = UNIT_arrBulConcat(1, 2, 3);
+//apiDebugAssert(
+//	array_equals(
+//		_array, 
+//		[1, 2, 3]
+//	),
+//	"<UNIT_arrBulConcat 2>"
+//);
 		
-_array = UNIT_arrBulConcat([1], [2], [3]);
-apiDebugAssert(
-	array_equals(
-		_array, 
-		[1, 2, 3]
-	),
-	"<UNIT_arrBulConcat 3>"
-);
+//_array = UNIT_arrBulConcat([1], [2], [3]);
+//apiDebugAssert(
+//	array_equals(
+//		_array, 
+//		[1, 2, 3]
+//	),
+//	"<UNIT_arrBulConcat 3>"
+//);
 		
-_array = UNIT_arrBulConcat([], []);
-apiDebugAssert(
-	array_equals(
-		_array, 
-		[]
-	),
-	"<UNIT_arrBulConcat 4>"
-);
+//_array = UNIT_arrBulConcat([], []);
+//apiDebugAssert(
+//	array_equals(
+//		_array, 
+//		[]
+//	),
+//	"<UNIT_arrBulConcat 4>"
+//);
 		
-_array = UNIT_arrBulConcat();
-apiDebugAssert(
-	array_equals(
-		_array, 
-		[]
-	),
-	"<UNIT_arrBulConcat 5>"
-);
+//_array = UNIT_arrBulConcat();
+//apiDebugAssert(
+//	array_equals(
+//		_array, 
+//		[]
+//	),
+//	"<UNIT_arrBulConcat 5>"
+//);
 		
-show_debug_message("\t UNIT_arrBulConcat \t\tis work");
+//show_debug_message("\t UNIT_arrBulConcat \t\tis work");
 		
-#endregion
+//#endregion
 
 
 

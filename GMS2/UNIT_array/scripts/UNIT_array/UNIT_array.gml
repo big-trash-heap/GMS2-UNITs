@@ -196,40 +196,6 @@ function UNIT_arrBul() {
 	return _arrayBul;
 }
 
-/// @param			...value
-/// @description	Функция для построение массива из
-//					массивов и значений
-function UNIT_arrBulConcat() {
-	var _argSize  = argument_count;
-	var _arrayBul = [];
-	if (_argSize > 0) {
-		
-		var _value, _jsize, _j, _temp, _size = 0;
-		for (var _i = 0; _i < _argSize; ++_i) {
-			_value = argument[_i];
-			
-			if (is_array(_value)) {
-				
-				_jsize = array_length(_value);
-				_temp = _size + _jsize;
-				
-				array_resize(_arrayBul, _temp);
-				
-				for (_j = 0; _j < _jsize; _j++) 
-					array_set(_arrayBul, _size + _j, _value[_j]);
-				
-				_size = _temp;
-			}
-			else {
-				
-				_size += 1;
-				array_push(_arrayBul, _value);
-			}
-		}
-	}
-	return _arrayBul;
-}
-
 /// @param			array
 /// @description	Клонирование массива с глубиной 1
 function UNIT_arrBulDup1d(_array) {
@@ -237,6 +203,70 @@ function UNIT_arrBulDup1d(_array) {
 	var _arrayBul = array_create(_size);
 	array_copy(_arrayBul, 0, _array, 0, _size);
 	return _arrayBul;
+}
+
+/// @function		UNIT_arrBulFlatten(_array, [_depth=1]);
+function UNIT_arrBulFlatten(_array, _depth=1) {
+	
+	if (_depth < 1) return UNIT_arrBulDup1d(_array);
+	return UNIT_arrBulFlattenFrom(_depth + 2, _array);
+}
+
+/// @function		UNIT_arrBulFlattenFrom(_depth, ...args);
+function UNIT_arrBulFlattenFrom(_depth) {
+	
+	var _argSize = argument_count;
+	if (_argSize > 1) {
+		
+		var _stack = ds_stack_create();
+		var _build = [];
+		
+		var _array, _size, _j;
+		var _pack, _value;
+		var _locdepth;
+		
+		var _i = 1;
+		do {
+			
+			_value = argument[_i];
+			if (_depth > 1 && is_array(_value)) {
+				
+				ds_stack_push(_stack, [0, _value, 2]);
+				do {
+					
+					_pack = ds_stack_top(_stack);
+					_array = _pack[1];
+					_locdepth = _pack[2];
+					_size = array_length(_array);
+					
+					for (_j = _pack[0]; _j < _size; ++_j) {
+						
+						_value = _array[_j];
+						if (_locdepth < _depth && is_array(_value)) {
+							ds_stack_push(_stack, [0, _value, _locdepth + 1]);
+							
+							_pack[@ 0] = _j + 1;
+							_j = -1;
+							break;
+						}
+						else  {
+							array_push(_build, _value);	
+						}
+					}
+					
+					if (_j != -1) ds_stack_pop(_stack);
+				} until (ds_stack_empty(_stack));
+			}
+			else {
+				array_push(_build, _value);	
+			}
+		} until (++_i == _argSize);
+		
+		ds_stack_destroy(_stack);
+		return _build;
+	}
+	
+	return [];
 }
 
 #endregion

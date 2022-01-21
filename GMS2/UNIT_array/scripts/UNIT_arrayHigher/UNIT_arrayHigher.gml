@@ -65,61 +65,6 @@ function UNIT_arrBulFilter(_array, _f, _data) {
 	return _arrayBul;
 }
 
-/// @function		UNIT_arrFlatten(...args);
-function UNIT_arrFlatten() {
-	
-	var _argSize = argument_count;
-	if (_argSize > 0) {
-		
-		var _stack = ds_stack_create();
-		var _build = [];
-		
-		var _array, _size, _j;
-		var _pack, _value;
-		
-		var _i = 0;
-		do {
-			
-			_value = argument[_i];
-			if (is_array(_value)) {
-				
-				ds_stack_push(_stack, [0, _value]);
-				do {
-					
-					_pack = ds_stack_top(_stack);
-					_array = _pack[1];
-					_size = array_length(_array);
-					
-					for (_j = _pack[0]; _j < _size; ++_j) {
-						
-						_value = _array[_j];
-						if (is_array(_value)) {
-							ds_stack_push(_stack, [0, _value]);
-							
-							_pack[@ 0] = _j + 1;
-							_j = -1;
-							break;
-						}
-						else  {
-							array_push(_build, _value);	
-						}
-					}
-					
-					if (_j != -1) ds_stack_pop(_stack);
-				} until (ds_stack_empty(_stack));
-			}
-			else {
-				array_push(_build, _value);	
-			}
-		} until (++_i == _argSize);
-		
-		ds_stack_destroy(_stack);
-		return _build;
-	}
-	
-	return [];
-}
-
 #endregion
 
 #region find
