@@ -1,4 +1,4 @@
-
+/*
 var _handler = new UNIT_TimersHandlerSimple();
 _handler.newLoop(function() {
 	show_debug_message("loop");	
@@ -13,7 +13,7 @@ var _timer = new UNIT_TimerAsync(1500, function() {
 UNIT_timerGl_timer(_timer);
 UNIT_timerGl_async(1500, function() {
 	show_debug_message("async");
-});
+});*/
 
 /*
 timer = new UNIT_TimerLoopAsync(
@@ -75,7 +75,7 @@ UNIT_timerGlobal().clearAll(); */
 
 //UNIT_timerGl_timer(timer);
 //UNIT_timerGl_timer(timer2);
-/*
+
 
 UNIT_timerGl_loop(
 	function(_0, _timer) {
@@ -105,6 +105,7 @@ UNIT_timerGl_loop(
 								//show_message(UNIT_timerGlobal().__clear);
 								UNIT_timerGlobal().clearAll(); });
 							var _t4 = UNIT_timerGl_loop(undefined, undefined, function() { show_message(444); });
+							
 							
 							_t2.unbind();
 							_t4.unbind();
@@ -158,9 +159,10 @@ UNIT_timerGl_loop(
 )._set("num", 1)._set("timer", undefined);
 
 self._fff = function() {
-	
+	return;
 	var _t;
 	
+	show_message("end");
 	timer = UNIT_timerGl_async(5000, function(_0, _timer, _1, _count) {
 		show_debug_message(["hello", _timer.getLeftCf(), _count]);
 	}, undefined, function(_0, _timer) {
