@@ -21,9 +21,9 @@ function UNIT_Timer() constructor {
 	}
 	
 	
-	static __init = __UNIT_timerVoid /* handler, timer        */;
-	static __tick = __UNIT_timerVoid /* handler, timer, super */;
-	static __free = __UNIT_timerVoid /* handler, timer        */;
+	static __init = __UNIT_timerVoid /* handler, timer         */;
+	static __tick = __UNIT_timerVoid /* handler, timer, super  */;
+	static __free = __UNIT_timerVoid /* handler, timer, inTick */;
 	
 	// этот метод нельзя переопределять
 	static __copyn_ = function(_struct) {
@@ -252,7 +252,7 @@ function UNIT_timerUnbind(_timer) {
 	var _cell = _map[? _timer];
 	if (_cell == undefined) return false;
 	
-	_cell[__UNIT_TIMER_CELL._HANDLER].__unbind(_cell);
+	_cell[__UNIT_TIMER_CELL._HANDLER].__unbind(_cell, false);
 	return true;
 }
 

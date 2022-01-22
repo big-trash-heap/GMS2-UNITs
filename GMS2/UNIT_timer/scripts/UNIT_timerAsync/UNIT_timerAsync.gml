@@ -2,7 +2,7 @@
 /*
 	finit = function(handler, timer);
 	ftick = function(handler, timer, super, milisec_step);
-	ffree = function(handler, timer);
+	ffree = function(handler, timer, inTick);
 */
 
 /*

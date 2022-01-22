@@ -2,7 +2,7 @@
 /*
 	finit = function(handler, timer);
 	ftick = function(handler, timer, super, milisec_step);
-	ffree = function(handler, timer);
+	ffree = function(handler, timer, inTick);
 */
 
 /*
@@ -68,9 +68,6 @@ function UNIT_TimerLoopAsyncExt(_ftick, _finit, _ffree) : UNIT_TimerLoopExt(_fti
 	static __set_finit = __UNIT_timerLoopAsync_finit;
 	
 	static __finit = __UNIT_timerVoid;
-	
-	if (_finit != undefined) self.__finit = _finit;
-	if (_ftick != undefined) self.__ftick = _ftick;
 	
 	static __init = __UNIT_timerLoopAsyncInit;
 	static __tick = function(_handler, _timer, _super) {

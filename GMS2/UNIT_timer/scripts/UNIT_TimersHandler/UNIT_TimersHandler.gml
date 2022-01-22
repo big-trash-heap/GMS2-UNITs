@@ -45,7 +45,7 @@ function UNIT_TimersHandler() constructor {
 	static __info_bind   = __UNIT_timerVoid;
 	static __info_unbind = __UNIT_timerVoid;
 	
-	static __unbind = function(_cell) {
+	static __unbind = function(_cell, _inTick) {
 		
 		var _timer = _cell[__UNIT_TIMER_CELL._TIMER];
 		_cell[@ __UNIT_TIMER_CELL._HANDLER] = undefined;
@@ -73,7 +73,7 @@ function UNIT_TimersHandler() constructor {
 		}
 		
 		--self.__count;
-		_timer.__free(self, _timer);
+		_timer.__free(self, _timer, _inTick);
 	}
 	
 	static __clone = function(_constructor) {
@@ -186,8 +186,7 @@ function UNIT_TimersHandler() constructor {
 					else
 					//if (_value[__UNIT_TIMER_CELL._HANDLER] == self) // entry-space
 					if (UNIT_timerGetBind(_timer) == self) // handler-space
-						self.__unbind(_value);
-						//UNIT_timerUnbind(_timer);
+						self.__unbind(_value, true);
 				}
 			} until (++_i == _size);
 			
