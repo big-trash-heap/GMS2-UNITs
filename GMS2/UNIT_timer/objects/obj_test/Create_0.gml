@@ -159,7 +159,7 @@ UNIT_timerGl_loop(
 )._set("num", 1)._set("timer", undefined);
 
 self._fff = function() {
-	return;
+	
 	var _t;
 	
 	show_message("end");

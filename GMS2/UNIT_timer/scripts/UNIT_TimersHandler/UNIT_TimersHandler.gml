@@ -183,10 +183,12 @@ function UNIT_TimersHandler() constructor {
 						self.__timers[_j] = _value;
 						++_j;
 					}
-					else
-					//if (_value[__UNIT_TIMER_CELL._HANDLER] == self) // entry-space
-					if (UNIT_timerGetBind(_timer) == self) // handler-space
-						self.__unbind(_value, true);
+					else {
+						
+						_value = self._map[? _timer];
+						if (_value != undefined && _value[__UNIT_TIMER_CELL._HANDLER] == self)
+							self.__unbind(_value, true);
+					}
 				}
 			} until (++_i == _size);
 			
