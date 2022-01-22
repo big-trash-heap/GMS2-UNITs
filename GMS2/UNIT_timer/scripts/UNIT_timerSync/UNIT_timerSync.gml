@@ -61,11 +61,11 @@ function UNIT_TimerSyncExt(_steps, _ftick, _finit, _ffree) : __UNIT_TimerTimelap
 
 function __UNIT_timerSyncTick(_handler, _timer, _super) {
 	
-	if (self.__step > 0) {
+	if (_timer.__step > 0) {
 		
-		--self.__step;
-		self.__ftick(_handler, _timer, _super);
-		return (self.__step == 0);
+		--_timer.__step;
+		_timer.__ftick(_handler, _timer, _super);
+		return (_timer.__step == 0);
 	}
 }
 

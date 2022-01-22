@@ -42,9 +42,39 @@ function UNIT_TimersHandler() constructor {
 	}
 	
 	
-	static __bind   = __UNIT_timerVoid;
-	static __unbind = __UNIT_timerVoid;
+	static __info_bind   = __UNIT_timerVoid;
+	static __info_unbind = __UNIT_timerVoid;
 	
+	static __unbind = function(_cell) {
+		
+		var _timer = _cell[__UNIT_TIMER_CELL._TIMER];
+		_cell[@ __UNIT_TIMER_CELL._HANDLER] = undefined;
+		
+		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING) {
+		
+		self.__info_unbind(_timer);
+		
+		}
+		
+		ds_map_delete(self._map, _timer);
+		
+		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK) {
+		
+		_timer.__mark = weak_ref_create(_timer);
+		_timer.__mark_ref = undefined;
+		
+		}
+		
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+		
+		_timer.__debug_time = 0;
+		self.__debug_time = 0;
+	
+		}
+		
+		--self.__count;
+		_timer.__free(self, _timer);
+	}
 	
 	static __clone = function(_constructor) {
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
@@ -87,6 +117,12 @@ function UNIT_TimersHandler() constructor {
 		
 		}
 		
+		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING) {
+		
+		self.__info_bind(_timer);
+		
+		}
+		
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
 		
 		self.__debug_time = 0;
@@ -101,12 +137,6 @@ function UNIT_TimersHandler() constructor {
 		array_push(self.__timers, _cell);
 		
 		_timer.__init(self, _timer);
-		
-		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING) {
-		
-		self.__bind(_timer);
-		
-		}
 		
 		return _timer;
 	}
@@ -156,7 +186,8 @@ function UNIT_TimersHandler() constructor {
 					else
 					//if (_value[__UNIT_TIMER_CELL._HANDLER] == self) // entry-space
 					if (UNIT_timerGetBind(_timer) == self) // handler-space
-						UNIT_timerUnbind(_timer);
+						self.__unbind(_value);
+						//UNIT_timerUnbind(_timer);
 				}
 			} until (++_i == _size);
 			
@@ -252,6 +283,14 @@ function UNIT_TimersHandler() constructor {
 	static isBind = function(_timer) {
 		
 		return (self == UNIT_timerGetBind(_timer));
+	}
+	
+	static isTimer = function() {
+		return false;
+	}
+	
+	static isHandler = function() {
+		return true;
 	}
 	
 	static toString = function() {

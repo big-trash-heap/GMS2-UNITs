@@ -10,6 +10,7 @@ function UNIT_Timer() constructor {
 	if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK) {
 	
 	self.__mark = weak_ref_create(self);
+	self.__mark_ref = undefined;
 	
 	}
 	
@@ -71,6 +72,26 @@ function UNIT_Timer() constructor {
 		}
 	}
 	
+	
+	static __set_f = function(_name, _f) {
+		if (is_undefined(_f) || _f == __UNIT_timerVoid)
+			variable_struct_remove(self, _name);
+		else
+			self[$ _name] = _f;
+	}
+	
+	static __set_finit = function(_f) {
+		self.__set_f("__init", _f);
+	}
+	
+	static __set_ftick = function(_f) {
+		self.__set_f("__tick", _f);
+	}
+	
+	static __set_ffree = function(_f) {
+		self.__set_f("__free", _f);
+	}
+	
 	#endregion
 	
 	static unbind = function() {
@@ -90,6 +111,14 @@ function UNIT_Timer() constructor {
 	
 	static toString = function() {
 		return ("UNIT::timer::" + instanceof(self));
+	}
+	
+	static isTimer = function() {
+		return true;
+	}
+	
+	static isHandler = function() {
+		return false;
 	}
 	
 	
@@ -155,12 +184,11 @@ function UNIT_Timer() constructor {
 		var _cell = __UNIT_timersHandlerMap()[? self];
 		if (_cell != undefined) {
 			
-			if (array_length(_cell) == 2) {
+			if (self.__mark_ref == undefined) {
 				
-				_cell[@ 2] = weak_ref_create(self);
+				self.__mark = weak_ref_create(self);
+				self.__mark_ref = _cell;
 			}
-			
-			return _cell[2];
 		}
 		return self.__mark;
 		
@@ -224,37 +252,7 @@ function UNIT_timerUnbind(_timer) {
 	var _cell = _map[? _timer];
 	if (_cell == undefined) return false;
 	
-	ds_map_delete(_map, _timer);
-	
-	if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK) {
-	
-	_timer.__mark = weak_ref_create(_timer);
-	
-	}
-	
-	var _handler = _cell[__UNIT_TIMER_CELL._HANDLER];
-	_cell[@ __UNIT_TIMER_CELL._HANDLER] = undefined;
-	
-	if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
-	
-	_timer.__debug_time = 0;
-	_handler.__debug_time = 0;
-	
-	}
-	
-	with (_handler) {
-	
-	--self.__count;
-	_timer.__free(self, _timer);
-	
-	}
-	
-	if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING) {
-	
-	_handler.__unbind(_timer);
-	
-	}
-	
+	_cell[__UNIT_TIMER_CELL._HANDLER].__unbind(_cell);
 	return true;
 }
 

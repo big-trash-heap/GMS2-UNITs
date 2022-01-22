@@ -21,11 +21,14 @@ function UNIT_TimerAsync(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTimelap
 	
 	#region __private
 	
+	static __set_finit = __UNIT_timerAsync_set_finit;
+	
 	static __finit = __UNIT_timerVoid;
-	if (_finit != undefined) self.__finit = _finit;
 	
 	static __init = __UNIT_timerAsyncInit;
 	static __tick = __UNIT_timerAsyncTick;
+	
+	self.__set_finit(_finit);
 	
 	#endregion
 	
@@ -56,11 +59,14 @@ function UNIT_TimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTime
 	
 	#region __private
 	
+	static __set_finit = __UNIT_timerAsync_set_finit;
+	
 	static __finit = __UNIT_timerVoid;
-	if (_finit != undefined) self.__finit = _finit;
 	
 	static __init = __UNIT_timerAsyncInit;
 	static __tick = __UNIT_timerAsyncTick;
+	
+	self.__set_finit(_finit);
 	
 	#endregion
 	
@@ -97,27 +103,27 @@ function UNIT_TimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTime
 #region __private
 
 function __UNIT_timerAsyncInit(_handler, _timer) {
-	self.__ctime = current_time;
-	self.__finit(_handler, _timer);
+	_timer.__ctime = current_time;
+	_timer.__finit(_handler, _timer);
 }
 
 function __UNIT_timerAsyncTick(_handler, _timer, _super) {
-	if (self.__step > 0) {
+	if (_timer.__step > 0) {
 		
 		var _ctime = current_time;
-		var _step = _ctime - self.__ctime;
+		var _step = _ctime - _timer.__ctime;
 		
-		if (self.__step > _step) {
-			self.__step -= _step;
+		if (_timer.__step > _step) {
+			_timer.__step -= _step;
 		}
 		else {
-			_step = self.__step;
-			self.__step = 0;
+			_step = _timer.__step;
+			_timer.__step = 0;
 		}
 		
-		self.__ctime = _ctime;
-		self.__ftick(_handler, _timer, _super, _step);
-		return (self.__step == 0);
+		_timer.__ctime = _ctime;
+		_timer.__ftick(_handler, _timer, _super, _step);
+		return (_timer.__step == 0);
 	}
 }
 
@@ -131,6 +137,10 @@ function __UNIT_timerAsyncResume() {
 
 function __UNIT_timerAsync_finit() {
 	return self.__finit;
+}
+
+function __UNIT_timerAsync_set_finit(_f) {
+	self.__set_f("__finit", _f);
 }
 
 #endregion

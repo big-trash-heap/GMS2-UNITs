@@ -80,7 +80,7 @@ function __UNIT_TimersHandlerGlobal() : UNIT_TimersHandlerSimpleExt() constructo
 		}
 	}
 	
-	static __bind = function(_timer) {
+	static __info_bind = function(_timer) {
 		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING
 			&& UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
 		
@@ -89,7 +89,7 @@ function __UNIT_TimersHandlerGlobal() : UNIT_TimersHandlerSimpleExt() constructo
 		}
 	}
 	
-	static __unbind = function(_timer) {
+	static __info_unbind = function(_timer) {
 		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING
 			&& UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
 		

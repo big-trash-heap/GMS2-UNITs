@@ -7,14 +7,17 @@ function __UNIT_TimerTimelapse(_steps, _ftick=undefined, _finit=undefined, _ffre
 	
 	#region __private
 	
+	static __set_ftick = function(_f) {
+		self.__set_f("__ftick", _f);
+	}
+	
 	static __ftick = __UNIT_timerVoid;
 	
 	self.__step = ceil(abs(_steps)) * sign(_steps);
 	
-	if (_finit != undefined) self.__init = _finit;
-	if (_ffree != undefined) self.__free = _ffree;
-	
-	if (_ftick != undefined) self.__ftick = _ftick;
+	self.__set_finit(_finit);
+	self.__set_ftick(_ftick);
+	self.__set_ffree(_ffree);
 	
 	static __clone = function(_constructor) {
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {

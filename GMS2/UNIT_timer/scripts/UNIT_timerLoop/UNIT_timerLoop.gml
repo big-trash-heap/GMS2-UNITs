@@ -12,9 +12,9 @@ function UNIT_TimerLoop(_ftick, _finit, _ffree) : UNIT_Timer() constructor {
 	
 	#region __private
 	
-	if (_finit != undefined) self.__init = _finit;
-	if (_ftick != undefined) self.__tick = _ftick;
-	if (_ffree != undefined) self.__free = _ffree;
+	self.__set_finit(_finit);
+	self.__set_ftick(_ftick);
+	self.__set_ffree(_ffree);
 	
 	#endregion
 	
@@ -39,17 +39,20 @@ function UNIT_TimerLoopExt(_ftick, _finit, _ffree) : UNIT_Timer() constructor {
 	
 	#region __private
 	
+	static __set_ftick = function(_f) {
+		self.__set_f("__ftick", _f);
+	}
+	
 	static __ftick = __UNIT_timerVoid;
 	
 	static __tick = function(_handler, _timer, _super) {
 		
-		if (self.__play) return self.__ftick(_handler, _timer, _super);
+		if (_timer.__play) return _timer.__ftick(_handler, _timer, _super);
 	}
 	
-	if (_finit != undefined) self.__init = _finit;
-	if (_ffree != undefined) self.__free = _ffree;
-	
-	if (_ftick != undefined) self.__ftick = _ftick;
+	self.__set_finit(_finit);
+	self.__set_ftick(_ftick);
+	self.__set_ffree(_ffree);
 	
 	self.__play = true;
 	
