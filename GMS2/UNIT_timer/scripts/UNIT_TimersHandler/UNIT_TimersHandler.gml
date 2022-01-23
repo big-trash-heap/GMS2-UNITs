@@ -36,27 +36,33 @@ function UNIT_TimersHandler()
 		var _timer = _cell[__UNIT_TIMER_CELL._TIMER];
 		_cell[@ __UNIT_TIMER_CELL._HANDLER] = undefined;
 		
+		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING) {
 		
 		self.__info_unbind(_timer);
 		
 		}
+		#endregion
 		
 		ds_map_delete(self._map, _timer);
 		
+		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK) {
 		
 		_timer.__mark = weak_ref_create(_timer);
 		_timer.__mark_ref = undefined;
 		
 		}
+		#endregion
 		
+		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
 		
 		_timer.__debug_time = 0;
 		self.__debug_time = 0;
 	
 		}
+		#endregion
 		
 		--self.__count;
 		_timer.__free(self, _timer, _inTick);
@@ -71,25 +77,31 @@ function UNIT_TimersHandler()
 			show_error("UNIT::timer -> таймер уже занят обработчиком", true);
 		}
 		
+		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH) {
 		
 		if (not _timer._bindCan())
 			show_error("UNIT::timer -> таймер отключил возможность привязыватся, используйте ._binCan(), чтобы проверить возможность привязать таймер к обработчику", true);
 		
 		}
+		#endregion
 		
+		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING) {
 		
 		self.__info_bind(_timer);
 		
 		}
+		#endregion
 		
+		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
 		
 		self.__debug_time = 0;
 		_timer.__debug_time = 0;
 		
 		}
+		#endregion
 		
 		var _cell = [self, _timer];
 		self._map[? _timer] = _cell;
@@ -104,21 +116,25 @@ function UNIT_TimersHandler()
 	
 	static tick = function(_super) {
 		
+		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
 		
 		self.__debug_time = 0;
 		
 		}
+		#endregion
 		
 		var _size = array_length(self.__timers);
 		if (_size > 0) {
 			
+			#region PREPROCESSOR
 			if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK) {
 			
 			if (self.__clear != -1) show_error("UNIT::timer -> нельзя вызывать tick во время вызова tick, clear, clearAll", true);
 			self.__clear = -2;
 			
 			}
+			#endregion
 			
 			var _i = 0, _j = 0, _value, _timer;
 			do {
@@ -126,19 +142,23 @@ function UNIT_TimersHandler()
 				_value = self.__timers[_i];
 				if (_value[__UNIT_TIMER_CELL._HANDLER] == self) {
 					
+					#region PREPROCESSOR
 					if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
 					
 					self.__temp = _value;
 					
 					}
+					#endregion
 					
 					_timer = _value[__UNIT_TIMER_CELL._TIMER];
 					
+					#region PREPROCESSOR
 					if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
 					
 					_timer.__debug_time = 0;
 					
 					}
+					#endregion
 					
 					if (not _timer.__tick(self, _timer, _super)) {
 						self.__timers[_j] = _value;
@@ -165,19 +185,23 @@ function UNIT_TimersHandler()
 				}
 			}
 			
+			#region PREPROCESSOR
 			if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
 			
 			delete self.__temp;
 			
 			}
+			#endregion
 			
 			array_resize(self.__timers, _j);
 			
+			#region PREPROCESSOR
 			if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK) {
 			
 			self.__clear = -1;
 			
 			}
+			#endregion
 		}
 	}
 	
@@ -208,11 +232,13 @@ function UNIT_TimersHandler()
 	// очень опасный метод
 	static clearAll = function() {
 		
+		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
 		
 		show_debug_message("UNIT::timer -> вы вызвали TimersHandler.clearAll это может быть опасно. Избегайте его вызова");
 		
 		}
+		#endregion
 		
 		if (array_length(self.__timers) > 0) {
 			
