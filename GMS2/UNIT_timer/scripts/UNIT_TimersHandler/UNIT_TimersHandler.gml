@@ -19,7 +19,9 @@
 #macro UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE								true
 #macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK				false
 
-function UNIT_TimersHandler() : __UNIT_TimersHandlerPreprocessor() constructor {
+function UNIT_TimersHandler()
+	: __UNIT_TimersHandlerPreprocessor()
+	constructor {
 	
 	#region __private
 	
