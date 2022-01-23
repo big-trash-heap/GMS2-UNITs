@@ -19,7 +19,7 @@
 #macro UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE								true
 #macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK				false
 
-function UNIT_TimersHandler() constructor {
+function UNIT_TimersHandler() : __UNIT_TimersHandlerPreprocessor() constructor {
 	
 	#region __private
 	
@@ -28,22 +28,6 @@ function UNIT_TimersHandler() constructor {
 	self.__timers = [];
 	self.__count  = 0;
 	self.__clear  = -1;
-	
-	if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
-	
-	self.__temp = undefined;
-	
-	}
-	
-	if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
-	
-	self.__debug_time = 0;
-	
-	}
-	
-	
-	static __info_bind   = __UNIT_timerVoid;
-	static __info_unbind = __UNIT_timerVoid;
 	
 	static __unbind = function(_cell, _inTick) {
 		
@@ -74,31 +58,6 @@ function UNIT_TimersHandler() constructor {
 		
 		--self.__count;
 		_timer.__free(self, _timer, _inTick);
-	}
-	
-	static __clone = function(_constructor) {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
-		
-		var _handler = new _constructor();
-		var _value;
-		
-		for (var _i = 0, _j = -1; _i < self.__count; ++_i) {
-			
-			do {
-				_value = self.__timers[++_j];
-			} until (_value[__UNIT_TIMER_CELL._HANDLER] == self);
-			
-			_handler.bind(_value[__UNIT_TIMER_CELL._TIMER]._clone());
-		}
-		
-		return _handler;
-		
-		}
-		else {
-		
-		show_error(____UNIT_TIMER_ERROR_CLONE, true);
-		
-		}
 	}
 	
 	#endregion
@@ -298,81 +257,6 @@ function UNIT_TimersHandler() constructor {
 		return ("UNIT::timer::" + instanceof(self) + "; number of timers: " + string(self.__count));
 	}
 	
-	
-	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
-		
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
-		
-		show_debug_message("UNIT::timer -> осторожно, класс " + instanceof(self) + " использует базовую версию метода _clone");
-		
-		}
-		
-		return self.__clone(asset_get_index(instanceof(self)));
-		
-		}
-		else {
-		
-		show_error(____UNIT_TIMER_ERROR_CLONE, true);
-		
-		}
-	}
-	
-	static _toArray = function() {
-		
-		var _array = array_create(self.__count);
-		var _value;
-		
-		for (var _i = 0, _j = -1; _i < self.__count; ++_i) {
-			
-			do {
-				_value = self.__timers[++_j];
-			} until (_value[__UNIT_TIMER_CELL._HANDLER] == self);
-			
-			_array[_i] = _value[__UNIT_TIMER_CELL._TIMER];
-		}
-		
-		return _array;
-	}
-	
-	static _tick_end = function(_super) {
-		if (self.__count == 0) return true;
-		self.tick(_super);
-	}
-	
-	#region UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK
-	
-	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком
-	static _tick_isBind = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
-		
-		return (self == UNIT_timerGetBind(self.__temp[__UNIT_TIMER_CELL._TIMER]));
-		
-		}
-		else {
-		
-		show_error(____UNIT_TIMER_ERROR_TIMERS_HANDLER, true);
-		
-		}
-	}
-	
-	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком,
-	// при условии, что он не менял очереди выполнения (был отвязан и привязан)
-	static _tick_isEntry = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
-		
-		return (self == self.__temp[__UNIT_TIMER_CELL._HANDLER]);
-		
-		}
-		else {
-		
-		show_error(____UNIT_TIMER_ERROR_TIMERS_HANDLER, true);
-		
-		}
-	}
-	
-	#endregion
-	
 }
 
 /// @function		UNIT_timersHandlerDebugErrorMemory([step=~10sec], [f_handlers=log], [f_timers=log]);
@@ -483,6 +367,7 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 	}
 }
 
+
 #region __private
 
 #macro ____UNIT_TIMER_ERROR_CLONE			"UNIT::timer -> UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE отключена"
@@ -494,6 +379,126 @@ enum __UNIT_TIMER_CELL { _HANDLER, _TIMER };
 function __UNIT_timersHandlerMap() {
 	static _map = ds_map_create();
 	return _map;
+}
+
+function __UNIT_TimersHandlerPreprocessor() constructor {
+	
+	if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
+	
+	self.__temp = undefined;
+	
+	}
+	
+	if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+	
+	self.__debug_time = 0;
+	
+	}
+	
+	static __info_bind   = __UNIT_timerVoid;
+	static __info_unbind = __UNIT_timerVoid;
+	
+	static __clone = function(_constructor) {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		
+		var _handler = new _constructor();
+		var _value;
+		
+		for (var _i = 0, _j = -1; _i < self.__count; ++_i) {
+			
+			do {
+				_value = self.__timers[++_j];
+			} until (_value[__UNIT_TIMER_CELL._HANDLER] == self);
+			
+			_handler.bind(_value[__UNIT_TIMER_CELL._TIMER]._clone());
+		}
+		
+		return _handler;
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		
+		}
+	}
+	
+	#region public
+	
+	static _clone = function() {
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		
+		if (UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
+		
+		show_debug_message("UNIT::timer -> осторожно, класс " + instanceof(self) + " использует базовую версию метода _clone");
+		
+		}
+		
+		return self.__clone(asset_get_index(instanceof(self)));
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		
+		}
+	}
+	
+	static _toArray = function() {
+		
+		var _array = array_create(self.__count);
+		var _value;
+		
+		for (var _i = 0, _j = -1; _i < self.__count; ++_i) {
+			
+			do {
+				_value = self.__timers[++_j];
+			} until (_value[__UNIT_TIMER_CELL._HANDLER] == self);
+			
+			_array[_i] = _value[__UNIT_TIMER_CELL._TIMER];
+		}
+		
+		return _array;
+	}
+	
+	static _tick_end = function(_super) {
+		if (self.__count == 0) return true;
+		self.tick(_super);
+	}
+	
+	/// ### UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK
+	
+	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком
+	static _tick_isBind = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
+		
+		return (self == UNIT_timerGetBind(self.__temp[__UNIT_TIMER_CELL._TIMER]));
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMERS_HANDLER, true);
+		
+		}
+	}
+	
+	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком,
+	// при условии, что он не менял очереди выполнения (был отвязан и привязан)
+	static _tick_isEntry = function() {
+		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
+		
+		return (self == self.__temp[__UNIT_TIMER_CELL._HANDLER]);
+		
+		}
+		else {
+		
+		show_error(____UNIT_TIMER_ERROR_TIMERS_HANDLER, true);
+		
+		}
+	}
+	
+	#endregion
+	
 }
 
 #endregion

@@ -39,9 +39,7 @@ function UNIT_TimerLoopExt(_ftick, _finit, _ffree) : UNIT_Timer() constructor {
 	
 	#region __private
 	
-	static __set_ftick = function(_f) {
-		self.__set_f("__ftick", _f);
-	}
+	static __set_ftick = __UNIT_timerOverride_set_ftick;
 	
 	static __ftick = __UNIT_timerVoid;
 	
@@ -77,9 +75,7 @@ function UNIT_TimerLoopExt(_ftick, _finit, _ffree) : UNIT_Timer() constructor {
 	}
 	
 	
-	static _get_ftick = function() {
-		return self.__ftick;
-	}
+	static _get_ftick = __UNIT_timerOverride_get_ftick;
 	
 	
 	static _clone = function() {

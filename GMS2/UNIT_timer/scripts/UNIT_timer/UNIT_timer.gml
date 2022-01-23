@@ -272,10 +272,3 @@ function UNIT_timerGetBind(_timer) {
 	if (_cell != undefined) return _cell[__UNIT_TIMER_CELL._HANDLER];
 }
 
-
-#region __private
-
-function __UNIT_timerVoid() {};
-
-#endregion
-
