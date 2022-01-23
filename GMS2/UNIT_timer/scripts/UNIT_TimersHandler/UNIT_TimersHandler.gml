@@ -166,6 +166,7 @@ function UNIT_TimersHandler()
 					}
 					else {
 						
+						// remove mode: handler-space 
 						_value = self._map[? _timer];
 						if (_value != undefined && _value[__UNIT_TIMER_CELL._HANDLER] == self)
 							self.__unbind(_value, true);
@@ -202,6 +203,7 @@ function UNIT_TimersHandler()
 			
 			}
 			#endregion
+			
 		}
 	}
 	

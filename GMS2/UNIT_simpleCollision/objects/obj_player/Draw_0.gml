@@ -10,7 +10,7 @@ case state.tds0:
 	draw_self();
 	draw_text(0, 0, "TDS 0");
 	
-	if (UNIT_simcollJumpLine(self.x, self.y, mouse_x, mouse_y, obj_wall))
+	if (UNIT_simcollJumpLine(self.x, self.y, mouse_x, mouse_y, [obj_wall]))
 		draw_set_color(c_red);
 	else
 		draw_set_color(c_lime);
