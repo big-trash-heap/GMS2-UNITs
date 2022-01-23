@@ -24,11 +24,14 @@ function UNIT_simcollStepW(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 		_objects = [_objects];
 		_count   = 1;
 	}
-	else _count = array_length(_objects);
-	
-	if (_count == 0) {
-		global.UNIT_simcollDist = _speed;
-		return false;
+	else {
+		
+		_count = array_length(_objects);
+		
+		if (_count == 0) {
+			global.UNIT_simcollDist = _speed;
+			return false;
+		}
 	}
 	
 	if (_speed < 0) {
@@ -118,11 +121,14 @@ function UNIT_simcollStepH(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 		_objects = [_objects];
 		_count   = 1;
 	}
-	else _count = array_length(_objects);
-	
-	if (_count == 0) {
-		global.UNIT_simcollDist = _speed;
-		return false;
+	else {
+		
+		_count = array_length(_objects);
+		
+		if (_count == 0) {
+			global.UNIT_simcollDist = _speed;
+			return false;
+		}
 	}
 	
 	if (_speed < 0) {
