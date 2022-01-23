@@ -7,9 +7,7 @@ function __UNIT_TimerTimelapse(_steps, _ftick=undefined, _finit=undefined, _ffre
 	
 	#region __private
 	
-	static __set_ftick = function(_f) {
-		self.__set_f("__ftick", _f);
-	}
+	static __set_ftick = __UNIT_timerOverride_set_ftick;
 	
 	static __ftick = __UNIT_timerVoid;
 	
@@ -66,9 +64,7 @@ function __UNIT_TimerTimelapse(_steps, _ftick=undefined, _finit=undefined, _ffre
 	}
 	
 	
-	static _get_ftick = function() {
-		return self.__ftick;
-	}
+	static _get_ftick = __UNIT_timerOverride_get_ftick;
 	
 }
 

@@ -16,10 +16,8 @@ function UNIT_TimerLoopAsync(_ftick, _finit, _ffree) : UNIT_TimerLoop(undefined,
 	
 	#region __private
 	
-	static __set_finit = __UNIT_timerLoopAsync_finit;
-	static __set_ftick = function(_f) {
-		self.__set_f("__ftick", _f);
-	}
+	static __set_finit = __UNIT_timerOverride_set_finit;
+	static __set_ftick = __UNIT_timerOverride_set_ftick;
 	
 	static __finit = __UNIT_timerVoid;
 	static __ftick = __UNIT_timerVoid;
@@ -38,10 +36,8 @@ function UNIT_TimerLoopAsync(_ftick, _finit, _ffree) : UNIT_TimerLoop(undefined,
 	
 	#endregion
 	
-	static _get_finit = __UNIT_timerLoopAsync_finit;
-	static _get_ftick = function() {
-		return self.__ftick;
-	}
+	static _get_finit = __UNIT_timerOverride_get_finit;
+	static _get_ftick = __UNIT_timerOverride_get_ftick;
 	
 	
 	static _clone = function() {
@@ -65,7 +61,7 @@ function UNIT_TimerLoopAsyncExt(_ftick, _finit, _ffree) : UNIT_TimerLoopExt(_fti
 	
 	#region __private
 	
-	static __set_finit = __UNIT_timerLoopAsync_finit;
+	static __set_finit = __UNIT_timerOverride_set_finit;
 	
 	static __finit = __UNIT_timerVoid;
 	
@@ -96,7 +92,7 @@ function UNIT_TimerLoopAsyncExt(_ftick, _finit, _ffree) : UNIT_TimerLoopExt(_fti
 	}
 	
 	
-	static _get_finit = __UNIT_timerLoopAsync_finit;
+	static _get_finit = __UNIT_timerOverride_get_finit;
 	
 	static _clone = function() {
 		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
@@ -121,14 +117,6 @@ function UNIT_TimerLoopAsyncExt(_ftick, _finit, _ffree) : UNIT_TimerLoopExt(_fti
 function __UNIT_timerLoopAsyncInit(_handler, _timer) {
 	_timer.__ctime = current_time;
 	_timer.__finit(_handler, _timer);
-}
-
-function __UNIT_timerLoopAsync_finit() {
-	return self.__finit;
-}
-
-function __UNIT_timerLoopAsync_set_finit(_f) {
-	self.__set_f("__finit", _f);
 }
 
 #endregion
