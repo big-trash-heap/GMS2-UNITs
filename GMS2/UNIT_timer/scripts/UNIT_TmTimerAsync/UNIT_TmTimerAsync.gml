@@ -15,62 +15,62 @@
 */
 
 
-/// @function		UNIT_TimerAsync(milisec, [ftick], [finit], [ffree]);
+/// @function		UNIT_TmTimerAsync(milisec, [ftick], [finit], [ffree]);
 /// @description	Асинхронный таймер
-function UNIT_TimerAsync(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTimelapse(_milisec, _ftick, undefined, _ffree) constructor {
+function UNIT_TmTimerAsync(_milisec, _ftick, _finit, _ffree) : __UNIT_TmTimerTimelapse(_milisec, _ftick, undefined, _ffree) constructor {
 	
 	#region __private
 	
-	static __set_finit = __UNIT_timerAsync_set_finit;
+	static __set_finit = __UNIT_tmAsync_set_finit;
 	
-	static __finit = __UNIT_timerVoid;
+	static __finit = __UNIT_tmVoid;
 	
-	static __init = __UNIT_timerAsyncInit;
-	static __tick = __UNIT_timerAsyncTick;
+	static __init = __UNIT_tmAsyncInit;
+	static __tick = __UNIT_tmAsyncTick;
 	
 	self.__set_finit(_finit);
 	
 	#endregion
 	
-	static resume = __UNIT_timerAsyncResume;
+	static resume = __UNIT_tmAsyncResume;
 	
 	
-	static _get_finit = __UNIT_timerAsync_finit;
+	static _get_finit = __UNIT_tmAsync_finit;
 	
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
-		return self.__clone(UNIT_TimerAsync);
+		return self.__clone(UNIT_TmTimerAsync);
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		show_error(____UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
 	
 }
 
-/// @function		UNIT_TimerAsyncExt(milisec, [ftick], [finit], [ffree]);
+/// @function		UNIT_TmTimerAsyncExt(milisec, [ftick], [finit], [ffree]);
 /// @description	Асинхронный таймер
-function UNIT_TimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTimelapseExt(_milisec, _ftick, undefined, _ffree) constructor {
+function UNIT_TmTimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TmTimerTimelapseExt(_milisec, _ftick, undefined, _ffree) constructor {
 	
 	#region __private
 	
-	static __set_finit = __UNIT_timerAsync_set_finit;
+	static __set_finit = __UNIT_tmAsync_set_finit;
 	
-	static __finit = __UNIT_timerVoid;
+	static __finit = __UNIT_tmVoid;
 	
-	static __init = __UNIT_timerAsyncInit;
-	static __tick = __UNIT_timerAsyncTick;
+	static __init = __UNIT_tmAsyncInit;
+	static __tick = __UNIT_tmAsyncTick;
 	
 	self.__set_finit(_finit);
 	
 	#endregion
 	
-	static resume = __UNIT_timerAsyncResume;
+	static resume = __UNIT_tmAsyncResume;
 	
 	static resetTime = function(_play=true) {
 		var _sign = sign(self.__step);
@@ -81,18 +81,18 @@ function UNIT_TimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTime
 	}
 	
 	
-	static _get_finit = __UNIT_timerAsync_finit;
+	static _get_finit = __UNIT_tmAsync_finit;
 	
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
-		return self.__clone(UNIT_TimerAsyncExt);
+		return self.__clone(UNIT_TmTimerAsyncExt);
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		show_error(____UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -102,12 +102,12 @@ function UNIT_TimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TimerTime
 
 #region __private
 
-function __UNIT_timerAsyncInit(_handler, _timer) {
+function __UNIT_tmAsyncInit(_handler, _timer) {
 	_timer.__ctime = current_time;
 	_timer.__finit(_handler, _timer);
 }
 
-function __UNIT_timerAsyncTick(_handler, _timer, _super) {
+function __UNIT_tmAsyncTick(_handler, _timer, _super) {
 	if (_timer.__step > 0) {
 		
 		var _ctime = current_time;
@@ -127,7 +127,7 @@ function __UNIT_timerAsyncTick(_handler, _timer, _super) {
 	}
 }
 
-function __UNIT_timerAsyncResume() {
+function __UNIT_tmAsyncResume() {
 	if (self.__step < 0) {
 		self.__step = -self.__step;
 		self.__ctime = current_time;
@@ -135,11 +135,11 @@ function __UNIT_timerAsyncResume() {
 	return self;
 }
 
-function __UNIT_timerAsync_finit() {
+function __UNIT_tmAsync_finit() {
 	return self.__finit;
 }
 
-function __UNIT_timerAsync_set_finit(_f) {
+function __UNIT_tmAsync_set_finit(_f) {
 	self.__set_f("__finit", _f);
 }
 

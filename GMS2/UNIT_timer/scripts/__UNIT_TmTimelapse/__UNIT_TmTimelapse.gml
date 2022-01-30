@@ -3,13 +3,13 @@
 	Идея в том, что тут необходимо переопределить только метод tick
 */
 
-function __UNIT_TimerTimelapse(_steps, _ftick=undefined, _finit=undefined, _ffree=undefined) : UNIT_Timer() constructor {
+function __UNIT_TmTimerTimelapse(_steps, _ftick=undefined, _finit=undefined, _ffree=undefined) : UNIT_TmTimer() constructor {
 	
 	#region __private
 	
-	static __set_ftick = __UNIT_timerOverride_set_ftick;
+	static __set_ftick = __UNIT_tmOverride_set_ftick;
 	
-	static __ftick = __UNIT_timerVoid;
+	static __ftick = __UNIT_tmVoid;
 	
 	self.__step = ceil(abs(_steps)) * sign(_steps);
 	
@@ -18,14 +18,14 @@ function __UNIT_TimerTimelapse(_steps, _ftick=undefined, _finit=undefined, _ffre
 	self.__set_ffree(_ffree);
 	
 	static __clone = function(_constructor) {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
 		return new _constructor(self.__step, self._get_ftick(), self._get_finit(), self._get_ffree()).__copyn_(self);
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		show_error(____UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -64,11 +64,11 @@ function __UNIT_TimerTimelapse(_steps, _ftick=undefined, _finit=undefined, _ffre
 	}
 	
 	
-	static _get_ftick = __UNIT_timerOverride_get_ftick;
+	static _get_ftick = __UNIT_tmOverride_get_ftick;
 	
 }
 
-function __UNIT_TimerTimelapseExt(_steps, _ftick, _finit, _ffree) : __UNIT_TimerTimelapse(_steps, _ftick, _finit, _ffree) constructor {
+function __UNIT_TmTimerTimelapseExt(_steps, _ftick, _finit, _ffree) : __UNIT_TmTimerTimelapse(_steps, _ftick, _finit, _ffree) constructor {
 	
 	#region __private
 	

@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "__private",
-    "path": "folders/UNIT::timer/main/__private.yy",
+    "name": "main",
+    "path": "folders/UNIT::timer/main.yy",
   },
   "resourceVersion": "1.0",
-  "name": "__UNIT_timerVoid",
+  "name": "UNIT_TmTimer",
   "tags": [],
   "resourceType": "GMScript",
 }

@@ -1,21 +1,21 @@
 
 // extend
-#macro UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK	false
+#macro UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK	false
 
 // Абстрактный класс
-function UNIT_Timer() 
-	: __UNIT_TimerPreprocessor()
+function UNIT_TmTimer() 
+	: __UNIT_TmTimerPreprocessor()
 	constructor {
 	
 	#region __private
 	
-	static __init = __UNIT_timerVoid /* handler, timer         */;
-	static __tick = __UNIT_timerVoid /* handler, timer, super  */;
-	static __free = __UNIT_timerVoid /* handler, timer, inTick */;
+	static __init = __UNIT_tmVoid /* handler, timer         */;
+	static __tick = __UNIT_tmVoid /* handler, timer, super  */;
+	static __free = __UNIT_tmVoid /* handler, timer, inTick */;
 	
 	
 	static __set_f = function(_name, _f) {
-		if (is_undefined(_f) || _f == __UNIT_timerVoid)
+		if (is_undefined(_f) || _f == __UNIT_tmVoid)
 			variable_struct_remove(self, _name);
 		else
 			self[$ _name] = _f;
@@ -37,17 +37,17 @@ function UNIT_Timer()
 	
 	static unbind = function() {
 		
-		return UNIT_timerUnbind(self);
+		return UNIT_tmUnbind(self);
 	}
 	
 	static isBind = function() {
 		
-		return UNIT_timerIsBind(self);
+		return UNIT_tmIsBind(self);
 	}
 	
 	static getBind = function() {
 		
-		return UNIT_timerGetBind(self);
+		return UNIT_tmGetBind(self);
 	}
 	
 	static toString = function() {
@@ -100,44 +100,44 @@ function UNIT_Timer()
 /// @param			timer
 /// @description	Отвяжет таймер от обработчика 
 //					и вернёт true, если таймер был отвязан
-function UNIT_timerUnbind(_timer) {
-	static _map = __UNIT_timersHandlerMap();
+function UNIT_tmUnbind(_timer) {
+	static _map = __UNIT_tmHandlerMap();
 	var _cell = _map[? _timer];
 	if (_cell == undefined) return false;
 	
-	_cell[__UNIT_TIMER_CELL._HANDLER].__unbind(_cell, false);
+	_cell[__UNIT_TM_CELL._HANDLER].__unbind(_cell, false);
 	return true;
 }
 
 /// @param			timer
 /// @description	Вернёт привязан ли таймер к чему-то
-function UNIT_timerIsBind(_timer) {
-	static _map = __UNIT_timersHandlerMap();
+function UNIT_tmIsBind(_timer) {
+	static _map = __UNIT_tmHandlerMap();
 	return ds_map_exists(_map, _timer);
 }
 
 /// @param			timer
 /// @description	Вернёт обработчик, к которому привязан таймер
 //					Если не привязан вернёт undefined
-function UNIT_timerGetBind(_timer) {
-	static _map = __UNIT_timersHandlerMap();
+function UNIT_tmGetBind(_timer) {
+	static _map = __UNIT_tmHandlerMap();
 	var _cell = _map[? _timer];
-	if (_cell != undefined) return _cell[__UNIT_TIMER_CELL._HANDLER];
+	if (_cell != undefined) return _cell[__UNIT_TM_CELL._HANDLER];
 }
 
 
 #region __private
 
-function __UNIT_TimerPreprocessor() constructor {
+function __UNIT_TmTimerPreprocessor() constructor {
 	
-	if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK) {
+	if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
 	
 	self.__mark = weak_ref_create(self);
 	self.__mark_ref = undefined;
 	
 	}
 	
-	if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+	if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
 	
 	self.__debug_time = 0;
 	
@@ -145,7 +145,7 @@ function __UNIT_TimerPreprocessor() constructor {
 	
 	// этот метод нельзя переопределять
 	static __copyn_ = function(_struct) {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
 		var _keys = variable_struct_get_names(_struct);
 		var _size = array_length(_keys), _key;
@@ -156,7 +156,7 @@ function __UNIT_TimerPreprocessor() constructor {
 				self[$ _key] = _struct[$ _key];
 		}
 		
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
 		
 		if (instanceof(self) == instanceof(_struct) && (
 			self._get_ftick() != _struct._get_ftick() ||
@@ -185,7 +185,7 @@ function __UNIT_TimerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		show_error(____UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -193,23 +193,23 @@ function __UNIT_TimerPreprocessor() constructor {
 	#region public
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
 		show_error("UNIT::timer -> для класса " + instanceof(self) + " не определён метод _clone", true);
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		show_error(____UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
 	
 	
 	static _mark = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK) {
+		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
 		
-		var _cell = __UNIT_timersHandlerMap()[? self];
+		var _cell = __UNIT_tmHandlerMap()[? self];
 		if (_cell != undefined) {
 			
 			if (self.__mark_ref == undefined) {
@@ -223,27 +223,27 @@ function __UNIT_TimerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error("UNIT::timer -> UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK отключена", true);
+		show_error("UNIT::timer -> UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK отключена", true);
 		
 		}
 	}
 	
 	
 	static _bindCan = function() {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH) {
 		
 		return !variable_struct_exists(self, "__");
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_BIND_SWITCH, true);
+		show_error(____UNIT_TM_ERROR_BIND_SWITCH, true);
 		
 		}
 	}
 	
 	static _bindEnable = function() {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH) {
 		
 		variable_struct_remove(self, "__");
 		return self;
@@ -251,13 +251,13 @@ function __UNIT_TimerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_BIND_SWITCH, true);
+		show_error(____UNIT_TM_ERROR_BIND_SWITCH, true);
 		
 		}
 	}
 	
 	static _bindDisable = function() {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH) {
 		
 		self.__ = undefined;
 		return self;
@@ -265,14 +265,14 @@ function __UNIT_TimerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_BIND_SWITCH, true);
+		show_error(____UNIT_TM_ERROR_BIND_SWITCH, true);
 		
 		}
 	}
 	
 	
 	static _unbind = function() {
-		UNIT_timerUnbind(self);
+		UNIT_tmUnbind(self);
 		return self;
 	}
 	

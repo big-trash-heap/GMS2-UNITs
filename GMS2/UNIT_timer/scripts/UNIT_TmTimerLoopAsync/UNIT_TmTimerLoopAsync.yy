@@ -6,7 +6,7 @@
     "path": "folders/UNIT::timer/_extend.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_timerGlobal",
+  "name": "UNIT_TmTimerLoopAsync",
   "tags": [],
   "resourceType": "GMScript",
 }

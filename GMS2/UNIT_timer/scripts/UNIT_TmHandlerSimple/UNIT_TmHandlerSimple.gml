@@ -3,14 +3,14 @@
 	Предоставляет дополнительный интерфейс для работы с обработчиками
 */
 
-function UNIT_TimersHandlerSimple() : UNIT_TimersHandler() constructor {
+function UNIT_TmHandlerSimple() : UNIT_TmHandler() constructor {
 	
 	#region __private
 	
-	static __timer_Loop      = UNIT_TimerLoop;
-	static __timer_LoopAsync = UNIT_TimerLoopAsync;
-	static __timer_Sync      = UNIT_TimerSync;
-	static __timer_Async     = UNIT_TimerAsync;
+	static __timer_Loop      = UNIT_TmTimerLoop;
+	static __timer_LoopAsync = UNIT_TmTimerLoopAsync;
+	static __timer_Sync      = UNIT_TmTimerSync;
+	static __timer_Async     = UNIT_TmTimerAsync;
 	
 	#endregion
 	
@@ -40,14 +40,14 @@ function UNIT_TimersHandlerSimple() : UNIT_TimersHandler() constructor {
 	
 }
 
-function UNIT_TimersHandlerSimpleExt() : UNIT_TimersHandlerSimple() constructor {
+function UNIT_TmHandlerSimpleExt() : UNIT_TmHandlerSimple() constructor {
 	
-	#region __private
+	#region __privates
 	
-	static __timer_Loop      = UNIT_TimerLoopExt;
-	static __timer_LoopAsync = UNIT_TimerLoopAsyncExt;
-	static __timer_Sync      = UNIT_TimerSyncExt;
-	static __timer_Async     = UNIT_TimerAsyncExt;
+	static __timer_Loop      = UNIT_TmTimerLoopExt;
+	static __timer_LoopAsync = UNIT_TmTimerLoopAsyncExt;
+	static __timer_Sync      = UNIT_TmTimerSyncExt;
+	static __timer_Async     = UNIT_TmTimerAsyncExt;
 	
 	#endregion
 	

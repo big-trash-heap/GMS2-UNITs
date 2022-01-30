@@ -1,31 +1,31 @@
 
 /*
 	Предполагается, что вы не будете использовать:
-	1. UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE
-	2. UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK
-	3. UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK
+	1. UNIT_PREPROCESSOR_TM_ENABLE_CLONE
+	2. UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK
+	3. UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK
 */
 
 // debug
-#macro UNIT_PREPROCESSOR_TIMER_ENABLE_LOG								true
-#macro UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG								true
-#macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK	true
+#macro UNIT_PREPROCESSOR_TM_ENABLE_LOG                       true
+#macro UNIT_PREPROCESSOR_TM_ENABLE_DEBUG                     true
+#macro UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_CHECK_ERROR_TICK	 true
 
 // extend 0
-#macro UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH						true
-#macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING	true
+#macro UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH               true
+#macro UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_INFORMING_BINDING true
 
 // extend 1
-#macro UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE								true
-#macro UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK				false
+#macro UNIT_PREPROCESSOR_TM_ENABLE_CLONE                     true
+#macro UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK              false
 
-function UNIT_TimersHandler()
-	: __UNIT_TimersHandlerPreprocessor()
+function UNIT_TmHandler()
+	: __UNIT_TmHandlerPreprocessor()
 	constructor {
 	
 	#region __private
 	
-	static _map = __UNIT_timersHandlerMap();
+	static _map = __UNIT_tmHandlerMap();
 	
 	self.__timers = [];
 	self.__count  = 0;
@@ -33,11 +33,11 @@ function UNIT_TimersHandler()
 	
 	static __unbind = function(_cell, _inTick) {
 		
-		var _timer = _cell[__UNIT_TIMER_CELL._TIMER];
-		_cell[@ __UNIT_TIMER_CELL._HANDLER] = undefined;
+		var _timer = _cell[__UNIT_TM_CELL._TIMER];
+		_cell[@ __UNIT_TM_CELL._HANDLER] = undefined;
 		
 		#region PREPROCESSOR
-		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING) {
+		if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_INFORMING_BINDING) {
 		
 		self.__info_unbind(_timer);
 		
@@ -47,7 +47,7 @@ function UNIT_TimersHandler()
 		ds_map_delete(self._map, _timer);
 		
 		#region PREPROCESSOR
-		if (UNIT_PREPROCESSOR_TIMER_TIMER_ENABLE_MARK) {
+		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
 		
 		_timer.__mark = weak_ref_create(_timer);
 		_timer.__mark_ref = undefined;
@@ -56,7 +56,7 @@ function UNIT_TimersHandler()
 		#endregion
 		
 		#region PREPROCESSOR
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
 		
 		_timer.__debug_time = 0;
 		self.__debug_time = 0;
@@ -72,22 +72,22 @@ function UNIT_TimersHandler()
 	
 	static bind = function(_timer) {
 		
-		if (UNIT_timerGetBind(_timer) == self) {
+		if (UNIT_tmGetBind(_timer) == self) {
 			
 			show_error("UNIT::timer -> таймер уже занят обработчиком", true);
 		}
 		
 		#region PREPROCESSOR
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH) {
 		
-		if (not _timer._bindCan())
+		if (_timer._bindCan() == false)
 			show_error("UNIT::timer -> таймер отключил возможность привязыватся, используйте ._binCan(), чтобы проверить возможность привязать таймер к обработчику", true);
 		
 		}
 		#endregion
 		
 		#region PREPROCESSOR
-		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_INFORMING_BINDING) {
+		if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_INFORMING_BINDING) {
 		
 		self.__info_bind(_timer);
 		
@@ -95,7 +95,7 @@ function UNIT_TimersHandler()
 		#endregion
 		
 		#region PREPROCESSOR
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
 		
 		self.__debug_time = 0;
 		_timer.__debug_time = 0;
@@ -117,7 +117,7 @@ function UNIT_TimersHandler()
 	static tick = function(_super) {
 		
 		#region PREPROCESSOR
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
 		
 		self.__debug_time = 0;
 		
@@ -128,7 +128,7 @@ function UNIT_TimersHandler()
 		if (_size > 0) {
 			
 			#region PREPROCESSOR
-			if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK) {
+			if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_CHECK_ERROR_TICK) {
 			
 			if (self.__clear != -1) show_error("UNIT::timer -> нельзя вызывать tick во время вызова tick, clear, clearAll", true);
 			self.__clear = -2;
@@ -140,20 +140,20 @@ function UNIT_TimersHandler()
 			do {
 				
 				_value = self.__timers[_i];
-				if (_value[__UNIT_TIMER_CELL._HANDLER] == self) {
+				if (_value[__UNIT_TM_CELL._HANDLER] == self) {
 					
 					#region PREPROCESSOR
-					if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
+					if (UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK) {
 					
 					self.__temp = _value;
 					
 					}
 					#endregion
 					
-					_timer = _value[__UNIT_TIMER_CELL._TIMER];
+					_timer = _value[__UNIT_TM_CELL._TIMER];
 					
 					#region PREPROCESSOR
-					if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+					if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
 					
 					_timer.__debug_time = 0;
 					
@@ -168,7 +168,7 @@ function UNIT_TimersHandler()
 						
 						// remove mode: handler-space 
 						_value = self._map[? _timer];
-						if (_value != undefined && _value[__UNIT_TIMER_CELL._HANDLER] == self)
+						if (_value != undefined && _value[__UNIT_TM_CELL._HANDLER] == self)
 							self.__unbind(_value, true);
 					}
 				}
@@ -180,14 +180,14 @@ function UNIT_TimersHandler()
 				_value = self.__timers[_i];
 				++_i;
 				
-				if (_value[__UNIT_TIMER_CELL._HANDLER] == self) {
+				if (_value[__UNIT_TM_CELL._HANDLER] == self) {
 					self.__timers[_j] = _value;
 					++_j;
 				}
 			}
 			
 			#region PREPROCESSOR
-			if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
+			if (UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK) {
 			
 			delete self.__temp;
 			
@@ -197,7 +197,7 @@ function UNIT_TimersHandler()
 			array_resize(self.__timers, _j);
 			
 			#region PREPROCESSOR
-			if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_ENABLE_CHECK_ERROR_TICK) {
+			if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_CHECK_ERROR_TICK) {
 			
 			self.__clear = -1;
 			
@@ -221,8 +221,8 @@ function UNIT_TimersHandler()
 				_value = self.__timers[self.__clear];
 				++self.__clear;
 				
-				if (_value[__UNIT_TIMER_CELL._HANDLER] == self && 
-					UNIT_timerUnbind(_value[__UNIT_TIMER_CELL._TIMER]) &&
+				if (_value[__UNIT_TM_CELL._HANDLER] == self && 
+					UNIT_tmUnbind(_value[__UNIT_TM_CELL._TIMER]) &&
 					self.__clear == -1)
 					return;
 			}
@@ -235,9 +235,9 @@ function UNIT_TimersHandler()
 	static clearAll = function() {
 		
 		#region PREPROCESSOR
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
 		
-		show_debug_message("UNIT::timer -> вы вызвали TimersHandler.clearAll это может быть опасно. Избегайте его вызова");
+		show_debug_message("UNIT::timer -> вы вызвали TmHandler.clearAll это может быть опасно. Избегайте его вызова");
 		
 		}
 		#endregion
@@ -252,8 +252,8 @@ function UNIT_TimersHandler()
 				_value = self.__timers[self.__clear];
 				++self.__clear;
 				
-				if (_value[__UNIT_TIMER_CELL._HANDLER] == self && 
-					UNIT_timerUnbind(_value[__UNIT_TIMER_CELL._TIMER]) &&
+				if (_value[__UNIT_TM_CELL._HANDLER] == self && 
+					UNIT_tmUnbind(_value[__UNIT_TM_CELL._TIMER]) &&
 					self.__clear == -1)
 					return;
 			}
@@ -272,7 +272,7 @@ function UNIT_TimersHandler()
 	
 	static isBind = function(_timer) {
 		
-		return (self == UNIT_timerGetBind(_timer));
+		return (self == UNIT_tmGetBind(_timer));
 	}
 	
 	static isTimer = function() {
@@ -289,11 +289,11 @@ function UNIT_TimersHandler()
 	
 }
 
-/// @function		UNIT_timersHandlerDebugErrorMemory([step=~10sec], [f_handlers=log], [f_timers=log]);
-function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f_timers) {
+/// @function		UNIT_tmsHandlerDebugErrorMemory([step=~10sec], [f_handlers=log], [f_timers=log]);
+function UNIT_tmsHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f_timers) {
 	static _memoryTime = 0;
 	
-	if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+	if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
 	
 	var _interval = max(room_speed * 5 - 1, _step - 1);
 	if (++_memoryTime > _interval) {
@@ -302,7 +302,7 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 	else exit;
 	
 	_f_handlers ??= function(_handler) {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
 		
 		show_debug_message(@"UNIT::timer -> обнаружен обработчик, который не используется "
 		+ string(_handler.__debug_time) + " frames; ~" + string(_handler.__debug_time / room_speed) + " seconds;"
@@ -323,7 +323,7 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 	}
 	
 	_f_timers ??= function(_timer) {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
 		
 		show_debug_message(@"UNIT::timer -> обнаружен таймер, который не используется "
 		+ string(_timer.__debug_time) + " frames; ~" + string(_timer.__debug_time / room_speed) + " seconds;"
@@ -335,21 +335,21 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 	}
 	
 	var _handlers = ds_map_create();
-	var _map = __UNIT_timersHandlerMap();
+	var _map = __UNIT_tmHandlerMap();
 	
 	var _key = ds_map_find_first(_map);
 	var _val, _timer, _handler, _time;
 	var _list;
 	
-	show_debug_message("\nUNIT::timer::UNIT_timersHandlerDebugErrorMemory(); // section: timers\n\n");
+	show_debug_message("\nUNIT::timer::UNIT_tmsHandlerDebugErrorMemory(); // section: timers\n\n");
 	
 	repeat ds_map_size(_map) {
 		
 		_val = _map[? _key];
 		_key = ds_map_find_next(_map, _key);
 		
-		_handler = _val[__UNIT_TIMER_CELL._HANDLER];
-		_timer   = _val[__UNIT_TIMER_CELL._TIMER];
+		_handler = _val[__UNIT_TM_CELL._HANDLER];
+		_timer   = _val[__UNIT_TM_CELL._TIMER];
 		
 		_list = _handlers[? _handler];
 		if (_list == undefined) {
@@ -360,7 +360,7 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 		_timer.__debug_time += _interval;
 		if (_timer.__debug_time > _step) {
 			
-			if (_f_timers(_timer)) ds_map_delete(_map, _timer);
+			if (_f_timers(_timer) == true) ds_map_delete(_map, _timer);
 		}
 		
 		if (ds_map_exists(_map, _timer)) {
@@ -369,7 +369,7 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 		}
 	}
 	
-	show_debug_message("UNIT::timer::UNIT_timersHandlerDebugErrorMemory(); // section: handlers\n\n");
+	show_debug_message("UNIT::timer::UNIT_tmsHandlerDebugErrorMemory(); // section: handlers\n\n");
 	
 	_key = ds_map_find_first(_handlers);
 	repeat ds_map_size(_handlers) {
@@ -384,7 +384,7 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 		_handler.__debug_time += _interval;
 		if (_handler.__debug_time > _step) {
 			
-			if (_f_handlers(_handler)) {
+			if (_f_handlers(_handler) == true) {
 				
 				var _size = ds_list_size(_timer);
 				while (_size > 0) ds_map_delete(_map, _timer[| --_size]);
@@ -400,36 +400,36 @@ function UNIT_timersHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f
 
 #region __private
 
-#macro ____UNIT_TIMER_ERROR_CLONE			"UNIT::timer -> UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE отключена"
-#macro ____UNIT_TIMER_ERROR_BIND_SWITCH		"UNIT::timer -> UNIT_PREPROCESSOR_TIMER_ENABLE_BIND_SWITCH отключена"
-#macro ____UNIT_TIMER_ERROR_TIMERS_HANDLER	"UNIT::timer -> UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK отключена"
+#macro ____UNIT_TM_ERROR_CLONE			"UNIT::timer -> UNIT_PREPROCESSOR_TM_ENABLE_CLONE отключена"
+#macro ____UNIT_TM_ERROR_BIND_SWITCH		"UNIT::timer -> UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH отключена"
+#macro ____UNIT_TM_ERROR_HANDLER	"UNIT::timer -> UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK отключена"
 
-enum __UNIT_TIMER_CELL { _HANDLER, _TIMER };
+enum __UNIT_TM_CELL { _HANDLER, _TIMER };
 
-function __UNIT_timersHandlerMap() {
+function __UNIT_tmHandlerMap() {
 	static _map = ds_map_create();
 	return _map;
 }
 
-function __UNIT_TimersHandlerPreprocessor() constructor {
+function __UNIT_TmHandlerPreprocessor() constructor {
 	
-	if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
+	if (UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK) {
 	
 	self.__temp = undefined;
 	
 	}
 	
-	if (UNIT_PREPROCESSOR_TIMER_ENABLE_DEBUG) {
+	if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
 	
 	self.__debug_time = 0;
 	
 	}
 	
-	static __info_bind   = __UNIT_timerVoid;
-	static __info_unbind = __UNIT_timerVoid;
+	static __info_bind   = __UNIT_tmVoid;
+	static __info_unbind = __UNIT_tmVoid;
 	
 	static __clone = function(_constructor) {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
 		var _handler = new _constructor();
 		var _value;
@@ -438,9 +438,9 @@ function __UNIT_TimersHandlerPreprocessor() constructor {
 			
 			do {
 				_value = self.__timers[++_j];
-			} until (_value[__UNIT_TIMER_CELL._HANDLER] == self);
+			} until (_value[__UNIT_TM_CELL._HANDLER] == self);
 			
-			_handler.bind(_value[__UNIT_TIMER_CELL._TIMER]._clone());
+			_handler.bind(_value[__UNIT_TM_CELL._TIMER]._clone());
 		}
 		
 		return _handler;
@@ -448,7 +448,7 @@ function __UNIT_TimersHandlerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		show_error(____UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -456,9 +456,9 @@ function __UNIT_TimersHandlerPreprocessor() constructor {
 	#region public
 	
 	static _clone = function() {
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_CLONE) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
-		if (UNIT_PREPROCESSOR_TIMER_ENABLE_LOG) {
+		if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
 		
 		show_debug_message("UNIT::timer -> осторожно, класс " + instanceof(self) + " использует базовую версию метода _clone");
 		
@@ -469,7 +469,7 @@ function __UNIT_TimersHandlerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_CLONE, true);
+		show_error(____UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -483,9 +483,9 @@ function __UNIT_TimersHandlerPreprocessor() constructor {
 			
 			do {
 				_value = self.__timers[++_j];
-			} until (_value[__UNIT_TIMER_CELL._HANDLER] == self);
+			} until (_value[__UNIT_TM_CELL._HANDLER] == self);
 			
-			_array[_i] = _value[__UNIT_TIMER_CELL._TIMER];
+			_array[_i] = _value[__UNIT_TM_CELL._TIMER];
 		}
 		
 		return _array;
@@ -496,18 +496,18 @@ function __UNIT_TimersHandlerPreprocessor() constructor {
 		self.tick(_super);
 	}
 	
-	/// ### UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK
+	/// ### UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK
 	
 	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком
 	static _tick_isBind = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
+		if (UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK) {
 		
-		return (self == UNIT_timerGetBind(self.__temp[__UNIT_TIMER_CELL._TIMER]));
+		return (self == UNIT_tmGetBind(self.__temp[__UNIT_TM_CELL._TIMER]));
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_TIMERS_HANDLER, true);
+		show_error(____UNIT_TM_ERROR_HANDLER, true);
 		
 		}
 	}
@@ -515,14 +515,14 @@ function __UNIT_TimersHandlerPreprocessor() constructor {
 	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком,
 	// при условии, что он не менял очереди выполнения (был отвязан и привязан)
 	static _tick_isEntry = function() {
-		if (UNIT_PREPROCESSOR_TIMER_TIMERS_HANDLER_EXTEND_TICK) {
+		if (UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK) {
 		
-		return (self == self.__temp[__UNIT_TIMER_CELL._HANDLER]);
+		return (self == self.__temp[__UNIT_TM_CELL._HANDLER]);
 		
 		}
 		else {
 		
-		show_error(____UNIT_TIMER_ERROR_TIMERS_HANDLER, true);
+		show_error(____UNIT_TM_ERROR_HANDLER, true);
 		
 		}
 	}
