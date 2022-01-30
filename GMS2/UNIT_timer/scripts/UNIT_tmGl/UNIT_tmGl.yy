@@ -6,7 +6,7 @@
     "path": "folders/UNIT::timer/_extend.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_tmGlobal",
+  "name": "UNIT_tmGl",
   "tags": [],
   "resourceType": "GMScript",
 }

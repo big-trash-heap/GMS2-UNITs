@@ -289,8 +289,8 @@ function UNIT_TmHandler()
 	
 }
 
-/// @function		UNIT_tmsHandlerDebugErrorMemory([step=~10sec], [f_handlers=log], [f_timers=log]);
-function UNIT_tmsHandlerDebugErrorMemory(_step=room_speed*10, _f_handlers, _f_timers) {
+/// @function		UNIT_tmDebugErrorMemory([step=~10sec], [f_handlers=log], [f_timers=log]);
+function UNIT_tmDebugErrorMemory(_step=room_speed*10, _f_handlers, _f_timers) {
 	static _memoryTime = 0;
 	
 	if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {

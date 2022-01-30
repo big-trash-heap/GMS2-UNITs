@@ -3,58 +3,58 @@
 	Данное решение не относится к базовым и представленно как дополнение
 
 	Глобальный интерфейс для удобной простой и удобной работы
-	Необходимо вызывать UNIT_tmGlobalTick каждый шаг для работы
+	Необходимо вызывать UNIT_tmGlTick каждый шаг для работы
 	
 	Данный файл можно удалить, он не влияет на работу остальных скриптов
 */
 
 /// @description	Получение глобального обработчика
-function UNIT_tmGlobal() {
+function UNIT_tmGl() {
 	static _handler = new __UNIT_TmHandlerGlobal();
 	return _handler;
 }
 
 /// @param			[super]
 /// @description	Итератор глобального обработчика
-function UNIT_tmGlobalTick(_super) {
-	static _handler = UNIT_tmGlobal();
+function UNIT_tmGlTick(_super) {
+	static _handler = UNIT_tmGl();
 	_handler.tick(_super);
 }
 
 
 /// @function		UNIT_tmGl_timer(timer);
 function UNIT_tmGl_timer(_timer) {
-	return UNIT_tmGlobal().bind(_timer);
+	return UNIT_tmGl().bind(_timer);
 }
 
 /// @function		UNIT_tmGl_loop([ftick], [finit], [ffree]);
 function UNIT_tmGl_loop(_ftick, _finit, _ffree) {
-	return UNIT_tmGlobal().newLoop(_ftick, _finit, _ffree);
+	return UNIT_tmGl().newLoop(_ftick, _finit, _ffree);
 }
 
 /// @function		UNIT_tmGl_loopAsync([ftick], [finit], [ffree]);
 function UNIT_tmGl_loopAsync(_ftick, _finit, _ffree) {
-	return UNIT_tmGlobal().newLoopAsync(_ftick, _finit, _ffree);
+	return UNIT_tmGl().newLoopAsync(_ftick, _finit, _ffree);
 }
 
 /// @function		UNIT_tmGl_sync(steps, [ftick], [finit], [ffree]);
 function UNIT_tmGl_sync(_steps, _ftick, _finit, _ffree) {
-	return UNIT_tmGlobal().newSync(_steps, _ftick, _finit, _ffree);
+	return UNIT_tmGl().newSync(_steps, _ftick, _finit, _ffree);
 }
 
 /// @function		UNIT_tmGl_async(milisec, [ftick], [finit], [ffree]);
 function UNIT_tmGl_async(_milisec, _ftick, _finit, _ffree) {
-	return UNIT_tmGlobal().newAsync(_milisec, _ftick, _finit, _ffree);
+	return UNIT_tmGl().newAsync(_milisec, _ftick, _finit, _ffree);
 }
 
 /// @function		UNIT_tmGl_endSync(steps, f);
 function UNIT_tmGl_endSync(_steps, _f) {
-	return UNIT_tmGlobal().newEndSync(_steps, _f);
+	return UNIT_tmGl().newEndSync(_steps, _f);
 }
 
 /// @function		UNIT_tmGl_endAsync(milisec, f);
 function UNIT_tmGl_endAsync(_milisec, _f) {
-	return UNIT_tmGlobal().newEndAsync(_milisec, _f);
+	return UNIT_tmGl().newEndAsync(_milisec, _f);
 }
 
 

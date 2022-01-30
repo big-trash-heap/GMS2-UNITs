@@ -33,9 +33,9 @@ timer2 = timer._clone()._set("name", "Dasha");
 UNIT_tmGl_timer(timer);
 UNIT_tmGl_timer(timer2);
 
-handler = UNIT_tmGlobal()._clone();
+handler = UNIT_tmGl()._clone();
 
-UNIT_tmGlobal().clearAll(); */
+UNIT_tmGl().clearAll(); */
 
 
 
@@ -102,8 +102,8 @@ UNIT_tmGl_loop(
 							var _t1 = UNIT_tmGl_loop();
 							var _t2 = UNIT_tmGl_loop(undefined, undefined, function() { show_message(222); });
 							var _t3 = UNIT_tmGl_loop(undefined, undefined, function() {
-								//show_message(UNIT_tmGlobal().__clear);
-								UNIT_tmGlobal().clearAll(); });
+								//show_message(UNIT_tmGl().__clear);
+								UNIT_tmGl().clearAll(); });
 							var _t4 = UNIT_tmGl_loop(undefined, undefined, function() { show_message(444); });
 							
 							
@@ -116,7 +116,7 @@ UNIT_tmGl_loop(
 							var _save = self._fff;
 							self._fff = undefined;
 							
-							UNIT_tmGlobal().clearAll();
+							UNIT_tmGl().clearAll();
 							
 							show_message("clearAll");
 							show_message(_timer.isBind());
@@ -148,7 +148,7 @@ UNIT_tmGl_loop(
 		_timer.timer._set("timer", _t);
 		
 		if (_timer.num > 8) {
-			UNIT_tmGlobal().clear();
+			UNIT_tmGl().clear();
 			return;
 		}
 		
@@ -181,7 +181,7 @@ self._fff = function() {
 		timer.resume();
 	});
 	
-	show_message(UNIT_tmGlobal()._toArray());
+	show_message(UNIT_tmGl()._toArray());
 	
 	var base = UNIT_tmGl_loop(function() {
 		show_debug_message("loop");	

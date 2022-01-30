@@ -1,5 +1,5 @@
 
-UNIT_tmGlobalTick();
+UNIT_tmGlTick();
 //handler.tick();
 
-UNIT_tmsHandlerDebugErrorMemory();
+UNIT_tmDebugErrorMemory();

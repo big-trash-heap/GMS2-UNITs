@@ -4,7 +4,7 @@
     {"id":{"name":"tests","path":"scripts/tests/tests.yy",},"order":2,},
     {"id":{"name":"UNIT_TmTimer","path":"scripts/UNIT_TmTimer/UNIT_TmTimer.yy",},"order":0,},
     {"id":{"name":"UNIT_TmTimerAsync","path":"scripts/UNIT_TmTimerAsync/UNIT_TmTimerAsync.yy",},"order":0,},
-    {"id":{"name":"UNIT_tmGlobal","path":"scripts/UNIT_tmGlobal/UNIT_tmGlobal.yy",},"order":1,},
+    {"id":{"name":"UNIT_tmGl","path":"scripts/UNIT_tmGl/UNIT_tmGl.yy",},"order":1,},
     {"id":{"name":"UNIT_TmTimerLoop","path":"scripts/UNIT_TmTimerLoop/UNIT_TmTimerLoop.yy",},"order":0,},
     {"id":{"name":"UNIT_TmTimerLoopAsync","path":"scripts/UNIT_TmTimerLoopAsync/UNIT_TmTimerLoopAsync.yy",},"order":2,},
     {"id":{"name":"UNIT_TmHandler","path":"scripts/UNIT_TmHandler/UNIT_TmHandler.yy",},"order":1,},
