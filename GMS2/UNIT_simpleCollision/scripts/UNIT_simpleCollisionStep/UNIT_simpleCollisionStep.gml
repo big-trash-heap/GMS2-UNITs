@@ -4,7 +4,7 @@
 /// @function		UNIT_simcollStepW(x, y, objects, speed, [prec=true], [check], [data]);
 function UNIT_simcollStepW(_x, _y, _objects, _speed, _prec=true, _check, _data) {
 	
-	static _list = __UNIT_simpleCollisionStep();
+	static _g_list = __UNIT_simpleCollisionStep();
 	
 	static _find_left = function(_left, _inst) {
 		
@@ -15,8 +15,6 @@ function UNIT_simcollStepW(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 		
 		return max(_right, _inst.bbox_right);
 	}
-	
-	ds_list_clear(_list);
 	
 	var _count;
 	if (not is_array(_objects)) {
@@ -33,6 +31,9 @@ function UNIT_simcollStepW(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 			return false;
 		}
 	}
+	
+	var _isCheck = (not is_undefined(_check));
+	var _list = (_isCheck ? ds_list_create() : _g_list);
 	
 	if (_speed < 0) {
 		
@@ -66,12 +67,14 @@ function UNIT_simcollStepW(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 			_find_v = infinity;
 		}
 		
-		if (not is_undefined(_check)) {
+		if (_isCheck) {
 			
 			do {
 				_inst = _list[| --_size];
 				if (_check(_inst, _data)) _find_v = _find_f(_find_v, _inst);
 			} until (_size == 0);
+			
+			ds_list_destroy(_list);
 			
 			if (is_infinity(_find_v)) {
 				
@@ -84,6 +87,8 @@ function UNIT_simcollStepW(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 			do {
 				_find_v = _find_f(_find_v, _list[| --_size]);
 			} until (_size == 0);
+			
+			ds_list_clear(_list);
 		}
 		
 		if (_speed < 0)
@@ -93,6 +98,11 @@ function UNIT_simcollStepW(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 		
 		return true;
 	}
+	else {
+		if (_isCheck) {
+			ds_list_destroy(_list);
+		}
+	}
 	
 	global.UNIT_simcollDist = _speed;
 	return false;
@@ -101,7 +111,7 @@ function UNIT_simcollStepW(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 /// @function		UNIT_simcollStepH(x, y, objects, speed, [prec=true], [check], [data]);
 function UNIT_simcollStepH(_x, _y, _objects, _speed, _prec=true, _check, _data) {
 	
-	static _list = __UNIT_simpleCollisionStep();
+	static _g_list = __UNIT_simpleCollisionStep();
 	
 	static _find_top = function(_top, _inst) {
 		
@@ -113,7 +123,8 @@ function UNIT_simcollStepH(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 		return max(_bottom, _inst.bbox_bottom);
 	}
 	
-	ds_list_clear(_list);
+	var _isCheck = (not is_undefined(_check));
+	var _list = (_isCheck ? ds_list_create() : _g_list);
 	
 	var _count;
 	if (not is_array(_objects)) {
@@ -163,12 +174,14 @@ function UNIT_simcollStepH(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 			_find_v = infinity;
 		}
 		
-		if (not is_undefined(_check)) {
+		if (_isCheck) {
 			
 			do {
 				_inst = _list[| --_size];
 				if (_check(_inst, _data)) _find_v = _find_f(_find_v, _inst);
 			} until (_size == 0);
+			
+			ds_list_destroy(_list);
 			
 			if (not is_infinity(_find_v)) {
 				
@@ -181,6 +194,8 @@ function UNIT_simcollStepH(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 			do {
 				_find_v = _find_f(_find_v, _list[| --_size]);
 			} until (_size == 0);
+			
+			ds_list_clear(_list);
 		}
 		
 		if (_speed < 0) 
@@ -189,6 +204,11 @@ function UNIT_simcollStepH(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 			global.UNIT_simcollDist = (_find_v - self.bbox_bottom - 1);
 		
 		return true;
+	}
+	else {
+		if (_isCheck) {
+			ds_list_destroy(_list);
+		}
 	}
 	
 	global.UNIT_simcollDist = _speed;

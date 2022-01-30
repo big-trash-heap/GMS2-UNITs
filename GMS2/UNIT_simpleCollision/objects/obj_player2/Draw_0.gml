@@ -11,7 +11,7 @@ draw_text(0, 0, global.UNIT_simcollDist);
 
 draw_text(0, 64, place_meeting(x, y + global.UNIT_simcollDist, obj_wall));
 
-if (UNIT_simcollStepW(x, y, obj_wall, -256))
+if (UNIT_simcollStepW(x, y, obj_wall, -256, false, function(_inst) { return _inst.image_xscale == -1; }))
 	draw_set_color(c_yellow);
 else
 	draw_set_color(c_lime);
