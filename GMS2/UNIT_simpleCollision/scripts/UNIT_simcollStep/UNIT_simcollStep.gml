@@ -4,7 +4,7 @@
 /// @function		UNIT_simcollStepW(x, y, objects, speed, [prec=true], [check], [data]);
 function UNIT_simcollStepW(_x, _y, _objects, _speed, _prec=true, _check, _data) {
 	
-	static _g_list = __UNIT_simpleCollisionStep();
+	static _g_list = __UNIT_simcollStep();
 	
 	static _find_left = function(_left, _inst) {
 		
@@ -111,7 +111,7 @@ function UNIT_simcollStepW(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 /// @function		UNIT_simcollStepH(x, y, objects, speed, [prec=true], [check], [data]);
 function UNIT_simcollStepH(_x, _y, _objects, _speed, _prec=true, _check, _data) {
 	
-	static _g_list = __UNIT_simpleCollisionStep();
+	static _g_list = __UNIT_simcollStep();
 	
 	static _find_top = function(_top, _inst) {
 		
@@ -218,12 +218,10 @@ function UNIT_simcollStepH(_x, _y, _objects, _speed, _prec=true, _check, _data) 
 
 #region __private
 
-function __UNIT_simpleCollisionStep() {
+function __UNIT_simcollStep() {
 	static _list = ds_list_create();
 	return _list;
 }
-
-function UNIT_simpleCollisionStep() {};
 
 #endregion
 

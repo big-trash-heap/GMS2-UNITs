@@ -7,12 +7,12 @@
 */
 
 																	// первоначальная проверка столкновение, со скоросью 0
-#macro UNIT_PREPROCESSOR_SIMPLE_COLLISION_MOVE_CHECKZERO			false
+#macro UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKZERO			false
 																	
 																	// первоначальная проверка столкновение, со скоростью равным знаку "скорости"
-#macro UNIT_PREPROCESSOR_SIMPLE_COLLISION_MOVE_CHECKSIGN			false
+#macro UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKSIGN			false
 																	// использовать ли для этой проверки указанную точность
-#macro UNIT_PREPROCESSOR_SIMPLE_COLLISION_MOVE_CHECKSIGN_ACCURACY	false
+#macro UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKSIGN_ACCURACY	false
 
 /*
 	Данные функции позволяют проверить столкновение симулируя пошаговое движение
@@ -34,7 +34,7 @@ function UNIT_simcollMove_single(_speed, _accuracy, _check, _data) {
 	global.UNIT_simcollDist = 0;
 	
 	//
-	if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_MOVE_CHECKZERO) {
+	if (UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKZERO) {
 	
 	if (_check(0, _data)) return true;
 	
@@ -43,9 +43,9 @@ function UNIT_simcollMove_single(_speed, _accuracy, _check, _data) {
 	//
 	if (_speed < 0) _accuracy = -_accuracy;
 	
-	if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_MOVE_CHECKSIGN) {
+	if (UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKSIGN) {
 	
-	if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_MOVE_CHECKSIGN_ACCURACY) {
+	if (UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKSIGN_ACCURACY) {
 	
 	if (_check(_accuracy, _data)) return true;
 	
@@ -93,7 +93,7 @@ function UNIT_simcollMove_double(_speed, _accuracyMicro, _accuracyMacro, _check,
 	global.UNIT_simcollDist = 0;
 	
 	//
-	if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_MOVE_CHECKZERO) {
+	if (UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKZERO) {
 	
 	if (_check(0, _data)) return true;
 	
@@ -106,9 +106,9 @@ function UNIT_simcollMove_double(_speed, _accuracyMicro, _accuracyMacro, _check,
 		_accuracyMacro = -_accuracyMacro;
 	}
 	
-	if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_MOVE_CHECKSIGN) {
+	if (UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKSIGN) {
 	
-	if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_MOVE_CHECKSIGN_ACCURACY) {
+	if (UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKSIGN_ACCURACY) {
 	
 	if (_check(_accuracyMicro, _data)) return true;
 	
@@ -167,11 +167,3 @@ function UNIT_simcollMove_double(_speed, _accuracyMicro, _accuracyMacro, _check,
 	global.UNIT_simcollDist = _speed;
 	return false;
 }
-
-
-#region __private
-
-function UNIT_simpleCollisionMove() {};
-
-#endregion
-

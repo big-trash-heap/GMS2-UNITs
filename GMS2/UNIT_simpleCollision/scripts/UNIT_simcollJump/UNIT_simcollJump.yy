@@ -6,7 +6,7 @@
     "path": "folders/UNIT::simpleCollision.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_simpleCollisionGlobal",
+  "name": "UNIT_simcollJump",
   "tags": [],
   "resourceType": "GMScript",
 }

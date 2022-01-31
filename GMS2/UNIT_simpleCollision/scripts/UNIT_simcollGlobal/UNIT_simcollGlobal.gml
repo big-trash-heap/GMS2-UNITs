@@ -11,7 +11,7 @@ global.UNIT_simcollDist = 0; // Используется для сохранен
 
 #region __private
 
-function UNIT_simpleCollisionGlobal() {};
+function UNIT_simcollGlobal() {};
 
 #endregion
 

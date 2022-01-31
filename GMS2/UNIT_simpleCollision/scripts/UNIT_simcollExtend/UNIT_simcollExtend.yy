@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "UNIT::simpleCollision",
-    "path": "folders/UNIT::simpleCollision.yy",
+    "name": "extend",
+    "path": "folders/UNIT::simpleCollision/extend.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_simpleCollisionJump",
+  "name": "UNIT_simcollExtend",
   "tags": [],
   "resourceType": "GMScript",
 }

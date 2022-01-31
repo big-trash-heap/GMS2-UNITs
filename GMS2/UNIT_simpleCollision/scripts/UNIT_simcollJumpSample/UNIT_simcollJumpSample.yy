@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "special",
-    "path": "folders/UNIT::simpleCollision/special.yy",
+    "name": "sample",
+    "path": "folders/UNIT::simpleCollision/sample.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_simpleCollisionStep",
+  "name": "UNIT_simcollJumpSample",
   "tags": [],
   "resourceType": "GMScript",
 }

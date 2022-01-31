@@ -2,36 +2,36 @@
 
 /*
 	Настройки работы функций
-	(смотри в UNIT_simpleCollisionMove)
+	(смотри в UNIT_simcollMove)
 */
 
 // Общие настройки
 															// сохранения id объекта, с которым было обнаруженно столкновение в последний раз
 															// записывается global.UNIT_simcollId
-#macro UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID	false
+#macro UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID           false
 
 // Настройки UNIT_simcollJumpLine
 															// проверка ошибочных ситуаций
 															// из-за погрешности collision_line, иногда результат UNIT_simcollJumpLine оказывается неверным
 															// эта настройка может решить эту проблему, но зачастую это совсем не нужно
-#macro UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPLINE_FIXANGLE	false
+#macro UNIT_PREPROCESSOR_SIMCOLL_JUMPLINE_FIXANGLE	false
 															
 															// сохранения угла
 															// записывается в global.UNIT_simcollDir
-#macro UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPLINE_GETANGLE	false
+#macro UNIT_PREPROCESSOR_SIMCOLL_JUMPLINE_GETANGLE	false
 
 
 #region PREPROCESSOR
 
 // инициализация переменных
 
-if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 	
 global.UNIT_simcollId = noone;
 	
 }
 
-if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPLINE_GETANGLE) {
+if (UNIT_PREPROCESSOR_SIMCOLL_JUMPLINE_GETANGLE) {
 	
 global.UNIT_simcollDir = 0;
 
@@ -49,10 +49,10 @@ global.UNIT_simcollDir = 0;
 
 #region line
 
-/// @function		UNIT_simcollJumpLine(x1, y1, x2, y2, objects, [prec=false], [notme=false], [accuracy=UNIT_SIMPLE_COLLISION_MOVE_DEFAULT_ACCURACY]);
-function UNIT_simcollJumpLine(_x1, _y1, _x2, _y2, _objects, _prec=false, _notme=false, _accuracy=UNIT_SIMPLE_COLLISION_MOVE_DEFAULT_ACCURACY) {
+/// @function		UNIT_simcollJumpLine(x1, y1, x2, y2, objects, [prec=false], [notme=false], [accuracy=UNIT_SIMCOLL_MOVE_DEFAULT_ACCURACY]);
+function UNIT_simcollJumpLine(_x1, _y1, _x2, _y2, _objects, _prec=false, _notme=false, _accuracy=UNIT_SIMCOLL_MOVE_DEFAULT_ACCURACY) {
 	
-	static _sampleObject = __UNIT_simpleCollisionJumpSample();
+	static _sampleObject = __UNIT_simcollJumpSample();
 	
 	static _check = method(_sampleObject,
 		function(_speed, _objects) {
@@ -73,7 +73,7 @@ function UNIT_simcollJumpLine(_x1, _y1, _x2, _y2, _objects, _prec=false, _notme=
 				_isCollision = (_colobject != noone);
 			} until (_isCollision || _size == 0);
 			
-			if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+			if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 				
 			if (_isCollision) global.UNIT_simcollId = _colobject;
 			
@@ -83,7 +83,7 @@ function UNIT_simcollJumpLine(_x1, _y1, _x2, _y2, _objects, _prec=false, _notme=
 	
 	if (not is_array(_objects)) _objects = [_objects];
 	
-	if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+	if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 	
 	global.UNIT_simcollId = noone;
 	
@@ -91,7 +91,7 @@ function UNIT_simcollJumpLine(_x1, _y1, _x2, _y2, _objects, _prec=false, _notme=
 	
 	if (array_length(_objects) == 0) {
 		
-		if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPLINE_GETANGLE) {
+		if (UNIT_PREPROCESSOR_SIMCOLL_JUMPLINE_GETANGLE) {
 		
 		global.UNIT_simcollDir = point_direction(_x1, _y1, _x2, _y2);
 		
@@ -103,7 +103,7 @@ function UNIT_simcollJumpLine(_x1, _y1, _x2, _y2, _objects, _prec=false, _notme=
 	
 	var _dir = point_direction(_x1, _y1, _x2, _y2);
 	
-	if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPLINE_GETANGLE) {
+	if (UNIT_PREPROCESSOR_SIMCOLL_JUMPLINE_GETANGLE) {
 	
 	global.UNIT_simcollDir = _dir;
 	
@@ -118,14 +118,14 @@ function UNIT_simcollJumpLine(_x1, _y1, _x2, _y2, _objects, _prec=false, _notme=
 	_x2 = point_distance(_x1, _y1, _x2, _y2);
 	_y2 = UNIT_simcollJump(_x2, _check, _objects, _accuracy);
 	
-	if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPLINE_FIXANGLE) {
+	if (UNIT_PREPROCESSOR_SIMCOLL_JUMPLINE_FIXANGLE) {
 	
 	if (_y2) {
 		
 		_x1 = _x1 + lengthdir_x(global.UNIT_simcollDist, _dir);
 		_y1 = _y1 + lengthdir_y(global.UNIT_simcollDist, _dir);
 		
-		if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+		if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 		
 		if (collision_circle(_x1, _y1, 1.7 + _accuracy, global.UNIT_simcollId, _prec, false)) return true;
 		
@@ -138,7 +138,7 @@ function UNIT_simcollJumpLine(_x1, _y1, _x2, _y2, _objects, _prec=false, _notme=
 			_colobject = collision_circle(_x1, _y1, 1.7 + _accuracy, _objects[--_size], _prec, _notme);
 			if (_colobject != noone) {
 				
-				if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+				if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 				
 				global.UNIT_simcollId = _colobject;
 				
@@ -150,7 +150,7 @@ function UNIT_simcollJumpLine(_x1, _y1, _x2, _y2, _objects, _prec=false, _notme=
 		
 		global.UNIT_simcollDist = _x2;
 		
-		if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+		if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 		
 		global.UNIT_simcollId = noone;
 		
@@ -168,10 +168,10 @@ function UNIT_simcollJumpLine(_x1, _y1, _x2, _y2, _objects, _prec=false, _notme=
 
 #region rectangle
 
-/// @function		UNIT_simcollJumpRectW(x1, y1, y2, width, objects, [prec=false], [notme=false], [accuracy=UNIT_SIMPLE_COLLISION_MOVE_DEFAULT_ACCURACY]);
-function UNIT_simcollJumpRectW(_x1, _y1, _y2, _width, _objects, _prec=false, _notme=false, _accuracy=UNIT_SIMPLE_COLLISION_MOVE_DEFAULT_ACCURACY) {
+/// @function		UNIT_simcollJumpRectW(x1, y1, y2, width, objects, [prec=false], [notme=false], [accuracy=UNIT_SIMCOLL_MOVE_DEFAULT_ACCURACY]);
+function UNIT_simcollJumpRectW(_x1, _y1, _y2, _width, _objects, _prec=false, _notme=false, _accuracy=UNIT_SIMCOLL_MOVE_DEFAULT_ACCURACY) {
 	
-	static _sampleObject = __UNIT_simpleCollisionJumpSample();
+	static _sampleObject = __UNIT_simcollJumpSample();
 	
 	static _check_xp = method(_sampleObject,
 		function(_speed, _objects) {
@@ -191,7 +191,7 @@ function UNIT_simcollJumpRectW(_x1, _y1, _y2, _width, _objects, _prec=false, _no
 				_isCollision = (_colobject != noone);
 			} until (_isCollision || _size == 0);
 			
-			if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+			if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 				
 			if (_isCollision) global.UNIT_simcollId = _colobject;
 			
@@ -217,7 +217,7 @@ function UNIT_simcollJumpRectW(_x1, _y1, _y2, _width, _objects, _prec=false, _no
 				_isCollision = (_colobject != noone);
 			} until (_isCollision || _size == 0);
 			
-			if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+			if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 				
 			if (_isCollision) global.UNIT_simcollId = _colobject;
 			
@@ -227,7 +227,7 @@ function UNIT_simcollJumpRectW(_x1, _y1, _y2, _width, _objects, _prec=false, _no
 	
 	if (not is_array(_objects)) _objects = [_objects];
 	
-	if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+	if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 	
 	global.UNIT_simcollId = noone;
 	
@@ -258,10 +258,10 @@ function UNIT_simcollJumpRectW(_x1, _y1, _y2, _width, _objects, _prec=false, _no
 	return _y1;
 }
 
-/// @function		UNIT_simcollJumpRectH(x1, y1, x2, height, objects, [prec=false], [notme=false], [accuracy=UNIT_SIMPLE_COLLISION_MOVE_DEFAULT_ACCURACY]);
-function UNIT_simcollJumpRectH(_x1, _y1, _x2, _height, _objects, _prec=false, _notme=false, _accuracy=UNIT_SIMPLE_COLLISION_MOVE_DEFAULT_ACCURACY) {
+/// @function		UNIT_simcollJumpRectH(x1, y1, x2, height, objects, [prec=false], [notme=false], [accuracy=UNIT_SIMCOLL_MOVE_DEFAULT_ACCURACY]);
+function UNIT_simcollJumpRectH(_x1, _y1, _x2, _height, _objects, _prec=false, _notme=false, _accuracy=UNIT_SIMCOLL_MOVE_DEFAULT_ACCURACY) {
 	
-	static _sampleObject = __UNIT_simpleCollisionJumpSample();
+	static _sampleObject = __UNIT_simcollJumpSample();
 	
 	static _check_yp = method(_sampleObject,
 		function(_speed, _objects) {
@@ -281,7 +281,7 @@ function UNIT_simcollJumpRectH(_x1, _y1, _x2, _height, _objects, _prec=false, _n
 				_isCollision = (_colobject != noone);
 			} until (_isCollision || _size == 0);
 			
-			if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+			if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 				
 			if (_isCollision) global.UNIT_simcollId = _colobject;
 			
@@ -307,7 +307,7 @@ function UNIT_simcollJumpRectH(_x1, _y1, _x2, _height, _objects, _prec=false, _n
 				_isCollision = (_colobject != noone);
 			} until (_isCollision || _size == 0);
 			
-			if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+			if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 				
 			if (_isCollision) global.UNIT_simcollId = _colobject;
 			
@@ -317,7 +317,7 @@ function UNIT_simcollJumpRectH(_x1, _y1, _x2, _height, _objects, _prec=false, _n
 	
 	if (not is_array(_objects)) _objects = [_objects];
 	
-	if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+	if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 	
 	global.UNIT_simcollId = noone;
 	
@@ -352,10 +352,10 @@ function UNIT_simcollJumpRectH(_x1, _y1, _x2, _height, _objects, _prec=false, _n
 
 #region circle
 
-/// @function		UNIT_simcollJumpCircle(x, y, rad, objects, [prec=false], [notme=false], [accuracy=UNIT_SIMPLE_COLLISION_MOVE_DEFAULT_ACCURACY]);
-function UNIT_simcollJumpCircle(_x, _y, _rad, _objects, _prec=false, _notme=false, _accuracy=UNIT_SIMPLE_COLLISION_MOVE_DEFAULT_ACCURACY) {
+/// @function		UNIT_simcollJumpCircle(x, y, rad, objects, [prec=false], [notme=false], [accuracy=UNIT_SIMCOLL_MOVE_DEFAULT_ACCURACY]);
+function UNIT_simcollJumpCircle(_x, _y, _rad, _objects, _prec=false, _notme=false, _accuracy=UNIT_SIMCOLL_MOVE_DEFAULT_ACCURACY) {
 	
-	static _sampleObject = __UNIT_simpleCollisionJumpSample();
+	static _sampleObject = __UNIT_simcollJumpSample();
 	
 	static _check = method(_sampleObject,
 		function(_speed, _objects) {
@@ -374,7 +374,7 @@ function UNIT_simcollJumpCircle(_x, _y, _rad, _objects, _prec=false, _notme=fals
 				_isCollision = (_colobject != noone);
 			} until (_isCollision || _size == 0);
 			
-			if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+			if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 				
 			if (_isCollision) global.UNIT_simcollId = _colobject;
 			
@@ -384,7 +384,7 @@ function UNIT_simcollJumpCircle(_x, _y, _rad, _objects, _prec=false, _notme=fals
 	
 	if (not is_array(_objects)) _objects = [_objects];
 	
-	if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+	if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 	
 	global.UNIT_simcollId = noone;
 	
@@ -410,12 +410,12 @@ function UNIT_simcollJumpCircle(_x, _y, _rad, _objects, _prec=false, _notme=fals
 
 #region __private
 
-function __UNIT_simpleCollisionJumpSample() {
+function __UNIT_simcollJumpSample() {
 	static _obj = {};
 	return _obj;
 }
 
-function UNIT_simpleCollisionJumpSample() {};
+function UNIT_simcollJumpSample() {};
 
 #endregion
 

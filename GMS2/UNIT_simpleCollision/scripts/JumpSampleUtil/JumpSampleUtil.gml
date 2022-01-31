@@ -7,12 +7,11 @@ function cc_find(_findFirst) {
 		var _isCollision;
 		
 		do {
-				
 			_colobject = self.find(_speed, _objects[--_size]);
 			_isCollision = (_colobject != noone);
 		} until (_isCollision || _size == 0);
 		
-		if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+		if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 		
 		if (_isCollision) global.UNIT_simcollId = _colobject;
 		
@@ -41,7 +40,7 @@ function cc_findWithFilter(_findAll, _check, _data) {
 					_instance = _list[| --_listSize];
 					if (self.check(_instance, self.data)) {
 						
-						if (UNIT_PREPROCESSOR_SIMPLE_COLLISION_JUMPSAMPLE_GETID) {
+						if (UNIT_PREPROCESSOR_SIMCOLL_JUMPSAMPLE_GETID) {
 						
 						global.UNIT_simcollId = _instance;
 						
