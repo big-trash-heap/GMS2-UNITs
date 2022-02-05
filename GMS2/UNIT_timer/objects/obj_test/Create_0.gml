@@ -191,9 +191,10 @@ self._fff = function() {
 		
 		_timer.t.resume();
 		UNIT_tmGl().clearLoop(8);
-		UNIT_tmGl_sync(180, function(_gl, _timer) {
+		var _new = UNIT_tmGl_syncStp(7, 180, function(_gl, _timer) {
 			show_debug_message(["sync", _timer.getTime()]);
-		}).setStep(7);
+		});
+		show_message(_new);
 	})._set("t", base);
 }
 

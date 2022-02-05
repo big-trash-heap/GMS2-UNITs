@@ -42,6 +42,11 @@ function UNIT_tmGl_sync(_steps, _ftick, _finit, _ffree) {
 	return UNIT_tmGl().newSync(_steps, _ftick, _finit, _ffree);
 }
 
+/// @function		UNIT_tmGl_syncStp(step, steps, [ftick], [finit], [ffree]);
+function UNIT_tmGl_syncStp(_step, _steps, _ftick, _finit, _ffree) {
+	return UNIT_tmGl().bind(new UNIT_TmTimerSyncExt(_steps, _ftick, _finit, _ffree)).setStep(_step);
+}
+
 /// @function		UNIT_tmGl_async(milisec, [ftick], [finit], [ffree]);
 function UNIT_tmGl_async(_milisec, _ftick, _finit, _ffree) {
 	return UNIT_tmGl().newAsync(_milisec, _ftick, _finit, _ffree);
