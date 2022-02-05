@@ -440,9 +440,9 @@ function UNIT_tmDebugErrorMemory(_step=room_speed*10, _f_handlers, _f_timers) {
 
 #region __private
 
-#macro ____UNIT_TM_ERROR_CLONE			"UNIT::timer -> UNIT_PREPROCESSOR_TM_ENABLE_CLONE отключена"
-#macro ____UNIT_TM_ERROR_BIND_SWITCH		"UNIT::timer -> UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH отключена"
-#macro ____UNIT_TM_ERROR_HANDLER	"UNIT::timer -> UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK отключена"
+#macro ____UNIT_TM_ERROR_CLONE          "UNIT::timer -> UNIT_PREPROCESSOR_TM_ENABLE_CLONE отключена"
+#macro ____UNIT_TM_ERROR_BIND_SWITCH    "UNIT::timer -> UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH отключена"
+#macro ____UNIT_TM_ERROR_HANDLER        "UNIT::timer -> UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK отключена"
 
 enum __UNIT_TM_CELL { _HANDLER, _TIMER };
 
