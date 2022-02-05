@@ -68,6 +68,11 @@ function UNIT_TmTimerSyncExt(_steps, _ftick, _finit, _ffree) : __UNIT_TmTimerTim
 		return self.__tickStep;
 	}
 	
+	static resetStep = function() {
+		variable_struct_remove(self, "__tickStep");
+		return self;
+	}
+	
 	static _clone = function() {
 		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
