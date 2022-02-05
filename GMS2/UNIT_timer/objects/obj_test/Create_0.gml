@@ -35,7 +35,7 @@ UNIT_tmGl_timer(timer2);
 
 handler = UNIT_tmGl()._clone();
 
-UNIT_tmGl().clearAll(); */
+UNIT_tmGl().clearLoop(); */
 
 
 
@@ -103,7 +103,7 @@ UNIT_tmGl_loop(
 							var _t2 = UNIT_tmGl_loop(undefined, undefined, function() { show_message(222); });
 							var _t3 = UNIT_tmGl_loop(undefined, undefined, function() {
 								//show_message(UNIT_tmGl().__clear);
-								UNIT_tmGl().clearAll(); });
+								UNIT_tmGl().clearLoop(); });
 							var _t4 = UNIT_tmGl_loop(undefined, undefined, function() { show_message(444); });
 							
 							
@@ -116,9 +116,9 @@ UNIT_tmGl_loop(
 							var _save = self._fff;
 							self._fff = undefined;
 							
-							UNIT_tmGl().clearAll();
+							UNIT_tmGl().clearLoop();
 							
-							show_message("clearAll");
+							show_message("clearLoop");
 							show_message(_timer.isBind());
 							
 							UNIT_tmGl_timer(_timer);
@@ -190,6 +190,7 @@ self._fff = function() {
 	UNIT_tmGl_endAsync(15000, function(_0, _timer) {
 		
 		_timer.t.resume();
+		UNIT_tmGl().clearLoop(8);
 	})._set("t", base);
 }
 

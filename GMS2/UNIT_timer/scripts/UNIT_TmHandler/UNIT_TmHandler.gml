@@ -130,7 +130,7 @@ function UNIT_TmHandler()
 			#region PREPROCESSOR
 			if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_CHECK_ERROR_TICK) {
 			
-			if (self.__clear != -1) show_error("UNIT::timer -> нельзя вызывать tick во время вызова tick, clear, clearAll", true);
+			if (self.__clear != -1) show_error("UNIT::timer -> нельзя вызывать tick во время вызова tick, clear, clearLoop", true);
 			self.__clear = -2;
 			
 			}
@@ -221,10 +221,11 @@ function UNIT_TmHandler()
 				_value = self.__timers[self.__clear];
 				++self.__clear;
 				
-				if (_value[__UNIT_TM_CELL._HANDLER] == self && 
-					UNIT_tmUnbind(_value[__UNIT_TM_CELL._TIMER]) &&
-					self.__clear == -1)
-					return;
+				if (_value[__UNIT_TM_CELL._HANDLER] == self) {
+					
+					self.__unbind(_value, false);
+					if (self.__clear == -1) return;
+				}
 			}
 			
 			self.__clear = -1;
@@ -232,34 +233,73 @@ function UNIT_TmHandler()
 	}
 	
 	// очень опасный метод
-	static clearAll = function() {
+	static clearLoop = function(_countAttempts=infinity) {
 		
 		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
 		
-		show_debug_message("UNIT::timer -> вы вызвали TmHandler.clearAll это может быть опасно. Избегайте его вызова");
+		show_debug_message("UNIT::timer -> вы вызвали TmHandler.clearLoop это может быть опасно. Избегайте его вызова");
+		show_debug_message("\tUNIT::timer::clearLoop -> количество итераций: " + string(_countAttempts));
+		
+		if (is_infinity(_countAttempts) && sign(_countAttempts) == 1) {
+			
+			show_debug_message("\tUNIT::timer::clearLoop -> бесконечное количество итераций может привести к зависанию");
+		}
 		
 		}
 		#endregion
 		
-		if (array_length(self.__timers) > 0) {
+		var _size = array_length(self.__timers);
+		if (_size > 0) {
+			
+			#region PREPROCESSOR
+			if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
+			
+			if (self.__clear != -1) {
+				show_debug_message("\tUNIT::timer::clearLoop -> возможный вызов TmHandler.clearLoop в TmHandler.clearLoop. Это может привести к зависанию");
+			}
+			
+			}
+			#endregion
 			
 			self.__clear = max(0, self.__clear);
 			
-			var _value;
-			while (self.__clear < array_length(self.__timers)) {
+			while (_countAttempts > 0) {
 				
-				_value = self.__timers[self.__clear];
-				++self.__clear;
+				--_countAttempts;
 				
-				if (_value[__UNIT_TM_CELL._HANDLER] == self && 
-					UNIT_tmUnbind(_value[__UNIT_TM_CELL._TIMER]) &&
-					self.__clear == -1)
-					return;
+				var _value;
+				while (self.__clear < _size) {
+					
+					_value = self.__timers[self.__clear];
+					++self.__clear;
+					
+					if (_value[__UNIT_TM_CELL._HANDLER] == self) {
+						
+						self.__unbind(_value, false);
+						if (self.__clear == -1) {
+							
+							_countAttempts = -10;
+							return;
+						}
+					}
+				}
+				
+				_size = array_length(self.__timers);
+				if (_size == self.__clear) break;
 			}
+			
+			#region PREPROCESSOR
+			if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
+			
+			show_debug_message("\tUNIT::timer::clearLoop -> не удачное удаление, возможно некоторые таймеры при удаление порождают другие таймеры и т.д.");
+			
+			}
+			#endregion
 			
 			self.__clear = -1;
 		}
+		
 	}
 	
 	static getCount = function() {
