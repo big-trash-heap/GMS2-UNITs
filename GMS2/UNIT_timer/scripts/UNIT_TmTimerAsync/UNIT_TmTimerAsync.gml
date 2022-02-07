@@ -122,7 +122,9 @@ function __UNIT_tmAsyncTick(_handler, _timer, _super) {
 		}
 		
 		_timer.__ctime = _ctime;
-		_timer.__ftick(_handler, _timer, _super, _step);
+		if (_timer.__ftick(_handler, _timer, _super, _step) == true) {
+			return true;	
+		}
 		return (_timer.__step == 0);
 	}
 }

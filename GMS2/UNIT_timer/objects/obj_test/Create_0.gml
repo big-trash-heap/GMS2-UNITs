@@ -193,8 +193,17 @@ self._fff = function() {
 		UNIT_tmGl().clearLoop(8);
 		var _new = UNIT_tmGl_syncStp(7, 180, function(_gl, _timer) {
 			show_debug_message(["sync", _timer.getTime()]);
+			
 		});
 		show_message(_new);
+		UNIT_tmGl_sync(1000 * room_speed, function() {
+			show_debug_message([" >>>", "sync"]);
+			return keyboard_check(vk_space);
+		});
+		UNIT_tmGl_async(1000 * 1000, function() {
+			show_debug_message([" >>>", "async"]);
+			return keyboard_check(vk_space);
+		});
 	})._set("t", base);
 }
 
