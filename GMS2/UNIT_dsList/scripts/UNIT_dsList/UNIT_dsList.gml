@@ -51,18 +51,6 @@ function UNIT_dsListDequeue(_id) {
 	return _value;
 }
 
-/// @param			id
-/// @description	Вернёт первый элемент
-function UNIT_dsListHead(_id) {
-	return _id[| 0];
-}
-
-/// @param			id
-/// @description	Вернёт последний элемент
-function UNIT_dsListTail(_id) {
-	return _id[| ds_list_size(_id) - 1];
-}
-
 #endregion
 
 #region build
@@ -104,6 +92,18 @@ function UNIT_dsListToArr(_id) {
 	}
 	
 	return _array;
+}
+
+/// @param			id
+/// @description	Вернёт первый элемент
+function UNIT_dsListHead(_id) {
+	return _id[| 0];
+}
+
+/// @param			id
+/// @description	Вернёт последний элемент
+function UNIT_dsListTail(_id) {
+	return _id[| ds_list_size(_id) - 1];
 }
 
 #endregion
