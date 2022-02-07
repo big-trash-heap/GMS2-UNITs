@@ -1,5 +1,5 @@
 
-//					better    = function(previos, next, data)
+//					better    = function(current, pretender, data)
 //					predicate = function(value, index, data)
 
 /// @function		UNIT_algoBetter(seq_size, seq_get, seq, index, limit, step, better, [data_better], [predicate=true], [data_predicate]);

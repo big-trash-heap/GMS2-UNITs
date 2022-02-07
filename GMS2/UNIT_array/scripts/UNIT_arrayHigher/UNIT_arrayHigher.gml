@@ -102,6 +102,7 @@ function UNIT_arrFindBetter(_array, _f, _data) {
 			_pretender = _array[--_size];
 			if (_f(_current, _pretender, _data)) {
 				_current_index = _size;
+				_current = _pretender;
 			}
 		} until (_size == 0);
 		
