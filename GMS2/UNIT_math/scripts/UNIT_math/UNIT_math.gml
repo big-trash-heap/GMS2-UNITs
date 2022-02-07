@@ -27,13 +27,10 @@ function UNIT_mthWrap(_number, _max) {
 }
 
 function UNIT_mthWrap2(_number, _min, _max) {
-	if (sign(_number - _max) == 1) {
-		return (_number % _max + _min);
-	}
-	if (sign(_min - _number) == 1) {
-		return (_number % _max + _max - _min);
-	}
-	return _number;
+	var _length = (_max - _min);
+	_number    -= _min;
+	
+	return (_number + ceil(-_number / _length) * _length + _min);
 }
 
 
