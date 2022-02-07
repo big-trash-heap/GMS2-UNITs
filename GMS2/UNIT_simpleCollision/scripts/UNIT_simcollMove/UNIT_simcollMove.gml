@@ -7,12 +7,12 @@
 */
 
 																	// первоначальная проверка столкновение, со скоросью 0
-#macro UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKZERO			false
+#macro UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKZERO             false
 																	
 																	// первоначальная проверка столкновение, со скоростью равным знаку "скорости"
-#macro UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKSIGN			false
+#macro UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKSIGN             false
 																	// использовать ли для этой проверки указанную точность
-#macro UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKSIGN_ACCURACY	false
+#macro UNIT_PREPROCESSOR_SIMCOLL_MOVE_CHECKSIGN_ACCURACY    false
 
 /*
 	Данные функции позволяют проверить столкновение симулируя пошаговое движение
