@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "UNIT::algo",
-    "path": "folders/UNIT::algo.yy",
+    "name": ".noinclude",
+    "path": "folders/.noinclude.yy",
   },
   "resourceVersion": "1.0",
   "name": "UNIT_algoFind",
