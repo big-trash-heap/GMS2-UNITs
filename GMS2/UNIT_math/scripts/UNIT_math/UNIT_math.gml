@@ -17,6 +17,25 @@ function UNIT_mthSign(_number, _positive=true) {
 	return (_number != 0 ? _number : (_positive ? 1 : -1));
 }
 
+// https://github.com/blueburncz/CoreExtension/blob/bc1eb8216f407a28bb22ea39fa5b7ce974cec339/scripts/CE_MathMisc/CE_MathMisc.gml#L79
+function UNIT_mthSnap(_number, _step) {
+	return (floor(_number / _step) * _step);
+}
+
+function UNIT_mthWrap(_number, _max) {
+	return (_number + ceil(-_number / _max) * _max);
+}
+
+function UNIT_mthWrap2(_number, _min, _max) {
+	if (sign(_number - _max) == 1) {
+		return (_number % _max + _min);
+	}
+	if (sign(_min - _number) == 1) {
+		return (_number % _max + _max - _min);
+	}
+	return _number;
+}
+
 
 #region __private
 
