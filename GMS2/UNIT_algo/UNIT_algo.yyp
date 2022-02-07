@@ -1,8 +1,7 @@
 {
   "resources": [
-    {"id":{"name":"room_test","path":"rooms/room_test/room_test.yy",},"order":0,},
-    {"id":{"name":"UNIT_arrayHigher","path":"scripts/UNIT_arrayHigher/UNIT_arrayHigher.yy",},"order":1,},
-    {"id":{"name":"UNIT_array","path":"scripts/UNIT_array/UNIT_array.yy",},"order":0,},
+    {"id":{"name":"UNIT_algoFind","path":"scripts/UNIT_algoFind/UNIT_algoFind.yy",},"order":2,},
+    {"id":{"name":"UNIT_algoBetter","path":"scripts/UNIT_algoBetter/UNIT_algoBetter.yy",},"order":1,},
   ],
   "Options": [
     {"name":"Amazon Fire","path":"options/amazonfire/options_amazonfire.yy",},
@@ -21,12 +20,10 @@
     "name": "Default",
     "children": [],
   },
-  "RoomOrderNodes": [
-    {"roomId":{"name":"room_test","path":"rooms/room_test/room_test.yy",},},
-  ],
+  "RoomOrderNodes": [],
   "Folders": [
-    {"folderPath":"folders/UNIT::array.yy","order":1,"resourceVersion":"1.0","name":"UNIT::array","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/tests.yy","order":2,"resourceVersion":"1.0","name":"tests","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/UNIT::algo.yy","order":1,"resourceVersion":"1.0","name":"UNIT::algo","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/UNIT::algo/better.yy","order":0,"resourceVersion":"1.0","name":"better","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
@@ -39,7 +36,7 @@
     "IDEVersion": "2022.1.1.610",
   },
   "resourceVersion": "1.4",
-  "name": "UNIT_array",
+  "name": "UNIT_algo",
   "tags": [],
   "resourceType": "GMProject",
 }
