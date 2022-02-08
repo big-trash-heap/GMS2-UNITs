@@ -6,7 +6,7 @@
     "path": "folders/UNIT::simpleCollision/other.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_simcollImitation",
+  "name": "UNIT_simcollImitationJust",
   "tags": [],
   "resourceType": "GMScript",
 }
