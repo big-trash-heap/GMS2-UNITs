@@ -8,10 +8,7 @@
 
 global.UNIT_simcollDist = 0; // Используется для сохранения найденной скорости/растояния
 
-
-#region __private
-
-function UNIT_simcollGlobal() {};
-
-#endregion
+function UNIT_simcollGetDist() {
+	return global.UNIT_simcollDist;
+}
 

@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "template",
-    "path": "folders/UNIT::simpleCollision/template.yy",
+    "name": "iterations",
+    "path": "folders/UNIT::simpleCollision/iterations.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_simcollGlobal",
+  "name": "UNIT_simcollGetDist",
   "tags": [],
   "resourceType": "GMScript",
 }

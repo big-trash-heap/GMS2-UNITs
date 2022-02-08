@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "extend",
-    "path": "folders/UNIT::simpleCollision/extend.yy",
+    "name": "other",
+    "path": "folders/UNIT::simpleCollision/other.yy",
   },
   "resourceVersion": "1.0",
   "name": "UNIT_simcollImitation",

@@ -25,7 +25,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "__private",
-    "path": "folders/UNIT::simpleCollision/extend/__private.yy",
+    "path": "folders/UNIT::simpleCollision/other/__private.yy",
   },
   "resourceVersion": "1.0",
   "name": "__UNIT_simcollImitation",
