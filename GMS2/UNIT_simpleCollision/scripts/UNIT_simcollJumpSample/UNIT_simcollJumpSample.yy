@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "sample",
-    "path": "folders/UNIT::simpleCollision/sample.yy",
+    "name": "jumpSample",
+    "path": "folders/.noinclude/jumpSample.yy",
   },
   "resourceVersion": "1.0",
   "name": "UNIT_simcollJumpSample",
