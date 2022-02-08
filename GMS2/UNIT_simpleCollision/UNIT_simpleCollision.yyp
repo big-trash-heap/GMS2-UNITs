@@ -9,6 +9,7 @@
     {"id":{"name":"obj_player2","path":"objects/obj_player2/obj_player2.yy",},"order":0,},
     {"id":{"name":"UNIT_simcollStep","path":"scripts/UNIT_simcollStep/UNIT_simcollStep.yy",},"order":1,},
     {"id":{"name":"UNIT_sprSpriteObject","path":"sprites/UNIT_sprSpriteObject/UNIT_sprSpriteObject.yy",},"order":6,},
+    {"id":{"name":"UNIT_simcollChangeState","path":"scripts/UNIT_simcollChangeState/UNIT_simcollChangeState.yy",},"order":2,},
     {"id":{"name":"UNIT_simcollJumpSample","path":"scripts/UNIT_simcollJumpSample/UNIT_simcollJumpSample.yy",},"order":0,},
     {"id":{"name":"room_test","path":"rooms/room_test/room_test.yy",},"order":1,},
     {"id":{"name":"UNIT_simcollJump","path":"scripts/UNIT_simcollJump/UNIT_simcollJump.yy",},"order":2,},

@@ -1,5 +1,5 @@
 
-///					f = function(instance, data);
+///					f = function(temp_instance, data);
 
 /// @function		UNIT_simcollImitationJust(f, [data]);
 function UNIT_simcollImitationJust(_f, _data) {
@@ -59,3 +59,4 @@ function UNIT_simcollImitationUnitUnsafe(_f, _data) {
 	
 	return _f(_instance, _data);
 }
+
