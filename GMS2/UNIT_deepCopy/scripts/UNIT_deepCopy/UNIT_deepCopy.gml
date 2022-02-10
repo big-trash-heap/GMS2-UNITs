@@ -1,4 +1,5 @@
 
+var _global = {};
 var _stc = {};
 _stc.a = _stc;
 _stc.b = [20, _stc];
@@ -6,7 +7,10 @@ _stc.c = {
 	x: 0,
 	mt: method(_stc, function() {
 		
-	})
+	}),
+	check: method(_global, function() {
+		
+	}),
 }
 _stc.c.mt2 = _stc.c.mt;
 
@@ -23,6 +27,7 @@ show_debug_message(_copy.c.mt == _stc.c.mt);
 show_debug_message(_copy.c.mt2 == _stc.c.mt2);
 show_debug_message(_copy.c.mt == _stc.c.mt2);
 show_debug_message(_copy.c.mt2 == _stc.c.mt);
+show_debug_message(_copy.c.check == _stc.c.check);
 show_debug_message("all: 1");
 show_debug_message(_copy.a == _copy);
 show_debug_message(_copy.a == _copy);
@@ -32,6 +37,7 @@ show_debug_message(_copy.c.x == _stc.c.x);
 show_debug_message(_copy.c.mt == _copy.c.mt2);
 show_debug_message(_copy == method_get_self(_copy.c.mt));
 show_debug_message(_copy == method_get_self(_copy.c.mt2));
+show_debug_message(method_get_self(_copy.c.check) == _global);
 
 function UNIT_deepCopy(_value, _dpt=infinity, _nameMethodClone="_clone") {
 	
