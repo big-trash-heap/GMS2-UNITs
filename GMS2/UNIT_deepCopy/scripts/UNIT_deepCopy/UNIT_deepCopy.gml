@@ -16,9 +16,15 @@ show_debug_message("all: 0");
 show_debug_message(_copy == _stc);
 show_debug_message(_copy.a == _stc.a);
 show_debug_message(_copy.b == _stc.b);
-show_debug_message(_copy.c == _stc.c);
 show_debug_message(_copy.b[1] == _stc.b[1]);
+show_debug_message(_copy.c == _stc.c);
+show_debug_message(_copy.c.mt == _stc.c.mt);
 show_debug_message("all: 1");
+show_debug_message(_copy.a == _copy);
+show_debug_message(_copy.a == _copy);
+show_debug_message(_copy.b[1] == _copy);
+show_debug_message(_copy.b[0] == _stc.b[0]);
+show_debug_message(_copy.c.x == _stc.c.x);
 
 
 function UNIT_deepCopy(_value, _dpt=infinity, _nameMethodClone="_clone") {
@@ -169,7 +175,20 @@ function UNIT_deepCopy(_value, _dpt=infinity, _nameMethodClone="_clone") {
 	_size = array_length(_refs_meth);
 	while (_size > 0) {
 		
-		_stmp = _refs_meth[--_size];
+		_val = _refs_meth[--_size];
+		_ref = __UNIT_deepCopy_metaRef(_rmap, _val);
+		
+		_stmp = method_get_self(_ref);
+		if (_stmp == undefined) {
+			_new = method(undefined, _val);	
+		}
+		else {
+			
+			_new = method(_rmap[? _stmp] ?? _stmp, _val);
+		}
+		
+		_ref.ref = _new;
+		__UNIT_deepCopy_unsubscribe(_ref);
 	}
 	
 	_value = _rmap[? _value].ref;
