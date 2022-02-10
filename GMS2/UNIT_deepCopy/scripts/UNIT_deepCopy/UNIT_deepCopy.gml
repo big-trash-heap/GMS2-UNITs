@@ -108,7 +108,7 @@ function UNIT_deepCopy(_value, _dpt=infinity, _nameMethodClone="_clone") {
 				if (not is_undefined(_stmp)) {
 					with (_val) {
 					
-					_new = _stmp();
+					_new = _stmp(_value);
 					
 					}
 					
