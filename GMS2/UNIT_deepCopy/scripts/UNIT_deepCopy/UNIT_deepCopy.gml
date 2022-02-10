@@ -4,10 +4,11 @@ _stc.a = _stc;
 _stc.b = [20, _stc];
 _stc.c = {
 	x: 0,
-	mt: function() {
+	mt: method(_stc, function() {
 		
-	}
+	})
 }
+_stc.c.mt2 = _stc.c.mt;
 
 var _copy = UNIT_deepCopy(_stc);
 show_debug_message(_stc);
@@ -19,13 +20,18 @@ show_debug_message(_copy.b == _stc.b);
 show_debug_message(_copy.b[1] == _stc.b[1]);
 show_debug_message(_copy.c == _stc.c);
 show_debug_message(_copy.c.mt == _stc.c.mt);
+show_debug_message(_copy.c.mt2 == _stc.c.mt2);
+show_debug_message(_copy.c.mt == _stc.c.mt2);
+show_debug_message(_copy.c.mt2 == _stc.c.mt);
 show_debug_message("all: 1");
 show_debug_message(_copy.a == _copy);
 show_debug_message(_copy.a == _copy);
 show_debug_message(_copy.b[1] == _copy);
 show_debug_message(_copy.b[0] == _stc.b[0]);
 show_debug_message(_copy.c.x == _stc.c.x);
-
+show_debug_message(_copy.c.mt == _copy.c.mt2);
+show_debug_message(_copy == method_get_self(_copy.c.mt));
+show_debug_message(_copy == method_get_self(_copy.c.mt2));
 
 function UNIT_deepCopy(_value, _dpt=infinity, _nameMethodClone="_clone") {
 	
@@ -178,13 +184,14 @@ function UNIT_deepCopy(_value, _dpt=infinity, _nameMethodClone="_clone") {
 		_val = _refs_meth[--_size];
 		_ref = __UNIT_deepCopy_metaRef(_rmap, _val);
 		
-		_stmp = method_get_self(_ref);
+		_stmp = method_get_self(_val);
 		if (_stmp == undefined) {
 			_new = method(undefined, _val);	
 		}
 		else {
 			
-			_new = method(_rmap[? _stmp] ?? _stmp, _val);
+			_skey = _rmap[? _stmp];
+			_new = method(is_undefined(_skey) ? _stmp : _skey.ref, _val);
 		}
 		
 		_ref.ref = _new;
@@ -310,6 +317,4 @@ function __UNIT_deepCopy_nd_valueSet(_sname, _sSet, _sMetaSet, _rmap, _value, _d
 }
 
 #endregion
-
-
 
