@@ -1,5 +1,24 @@
 
+var _stc = {};
+_stc.a = _stc;
+_stc.b = [20, _stc];
+_stc.c = {
+	x: 0,
+	mt: function() {
+		
+	}
+}
 
+var _copy = UNIT_deepCopy(_stc);
+show_debug_message(_stc);
+show_debug_message(_copy);
+show_debug_message("all: 0");
+show_debug_message(_copy == _stc);
+show_debug_message(_copy.a == _stc.a);
+show_debug_message(_copy.b == _stc.b);
+show_debug_message(_copy.c == _stc.c);
+show_debug_message(_copy.b[1] == _stc.b[1]);
+show_debug_message("all: 1");
 
 
 function UNIT_deepCopy(_value, _dpt=infinity, _nameMethodClone="_clone") {
@@ -11,7 +30,6 @@ function UNIT_deepCopy(_value, _dpt=infinity, _nameMethodClone="_clone") {
 		);
 	}
 	
-	_dpt = round(_dpt);
 	if (_dpt < 1 || not __UNIT_deepCopy_isRef(_value)) return _value;
 	
 	var _rmap = ds_map_create();
@@ -110,7 +128,7 @@ function UNIT_deepCopy(_value, _dpt=infinity, _nameMethodClone="_clone") {
 								variable_struct_set,
 								__UNIT_deepCopy_metaStcSet,
 								_rmap,
-								_val[_stmp],
+								_val[$ _stmp],
 								_new,
 								_stmp,
 								_refs_next,
@@ -181,7 +199,7 @@ function __UNIT_deepCopy_metaRef(_id, _ref) {
 		return _meta;
 	}
 	
-	_meta.code = 0x2;
+	_meta.code = max(0x2, _meta.code);
 	return _meta;
 }
 
@@ -211,19 +229,20 @@ function __UNIT_deepCopy_unsubscribe(_ref) {
 	
 	var _arrs;
 	var _size;
+	var _reff = _ref.ref;
 	
 	_arrs = _ref.sarr;
 	_size = array_length(_arrs);
 	while (_size > 0) {
 		_size -= 2;
-		array_set(_arrs[_size], _arrs[_size + 1], _ref);
+		array_set(_arrs[_size], _arrs[_size + 1], _reff);
 	}
 	
 	_arrs = _ref.sstc;
 	_size = array_length(_arrs);
 	while (_size > 0) {
 		_size -= 2;
-		variable_struct_set(_arrs[_size], _arrs[_size + 1], _ref);
+		variable_struct_set(_arrs[_size], _arrs[_size + 1], _reff);
 	}
 	
 	variable_struct_remove(_ref, "sarr");
