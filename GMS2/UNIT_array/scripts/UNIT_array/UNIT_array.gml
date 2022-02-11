@@ -285,7 +285,7 @@ function UNIT_arrFindByVal(_array, _value, _index=0) {
 
 /// @function		UNIT_arrExists(array, value);
 function UNIT_arrExists(_array, _value) {
-	return (UNIT_arrFindInd(_array, _value) != -1);
+	return (UNIT_arrFindByVal(_array, _value) != -1);
 }
 
 #endregion
