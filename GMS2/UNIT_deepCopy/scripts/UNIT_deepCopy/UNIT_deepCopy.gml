@@ -1,4 +1,19 @@
 
+singleton = function() {
+	static _singleton = function() {
+		var _singleton = {};
+		
+		_singleton._clone = method(_singleton, function() {
+			show_debug_message(">> _singleton.clone()");
+			return self;
+		});
+		
+		return _singleton;
+	}();
+	return _singleton;
+}
+
+
 var _global = {};
 var _stc = {};
 _stc.a = _stc;
@@ -11,8 +26,12 @@ _stc.c = {
 	check: method(_global, function() {
 		
 	}),
+	
 }
 _stc.c.mt2 = _stc.c.mt;
+_stc.s = singleton();
+_stc.s2 = [singleton(), singleton()];
+
 
 var _copy = UNIT_deepCopy(_stc);
 show_debug_message(_stc);
@@ -38,6 +57,10 @@ show_debug_message(_copy.c.mt == _copy.c.mt2);
 show_debug_message(_copy == method_get_self(_copy.c.mt));
 show_debug_message(_copy == method_get_self(_copy.c.mt2));
 show_debug_message(method_get_self(_copy.c.check) == _global);
+show_debug_message(_copy.s == singleton());
+show_debug_message(_copy.s == _stc.s);
+show_debug_message(_copy.s2[0] == singleton());
+show_debug_message(_copy.s2[1] == singleton());
 
 function UNIT_deepCopy(_value, _dpt=infinity, _nameMethodClone="_clone") {
 	

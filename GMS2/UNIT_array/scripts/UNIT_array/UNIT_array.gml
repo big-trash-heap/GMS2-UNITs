@@ -273,8 +273,8 @@ function UNIT_arrBulFlattenFrom(_depth) {
 
 #region find
 
-/// @function		UNIT_arrFindInd(array, value, [index=0]);
-function UNIT_arrFindInd(_array, _value, _index=0) {
+/// @function		UNIT_arrFindByVal(array, value, [index=0]);
+function UNIT_arrFindByVal(_array, _value, _index=0) {
 	
 	var _size = array_length(_array);
 	for (; _index < _size; ++_index)
