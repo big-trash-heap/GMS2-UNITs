@@ -156,6 +156,8 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	
 	if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
 	
+	// $$Broken$$
+	
 	self.__mark = weak_ref_create(self);
 	self.__mark_ref = undefined;
 	
@@ -163,6 +165,9 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	
 	// этот метод нельзя переопределять
 	static __copyn_ = function(_struct) {
+		
+		// $$Broken$$
+		
 		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
 		var _keys = variable_struct_get_names(_struct);
@@ -226,6 +231,8 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	
 	static _mark = function() {
 		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
+		
+		// $$Broken$$
 		
 		//var _cell = __UNIT_tmHandlerMap()[? self];
 		if (_cell != undefined) {
