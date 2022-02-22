@@ -194,7 +194,7 @@ self._fff = function() {
 		timer.resume();
 	});
 	
-	show_message(UNIT_tmGl()._toArray());
+	//show_message(UNIT_tmGl()._toArray());
 	
 	var base = UNIT_tmGl_loop(function() {
 		show_debug_message("loop");	
@@ -207,7 +207,7 @@ self._fff = function() {
 		var _new = UNIT_tmGl_syncStp(7, 180, function(_gl, _timer) {
 			show_debug_message(["sync", _timer.getTime()]);
 			
-		});
+		});    
 		show_message(_new);
 		UNIT_tmGl_sync(1000 * room_speed, function() {
 			show_debug_message([" >>>", "sync"]);

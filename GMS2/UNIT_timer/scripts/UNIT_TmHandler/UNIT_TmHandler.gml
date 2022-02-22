@@ -35,16 +35,11 @@ function UNIT_TmHandler()
 		_data.timer = undefined;
 	}
 	
-	//static _map = __UNIT_tmHandlerMap();
-	
 	self.__timers = [];
 	self.__count  = 0;
 	self.__clear  = -1;
 	
 	static __unbind = function(_timer, _inTick) {
-		
-		//var _timer = _cell[__UNIT_TM_CELL._TIMER];
-		//_cell[@ __UNIT_TM_CELL._HANDLER] = undefined;
 		
 		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_INFORMING_BINDING) {
@@ -53,8 +48,6 @@ function UNIT_TmHandler()
 		
 		}
 		#endregion
-		
-		//ds_map_delete(self._map, _timer);
 		
 		_timer.__unbind();
 		
@@ -66,15 +59,6 @@ function UNIT_TmHandler()
 		
 		}
 		#endregion
-		
-		//#region PREPROCESSOR
-		//if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
-		
-		//_timer.__debug_time = 0;
-		//self.__debug_time = 0;
-	
-		//}
-		//#endregion
 		
 		--self.__count;
 		_timer.__free(self, _timer, _inTick);
@@ -106,22 +90,9 @@ function UNIT_TmHandler()
 		}
 		#endregion
 		
-		//#region PREPROCESSOR
-		//if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
-		
-		//self.__debug_time = 0;
-		//_timer.__debug_time = 0;
-		
-		//}
-		//#endregion
-		
-		//var _cell = [self, _timer];
-		//self._map[? _timer] = _cell;
-		
 		var _anchor = _timer.__bind(self);
 		
 		++self.__count;
-		//array_push(self.__timers, _cell);
 		array_push(self.__timers, _anchor);
 		
 		_timer.__init(self, _timer);
@@ -130,14 +101,6 @@ function UNIT_TmHandler()
 	}
 	
 	static tick = function(_super) {
-		
-		//#region PREPROCESSOR
-		//if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
-		
-		//self.__debug_time = 0;
-		
-		//}
-		//#endregion
 		
 		var _size = array_length(self.__timers);
 		if (_size > 0) {
@@ -153,14 +116,11 @@ function UNIT_TmHandler()
 			
 			var _i = 0, _j = 0;
 			var _value, _timer;
-			//var _data;
 			do {
 				
 				_value = self.__timers[_i];
 				_timer = _value.timer;
 				
-				//if (_value[__UNIT_TM_CELL._HANDLER] == self) {
-				//if (weak_ref_alive(_weak_timer)) {
 				if (_timer != undefined) {
 					
 					#region PREPROCESSOR
@@ -171,16 +131,6 @@ function UNIT_TmHandler()
 					}
 					#endregion
 					
-					//_timer = _value[__UNIT_TM_CELL._TIMER];
-					
-					//#region PREPROCESSOR
-					//if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
-					
-					//_timer.__debug_time = 0;
-					
-					//}
-					//#endregion
-					
 					if (not _timer.__tick(self, _timer, _super)) {
 						self.__timers[_j] = _value;
 						++_j;
@@ -188,9 +138,6 @@ function UNIT_TmHandler()
 					else {
 						
 						// remove mode: handler-space 
-						//_value = self._map[? _timer];
-						//if (_value != undefined && _value[__UNIT_TM_CELL._HANDLER] == self)
-						//	self.__unbind(_value, true);
 						if (_timer.getBind() == self) {
 							self.__unbind(_timer, true);
 						}
@@ -203,10 +150,8 @@ function UNIT_TmHandler()
 			while (_i != _size) {
 				
 				_value = self.__timers[_i];
-				
 				++_i;
 				
-				//if (_value[__UNIT_TM_CELL._HANDLER] == self) {
 				if (_value.timer != undefined) {
 					self.__timers[_j] = _value;
 					++_j;
@@ -360,127 +305,11 @@ function UNIT_TmHandler()
 	
 }
 
-///// @function		UNIT_tmDebugErrorMemory([step=~10sec], [f_handlers=log], [f_timers=log]);
-//function UNIT_tmDebugErrorMemory(_step=room_speed*10, _f_handlers, _f_timers) {
-//	static _memoryTime = 0;
-	
-//	if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
-	
-//	var _interval = max(room_speed * 5 - 1, _step - 1);
-//	if (++_memoryTime > _interval) {
-//		_memoryTime = 0;
-//	}
-//	else exit;
-	
-//	_f_handlers ??= function(_handler) {
-//		if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
-		
-//		show_debug_message(@"UNIT::timer -> обнаружен обработчик, который не используется "
-//		+ string(_handler.__debug_time) + " frames; ~" + string(_handler.__debug_time / room_speed) + " seconds;"
-//		+ "\n\tUNIT::timer -> вероятная утечка памяти"
-//		+ "\n\tUNIT::timer -> inst: " + string(_handler)
-//		+ "\n\tUNIT::timer -> timers-list:"
-//		);
-		
-//		var _timers = _handler._toArray();
-//		var _size = array_length(_timers);
-//		for (var _i = 0; _i < _size; ++_i) {
-//			show_debug_message("\t" + string(_i + 1) + ". " + string(_timers[_i]));
-//		}
-		
-//		show_debug_message("\n");
-		
-//		}
-//	}
-	
-//	_f_timers ??= function(_timer) {
-//		if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
-		
-//		show_debug_message(@"UNIT::timer -> обнаружен таймер, который не используется "
-//		+ string(_timer.__debug_time) + " frames; ~" + string(_timer.__debug_time / room_speed) + " seconds;"
-//		+ "\n\tUNIT::timer -> вероятная утечка памяти"
-//		+ "\n\tUNIT::timer -> inst: " + string(_timer) + "\n"
-//		);
-		
-//		}
-//	}
-	
-//	var _handlers = ds_map_create();
-//	var _map = __UNIT_tmHandlerMap();
-	
-//	var _key = ds_map_find_first(_map);
-//	var _val, _timer, _handler, _time;
-//	var _list;
-	
-//	show_debug_message("\nUNIT::timer::UNIT_tmsHandlerDebugErrorMemory(); // section: timers\n\n");
-	
-//	repeat ds_map_size(_map) {
-		
-//		_val = _map[? _key];
-//		_key = ds_map_find_next(_map, _key);
-		
-//		_handler = _val[__UNIT_TM_CELL._HANDLER];
-//		_timer   = _val[__UNIT_TM_CELL._TIMER];
-		
-//		_list = _handlers[? _handler];
-//		if (_list == undefined) {
-//			_list = ds_list_create();
-//			ds_map_add_list(_handlers, _handler, _list);
-//		}
-		
-//		_timer.__debug_time += _interval;
-//		if (_timer.__debug_time > _step) {
-			
-//			if (_f_timers(_timer) == true) ds_map_delete(_map, _timer);
-//		}
-		
-//		if (ds_map_exists(_map, _timer)) {
-			
-//			ds_list_add(_list, _timer);
-//		}
-//	}
-	
-//	show_debug_message("UNIT::timer::UNIT_tmsHandlerDebugErrorMemory(); // section: handlers\n\n");
-	
-//	_key = ds_map_find_first(_handlers);
-//	repeat ds_map_size(_handlers) {
-		
-//		_val = _handlers[? _key];
-		
-//		_handler = _key;
-//		_timer   = _val
-		
-//		_key = ds_map_find_next(_handlers, _key);
-		
-//		_handler.__debug_time += _interval;
-//		if (_handler.__debug_time > _step) {
-			
-//			if (_f_handlers(_handler) == true) {
-				
-//				var _size = ds_list_size(_timer);
-//				while (_size > 0) ds_map_delete(_map, _timer[| --_size]);
-//			}
-//		}
-//	}
-	
-//	ds_map_destroy(_handlers);
-	
-//	}
-//}
-
-
 #region __private
 
 #macro ____UNIT_TM_ERROR_CLONE          "UNIT::timer -> UNIT_PREPROCESSOR_TM_ENABLE_CLONE отключена"
 #macro ____UNIT_TM_ERROR_BIND_SWITCH    "UNIT::timer -> UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH отключена"
 #macro ____UNIT_TM_ERROR_HANDLER        "UNIT::timer -> UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK отключена"
-
-//enum __UNIT_TM_CELL { _HANDLER, _TIMER };
-
-//function __UNIT_tmHandlerMap() {
-//	static _map = ds_map_create();
-//	return _map;
-//}
 
 function __UNIT_TmHandlerPreprocessor() constructor {
 	
@@ -489,12 +318,6 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 	self.__temp = undefined;
 	
 	}
-	
-	//if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
-	
-	//self.__debug_time = 0;
-	
-	//}
 	
 	static __info_bind   = __UNIT_tmVoid;
 	static __info_unbind = __UNIT_tmVoid;
@@ -548,16 +371,16 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 	static _toArray = function() {
 		
 		var _array = array_create(self.__count);
-		//var _value;
+		var _value;
 		
-		//for (var _i = 0, _j = -1; _i < self.__count; ++_i) {
+		for (var _i = 0, _j = -1; _i < self.__count; ++_i) {
 			
-		//	do {
-		//		_value = self.__timers[++_j];
-		//	} until (_value[__UNIT_TM_CELL._HANDLER] == self);
+			do {
+				_value = self.__timers[++_j];
+			} until (_value[__UNIT_TM_CELL._HANDLER] == self);
 			
-		//	_array[_i] = _value[__UNIT_TM_CELL._TIMER];
-		//}
+			_array[_i] = _value[__UNIT_TM_CELL._TIMER];
+		}
 		
 		return _array;
 	}

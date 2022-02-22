@@ -130,22 +130,14 @@ function UNIT_TmTimer()
 /// @description	Отвяжет таймер от обработчика 
 //					и вернёт true, если таймер был отвязан
 function UNIT_tmUnbind(_timer) {
-	//static _map = __UNIT_tmHandlerMap();
-	//var _cell = _map[? _timer];
-	//if (_cell == undefined) return false;
-	
-	//_cell[__UNIT_TM_CELL._HANDLER].__unbind(_cell, false);
-	//return true;
-	
+
 	return _timer.unbind();
 }
 
 /// @param			timer
 /// @description	Вернёт привязан ли таймер к чему-то
 function UNIT_tmIsBind(_timer) {
-	//static _map = __UNIT_tmHandlerMap();
-	//return ds_map_exists(_map, _timer);
-	
+
 	return _timer.isBind();
 }
 
@@ -153,10 +145,7 @@ function UNIT_tmIsBind(_timer) {
 /// @description	Вернёт обработчик, к которому привязан таймер
 //					Если не привязан вернёт undefined
 function UNIT_tmGetBind(_timer) {
-	//static _map = __UNIT_tmHandlerMap();
-	//var _cell = _map[? _timer];
-	//if (_cell != undefined) return _cell[__UNIT_TM_CELL._HANDLER];
-	
+
 	return _timer.getBind();
 }
 
@@ -171,12 +160,6 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	self.__mark_ref = undefined;
 	
 	}
-	
-	//if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
-	
-	//self.__debug_time = 0;
-	
-	//}
 	
 	// этот метод нельзя переопределять
 	static __copyn_ = function(_struct) {
