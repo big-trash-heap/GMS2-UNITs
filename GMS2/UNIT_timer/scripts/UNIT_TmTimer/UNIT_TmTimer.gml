@@ -9,10 +9,33 @@ function UNIT_TmTimer()
 	
 	#region __private
 	
+	self.__handler = undefined;
+	
 	static __init = __UNIT_tmVoid /* handler, timer         */;
 	static __tick = __UNIT_tmVoid /* handler, timer, super  */;
 	static __free = __UNIT_tmVoid /* handler, timer, inTick */;
 	
+	static __data = function() {
+		return self.__handler.data;
+	}
+	
+	static __bind = function(_handler) {
+		
+		var _data = _handler.__timerBind(self);
+		
+		self.__handler = {
+			handler: _handler,
+			data: _data,
+		}
+		
+		return _data;
+	}
+	
+	static __unbind = function() {
+		
+		self.__handler.handler.__timerUnbind(self, self.__handler.data);
+		delete self.__handler;
+	}
 	
 	static __set_f = function(_name, _f) {
 		if (is_undefined(_f) || _f == __UNIT_tmVoid)
@@ -37,17 +60,23 @@ function UNIT_TmTimer()
 	
 	static unbind = function() {
 		
-		return UNIT_tmUnbind(self);
+		if (self.__handler != undefined) {
+			
+			self.__handler.handler.__unbind(self, false);
+			return true;
+		}
+		
+		return false;
 	}
 	
 	static isBind = function() {
 		
-		return UNIT_tmIsBind(self);
+		return (self.__handler != undefined);
 	}
 	
 	static getBind = function() {
 		
-		return UNIT_tmGetBind(self);
+		return self.__handler.handler;
 	}
 	
 	static toString = function() {
@@ -101,28 +130,34 @@ function UNIT_TmTimer()
 /// @description	Отвяжет таймер от обработчика 
 //					и вернёт true, если таймер был отвязан
 function UNIT_tmUnbind(_timer) {
-	static _map = __UNIT_tmHandlerMap();
-	var _cell = _map[? _timer];
-	if (_cell == undefined) return false;
+	//static _map = __UNIT_tmHandlerMap();
+	//var _cell = _map[? _timer];
+	//if (_cell == undefined) return false;
 	
-	_cell[__UNIT_TM_CELL._HANDLER].__unbind(_cell, false);
-	return true;
+	//_cell[__UNIT_TM_CELL._HANDLER].__unbind(_cell, false);
+	//return true;
+	
+	return _timer.unbind();
 }
 
 /// @param			timer
 /// @description	Вернёт привязан ли таймер к чему-то
 function UNIT_tmIsBind(_timer) {
-	static _map = __UNIT_tmHandlerMap();
-	return ds_map_exists(_map, _timer);
+	//static _map = __UNIT_tmHandlerMap();
+	//return ds_map_exists(_map, _timer);
+	
+	return _timer.isBind();
 }
 
 /// @param			timer
 /// @description	Вернёт обработчик, к которому привязан таймер
 //					Если не привязан вернёт undefined
 function UNIT_tmGetBind(_timer) {
-	static _map = __UNIT_tmHandlerMap();
-	var _cell = _map[? _timer];
-	if (_cell != undefined) return _cell[__UNIT_TM_CELL._HANDLER];
+	//static _map = __UNIT_tmHandlerMap();
+	//var _cell = _map[? _timer];
+	//if (_cell != undefined) return _cell[__UNIT_TM_CELL._HANDLER];
+	
+	return _timer.getBind();
 }
 
 
@@ -137,11 +172,11 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	
 	}
 	
-	if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
+	//if (UNIT_PREPROCESSOR_TM_ENABLE_DEBUG) {
 	
-	self.__debug_time = 0;
+	//self.__debug_time = 0;
 	
-	}
+	//}
 	
 	// этот метод нельзя переопределять
 	static __copyn_ = function(_struct) {
@@ -209,7 +244,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	static _mark = function() {
 		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
 		
-		var _cell = __UNIT_tmHandlerMap()[? self];
+		//var _cell = __UNIT_tmHandlerMap()[? self];
 		if (_cell != undefined) {
 			
 			if (self.__mark_ref == undefined) {
@@ -272,7 +307,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	
 	
 	static _unbind = function() {
-		UNIT_tmUnbind(self);
+		self.unbind();
 		return self;
 	}
 	

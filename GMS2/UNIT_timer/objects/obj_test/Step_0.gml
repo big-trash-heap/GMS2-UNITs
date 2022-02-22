@@ -2,4 +2,4 @@
 UNIT_tmGlTick();
 //handler.tick();
 
-UNIT_tmDebugErrorMemory();
+//UNIT_tmDebugErrorMemory();

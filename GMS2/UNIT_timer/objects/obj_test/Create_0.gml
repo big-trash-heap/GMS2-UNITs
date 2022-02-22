@@ -1,3 +1,16 @@
+
+
+//UNIT_tmGl_loop(function() {
+//	show_debug_message("loop");
+//});
+
+
+//exit;
+
+
+
+
+
 /*
 var _handler = new UNIT_TmHandlerSimple();
 _handler.newLoop(function() {

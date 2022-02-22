@@ -1,5 +1,6 @@
 {
   "resources": [
+    {"id":{"name":"Script3","path":"scripts/Script3/Script3.yy",},"order":3,},
     {"id":{"name":"room_test","path":"rooms/room_test/room_test.yy",},"order":0,},
     {"id":{"name":"UNIT_arrayHigher","path":"scripts/UNIT_arrayHigher/UNIT_arrayHigher.yy",},"order":1,},
     {"id":{"name":"UNIT_array","path":"scripts/UNIT_array/UNIT_array.yy",},"order":0,},
