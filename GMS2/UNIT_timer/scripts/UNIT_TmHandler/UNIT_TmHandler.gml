@@ -50,15 +50,6 @@ function UNIT_TmHandler()
 		
 		_timer.__unbind();
 		
-		//#region PREPROCESSOR
-		//if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
-		
-		//_timer.__mark = weak_ref_create(_timer);
-		//_timer.__mark_ref = undefined;
-		
-		//}
-		//#endregion
-		
 		--self.__count;
 		_timer.__free(self, _timer, _inTick);
 	}

@@ -1,6 +1,6 @@
 
 // extend
-//#macro UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK	false
+#macro UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK	false
 
 // Абстрактный класс
 function UNIT_TmTimer() 
@@ -154,15 +154,6 @@ function UNIT_tmGetBind(_timer) {
 
 function __UNIT_TmTimerPreprocessor() constructor {
 	
-	//if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
-	
-	//// $$Broken$$
-	
-	//self.__mark = weak_ref_create(self);
-	//self.__mark_ref = undefined;
-	
-	//}
-	
 	// этот метод нельзя переопределять
 	static __copyn_ = function(_struct) {
 		
@@ -228,27 +219,16 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	
 	
 	static _mark = function() {
-		//if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
+		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
 		
-		//// $$Broken$$
+		return weak_ref_create(self.__handler);
 		
-		////var _cell = __UNIT_tmHandlerMap()[? self];
-		//if (_cell != undefined) {
-			
-		//	if (self.__mark_ref == undefined) {
-				
-		//		self.__mark = weak_ref_create(self);
-		//		self.__mark_ref = _cell;
-		//	}
-		//}
-		//return self.__mark;
+		}
+		else {
 		
-		//}
-		//else {
+		show_error("UNIT::timer -> UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK отключена", true);
 		
-		//show_error("UNIT::timer -> UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK отключена", true);
-		
-		//}
+		}
 	}
 	
 	
