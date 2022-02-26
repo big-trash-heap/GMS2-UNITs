@@ -8,7 +8,6 @@
 
 // debug
 #macro UNIT_PREPROCESSOR_TM_ENABLE_LOG                       true
-//#macro UNIT_PREPROCESSOR_TM_ENABLE_DEBUG                     true
 #macro UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_CHECK_ERROR_TICK	 true
 
 // extend 0
@@ -51,14 +50,14 @@ function UNIT_TmHandler()
 		
 		_timer.__unbind();
 		
-		#region PREPROCESSOR
-		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
+		//#region PREPROCESSOR
+		//if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
 		
-		_timer.__mark = weak_ref_create(_timer);
-		_timer.__mark_ref = undefined;
+		//_timer.__mark = weak_ref_create(_timer);
+		//_timer.__mark_ref = undefined;
 		
-		}
-		#endregion
+		//}
+		//#endregion
 		
 		--self.__count;
 		_timer.__free(self, _timer, _inTick);
@@ -324,20 +323,19 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 	
 	static __clone = function(_constructor) {
 		
-		// $$Broken$$
-		
 		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
 		var _handler = new _constructor();
-		var _value;
+		var _value, _timer;
 		
 		for (var _i = 0, _j = -1; _i < self.__count; ++_i) {
 			
 			do {
 				_value = self.__timers[++_j];
-			} until (_value[__UNIT_TM_CELL._HANDLER] == self);
+				_timer = _value.timer;
+			} until (_timer != undefined);
 			
-			_handler.bind(_value[__UNIT_TM_CELL._TIMER]._clone());
+			_handler.bind(_timer._clone());
 		}
 		
 		return _handler;
@@ -353,8 +351,6 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 	#region public
 	
 	static _clone = function() {
-		
-		// $$Broken$$
 		
 		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
@@ -376,18 +372,17 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 	
 	static _toArray = function() {
 		
-		// $$Broken$$
-		
 		var _array = array_create(self.__count);
-		var _value;
+		var _value, _timer;
 		
 		for (var _i = 0, _j = -1; _i < self.__count; ++_i) {
 			
 			do {
 				_value = self.__timers[++_j];
-			} until (_value[__UNIT_TM_CELL._HANDLER] == self);
+				_timer = _value.timer;
+			} until (_timer != undefined);
 			
-			_array[_i] = _value[__UNIT_TM_CELL._TIMER];
+			_array[_i] = _timer;
 		}
 		
 		return _array;
@@ -403,11 +398,10 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 	// является ли текущий таймер (во время выполнения tick) связан с текущим обработчиком
 	static _tick_isBind = function() {
 		
-		// $$Broken$$
-		
 		if (UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK) {
 		
-		return (self == UNIT_tmGetBind(self.__temp[__UNIT_TM_CELL._TIMER]));
+		var _timer = self.__temp.timer;
+		return (_timer != undefined && self == _timer.getBind());
 		
 		}
 		else {
@@ -421,11 +415,9 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 	// при условии, что он не менял очереди выполнения (был отвязан и привязан)
 	static _tick_isEntry = function() {
 		
-		// $$Broken$$
-		
 		if (UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK) {
 		
-		return (self == self.__temp[__UNIT_TM_CELL._HANDLER]);
+		return (self.__temp.timer != undefined);
 		
 		}
 		else {
