@@ -132,6 +132,9 @@ function UNIT_TmHandler()
 							self.__unbind(_timer, true);
 						}
 						
+						// remove mode: entry-space
+						// TODO
+						
 					}
 				}
 			} until (++_i == _size);
