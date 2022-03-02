@@ -1,6 +1,6 @@
 
 // extend
-#macro UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK	false
+#macro UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK	true
 
 // Абстрактный класс
 function UNIT_TmTimer() 
@@ -21,6 +21,14 @@ function UNIT_TmTimer()
 	
 	static __bind = function(_handler) {
 		
+		#region PREPROCESSOR
+		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
+		
+		self.__mark_reference = weak_ref_create(self);
+		
+		}
+		#endregion
+		
 		var _data = _handler.__timerBind(self);
 		
 		self.__handler = {
@@ -32,6 +40,14 @@ function UNIT_TmTimer()
 	}
 	
 	static __unbind = function() {
+		
+		#region PREPROCESSOR
+		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
+		
+		self.__mark_reference = weak_ref_create(self);
+		
+		}
+		#endregion
 		
 		self.__handler.handler.__timerUnbind(self, self.__handler.data);
 		delete self.__handler;
@@ -154,6 +170,12 @@ function UNIT_tmGetBind(_timer) {
 
 function __UNIT_TmTimerPreprocessor() constructor {
 	
+	if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
+	
+	self.__mark_reference = weak_ref_create(self);
+	
+	}
+	
 	// этот метод нельзя переопределять
 	static __copyn_ = function(_struct) {
 		
@@ -221,7 +243,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	static _mark = function() {
 		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
 		
-		return weak_ref_create(self.__handler);
+		return self.__mark_reference;
 		
 		}
 		else {
