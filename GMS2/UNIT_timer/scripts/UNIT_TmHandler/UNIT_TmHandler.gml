@@ -10,6 +10,9 @@
 #macro UNIT_PREPROCESSOR_TM_ENABLE_LOG                       true
 #macro UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_CHECK_ERROR_TICK	 true
 
+// mode
+#macro UNIT_PREPROCESSOR_TM_ENABLE_REMOVE_ENTRY_SPACE        false
+
 // extend 0
 #macro UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH               true
 #macro UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_INFORMING_BINDING true
@@ -127,14 +130,23 @@ function UNIT_TmHandler()
 					}
 					else {
 						
+						if (UNIT_PREPROCESSOR_TM_ENABLE_REMOVE_ENTRY_SPACE) {
+						
+						// remove mode: entry-space
+						if (_value.timer == _timer) {
+							self.__unbind(_timer, true);
+						}
+						
+						}
+						else
+						{
+						
 						// remove mode: handler-space 
 						if (_timer.getBind() == self) {
 							self.__unbind(_timer, true);
 						}
 						
-						// remove mode: entry-space
-						// TODO
-						
+						}
 					}
 				}
 			} until (++_i == _size);
