@@ -450,6 +450,4 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 	
 }
 
-#macro ____UNIT_TM_SKIP_VOID_TICK		if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) { show_debug_message("UNIT::timer::skip -> " + string(_timer)); };
-
 #endregion

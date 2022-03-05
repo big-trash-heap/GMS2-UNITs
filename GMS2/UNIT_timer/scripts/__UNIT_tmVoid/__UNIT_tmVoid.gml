@@ -17,6 +17,11 @@ function __UNIT_tmOverride_get_ftick() {
 	return self.__ftick;
 }
 
+#macro ____UNIT_TM_SKIP_VOID_TICK \
+if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) { \
+show_debug_message("UNIT::timer::skip -> " + string(_timer)); \
+}
+
 #macro ____UNIT_TM_SKIP_VOID_TICK_LOOP \
 if (UNIT_PREPROCESSOR_TM_ENABLE_SKIP_VOID_TICK) { \
 if (_timer._get_ftick() == __UNIT_tmVoid) { \
