@@ -74,11 +74,11 @@ function UNIT_TmTimer()
 	
 	#endregion
 	
-	static unbind = function() {
+	static unbind = function(_inTick=false) {
 		
 		if (self.__handler != undefined) {
 			
-			self.__handler.handler.__unbind(self, false);
+			self.__handler.handler.__unbind(self, _inTick);
 			return true;
 		}
 		
