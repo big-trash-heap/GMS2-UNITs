@@ -12,6 +12,7 @@
 
 // mode
 #macro UNIT_PREPROCESSOR_TM_ENABLE_REMOVE_ENTRY_SPACE        false
+#macro UNIT_PREPROCESSOR_TM_ENABLE_SKIP_VOID_TICK            false
 
 // extend 0
 #macro UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH               true
@@ -120,6 +121,18 @@ function UNIT_TmHandler()
 					if (UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK) {
 					
 					self.__temp = _value;
+					
+					}
+					#endregion
+					
+					#region PREPROCESSOR
+					if (UNIT_PREPROCESSOR_TM_ENABLE_SKIP_VOID_TICK) {
+					
+					if (_timer.__tick == __UNIT_tmVoid) {
+						self.__timers[_j] = _value;
+						++_j;
+						continue;
+					}
 					
 					}
 					#endregion
@@ -437,5 +450,6 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 	
 }
 
-#endregion
+#macro ____UNIT_TM_SKIP_VOID_TICK		if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) { show_debug_message("UNIT::timer::skip -> " + string(_timer)); };
 
+#endregion

@@ -17,9 +17,15 @@ function UNIT_TmTimerSync(_steps, _ftick, _finit, _ffree) : __UNIT_TmTimerTimela
 		if (_timer.__step > 0) {
 		
 			--_timer.__step;
+			
+			#region PREPROCESSOR
+			____UNIT_TM_SKIP_VOID_TICK_TIMELAPSE;
+			#endregion
+			
 			if (_timer.__ftick(_handler, _timer, _super) == true) {
 				return true;
 			}
+			
 			return (_timer.__step == 0);
 		}
 	}
@@ -54,9 +60,15 @@ function UNIT_TmTimerSyncExt(_steps, _ftick, _finit, _ffree) : __UNIT_TmTimerTim
 		if (_timer.__step > 0) {
 		
 			_timer.__step = max(0, _timer.__step - _timer.__tickStep);
+			
+			#region PREPROCESSOR
+			____UNIT_TM_SKIP_VOID_TICK_TIMELAPSE;
+			#endregion
+			
 			if (_timer.__ftick(_handler, _timer, _super) == true) {
 				return true;	
 			}
+			
 			return (_timer.__step == 0);
 		}
 	}

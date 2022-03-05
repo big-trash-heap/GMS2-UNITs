@@ -45,7 +45,14 @@ function UNIT_TmTimerLoopExt(_ftick, _finit, _ffree) : UNIT_TmTimer() constructo
 	
 	static __tick = function(_handler, _timer, _super) {
 		
-		if (_timer.__play == true) return _timer.__ftick(_handler, _timer, _super);
+		if (_timer.__play == true) {
+			
+			#region PREPROCESSOR
+			____UNIT_TM_SKIP_VOID_TICK_LOOP;
+			#endregion
+			
+			return _timer.__ftick(_handler, _timer, _super);
+		}
 	}
 	
 	self.__set_finit(_finit);

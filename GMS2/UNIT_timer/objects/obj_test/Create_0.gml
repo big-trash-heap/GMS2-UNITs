@@ -216,6 +216,10 @@ self._fff = function() {
 		UNIT_tmGl_async(1000 * 1000, function() {
 			show_debug_message([" >>>", "async"]);
 			return keyboard_check(vk_space);
+		}, undefined, function() {
+			UNIT_tmGl_sync(1000, undefined, undefined, function() {
+				show_message("wowo");
+			});
 		});
 	})._set("t", base);
 }

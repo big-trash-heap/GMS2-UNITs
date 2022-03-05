@@ -122,9 +122,15 @@ function __UNIT_tmAsyncTick(_handler, _timer, _super) {
 		}
 		
 		_timer.__ctime = _ctime;
+		
+		#region PREPROCESSOR
+		____UNIT_TM_SKIP_VOID_TICK_TIMELAPSE;
+		#endregion
+		
 		if (_timer.__ftick(_handler, _timer, _super, _step) == true) {
 			return true;	
 		}
+		
 		return (_timer.__step == 0);
 	}
 }

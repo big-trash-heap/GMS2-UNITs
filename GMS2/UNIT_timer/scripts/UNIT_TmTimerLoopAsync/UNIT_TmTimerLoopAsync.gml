@@ -28,6 +28,17 @@ function UNIT_TmTimerLoopAsync(_ftick, _finit, _ffree) : UNIT_TmTimerLoop(undefi
 		var _diff = _ctime - _timer.__ctime;
 		
 		_timer.__ctime = _ctime;
+		
+		#region PREPROCESSOR
+		if (UNIT_PREPROCESSOR_TM_ENABLE_SKIP_VOID_TICK) {
+		
+		if (_timer._get_ftick() == __UNIT_tmVoid) {
+			return false;
+		}
+		
+		}
+		#endregion
+		
 		return _timer.__ftick(_handler, _timer, _super, _diff);
 	}
 	
@@ -73,6 +84,11 @@ function UNIT_TmTimerLoopAsyncExt(_ftick, _finit, _ffree) : UNIT_TmTimerLoopExt(
 			var _diff = _ctime - _timer.__ctime;
 			
 			_timer.__ctime = _ctime;
+			
+			#region PREPROCESSOR
+			____UNIT_TM_SKIP_VOID_TICK_LOOP;
+			#endregion
+			
 			return _timer.__ftick(_handler, _timer, _super, _diff);
 		} else {
 			_timer.__ctime = _ctime;
