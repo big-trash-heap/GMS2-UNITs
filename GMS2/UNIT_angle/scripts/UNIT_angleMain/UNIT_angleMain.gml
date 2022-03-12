@@ -71,10 +71,35 @@ function UNIT_angleArcFurtherLimit(_angle, _arcAngle, _arcLengthHalf) {
 /// @function		UNIT_angleArcRotate(angleCurrent, angleRequired, speed, arcAngle, arcLengthHalf, [accuracy]);
 function UNIT_angleArcRotate(_angleCurrent, _angleRequired, _speed, _arcAngle, _arcLengthHalf, _accuracy) {
 	
-	return UNIT_angleRotate(_angleCurrent,
-		UNIT_angleArcWrap(_angleRequired, _arcAngle, _arcLengthHalf), 
-		_speed, _accuracy
-	);
+	if (sign(_speed) < 1 || sign(_arcLengthHalf) < 1) return _angleCurrent;
+	
+	_angleRequired = UNIT_angleArcWrap(_angleRequired, _arcAngle, _arcLengthHalf);
+	
+	var _diff = angle_difference(_angleRequired, _arcAngle);
+	if (sign(_arcLengthHalf - abs(_diff)) == -1) {
+		
+		if (sign(_diff) > 0) {
+			return UNIT_angleWrap(_arcAngle + _arcLengthHalf);
+		}
+		
+		return UNIT_angleWrap(_arcAngle - _arcLengthHalf);
+	}
+	
+	
+	//_angleRequired = UNIT_angleArcWrap(_angleRequired, _arcAngle, _arcLengthHalf);
+	
+	
+	
+	//var _diff = angle_difference(_angle, _arcAngle);
+	//if (sign(_arcLengthHalf - abs(_diff)) == -1) {
+		
+	//	if (sign(_diff) > 0) {
+	//		return UNIT_angleWrap(_arcAngle + _arcLengthHalf);
+	//	}
+		
+	//	return UNIT_angleWrap(_arcAngle - _arcLengthHalf);
+	//}
+	
 }
 
 /// @function		UNIT_angleArcIn(angleTest, arcAngle, arcLengthHalf);
@@ -93,16 +118,23 @@ function UNIT_angleArcIn(_angleTest, _arcAngle, _arcLengthHalf) {
 function UNIT_angleSpeedRotate(_angleCurrent, _angleRequired, _speed) {
 	
 	if (sign(_speed) < 1) return 0;
+	
 	return clamp(angle_difference(_angleRequired, _angleCurrent), -_speed, _speed);
 }
 
 /// @function		UNIT_angleSpeedArcRotate(angleCurrent, angleRequired, speed, arcAngle, arcLengthHalf);
 function UNIT_angleSpeedArcRotate(_angleCurrent, _angleRequired, _speed, _arcAngle, _arcLengthHalf) {
 	
-	return UNIT_angleSpeedRotate(_angleCurrent,
-		UNIT_angleArcWrap(_angleRequired, _arcAngle, _arcLengthHalf),
-		_speed
-	);
+	if (sign(_speed) < 1) return 0;
+	
+	var _sign = sign(angle_difference(_arcAngle, _angleRequired));
+	
+	if (_sign == 0 || sign(angle_difference(_arcAngle, _angleCurrent)) == _sign) {
+		_angleRequired = UNIT_angleArcWrap(_angleRequired, _arcAngle, _arcLengthHalf);
+		return clamp(angle_difference(_angleRequired, _angleCurrent), -_speed, _speed);
+	}
+	
+	return (-_speed * _sign);
 }
 
 /// @function		UNIT_angleArcRotateWrap(angleCurrent, angleRequired, speed, arcAngle, arcLengthHalf, [accuracy]);
