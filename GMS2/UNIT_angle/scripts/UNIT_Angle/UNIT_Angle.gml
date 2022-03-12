@@ -24,9 +24,10 @@ function UNIT_Angle(_angle=0) constructor {
 	}
 	
 	static rotateAngle = function(_angleRequired, _speed, _accuracy) {
-		self.__angle = UNIT_angleWrap(UNIT_angleRotate(self.__angle, 
-			_angleRequired, _speed, _accuracy
-		));
+		self.__angle =
+			UNIT_angleWrap(
+				UNIT_angleRotate(self.__angle, _angleRequired, _speed, _accuracy)
+			);
 		return self;
 	}
 	
@@ -39,6 +40,8 @@ function UNIT_Angle(_angle=0) constructor {
 
 /// @function		UNIT_AngleTwist([twist=0], [angle=0]);
 function UNIT_AngleTwist(_twist=0, _angle) : UNIT_Angle(_angle) constructor {
+	
+	/// TODO: rework
 	
 	#region __private
 	

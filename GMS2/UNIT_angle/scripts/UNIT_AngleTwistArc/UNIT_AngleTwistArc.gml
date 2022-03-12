@@ -2,6 +2,8 @@
 
 function UNIT_AngleTwistArc(_arcLength=90, _twist=0, _angle=0) constructor {
 	
+	/// TODO: rework
+	
 	#region __private
 	
 	self.__twist  = UNIT_angleWrap(_twist);

@@ -32,12 +32,13 @@ function UNIT_angleArcWrap(_angle, _arcAngle, _arcLengthHalf) {
 	if (sign(_arcLengthHalf) < 1) return UNIT_angleWrap(_arcAngle);
 	
 	var _diff = angle_difference(_angle, _arcAngle);
-	if (sign(_arcLengthHalf - abs(_diff)) < 1) {
+	if (sign(_arcLengthHalf - abs(_diff)) == -1) {
 		
-		if (sign(_diff) > 0)
+		if (sign(_diff) > 0) {
 			return UNIT_angleWrap(_arcAngle + _arcLengthHalf);
-		else
-			return UNIT_angleWrap(_arcAngle - _arcLengthHalf);
+		}
+		
+		return UNIT_angleWrap(_arcAngle - _arcLengthHalf);
 	}
 	
 	return UNIT_angleWrap(_angle);
@@ -48,11 +49,11 @@ function UNIT_angleArcNearestLimit(_angle, _arcAngle, _arcLengthHalf) {
 	
 	if (sign(_arcLengthHalf) < 1) return UNIT_angleWrap(_arcAngle);
 	
-	if (sign(angle_difference(_angle, _arcAngle)) > 0)
+	if (sign(angle_difference(_angle, _arcAngle)) == 1) {
 		return UNIT_angleWrap(_arcAngle + _arcLengthHalf);
-	else
-		return UNIT_angleWrap(_arcAngle - _arcLengthHalf);
+	}
 	
+	return UNIT_angleWrap(_arcAngle - _arcLengthHalf);
 }
 
 /// @function		UNIT_angleArcFurtherLimit(angle, arcAngle, arcLengthHalf);
@@ -60,10 +61,11 @@ function UNIT_angleArcFurtherLimit(_angle, _arcAngle, _arcLengthHalf) {
 	
 	if (sign(_arcLengthHalf) < 1) return UNIT_angleWrap(_arcAngle);
 	
-	if (sign(angle_difference(_angle, _arcAngle)) > 0)
+	if (sign(angle_difference(_angle, _arcAngle)) == 1) {
 		return UNIT_angleWrap(_arcAngle - _arcLengthHalf);
-	else
-		return UNIT_angleWrap(_arcAngle + _arcLengthHalf);
+	}
+	
+	return UNIT_angleWrap(_arcAngle + _arcLengthHalf);
 }
 
 /// @function		UNIT_angleArcRotate(angleCurrent, angleRequired, speed, arcAngle, arcLengthHalf, [accuracy]);
