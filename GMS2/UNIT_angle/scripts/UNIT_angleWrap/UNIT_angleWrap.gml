@@ -2,8 +2,6 @@
 // Я использовал свой старый код, который тоже можно скачать (но не с github)
 // https://marketplace.yoyogames.com/assets/5621/smooth-rotation-and-arc
 
-#region main
-
 /// @param			angle
 function UNIT_angleWrap(_angle) {
 	
@@ -86,13 +84,6 @@ function UNIT_angleArcRotateWrap(_angleCurrent, _angleRequired, _speed, _arcAngl
 	), _arcAngle, _arcLengthHalf);
 }
 
-/// @function		UNIT_angleArcIn(angleTest, arcAngle, arcLengthHalf);
-function UNIT_angleArcIn(_angleTest, _arcAngle, _arcLengthHalf) {
-	return (sign(_arcLengthHalf - abs(angle_difference(_angleTest, _arcAngle))) == 1);
-}
-
-#endregion
-
 /// @function		UNIT_angleSpeedRotate(angleCurrent, angleRequired, speed);
 function UNIT_angleSpeedRotate(_angleCurrent, _angleRequired, _speed) {
 	
@@ -111,6 +102,12 @@ function UNIT_angleSpeedArcRotate(_angleCurrent, _angleRequired, _speed, _arcAng
 	
 	return clamp(_angleCurrent - _angleRequired, -_speed, _speed);
 }
+
+/// @function		UNIT_angleArcIn(angleTest, arcAngle, arcLengthHalf);
+function UNIT_angleArcIn(_angleTest, _arcAngle, _arcLengthHalf) {
+	return (sign(_arcLengthHalf - abs(angle_difference(_angleTest, _arcAngle))) == 1);
+}
+
 
 #region __private
 
