@@ -2,14 +2,35 @@
 var _mouseDir = point_direction(x, y, mouse_x, mouse_y);
 var _rotate = 0.78 * (keyboard_check(ord("A")) - keyboard_check(ord("D")));
 
-direction  += _rotate;
-//image_angle = UNIT_angleArcRotate(image_angle, _mouseDir, 0.7, direction, 90);
+direction	+= _rotate;
+image_angle += _rotate;
 
-image_angle += UNIT_angleSpeedArcRotate(image_angle, _mouseDir, 0.7, direction, 120);
+var _save = image_angle;
+
+image_angle = UNIT_angleArcRotateWrap(image_angle, _mouseDir, 8, direction, 120);
+
+//image_angle += UNIT_angleSpeedArcRotate(image_angle, _mouseDir, 0.7, direction, 120);
+
+show_debug_message({
+	image_angle_previos: _save,
+	image_angle: image_angle,
+	required_angle: _mouseDir,
+	math_speed: UNIT_angleSpeedArcRotate(_save, _mouseDir, 8, direction, 120),
+});
 
 if (keyboard_check(vk_space)) {
 	
 	image_angle = _mouseDir;
+}
+
+if (keyboard_check(vk_control)) {
+	
+	image_angle = 0;
+}
+
+if (keyboard_check(vk_escape)) {
+	
+	game_end();
 }
 
 //s += _rotate;

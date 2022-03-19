@@ -1,7 +1,6 @@
 {
   "resources": [
-    {"id":{"name":"angle_limit_speed","path":"scripts/angle_limit_speed/angle_limit_speed.yy",},"order":0,},
-    {"id":{"name":"UNIT_angleMain","path":"scripts/UNIT_angleMain/UNIT_angleMain.yy",},"order":0,},
+    {"id":{"name":"UNIT_angleWrap","path":"scripts/UNIT_angleWrap/UNIT_angleWrap.yy",},"order":0,},
     {"id":{"name":"UNIT_Angle","path":"scripts/UNIT_Angle/UNIT_Angle.yy",},"order":0,},
     {"id":{"name":"spr_e100","path":"sprites/spr_e100/spr_e100.yy",},"order":1,},
     {"id":{"name":"UNIT_AngleTwistArc","path":"scripts/UNIT_AngleTwistArc/UNIT_AngleTwistArc.yy",},"order":2,},
@@ -33,9 +32,6 @@
     {"folderPath":"folders/UNIT::angle.yy","order":8,"resourceVersion":"1.0","name":"UNIT::angle","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/test.yy","order":9,"resourceVersion":"1.0","name":"test","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/UNIT::angle/_extend.yy","order":2,"resourceVersion":"1.0","name":"_extend","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Scripts.yy","order":10,"resourceVersion":"1.0","name":"Scripts","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Scripts/Smooth rotation and arc.yy","order":1,"resourceVersion":"1.0","name":"Smooth rotation and arc","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Scripts/Smooth rotation and arc/Angle PKG.yy","order":1,"resourceVersion":"1.0","name":"Angle PKG","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},

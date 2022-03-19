@@ -6,7 +6,7 @@
     "path": "folders/UNIT::angle.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_angleMain",
+  "name": "UNIT_angleWrap",
   "tags": [],
   "resourceType": "GMScript",
 }
