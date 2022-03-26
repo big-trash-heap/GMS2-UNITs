@@ -46,7 +46,7 @@ function UNIT_TmHandler()
 	self.__count  = 0;
 	self.__clear  = __UNIT_TM_CLEAR._IS_CLEAR;
 	
-	// (not overloaded)
+	// не перегружаемый (not overloaded)
 	static __unbind = function(_timer, _inTick) {
 		
 		#region PREPROCESSOR
@@ -321,6 +321,24 @@ function UNIT_TmHandler()
 		return UNIT_TM_CATEGORY._HANDLER;
 	}
 	
+	static toArray = function() {
+		
+		var _array = array_create(self.__count);
+		var _value, _timer;
+		
+		for (var _i = 0, _j = -1; _i < self.__count; ++_i) {
+			
+			do {
+				_value = self.__timers[++_j];
+				_timer = _value.timer;
+			} until (_timer != undefined);
+			
+			_array[_i] = _timer;
+		}
+		
+		return _array;
+	}
+	
 	static toString = function() {
 		return ("UNIT::tm::" + instanceof(self) + "; number of timers: " + string(self.__count));
 	}
@@ -396,33 +414,6 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 		show_error(____UNIT_TM_ERROR_CLONE, true);
 		
 		}
-	}
-	
-	static _toArray = function() {
-		
-		var _array = array_create(self.__count);
-		var _value, _timer;
-		
-		for (var _i = 0, _j = -1; _i < self.__count; ++_i) {
-			
-			do {
-				_value = self.__timers[++_j];
-				_timer = _value.timer;
-			} until (_timer != undefined);
-			
-			_array[_i] = _timer;
-		}
-		
-		return _array;
-	}
-	
-	static _tick_end = function(_super) {
-		if (self.__count == 0) { 
-			return true; 
-		}
-		
-		self.tick(_super);
-		return false;
 	}
 	
 	/// ### UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK

@@ -194,7 +194,7 @@ self._fff = function() {
 		timer.resume();
 	});
 	
-	show_message(UNIT_tmGl()._toArray());
+	show_message(UNIT_tmGl().toArray());
 	
 	var base = UNIT_tmGl_loop(function() {
 		show_debug_message("loop");	
