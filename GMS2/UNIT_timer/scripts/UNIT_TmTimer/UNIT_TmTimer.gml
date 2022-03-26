@@ -15,6 +15,8 @@ function UNIT_TmTimer()
 	static __tick = __UNIT_tmVoid /* handler, timer, super  */;
 	static __free = __UNIT_tmVoid /* handler, timer, inTick */;
 	
+	#region interface-connect
+	
 	static __data = function() {
 		return self.__handler.data;
 	}
@@ -53,6 +55,10 @@ function UNIT_TmTimer()
 		delete self.__handler;
 	}
 	
+	#endregion
+	
+	#region interface-change_f
+	
 	static __set_finit = function(_f) {
 		__UNIT_tmSetF("__init", _f);
 	}
@@ -64,6 +70,8 @@ function UNIT_TmTimer()
 	static __set_ffree = function(_f) {
 		__UNIT_tmSetF("__free", _f);
 	}
+	
+	#endregion
 	
 	#endregion
 	

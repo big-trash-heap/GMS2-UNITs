@@ -28,6 +28,8 @@ function UNIT_TmHandler()
 	
 	#region __private
 	
+	#region interface-connect
+	
 	static __timerBind = function(_timer) {
 		
 		return { timer: _timer };
@@ -38,10 +40,13 @@ function UNIT_TmHandler()
 		_data.timer = undefined;
 	}
 	
+	#endregion
+	
 	self.__timers = [];
 	self.__count  = 0;
-	self.__clear  = -1;
+	self.__clear  = __UNIT_TM_CLEAR._IS_CLEAR;
 	
+	// (not overloaded)
 	static __unbind = function(_timer, _inTick) {
 		
 		#region PREPROCESSOR
@@ -102,8 +107,11 @@ function UNIT_TmHandler()
 			#region PREPROCESSOR
 			if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_CHECK_ERROR_TICK) {
 			
-			if (self.__clear != -1) show_error("UNIT::tm -> нельзя вызывать tick во время вызова tick, clear, clearLoop", true);
-			self.__clear = -2;
+			if (self.__clear != __UNIT_TM_CLEAR._IS_CLEAR) {
+				show_error("UNIT::tm -> нельзя вызывать tick во время вызова tick, clear, clearLoop", true);
+			}
+			
+			self.__clear = __UNIT_TM_CLEAR._IS_BLOCK;
 			
 			}
 			#endregion
@@ -189,7 +197,7 @@ function UNIT_TmHandler()
 			#region PREPROCESSOR
 			if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_CHECK_ERROR_TICK) {
 			
-			self.__clear = -1;
+			self.__clear = __UNIT_TM_CLEAR._IS_CLEAR;
 			
 			}
 			#endregion
@@ -216,11 +224,11 @@ function UNIT_TmHandler()
 				if (_timer != undefined) {
 					
 					self.__unbind(_timer, false);
-					if (self.__clear == -1) return;
+					if (self.__clear == __UNIT_TM_CLEAR._IS_CLEAR) return;
 				}
 			}
 			
-			self.__clear = -1;
+			self.__clear = __UNIT_TM_CLEAR._IS_CLEAR;
 		}
 	}
 	
@@ -247,7 +255,7 @@ function UNIT_TmHandler()
 			#region PREPROCESSOR
 			if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
 			
-			if (self.__clear != -1) {
+			if (self.__clear != __UNIT_TM_CLEAR._IS_CLEAR) {
 				show_debug_message("\tUNIT::tm::clearLoop -> возможный вызов TmHandler.clearLoop в TmHandler.clearLoop. Это может привести к зависанию");
 			}
 			
@@ -271,9 +279,9 @@ function UNIT_TmHandler()
 					if (_timer != undefined) {
 						
 						self.__unbind(_timer, false);
-						if (self.__clear == -1) {
+						if (self.__clear == __UNIT_TM_CLEAR._IS_CLEAR) {
 							
-							_countAttempts = -10;
+							_countAttempts = -10; // magic-number
 							return;
 						}
 					}
@@ -291,7 +299,7 @@ function UNIT_TmHandler()
 			}
 			#endregion
 			
-			self.__clear = -1;
+			self.__clear = __UNIT_TM_CLEAR._IS_CLEAR;
 		}
 		
 	}
@@ -324,6 +332,11 @@ function UNIT_TmHandler()
 #macro ____UNIT_TM_ERROR_CLONE          "UNIT::tm -> UNIT_PREPROCESSOR_TM_ENABLE_CLONE отключена"
 #macro ____UNIT_TM_ERROR_BIND_SWITCH    "UNIT::tm -> UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH отключена"
 #macro ____UNIT_TM_ERROR_HANDLER        "UNIT::tm -> UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK отключена"
+
+enum __UNIT_TM_CLEAR {
+	_IS_CLEAR = -1,
+	_IS_BLOCK = -2,
+};
 
 function __UNIT_TmHandlerPreprocessor() constructor {
 	
@@ -404,8 +417,12 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 	}
 	
 	static _tick_end = function(_super) {
-		if (self.__count == 0) return true;
+		if (self.__count == 0) { 
+			return true; 
+		}
+		
 		self.tick(_super);
+		return false;
 	}
 	
 	/// ### UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK
