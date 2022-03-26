@@ -97,8 +97,8 @@ function UNIT_angleSpeedArcRotate(_angleCurrent, _angleRequired, _speed, _arcAng
 	
 	if (sign(_speed) < 1) return 0;
 	
-	_angleCurrent  = UNIT_angleWrap(180 - (_angleCurrent - _arcAngle));
-	_angleRequired = UNIT_angleWrap(180 - (UNIT_angleArcWrap(_angleRequired - _arcAngle, 0, _arcLengthHalf)));
+	_angleCurrent  = UNIT_angleWrap(180 - _angleCurrent + _arcAngle);
+	_angleRequired = UNIT_angleWrap(180 - UNIT_angleArcWrap(_angleRequired - _arcAngle, 0, _arcLengthHalf));
 	
 	return clamp(_angleCurrent - _angleRequired, -_speed, _speed);
 }
@@ -115,8 +115,8 @@ function __UNIT_angleSpeedArcRotate(_angleCurrent, _angleRequired, _speed, _arcA
 	
 	if (sign(_speed) < 1) return 0;
 	
-	_angleCurrent  = UNIT_angleWrap(180 - (_angleCurrent - _arcAngle));
-	_angleRequired = UNIT_angleWrap(180 - (_angleRequired - _arcAngle));
+	_angleCurrent  = UNIT_angleWrap(180 - _angleCurrent + _arcAngle);
+	_angleRequired = UNIT_angleWrap(180 - _angleRequired + _arcAngle);
 	
 	return clamp(_angleCurrent - _angleRequired, -_speed, _speed);
 }

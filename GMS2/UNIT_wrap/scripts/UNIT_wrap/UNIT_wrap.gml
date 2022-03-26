@@ -25,7 +25,7 @@ function __UNIT_wrap() constructor {
 		var _size = array_length(_keys), _key;
 		while (_size > 0) {
 			_key = _keys[--_size];
-			if (!_replace && variable_struct_exists(_struct, _key)) continue;
+			if (not _replace && variable_struct_exists(_struct, _key)) continue;
 			self[$ _key] = _struct[$ _key];
 		}
 		return self;

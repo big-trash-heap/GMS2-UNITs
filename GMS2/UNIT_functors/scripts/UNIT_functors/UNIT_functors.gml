@@ -9,7 +9,7 @@ function UNIT_functorVoid() {
 
 /// @function		UNIT_functorConst(_, value);
 function UNIT_functorConst(_0, _value) {
-	return _value;	
+	return _value;
 }
 
 /// @function		UNIT_functorId(value, ...values);

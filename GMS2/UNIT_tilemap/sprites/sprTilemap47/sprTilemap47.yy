@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"sprTilemap47","path":"sprites/sprTilemap47/sprTilemap47.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "sprTilemap47",
     "tags": [],
     "resourceType": "GMSequence",

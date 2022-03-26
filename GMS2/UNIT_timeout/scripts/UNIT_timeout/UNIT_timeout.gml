@@ -21,6 +21,11 @@ function UNIT_timeoutAppend(_timeout, _time, _f, _data) {
 	
 	with (_timeout.__value) {
 	
+	var _update = self[$ "update"];
+	if (is_method(_update)) {
+		_update();	
+	}
+	
 	ds_priority_add(self.ds, [_f, _data], self.time + _time);
 	
 	}
@@ -210,6 +215,10 @@ function __UNIT_TimeoutAsync() constructor {
 	
 	self.ds = ds_priority_create();
 	self.time = current_time;
+	
+	static update = function() {
+		self.time = current_time;
+	}
 	
 	static tick = method_get_index(function(_timeout) {
 		

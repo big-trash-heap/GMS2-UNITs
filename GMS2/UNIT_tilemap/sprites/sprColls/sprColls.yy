@@ -138,7 +138,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"sprColls","path":"sprites/sprColls/sprColls.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "sprColls",
     "tags": [],
     "resourceType": "GMSequence",

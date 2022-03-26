@@ -101,19 +101,19 @@ function UNIT_tileAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cel
 		}
 		
 		// top-left
-		if (_ang_tl and _predicate(_tilemapElementId, _cellX1 - 1, _cellY1 - 1, _data))
+		if (_ang_tl > 0 and _predicate(_tilemapElementId, _cellX1 - 1, _cellY1 - 1, _data))
 			_bitsGrow_W |= 1;
 		
 		// top-right
-		if (_ang_tr and _predicate(_tilemapElementId, _cellX1 + 1, _cellY1 - 1, _data))
+		if (_ang_tr > 0 and _predicate(_tilemapElementId, _cellX1 + 1, _cellY1 - 1, _data))
 			_bitsGrow_W |= 4;
 		
 		// bottom-left
-		if (_ang_bl and _predicate(_tilemapElementId, _cellX1 - 1, _cellY1 + 1, _data))
+		if (_ang_bl > 0 and _predicate(_tilemapElementId, _cellX1 - 1, _cellY1 + 1, _data))
 			_bitsGrow_W |= 32;
 		
 		// bottom-right
-		if (_ang_br and _predicate(_tilemapElementId, _cellX1 + 1, _cellY1 + 1, _data))
+		if (_ang_br > 0 and _predicate(_tilemapElementId, _cellX1 + 1, _cellY1 + 1, _data))
 			_bitsGrow_W |= 128;
 		
 		tilemap_set(
@@ -158,11 +158,11 @@ function UNIT_tileAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cel
 			}
 			
 			// top-right
-			if (_ang_tr and _predicate(_tilemapElementId, _xx + 1, _cellY1 - 1, _data))
+			if (_ang_tr > 0 and _predicate(_tilemapElementId, _xx + 1, _cellY1 - 1, _data))
 				_bitsGrow_W |= 4;
 			
 			// bottom-right
-			if (_ang_br and _predicate(_tilemapElementId, _xx + 1, _cellY1 + 1, _data))
+			if (_ang_br > 0 and _predicate(_tilemapElementId, _xx + 1, _cellY1 + 1, _data))
 				_bitsGrow_W |= 128;
 			
 			tilemap_set(
@@ -211,11 +211,11 @@ function UNIT_tileAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cel
 			}
 			
 			// bottom-left
-			if (_ang_bl and _predicate(_tilemapElementId, _cellX1 - 1, _yy + 1, _data))
+			if (_ang_bl > 0 and _predicate(_tilemapElementId, _cellX1 - 1, _yy + 1, _data))
 				_bitsGrow_H |= 32;
 			
 			// bottom-right
-			if (_ang_br and _predicate(_tilemapElementId, _cellX1 + 1, _yy + 1, _data))
+			if (_ang_br > 0 and _predicate(_tilemapElementId, _cellX1 + 1, _yy + 1, _data))
 				_bitsGrow_H |= 128;
 			
 			tilemap_set(
@@ -259,7 +259,7 @@ function UNIT_tileAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cel
 				}
 				
 				// bottom-right
-				if (_ang_br and _predicate(_tilemapElementId, _xx + 1, _yy + 1, _data))
+				if (_ang_br > 0 and _predicate(_tilemapElementId, _xx + 1, _yy + 1, _data))
 					_bitsGrow_W |= 128;
 				
 				tilemap_set(

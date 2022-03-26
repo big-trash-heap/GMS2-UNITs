@@ -18,6 +18,11 @@ function UNIT_Eventor() : UNIT_EventSingle() constructor {
 			}
 			else {
 				
+				if (typeof(_f) == "struct") {
+					
+					return (_f == method_get_self(_present_f));
+				}
+				
 				return (
 					method_get_index(_present_f) == method_get_index(_f) &&
 					method_get_self(_present_f) == method_get_self(_f)

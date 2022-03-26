@@ -70,10 +70,10 @@ function UNIT_tileAuto16_set_cd(_tilemapElementId, _cellX, _cellY) {
 	tilemap_set(_tilemapElementId, 1, _cellX, _cellY);
 	
 	//
-	var _mask_10_l = (tilemapEntry(_tilemapElementId, _cellX - 2, _cellY) ? 5  : 0);
-	var _mask_05_r = (tilemapEntry(_tilemapElementId, _cellX + 2, _cellY) ? 10 : 0);
-	var _mask_12_t = (tilemapEntry(_tilemapElementId, _cellX, _cellY - 2) ? 3  : 0);
-	var _mask_03_d = (tilemapEntry(_tilemapElementId, _cellX, _cellY + 2) ? 12 : 0);
+	var _mask_10_l = (UNIT_tileEntry(_tilemapElementId, _cellX - 2, _cellY) ? 5  : 0);
+	var _mask_05_r = (UNIT_tileEntry(_tilemapElementId, _cellX + 2, _cellY) ? 10 : 0);
+	var _mask_12_t = (UNIT_tileEntry(_tilemapElementId, _cellX, _cellY - 2) ? 3  : 0);
+	var _mask_03_d = (UNIT_tileEntry(_tilemapElementId, _cellX, _cellY + 2) ? 12 : 0);
 	
 	// top
 	if (UNIT_tileModify(_tilemapElementId, _cellX, _cellY - 1, __UNIT_tileAuto16_set, _mask_12_t)) {
