@@ -24,11 +24,11 @@ function UNIT_TmTimer()
 		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
 		
-		self.__mark_reference = weak_ref_create(self);
+		self.__markReference = weak_ref_create(self);
 		
 		}
 		#endregion
-		
+		 
 		var _data = _handler.__timerBind(self);
 		
 		self.__handler = {
@@ -44,7 +44,7 @@ function UNIT_TmTimer()
 		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
 		
-		self.__mark_reference = weak_ref_create(self);
+		self.__markReference = weak_ref_create(self);
 		
 		}
 		#endregion
@@ -89,7 +89,12 @@ function UNIT_TmTimer()
 	}
 	
 	static toString = function() {
-		return ("UNIT::timer::" + instanceof(self));
+		return ("UNIT::tm::" + instanceof(self));
+	}
+	
+	
+	static getCategory = function() {
+		return UNIT_TM_CATEGORY._TIMER;
 	}
 	
 	static isTimer = function() {
@@ -113,7 +118,7 @@ function UNIT_TmTimer()
 	    while (_size > 0) {
         
 	        _key = _keys[--_size];
-	        if (!_replace and variable_struct_exists(self, _key)) continue;
+	        if (not _replace and variable_struct_exists(self, _key)) continue;
 	        self[$ _key] = _struct[$ _key];
 	    }
 		
@@ -165,7 +170,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	
 	if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
 	
-	self.__mark_reference = weak_ref_create(self);
+	self.__markReference = weak_ref_create(self);
 	
 	}
 	
@@ -190,7 +195,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 			self._get_finit() != _struct._get_finit() ||
 			self._get_ffree() != _struct._get_ffree())) {
 			
-			show_debug_message("UNIT::timer -> вероятно не верная реализация метода _clone в классе " + instanceof(self)
+			show_debug_message("UNIT::tm -> вероятно не верная реализация метода _clone в классе " + instanceof(self)
 			+ "\n\t; экземпляр, который был клонирован: " + string(_struct)
 			+ "\n\t; клон: " + string(self)
 			+ "\n\t; callstack: " 
@@ -222,7 +227,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	static _clone = function() {
 		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
-		show_error("UNIT::timer -> для класса " + instanceof(self) + " не определён метод _clone", true);
+		show_error("UNIT::tm -> для класса " + instanceof(self) + " не определён метод _clone", true);
 		
 		}
 		else {
@@ -236,12 +241,12 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	static _mark = function() {
 		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
 		
-		return self.__mark_reference;
+		return self.__markReference;
 		
 		}
 		else {
 		
-		show_error("UNIT::timer -> UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK отключена", true);
+		show_error("UNIT::tm -> UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK отключена", true);
 		
 		}
 	}
@@ -250,7 +255,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	static _bindCan = function() {
 		if (UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH) {
 		
-		return !variable_struct_exists(self, "__");
+		return (not variable_struct_exists(self, "__bindSwitch"));
 		
 		}
 		else {
@@ -263,7 +268,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	static _bindEnable = function() {
 		if (UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH) {
 		
-		variable_struct_remove(self, "__");
+		variable_struct_remove(self, "__bindSwitch");
 		return self;
 		
 		}
@@ -277,7 +282,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 	static _bindDisable = function() {
 		if (UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH) {
 		
-		self.__ = undefined;
+		self.__bindSwitch = undefined;
 		return self;
 		
 		}
@@ -286,12 +291,6 @@ function __UNIT_TmTimerPreprocessor() constructor {
 		show_error(____UNIT_TM_ERROR_BIND_SWITCH, true);
 		
 		}
-	}
-	
-	
-	static _unbind = function() {
-		self.unbind();
-		return self;
 	}
 	
 	#endregion

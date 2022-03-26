@@ -68,14 +68,14 @@ function UNIT_tmGl_endAsync(_milisec, _f) {
 function __UNIT_TmHandlerGlobal() : UNIT_TmHandlerSimpleExt() constructor {
 	
 	static toString = function() {
-		return ("UNIT::timer::UNIT_tmGlobal; number of timers: " + string(self.__count));
+		return ("UNIT::tm::UNIT_tmGlobal; number of timers: " + string(self.__count));
 	}
 	
 	
 	static _clone = function() {
 		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
-		show_error("UNIT::timer::UNIT_tmGlobal -> клонирование запрещено", true);
+		show_error("UNIT::tm::UNIT_tmGlobal -> клонирование запрещено", true);
 		
 		}
 		else {
@@ -89,7 +89,7 @@ function __UNIT_TmHandlerGlobal() : UNIT_TmHandlerSimpleExt() constructor {
 		if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_INFORMING_BINDING
 			&& UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
 		
-		show_debug_message("UNIT::timer::UNIT_tmGlobal.bind(" + string(_timer) + ");");
+		show_debug_message("UNIT::tm::UNIT_tmGlobal.bind(" + string(_timer) + ");");
 		
 		}
 	}
@@ -98,7 +98,7 @@ function __UNIT_TmHandlerGlobal() : UNIT_TmHandlerSimpleExt() constructor {
 		if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_INFORMING_BINDING
 			&& UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
 		
-		show_debug_message("UNIT::timer::UNIT_tmGlobal.unbind(" + string(_timer) + ");");
+		show_debug_message("UNIT::tm::UNIT_tmGlobal.unbind(" + string(_timer) + ");");
 		
 		}
 	}

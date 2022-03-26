@@ -29,7 +29,7 @@ function __UNIT_tmOverride_get_ftick() {
 
 #macro ____UNIT_TM_SKIP_VOID_TICK \
 if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) { \
-show_debug_message("UNIT::timer::skip -> " + string(_timer)); \
+show_debug_message("UNIT::tm::skip -> " + string(_timer)); \
 }
 
 #macro ____UNIT_TM_SKIP_VOID_TICK_LOOP \

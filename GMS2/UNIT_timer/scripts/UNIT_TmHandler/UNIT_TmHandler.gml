@@ -64,14 +64,14 @@ function UNIT_TmHandler()
 		
 		if (_timer.isBind()) {
 			
-			show_error("UNIT::timer -> таймер уже занят обработчиком", true);
+			show_error("UNIT::tm -> таймер уже занят обработчиком", true);
 		}
 		
 		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH) {
 		
 		if (_timer._bindCan() == false)
-			show_error("UNIT::timer -> таймер отключил возможность привязыватся, используйте ._binCan(), чтобы проверить возможность привязать таймер к обработчику", true);
+			show_error("UNIT::tm -> таймер отключил возможность привязыватся, используйте ._binCan(), чтобы проверить возможность привязать таймер к обработчику", true);
 		
 		}
 		#endregion
@@ -102,7 +102,7 @@ function UNIT_TmHandler()
 			#region PREPROCESSOR
 			if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_CHECK_ERROR_TICK) {
 			
-			if (self.__clear != -1) show_error("UNIT::timer -> нельзя вызывать tick во время вызова tick, clear, clearLoop", true);
+			if (self.__clear != -1) show_error("UNIT::tm -> нельзя вызывать tick во время вызова tick, clear, clearLoop", true);
 			self.__clear = -2;
 			
 			}
@@ -230,12 +230,12 @@ function UNIT_TmHandler()
 		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
 		
-		show_debug_message("UNIT::timer -> вы вызвали TmHandler.clearLoop это может быть опасно. Избегайте его вызова");
-		show_debug_message("\tUNIT::timer::clearLoop -> количество итераций: " + string(_countAttempts));
+		show_debug_message("UNIT::tm -> вы вызвали TmHandler.clearLoop это может быть опасно. Избегайте его вызова");
+		show_debug_message("\tUNIT::tm::clearLoop -> количество итераций: " + string(_countAttempts));
 		
 		if (is_infinity(_countAttempts) && sign(_countAttempts) == 1) {
 			
-			show_debug_message("\tUNIT::timer::clearLoop -> бесконечное количество итераций может привести к зависанию");
+			show_debug_message("\tUNIT::tm::clearLoop -> бесконечное количество итераций может привести к зависанию");
 		}
 		
 		}
@@ -248,7 +248,7 @@ function UNIT_TmHandler()
 			if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
 			
 			if (self.__clear != -1) {
-				show_debug_message("\tUNIT::timer::clearLoop -> возможный вызов TmHandler.clearLoop в TmHandler.clearLoop. Это может привести к зависанию");
+				show_debug_message("\tUNIT::tm::clearLoop -> возможный вызов TmHandler.clearLoop в TmHandler.clearLoop. Это может привести к зависанию");
 			}
 			
 			}
@@ -286,7 +286,7 @@ function UNIT_TmHandler()
 			#region PREPROCESSOR
 			if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
 			
-			show_debug_message("\tUNIT::timer::clearLoop -> не удачное удаление, возможно некоторые таймеры при удаление порождают другие таймеры и т.д.");
+			show_debug_message("\tUNIT::tm::clearLoop -> не удачное удаление, возможно некоторые таймеры при удаление порождают другие таймеры и т.д.");
 			
 			}
 			#endregion
@@ -309,25 +309,21 @@ function UNIT_TmHandler()
 		return (self == UNIT_tmGetBind(_timer));
 	}
 	
-	static isTimer = function() {
-		return false;
-	}
-	
-	static isHandler = function() {
-		return true;
+	static getCategory = function() {
+		return UNIT_TM_CATEGORY._HANDLER;
 	}
 	
 	static toString = function() {
-		return ("UNIT::timer::" + instanceof(self) + "; number of timers: " + string(self.__count));
+		return ("UNIT::tm::" + instanceof(self) + "; number of timers: " + string(self.__count));
 	}
 	
 }
 
 #region __private
 
-#macro ____UNIT_TM_ERROR_CLONE          "UNIT::timer -> UNIT_PREPROCESSOR_TM_ENABLE_CLONE отключена"
-#macro ____UNIT_TM_ERROR_BIND_SWITCH    "UNIT::timer -> UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH отключена"
-#macro ____UNIT_TM_ERROR_HANDLER        "UNIT::timer -> UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK отключена"
+#macro ____UNIT_TM_ERROR_CLONE          "UNIT::tm -> UNIT_PREPROCESSOR_TM_ENABLE_CLONE отключена"
+#macro ____UNIT_TM_ERROR_BIND_SWITCH    "UNIT::tm -> UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH отключена"
+#macro ____UNIT_TM_ERROR_HANDLER        "UNIT::tm -> UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK отключена"
 
 function __UNIT_TmHandlerPreprocessor() constructor {
 	
@@ -375,7 +371,7 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 		
 		if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
 		
-		show_debug_message("UNIT::timer -> осторожно, класс " + instanceof(self) + " использует базовую версию метода _clone");
+		show_debug_message("UNIT::tm -> осторожно, класс " + instanceof(self) + " использует базовую версию метода _clone");
 		
 		}
 		

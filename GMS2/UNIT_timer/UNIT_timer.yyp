@@ -10,6 +10,7 @@
     {"id":{"name":"UNIT_TmHandler","path":"scripts/UNIT_TmHandler/UNIT_TmHandler.yy",},"order":1,},
     {"id":{"name":"__UNIT_tmVoid","path":"scripts/__UNIT_tmVoid/__UNIT_tmVoid.yy",},"order":0,},
     {"id":{"name":"UNIT_TmHandlerSimple","path":"scripts/UNIT_TmHandlerSimple/UNIT_TmHandlerSimple.yy",},"order":3,},
+    {"id":{"name":"UNIT_TmMain","path":"scripts/UNIT_TmMain/UNIT_TmMain.yy",},"order":4,},
     {"id":{"name":"UNIT_TmTimerSync","path":"scripts/UNIT_TmTimerSync/UNIT_TmTimerSync.yy",},"order":1,},
     {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},"order":1,},
     {"id":{"name":"__UNIT_TmTimelapse","path":"scripts/__UNIT_TmTimelapse/__UNIT_TmTimelapse.yy",},"order":0,},
