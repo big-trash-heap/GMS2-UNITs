@@ -53,23 +53,16 @@ function UNIT_TmTimer()
 		delete self.__handler;
 	}
 	
-	static __set_f = function(_name, _f) {
-		if (is_undefined(_f) || _f == __UNIT_tmVoid)
-			variable_struct_remove(self, _name);
-		else
-			self[$ _name] = _f;
-	}
-	
 	static __set_finit = function(_f) {
-		self.__set_f("__init", _f);
+		__UNIT_tmSetF("__init", _f);
 	}
 	
 	static __set_ftick = function(_f) {
-		self.__set_f("__tick", _f);
+		__UNIT_tmSetF("__tick", _f);
 	}
 	
 	static __set_ffree = function(_f) {
-		self.__set_f("__free", _f);
+		__UNIT_tmSetF("__free", _f);
 	}
 	
 	#endregion

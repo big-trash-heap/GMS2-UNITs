@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"UNIT_sprSpriteTileset","path":"sprites/UNIT_sprSpriteTileset/UNIT_sprSpriteTileset.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "UNIT_sprSpriteTileset",
     "tags": [],
     "resourceType": "GMSequence",

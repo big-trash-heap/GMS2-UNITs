@@ -21,7 +21,7 @@ function UNIT_TmTimerAsync(_milisec, _ftick, _finit, _ffree) : __UNIT_TmTimerTim
 	
 	#region __private
 	
-	static __set_finit = __UNIT_tmAsync_set_finit;
+	static __set_finit = __UNIT_tmOverride_set_finit;
 	
 	static __finit = __UNIT_tmVoid;
 	
@@ -35,7 +35,7 @@ function UNIT_TmTimerAsync(_milisec, _ftick, _finit, _ffree) : __UNIT_TmTimerTim
 	static resume = __UNIT_tmAsyncResume;
 	
 	
-	static _get_finit = __UNIT_tmAsync_finit;
+	static _get_finit = __UNIT_tmOverride_get_finit;
 	
 	
 	static _clone = function() {
@@ -59,7 +59,7 @@ function UNIT_TmTimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TmTimer
 	
 	#region __private
 	
-	static __set_finit = __UNIT_tmAsync_set_finit;
+	static __set_finit = __UNIT_tmOverride_set_finit;
 	
 	static __finit = __UNIT_tmVoid;
 	
@@ -81,7 +81,7 @@ function UNIT_TmTimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TmTimer
 	}
 	
 	
-	static _get_finit = __UNIT_tmAsync_finit;
+	static _get_finit = __UNIT_tmOverride_get_finit;
 	
 	
 	static _clone = function() {
@@ -141,14 +141,6 @@ function __UNIT_tmAsyncResume() {
 		self.__ctime = current_time;
 	}
 	return self;
-}
-
-function __UNIT_tmAsync_finit() {
-	return self.__finit;
-}
-
-function __UNIT_tmAsync_set_finit(_f) {
-	self.__set_f("__finit", _f);
 }
 
 #endregion

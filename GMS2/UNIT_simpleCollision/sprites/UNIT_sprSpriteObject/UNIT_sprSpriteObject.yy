@@ -79,7 +79,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"UNIT_sprSpriteObject","path":"sprites/UNIT_sprSpriteObject/UNIT_sprSpriteObject.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "UNIT_sprSpriteObject",
     "tags": [],
     "resourceType": "GMSequence",
