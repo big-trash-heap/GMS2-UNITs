@@ -66,7 +66,7 @@ function UNIT_TmTimerSyncExt(_steps, _ftick, _finit, _ffree) : __UNIT_TmTimerTim
 			#endregion
 			
 			if (_timer.__ftick(_handler, _timer, _super) == true) {
-				return true;	
+				return true;
 			}
 			
 			return (_timer.__step == 0);
@@ -75,7 +75,7 @@ function UNIT_TmTimerSyncExt(_steps, _ftick, _finit, _ffree) : __UNIT_TmTimerTim
 	
 	#endregion
 	
-	static setStep = function(_step) {
+	static setStep = function(_step=1) {
 		self.__tickStep = _step;
 		return self;
 	}
@@ -84,15 +84,13 @@ function UNIT_TmTimerSyncExt(_steps, _ftick, _finit, _ffree) : __UNIT_TmTimerTim
 		return self.__tickStep;
 	}
 	
-	static resetStep = function() {
-		variable_struct_remove(self, "__tickStep");
-		return self;
-	}
-	
 	static _clone = function() {
 		if (UNIT_PREPROCESSOR_TM_ENABLE_CLONE) {
 		
-		return self.__clone(UNIT_TmTimerSyncExt);
+		var _timer = self.__clone(UNIT_TmTimerSyncExt);
+		_timer.__tickStep = self.__tickStep;
+		
+		return _timer;
 		
 		}
 		else {

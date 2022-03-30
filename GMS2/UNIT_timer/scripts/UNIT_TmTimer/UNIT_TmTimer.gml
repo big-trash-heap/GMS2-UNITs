@@ -209,6 +209,12 @@ function __UNIT_TmTimerPreprocessor() constructor {
 		
 		}
 		
+		if (UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH) {
+		
+		(_struct._bindCan() ? self._bindEnable : self._bindDisable)();
+		
+		}
+		
 		return self;
 		
 		}
