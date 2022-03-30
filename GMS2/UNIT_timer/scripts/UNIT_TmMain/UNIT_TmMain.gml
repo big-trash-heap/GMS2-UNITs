@@ -18,3 +18,10 @@ function UNIT_tmCategoryIsHandler(_struct) {
 		return false;
 	}
 }
+
+
+#region __private
+
+function UNIT_tmMain() {};
+
+#endregion
