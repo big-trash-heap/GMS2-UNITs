@@ -46,7 +46,6 @@ function UNIT_TmHandler()
 	self.__count  = 0;
 	self.__clear  = __UNIT_TM_CLEAR._IS_CLEAR;
 	
-	// не перегружаемый (not overloaded)
 	static __unbind = function(_timer, _inTick) {
 		
 		#region PREPROCESSOR
@@ -56,6 +55,9 @@ function UNIT_TmHandler()
 		
 		}
 		#endregion
+		
+		var _data = _timer.__data();
+		self.__timerUnbind(_timer, _data);
 		
 		_timer.__unbind();
 		
@@ -89,7 +91,8 @@ function UNIT_TmHandler()
 		}
 		#endregion
 		
-		var _anchor = _timer.__bind(self);
+		var _data   = self.__timerBind(_timer);
+		var _anchor = _timer.__bind(self, _data);
 		
 		++self.__count;
 		array_push(self.__timers, _anchor);

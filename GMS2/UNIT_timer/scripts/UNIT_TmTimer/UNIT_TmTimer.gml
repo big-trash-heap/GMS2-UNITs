@@ -21,7 +21,7 @@ function UNIT_TmTimer()
 		return self.__handler.data;
 	}
 	
-	static __bind = function(_handler) {
+	static __bind = function(_handler, _data) {
 		
 		#region PREPROCESSOR
 		if (UNIT_PREPROCESSOR_TM_TIMER_ENABLE_MARK) {
@@ -30,8 +30,6 @@ function UNIT_TmTimer()
 		
 		}
 		#endregion
-		 
-		var _data = _handler.__timerBind(self);
 		
 		self.__handler = {
 			handler: _handler,
@@ -51,7 +49,6 @@ function UNIT_TmTimer()
 		}
 		#endregion
 		
-		self.__handler.handler.__timerUnbind(self, self.__handler.data);
 		delete self.__handler;
 	}
 	
