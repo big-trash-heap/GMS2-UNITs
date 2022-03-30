@@ -330,6 +330,32 @@ function UNIT_TmHandler()
 		return undefined;
 	}
 	
+	static forEachLoop = function(_f, _data) {
+		
+		//var _size = array_length(self.__timers);
+		//if (_size > 0) {
+			
+		//	var _i = 0, _value, _timer;
+		//	while (_i < _size) {
+				
+		//		_value = self.__timers[_i];
+		//		_timer = _value.timer;
+				
+		//		++_i;
+				
+		//		if (_timer != undefined && _f(_timer, _data)) {
+					
+		//			return _timer;
+		//		}
+		//	}
+		//}
+		
+		// TODO
+		
+		return undefined;
+	}
+	
+	
 	static getCount = function() {
 		return self.__count;	
 	}

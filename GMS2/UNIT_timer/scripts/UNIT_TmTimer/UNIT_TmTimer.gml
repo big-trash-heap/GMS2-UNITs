@@ -102,14 +102,6 @@ function UNIT_TmTimer()
 		return UNIT_TM_CATEGORY._TIMER;
 	}
 	
-	static isTimer = function() {
-		return true;
-	}
-	
-	static isHandler = function() {
-		return false;
-	}
-	
 	
 	static _set = function(_key, _value) {
 		self[$ _key] = _value;
