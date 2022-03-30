@@ -196,6 +196,13 @@ self._fff = function() {
 	
 	show_message(UNIT_tmGl().toArray());
 	
+	var _data = { array: [] };
+	UNIT_tmGl().forEach(function(_timer, _data) {
+		array_push(_data.array, _timer);
+	}, _data);
+	
+	show_message(_data);
+	
 	var base = UNIT_tmGl_loop(function() {
 		show_debug_message("loop");	
 	}).pause();
