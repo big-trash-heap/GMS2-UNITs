@@ -133,7 +133,9 @@ enum ___KEYS { _x, _y, _time, _lost_time };
 ```gml
 var _key = "name";
 var _State = 0xFF;
+function get_json(_path) { ... };
 ```
 
 ### globalvar
-**Не определено**
+**В общем случаи не определено**  
+Рекомендуется использовать только для именования публичных имён (начинающихся с буквы), и использованием **PascalCase** и **shake_case**
