@@ -1,3 +1,3 @@
 # UNITs
 
-I rethink and rewrite all the code I reuse, so I can consider it rightfully mine, and therefore license it as I please. I cite sources only because I respect the authors.
+Я переосмысливаю и переписываю весь повторно используемый код, чтобы считать его по праву своим и, следовательно, лицензировать его по своему усмотрению. Привожу источники только потому, что уважаю авторов.
