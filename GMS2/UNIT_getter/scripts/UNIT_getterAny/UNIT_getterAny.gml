@@ -91,9 +91,3 @@ function UNIT_getterCall(_f, _data) {
 }
 
 
-#region __private
-
-function UNIT_getter() {};
-
-#endregion
-

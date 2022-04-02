@@ -44,9 +44,3 @@ function UNIT_functorFunc(_func) {
 #endregion
 
 
-#region __private
-
-function UNIT_functors() {};
-
-#endregion
-

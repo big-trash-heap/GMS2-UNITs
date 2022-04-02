@@ -4,6 +4,21 @@ function UNIT_Eventor() : UNIT_EventSingle() constructor {
 	
 	#region __private
 	
+	static __compareSelf = function(_self0, _self1) {
+		
+		with (_self0) {
+		
+		_self0 = self;
+		
+		}
+		
+		with (_self1) {
+		
+		return (_self0 == self);
+		
+		}
+	}
+	
 	static __isFuntionsEqual = function(_present_f, _f) {
 		
 		if (is_numeric(_present_f)) {
@@ -20,12 +35,12 @@ function UNIT_Eventor() : UNIT_EventSingle() constructor {
 				
 				if (typeof(_f) == "struct") {
 					
-					return (_f == method_get_self(_present_f));
+					return self.__compareSelf(_f, method_get_self(_present_f));
 				}
 				
 				return (
 					method_get_index(_present_f) == method_get_index(_f) &&
-					method_get_self(_present_f) == method_get_self(_f)
+					self.__compareSelf(method_get_self(_f), method_get_self(_present_f))
 				);
 			}
 		}
@@ -178,7 +193,7 @@ function UNIT_Eventor() : UNIT_EventSingle() constructor {
 		return ("UNIT::event::" + instanceof(self) + "(" + _events + ");");
 	}
 	
-	static _toArray = function(_key) {
+	static toArray = function(_key) {
 		
 		var _array = self.__events[$ _key];
 		if (is_array(_array)) {

@@ -19,7 +19,7 @@ function UNIT_structMerge(_struct_merge, _struct, _replace=false) {
     while (_size > 0) {
         
         _key = _keys[--_size];
-        if (!_replace and variable_struct_exists(_struct_merge, _key)) continue;
+        if (not _replace and variable_struct_exists(_struct_merge, _key)) continue;
         _struct_merge[$ _key] = _struct[$ _key];
     }
 	

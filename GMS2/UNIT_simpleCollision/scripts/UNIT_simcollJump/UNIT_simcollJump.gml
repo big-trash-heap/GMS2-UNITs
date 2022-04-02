@@ -36,3 +36,4 @@ function UNIT_simcollJump(_speed, _check, _data, _accuracy=UNIT_SIMCOLL_MOVE_DEF
 	global.UNIT_simcollDist = _speed;
 	return false;
 }
+

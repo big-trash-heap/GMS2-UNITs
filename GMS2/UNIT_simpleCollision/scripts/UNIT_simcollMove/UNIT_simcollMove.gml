@@ -167,3 +167,4 @@ function UNIT_simcollMove_double(_speed, _accuracyMicro, _accuracyMacro, _check,
 	global.UNIT_simcollDist = _speed;
 	return false;
 }
+

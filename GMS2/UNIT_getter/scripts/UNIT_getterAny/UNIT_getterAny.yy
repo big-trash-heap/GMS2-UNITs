@@ -6,7 +6,7 @@
     "path": "folders/UNIT::getter.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_getter",
+  "name": "UNIT_getterAny",
   "tags": [],
   "resourceType": "GMScript",
 }

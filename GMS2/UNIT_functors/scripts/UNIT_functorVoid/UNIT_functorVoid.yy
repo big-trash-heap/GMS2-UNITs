@@ -6,7 +6,7 @@
     "path": "folders/UNIT::functors.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_functors",
+  "name": "UNIT_functorVoid",
   "tags": [],
   "resourceType": "GMScript",
 }
