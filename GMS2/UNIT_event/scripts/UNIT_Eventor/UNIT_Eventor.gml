@@ -5,18 +5,18 @@ function UNIT_Eventor() : UNIT_EventSingle() constructor {
 	#region __private
 	
 	static __compareSelf = function(_self0, _self1) {
-		
-		with (_self0) {
-		
-		_self0 = self;
-		
+	
+		static _split = function(_self) {
+			
+			if (instanceof(_self) == "instance") {
+				
+				return _self[$ "id"];
+			}
+			
+			return _self;
 		}
 		
-		with (_self1) {
-		
-		return (_self0 == self);
-		
-		}
+		return (_split(_self0) == _split(_self1));
 	}
 	
 	static __isFuntionsEqual = function(_present_f, _f) {
