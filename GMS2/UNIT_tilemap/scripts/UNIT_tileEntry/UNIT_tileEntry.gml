@@ -40,7 +40,9 @@ function UNIT_tileEntryAtPix(_tilemapElementId, _x, _y) {
 function UNIT_tileModify(_tilemapElementId, _cellX, _cellY, _handler, _data) {
 	
 	_data = _handler(tilemap_get(_tilemapElementId, _cellX, _cellY), _data);
-	if (_data == undefined) return false;
+	if (_data == undefined) {
+		return false;
+	}
 	
 	tilemap_set(_tilemapElementId, _data, _cellX, _cellY);
 	return true;
@@ -88,14 +90,6 @@ function UNIT_tileDebugDraw(_tilemapElementId, _offsetX, _offsetY, _drawCell, _d
 		}
 	}
 }
-
-#endregion
-
-
-
-#region __private
-
-function UNIT_tilemap() {};
 
 #endregion
 

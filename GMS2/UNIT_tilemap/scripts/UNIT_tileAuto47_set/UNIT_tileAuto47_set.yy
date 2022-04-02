@@ -6,7 +6,7 @@
     "path": "folders/UNIT::tilemap.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_tilemapAuto47_region",
+  "name": "UNIT_tileAuto47_set",
   "tags": [],
   "resourceType": "GMScript",
 }

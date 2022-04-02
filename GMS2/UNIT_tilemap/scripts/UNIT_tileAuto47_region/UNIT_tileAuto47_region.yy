@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "UNIT::toString",
-    "path": "folders/UNIT::toString.yy",
+    "name": "UNIT::tilemap",
+    "path": "folders/UNIT::tilemap.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_toString",
+  "name": "UNIT_tileAuto47_region",
   "tags": [],
   "resourceType": "GMScript",
 }

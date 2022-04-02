@@ -31,6 +31,11 @@ function __UNIT_wrap() constructor {
 		return self;
 	}
 	
+	static _dup = function() {
+		return (new __UNIT_wrap()._ext(self));
+	}
+	
+	
 	static toString = function() {
 		return "UNIT::wrap";	
 	}

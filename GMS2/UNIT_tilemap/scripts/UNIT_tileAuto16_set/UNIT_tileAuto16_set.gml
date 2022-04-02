@@ -197,7 +197,11 @@ function UNIT_tileAuto16AtPix_reset(_tilemapElementId, _x, _y) {
 function __UNIT_tileAuto16_set(_tile, _value) {
 	
 	if (_tile > -1) {
-		if (_tile == 0) return (_value + 1);
+		
+		if (_tile == 0) {
+			return (_value + 1);
+		}
+		
 		return ((_value & _tile - 1) + 1);
 	}
 }
@@ -206,13 +210,14 @@ function __UNIT_tileAuto16_reset(_tile, _value) {
 	
 	if (_tile > -1) {
 		
-		if (_tile == 0) return (_value + 1);
+		if (_tile == 0) {
+			return (_value + 1);
+		}
+		
 		//return ((~_value & 15 | _tile - 1) + 1);
 		return ((_value | _tile - 1) + 1);
 	}
 }
-
-function UNIT_tilemapAuto16() {};
 
 #endregion
 

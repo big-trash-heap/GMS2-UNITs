@@ -68,8 +68,10 @@ function UNIT_toStrBaseTIntBulTable(_table) {
 	
 	var _size = string_length(_table);
     var _build = {};
-    for (var _i = 1; _i <= _size; ++_i) 
-		_build[$ string_char_at(_table, _i)] = _i - 1;
+    for (var _i = 1; _i <= _size; ++_i) {
+		
+		_build[$ string_char_at(_table, _i)] = _i - 1;	
+	}
     
 	return _build;
 }
@@ -105,11 +107,4 @@ function UNIT_toStrInt(_value, _base=16, _padding=0) {
 	
 	return (_sign == -1 ? "-" + _str : _str);
 }
-
-
-#region __private
-
-function UNIT_toString() {};
-
-#endregion
 

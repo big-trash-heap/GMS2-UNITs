@@ -119,14 +119,3 @@ function UNIT_tileCollsRectInst(
 
 #endregion
 
-
-#region __private
-
-function __UNIT_tileFunctorId(_value) {
-	return _value;	
-}
-
-function UNIT_tilemapCollision() {};
-
-#endregion
-

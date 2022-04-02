@@ -238,12 +238,12 @@ function UNIT_tileAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cel
 			if (_predicate(_tilemapElementId, _xx, _yy, _data)) {
 				
 				_ang_tr = tilemap_get(_tilemapElementId, _xx, _yy - 1) - 1;
-				if (_ang_tr)
+				if (_ang_tr > 0)
 					_bitsGrow_W |= ~(_table[? _ang_tr] >> 5) & 7;
 				else
 				if (_ang_tr == 0)
 					_bitsGrow_W |= 7;
-					
+				
 				_ang_br = -1;
 				
 				// right
@@ -286,16 +286,17 @@ function UNIT_tileAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cel
 #region __private
 
 function __UNIT_tileAuto47_region_is(_tilemapElementId, _cellX, _cellY) {
-	return tilemap_get(_tilemapElementId, _cellX, _cellY);
+	return (tilemap_get(_tilemapElementId, _cellX, _cellY) > 0);
 }
 
 function __UNIT_tileAuto47_region_is_cd(_tilemapElementId, _cellX, _cellY) {
 	_tilemapElementId = tilemap_get(_tilemapElementId, _cellX, _cellY);
-	if (_tilemapElementId == -1) return 1;
-	return _tilemapElementId;
+	if (_tilemapElementId == -1) {
+		return 1;
+	}
+	
+	return (_tilemapElementId > 0);
 }
-
-function UNIT_tilemapAuto47_region() {};
 
 #endregion
 

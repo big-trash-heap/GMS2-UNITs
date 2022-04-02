@@ -1,7 +1,4 @@
 
-
-function __UNIT_tilemapUtility() {};
-
 function __UNIT_tileCallAtPix(_tilemapElementId, _x, _y, _call) {
 	
 	var _cellX = tilemap_get_cell_x_at_pixel(_tilemapElementId, _x, _y);
@@ -36,5 +33,9 @@ function __UNIT_tileTable47() {
 		return _table;
 	}();
 	return _table;
+}
+
+function __UNIT_tileFunctorId(_value) {
+	return _value;	
 }
 

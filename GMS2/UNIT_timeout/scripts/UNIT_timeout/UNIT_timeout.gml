@@ -21,11 +21,7 @@ function UNIT_timeoutAppend(_timeout, _time, _f, _data) {
 	
 	with (_timeout.__value) {
 	
-	var _update = self[$ "update"];
-	if (is_method(_update)) {
-		_update();	
-	}
-	
+	self.update();
 	ds_priority_add(self.ds, [_f, _data], self.time + _time);
 	
 	}
@@ -101,7 +97,7 @@ function UNIT_timeoutExecute(_timeout) {
 	
 }
 
-// @param			timeout
+/// @param			timeout
 function UNIT_timeoutFree(_timeout) {
 	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
@@ -110,7 +106,7 @@ function UNIT_timeoutFree(_timeout) {
 	}
 	
 	with (_timeout.__value) {
-		
+	
 	ds_priority_destroy(self.ds);
 	self.ds = -1;
 	
@@ -169,6 +165,8 @@ function __UNIT_TimeoutSync() constructor {
 	self.ds = ds_priority_create();
 	self.time = 0;
 	
+	static update = UNIT_timeout;
+	
 	static tick = method_get_index(function(_timeout) {
 		
 		with (_timeout.__value) {
@@ -194,10 +192,12 @@ function __UNIT_TimeoutSync() constructor {
 			}
 		}
 		
-		if (_ds == -1)
+		if (_ds == -1) {
 			_timeout.__value.time += 1;
-		else
-			_timeout.__value.time = 0;
+			return;
+		}
+		
+		_timeout.__value.time = 0;
 	});
 	
 	static clear = function() {
@@ -246,9 +246,7 @@ function __UNIT_TimeoutAsync() constructor {
 		}
 	});
 	
-	static clear = function() {
-		self.time = current_time;	
-	}
+	static clear = self.update;
 	
 	static toString = function() {
 		

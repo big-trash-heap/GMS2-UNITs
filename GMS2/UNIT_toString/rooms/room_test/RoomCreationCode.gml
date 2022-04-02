@@ -1,3 +1,4 @@
+
 function apiDebugAssert(_assert, _mess) {
 	if (!_assert) {
 		
