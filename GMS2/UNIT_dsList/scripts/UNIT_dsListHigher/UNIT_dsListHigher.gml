@@ -58,6 +58,23 @@ function UNIT_dsListFind(_id, _f, _data) {
 	return -1;
 }
 
+/// @function		UNIT_dsListFindAll(id, f, [data], [index=0]);
+function UNIT_dsListFindAll(_id, _f, _data, _index=0) {
+	
+	var _size = ds_list_size(_id);
+	var _vals = [], _value;
+	
+	for (; _index < _size; ++_index) {
+		
+		_value = _id[| _index];
+		if (_f(_value, _index, _data)) {
+			array_push(_vals, _value);
+		}
+	}
+	
+	return _vals;
+}
+
 //					f = function(current, pretender, data)
 
 /// @function		UNIT_dsListFindBetter(id, f, [data]);
@@ -83,6 +100,41 @@ function UNIT_dsListFindBetter(_id, _f, _data) {
 	}
 	
 	return -1;
+}
+
+#endregion
+
+#region other
+
+//					f = function(value, data)
+
+/// @function		UNIT_dsListAny(id, f, [data]);
+function UNIT_dsListAny(_id, _f, _data) {
+	
+	var _size = ds_list_size(_id);
+	while (_size > 0) {
+		
+		if (_f(_id[| --_size], _data)) {
+			return true;
+		}
+	}
+	
+	return false;
+	
+}
+
+/// @function		UNIT_dsListAll(id, f, [data]);
+function UNIT_dsListAll(_id, _f, _data) {
+	
+	var _size = ds_list_size(_id);
+	while (_size > 0) {
+		
+		if (not _f(_id[| --_size], _data)) {
+			return false;
+		}
+	}
+	
+	return true;
 }
 
 #endregion

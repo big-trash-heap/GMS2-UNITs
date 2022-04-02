@@ -93,7 +93,7 @@ function UNIT_arrFindAll(_array, _f, _data, _index=0) {
 	for (; _index < _size; ++_index) {
 		
 		_value = _array[_index];
-		if (_f(_array[_index], _index, _data)) {
+		if (_f(_value, _index, _data)) {
 			array_push(_vals, _value);
 		}
 	}
@@ -133,7 +133,6 @@ function UNIT_arrFindBetter(_array, _f, _data) {
 #region other
 
 //					f = function(value, index, data)
-
 /// @function		UNIT_arrForEach(array, f, [data], [index=0]);
 function UNIT_arrForEach(_array, _f, _data, _index=0) {
 	
@@ -144,14 +143,15 @@ function UNIT_arrForEach(_array, _f, _data, _index=0) {
 	return -1;
 }
 
+//					f = function(value, data)
+
 /// @function		UNIT_arrAny(array, f, [data]);
 function UNIT_arrAny(_array, _f, _data) {
 	
 	var _size = array_length(_array);
 	while (_size > 0) {
 		
-		--_size;
-		if (_f(_array[_size], _size, _data)) {
+		if (_f(_array[--_size], _data)) {
 			return true;
 		}
 	}
@@ -165,8 +165,7 @@ function UNIT_arrAll(_array, _f, _data) {
 	var _size = array_length(_array);
 	while (_size > 0) {
 		
-		--_size;
-		if (not _f(_array[_size], _size, _data)) {
+		if (not _f(_array[--_size], _data)) {
 			return false;
 		}
 	}

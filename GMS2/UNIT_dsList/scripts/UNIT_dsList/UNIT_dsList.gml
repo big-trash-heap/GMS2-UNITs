@@ -23,15 +23,19 @@ function UNIT_dsListDel(_id, _index, _count) {
 	var _idSize = ds_list_size(_id);
 	var _mSize = _idSize - _index;
 	
-	_count = min(_count, _mSize);
-	if (_count <= 0) exit;
-	
-	repeat (_mSize - _count) {
-		
-		_id[| _index] = _id[| _index + _count];
-		++_index;
+	repeat (min(_mSize, _count)) {
+		ds_list_delete(_id, _index);
 	}
-	UNIT_dsListResize(_id, _idSize - _count);
+	
+	//_count = min(_count, _mSize);
+	//if (_count <= 0) exit;
+	
+	//repeat (_mSize - _count) {
+		
+	//	_id[| _index] = _id[| _index + _count];
+	//	++_index;
+	//}
+	//UNIT_dsListResize(_id, _idSize - _count);
 }
 
 /// @param			id
