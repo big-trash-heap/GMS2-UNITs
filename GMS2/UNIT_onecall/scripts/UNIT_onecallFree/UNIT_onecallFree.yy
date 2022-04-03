@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "UNIT::bufferText",
-    "path": "folders/UNIT::bufferText.yy",
+    "name": "UNIT::onecall",
+    "path": "folders/UNIT::onecall.yy",
   },
   "resourceVersion": "1.0",
-  "name": "UNIT_bufferText",
+  "name": "UNIT_onecallFree",
   "tags": [],
   "resourceType": "GMScript",
 }

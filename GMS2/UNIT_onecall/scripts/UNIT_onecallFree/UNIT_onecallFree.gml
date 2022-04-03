@@ -24,13 +24,13 @@ function UNIT_onecallFree() {
 		return;
 	}
 	
-	show_error(____UNIT_ONECALL_ERROR, true);
+	show_error(__UNIT_ONECALL_ERROR, true);
 }
 
 
 #region __private
 
-#macro ____UNIT_ONECALL_ERROR	"UNIT::onecall -> был освобождён и не может быть использован повторно"
+#macro __UNIT_ONECALL_ERROR	"UNIT::onecall -> был освобождён и не может быть использован повторно"
 
 function __UNIT_onecall(_value) {
 	if (__UNIT_onecallData()) {
@@ -41,7 +41,7 @@ function __UNIT_onecall(_value) {
 		return false;
 	}
 	
-	show_error(____UNIT_ONECALL_ERROR, true);
+	show_error(__UNIT_ONECALL_ERROR, true);
 }
 
 function __UNIT_onecallData(_value) {
@@ -56,8 +56,6 @@ function __UNIT_onecallData(_value) {
 	}();
 	return (global.__UNIT_onecall_data >= 0);
 }
-
-function UNIT_onecall() {};
 
 #endregion
 

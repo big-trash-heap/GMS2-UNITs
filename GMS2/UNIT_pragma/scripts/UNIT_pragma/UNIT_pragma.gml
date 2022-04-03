@@ -14,7 +14,7 @@ function UNIT_pragma(_f, _priority=0, _data) {
 		return;
 	}
 	
-	show_error(____UNIT_PRAGMA_ERROR, true);
+	show_error(__UNIT_PRAGMA_ERROR, true);
 }
 
 /*
@@ -29,7 +29,7 @@ function UNIT_pragmaExecute() {
 		while (!ds_priority_empty(global.__UNIT_pragma_data)) {
 			
 			_data = ds_priority_delete_min(global.__UNIT_pragma_data);
-			_data[__UNIT_PRAGMA_CELL._F](_data[__UNIT_PRAGMA_CELL._VALUE]);
+			_data[___UNIT_PRAGMA_CELL._F](_data[___UNIT_PRAGMA_CELL._VALUE]);
 		}
 		
 		ds_priority_destroy(global.__UNIT_pragma_data);
@@ -44,15 +44,15 @@ function UNIT_pragmaExecute() {
 		return;
 	}
 	
-	show_error(____UNIT_PRAGMA_ERROR, true);
+	show_error(__UNIT_PRAGMA_ERROR, true);
 }
 
 
 #region __private
 
-#macro ____UNIT_PRAGMA_ERROR "UNIT::pragma -> очередь уже использована"
+#macro __UNIT_PRAGMA_ERROR "UNIT::pragma -> очередь уже использована"
 
-enum __UNIT_PRAGMA_CELL { _F, _VALUE };
+enum ___UNIT_PRAGMA_CELL { _F, _VALUE };
 
 function __UNIT_pragma() {
 	static _void = function() {

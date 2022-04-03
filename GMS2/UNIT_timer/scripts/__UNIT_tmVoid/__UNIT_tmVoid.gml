@@ -27,23 +27,23 @@ function __UNIT_tmOverride_get_ftick() {
 	return self.__ftick;
 }
 
-#macro ____UNIT_TM_SKIP_VOID_TICK \
+#macro __UNIT_TM_SKIP_VOID_TICK \
 if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) { \
 show_debug_message("UNIT::tm::skip -> " + string(_timer)); \
 }
 
-#macro ____UNIT_TM_SKIP_VOID_TICK_LOOP \
+#macro __UNIT_TM_SKIP_VOID_TICK_LOOP \
 if (UNIT_PREPROCESSOR_TM_ENABLE_SKIP_VOID_TICK) { \
 if (_timer._get_ftick() == __UNIT_tmVoid) { \
-	____UNIT_TM_SKIP_VOID_TICK; \
+	__UNIT_TM_SKIP_VOID_TICK; \
 	return false; \
 } \
 }
 
-#macro ____UNIT_TM_SKIP_VOID_TICK_TIMELAPSE \
+#macro __UNIT_TM_SKIP_VOID_TICK_TIMELAPSE \
 if (UNIT_PREPROCESSOR_TM_ENABLE_SKIP_VOID_TICK) { \
 if (_timer._get_ftick() == __UNIT_tmVoid) { \
-	____UNIT_TM_SKIP_VOID_TICK; \
+	__UNIT_TM_SKIP_VOID_TICK; \
 	return (_timer.__step == 0); \
 } \
 }

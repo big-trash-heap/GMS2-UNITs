@@ -80,7 +80,7 @@ function __UNIT_TmHandlerGlobal() : UNIT_TmHandlerSimpleExt() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_CLONE, true);
+		show_error(__UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}

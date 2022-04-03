@@ -220,7 +220,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_CLONE, true);
+		show_error(__UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -235,7 +235,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_CLONE, true);
+		show_error(__UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -263,7 +263,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_BIND_SWITCH, true);
+		show_error(__UNIT_TM_ERROR_BIND_SWITCH, true);
 		
 		}
 	}
@@ -277,7 +277,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_BIND_SWITCH, true);
+		show_error(__UNIT_TM_ERROR_BIND_SWITCH, true);
 		
 		}
 	}
@@ -291,7 +291,7 @@ function __UNIT_TmTimerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_BIND_SWITCH, true);
+		show_error(__UNIT_TM_ERROR_BIND_SWITCH, true);
 		
 		}
 	}

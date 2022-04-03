@@ -26,7 +26,7 @@ function UNIT_TmTimerLoop(_ftick, _finit, _ffree) : UNIT_TmTimer() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_CLONE, true);
+		show_error(__UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -48,7 +48,7 @@ function UNIT_TmTimerLoopExt(_ftick, _finit, _ffree) : UNIT_TmTimer() constructo
 		if (_timer.__play == true) {
 			
 			#region PREPROCESSOR
-			____UNIT_TM_SKIP_VOID_TICK_LOOP;
+			__UNIT_TM_SKIP_VOID_TICK_LOOP;
 			#endregion
 			
 			return _timer.__ftick(_handler, _timer, _super);
@@ -95,7 +95,7 @@ function UNIT_TmTimerLoopExt(_ftick, _finit, _ffree) : UNIT_TmTimer() constructo
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_CLONE, true);
+		show_error(__UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}

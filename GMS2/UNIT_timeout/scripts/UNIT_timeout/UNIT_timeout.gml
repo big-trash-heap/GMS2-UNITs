@@ -15,7 +15,7 @@ function UNIT_timeoutCreateAsync() {
 function UNIT_timeoutAppend(_timeout, _time, _f, _data) {
 	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
-	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_TIMEOUT_ERROR, true);
+	if (!UNIT_timeoutExists(_timeout)) show_error(___UNIT_TIMEOUT_ERROR, true);
 	
 	}
 	
@@ -61,7 +61,7 @@ function UNIT_timeoutAppendRepeat(_timeout, _time, _count, _f, _data) {
 function UNIT_timeoutClear(_timeout) {
 	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
-	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_TIMEOUT_ERROR, true);
+	if (!UNIT_timeoutExists(_timeout)) show_error(___UNIT_TIMEOUT_ERROR, true);
 	
 	}
 	
@@ -77,7 +77,7 @@ function UNIT_timeoutClear(_timeout) {
 function UNIT_timeoutExecute(_timeout) {
 	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
-	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_TIMEOUT_ERROR, true);
+	if (!UNIT_timeoutExists(_timeout)) show_error(___UNIT_TIMEOUT_ERROR, true);
 	
 	}
 	
@@ -92,7 +92,7 @@ function UNIT_timeoutExecute(_timeout) {
 	while (not ds_priority_empty(_ds)) {
 		
 		_min = ds_priority_delete_min(_ds);
-		_min[__UNIT_TIMEOUT_VAL._F](_min[__UNIT_TIMEOUT_VAL._DATA]);
+		_min[___UNIT_TIMEOUT_VAL._F](_min[___UNIT_TIMEOUT_VAL._DATA]);
 	}
 	
 }
@@ -101,7 +101,7 @@ function UNIT_timeoutExecute(_timeout) {
 function UNIT_timeoutFree(_timeout) {
 	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
-	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_TIMEOUT_ERROR, true);
+	if (!UNIT_timeoutExists(_timeout)) show_error(___UNIT_TIMEOUT_ERROR, true);
 	
 	}
 	
@@ -117,7 +117,7 @@ function UNIT_timeoutFree(_timeout) {
 function UNIT_timeoutTick(_timeout) {
 	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
-	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_TIMEOUT_ERROR, true);
+	if (!UNIT_timeoutExists(_timeout)) show_error(___UNIT_TIMEOUT_ERROR, true);
 	
 	}
 	
@@ -134,7 +134,7 @@ function UNIT_timeoutExists(_timeout) {
 function UNIT_timeoutSize(_timeout) {
 	if (UNIT_PREPROCESSOR_TIMEOUT_ENABLE_CHECK_EXISTS) {
 	
-	if (!UNIT_timeoutExists(_timeout)) show_error(____UNIT_TIMEOUT_ERROR, true);
+	if (!UNIT_timeoutExists(_timeout)) show_error(___UNIT_TIMEOUT_ERROR, true);
 	
 	}
 	
@@ -144,9 +144,9 @@ function UNIT_timeoutSize(_timeout) {
 
 #region __private
 
-#macro ____UNIT_TIMEOUT_ERROR "UNIT::timeout -> передан не существующий экземпляр"
+#macro ___UNIT_TIMEOUT_ERROR "UNIT::timeout -> передан не существующий экземпляр"
 
-enum __UNIT_TIMEOUT_VAL { _F, _DATA };
+enum ___UNIT_TIMEOUT_VAL { _F, _DATA };
 
 function UNIT_timeout() {};
 
@@ -182,8 +182,8 @@ function __UNIT_TimeoutSync() constructor {
 			_min = ds_priority_find_min(_ds);
 			if (ds_priority_find_priority(_ds, _min) < _time) {
 				
-				_f = _min[__UNIT_TIMEOUT_VAL._F];
-				_f(_timeout, _f, _min[__UNIT_TIMEOUT_VAL._DATA]);
+				_f = _min[___UNIT_TIMEOUT_VAL._F];
+				_f(_timeout, _f, _min[___UNIT_TIMEOUT_VAL._DATA]);
 				ds_priority_delete_value(_ds, _min);
 			}
 			else {
@@ -236,8 +236,8 @@ function __UNIT_TimeoutAsync() constructor {
 			_min = ds_priority_find_min(_ds);
 			if (ds_priority_find_priority(_ds, _min) < _time) {
 			
-				_f = _min[__UNIT_TIMEOUT_VAL._F];
-				_f(_timeout, _f, _min[__UNIT_TIMEOUT_VAL._DATA]);
+				_f = _min[___UNIT_TIMEOUT_VAL._F];
+				_f(_timeout, _f, _min[___UNIT_TIMEOUT_VAL._DATA]);
 				ds_priority_delete_value(_ds, _min);
 			}
 			else {

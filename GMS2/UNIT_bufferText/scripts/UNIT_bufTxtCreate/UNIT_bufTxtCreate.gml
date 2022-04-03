@@ -104,9 +104,3 @@ function UNIT_bufTxtCapacity(_buffer) {
 }
 
 
-#region __private
-
-function UNIT_bufferText() {};
-
-#endregion
-

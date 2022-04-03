@@ -59,7 +59,7 @@ function UNIT_TmTimerLoopAsync(_ftick, _finit, _ffree) : UNIT_TmTimerLoop(undefi
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_CLONE, true);
+		show_error(__UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -86,7 +86,7 @@ function UNIT_TmTimerLoopAsyncExt(_ftick, _finit, _ffree) : UNIT_TmTimerLoopExt(
 			_timer.__ctime = _ctime;
 			
 			#region PREPROCESSOR
-			____UNIT_TM_SKIP_VOID_TICK_LOOP;
+			__UNIT_TM_SKIP_VOID_TICK_LOOP;
 			#endregion
 			
 			return _timer.__ftick(_handler, _timer, _super, _diff);
@@ -120,7 +120,7 @@ function UNIT_TmTimerLoopAsyncExt(_ftick, _finit, _ffree) : UNIT_TmTimerLoopExt(
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_CLONE, true);
+		show_error(__UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}

@@ -44,7 +44,7 @@ function UNIT_TmHandler()
 	
 	self.__timers = [];
 	self.__count  = 0;
-	self.__clear  = __UNIT_TM_CLEAR._IS_CLEAR;
+	self.__clear  = ___UNIT_TM_CLEAR._IS_CLEAR;
 	
 	static __unbind = function(_timer, _inTick) {
 		
@@ -110,11 +110,11 @@ function UNIT_TmHandler()
 			#region PREPROCESSOR
 			if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_CHECK_ERROR_TICK) {
 			
-			if (self.__clear != __UNIT_TM_CLEAR._IS_CLEAR) {
+			if (self.__clear != ___UNIT_TM_CLEAR._IS_CLEAR) {
 				show_error("UNIT::tm -> нельзя вызывать tick во время вызова tick, clear, clearLoop", true);
 			}
 			
-			self.__clear = __UNIT_TM_CLEAR._IS_BLOCK;
+			self.__clear = ___UNIT_TM_CLEAR._IS_BLOCK;
 			
 			}
 			#endregion
@@ -200,7 +200,7 @@ function UNIT_TmHandler()
 			#region PREPROCESSOR
 			if (UNIT_PREPROCESSOR_TM_HANDLER_ENABLE_CHECK_ERROR_TICK) {
 			
-			self.__clear = __UNIT_TM_CLEAR._IS_CLEAR;
+			self.__clear = ___UNIT_TM_CLEAR._IS_CLEAR;
 			
 			}
 			#endregion
@@ -227,11 +227,11 @@ function UNIT_TmHandler()
 				if (_timer != undefined) {
 					
 					self.__unbind(_timer, false);
-					if (self.__clear == __UNIT_TM_CLEAR._IS_CLEAR) return;
+					if (self.__clear == ___UNIT_TM_CLEAR._IS_CLEAR) return;
 				}
 			}
 			
-			self.__clear = __UNIT_TM_CLEAR._IS_CLEAR;
+			self.__clear = ___UNIT_TM_CLEAR._IS_CLEAR;
 		}
 	}
 	
@@ -258,7 +258,7 @@ function UNIT_TmHandler()
 			#region PREPROCESSOR
 			if (UNIT_PREPROCESSOR_TM_ENABLE_LOG) {
 			
-			if (self.__clear != __UNIT_TM_CLEAR._IS_CLEAR) {
+			if (self.__clear != ___UNIT_TM_CLEAR._IS_CLEAR) {
 				show_debug_message("\tUNIT::tm::clearLoop -> возможный вызов TmHandler.clearLoop в TmHandler.clearLoop. Это может привести к зависанию");
 			}
 			
@@ -282,7 +282,7 @@ function UNIT_TmHandler()
 					if (_timer != undefined) {
 						
 						self.__unbind(_timer, false);
-						if (self.__clear == __UNIT_TM_CLEAR._IS_CLEAR) {
+						if (self.__clear == ___UNIT_TM_CLEAR._IS_CLEAR) {
 							
 							_countAttempts = -10; // magic-number
 							return;
@@ -302,7 +302,7 @@ function UNIT_TmHandler()
 			}
 			#endregion
 			
-			self.__clear = __UNIT_TM_CLEAR._IS_CLEAR;
+			self.__clear = ___UNIT_TM_CLEAR._IS_CLEAR;
 		}
 		
 	}
@@ -399,11 +399,11 @@ function UNIT_TmHandler()
 
 #region __private
 
-#macro ____UNIT_TM_ERROR_CLONE          "UNIT::tm -> UNIT_PREPROCESSOR_TM_ENABLE_CLONE отключена"
-#macro ____UNIT_TM_ERROR_BIND_SWITCH    "UNIT::tm -> UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH отключена"
-#macro ____UNIT_TM_ERROR_HANDLER        "UNIT::tm -> UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK отключена"
+#macro __UNIT_TM_ERROR_CLONE          "UNIT::tm -> UNIT_PREPROCESSOR_TM_ENABLE_CLONE отключена"
+#macro __UNIT_TM_ERROR_BIND_SWITCH    "UNIT::tm -> UNIT_PREPROCESSOR_TM_ENABLE_BIND_SWITCH отключена"
+#macro __UNIT_TM_ERROR_HANDLER        "UNIT::tm -> UNIT_PREPROCESSOR_TM_HANDLER_EXTEND_TICK отключена"
 
-enum __UNIT_TM_CLEAR {
+enum ___UNIT_TM_CLEAR {
 	_IS_CLEAR = -1,
 	_IS_BLOCK = -2,
 };
@@ -441,7 +441,7 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_CLONE, true);
+		show_error(__UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -463,7 +463,7 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_CLONE, true);
+		show_error(__UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -481,7 +481,7 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_HANDLER, true);
+		show_error(__UNIT_TM_ERROR_HANDLER, true);
 		
 		}
 	}
@@ -497,7 +497,7 @@ function __UNIT_TmHandlerPreprocessor() constructor {
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_HANDLER, true);
+		show_error(__UNIT_TM_ERROR_HANDLER, true);
 		
 		}
 	}

@@ -16,6 +16,7 @@
 								//
 #macro UNIT_MACRO_DEFCHAR		"▯"
 
+#macro _                        undefined
 
 #region __private
 

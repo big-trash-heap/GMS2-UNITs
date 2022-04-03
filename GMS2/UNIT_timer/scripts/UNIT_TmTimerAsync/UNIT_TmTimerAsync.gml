@@ -46,7 +46,7 @@ function UNIT_TmTimerAsync(_milisec, _ftick, _finit, _ffree) : __UNIT_TmTimerTim
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_CLONE, true);
+		show_error(__UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -92,7 +92,7 @@ function UNIT_TmTimerAsyncExt(_milisec, _ftick, _finit, _ffree) : __UNIT_TmTimer
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_CLONE, true);
+		show_error(__UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
@@ -124,7 +124,7 @@ function __UNIT_tmAsyncTick(_handler, _timer, _super) {
 		_timer.__ctime = _ctime;
 		
 		#region PREPROCESSOR
-		____UNIT_TM_SKIP_VOID_TICK_TIMELAPSE;
+		__UNIT_TM_SKIP_VOID_TICK_TIMELAPSE;
 		#endregion
 		
 		if (_timer.__ftick(_handler, _timer, _super, _step) == true) {

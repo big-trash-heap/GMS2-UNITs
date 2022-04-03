@@ -25,7 +25,7 @@ function __UNIT_TmTimerTimelapse(_steps, _ftick=undefined, _finit=undefined, _ff
 		}
 		else {
 		
-		show_error(____UNIT_TM_ERROR_CLONE, true);
+		show_error(__UNIT_TM_ERROR_CLONE, true);
 		
 		}
 	}
