@@ -48,7 +48,7 @@ function UNIT_Grid(_w=0, _h=0, _value=0) constructor {
 	static get = function(_x, _y) {
 		if (UNIT_PREPROCESSOR_GRID_ENABLE_CHECK_BOUND) {
 		
-		if (!self.exists(_x, _y)) show_error(____UNIT_GRID_ERROR, true);
+		if (!self.exists(_x, _y)) show_error(__UNIT_GRID_ERROR, true);
 		
 		}
 		
@@ -58,7 +58,7 @@ function UNIT_Grid(_w=0, _h=0, _value=0) constructor {
 	static set = function(_x, _y, _value) {
 		if (UNIT_PREPROCESSOR_GRID_ENABLE_CHECK_BOUND) {
 		
-		if (!self.exists(_x, _y)) show_error(____UNIT_GRID_ERROR, true);
+		if (!self.exists(_x, _y)) show_error(__UNIT_GRID_ERROR, true);
 		
 		}
 		
@@ -106,7 +106,7 @@ function UNIT_Grid(_w=0, _h=0, _value=0) constructor {
 
 #region __private
 
-#macro ____UNIT_GRID_ERROR "UNIT::grid -> выход за границу"
+#macro __UNIT_GRID_ERROR "UNIT::grid -> выход за границу"
 
 #endregion
 

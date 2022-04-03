@@ -99,7 +99,7 @@ function UNIT_deepCopy(_value, _dpt=infinity, _nameMethodClone="_clone") {
 			_val = _refs[--_size];
 			_ref = __UNIT_deepCopy_metaRef(_rmap, _val);
 			
-			_ref.code = 0x4;
+			_ref.code = ___UNIT_DEEP_COPY_CODE._WRITE_IN_CELL;
 			
 			if (is_array(_val)) {
 				
@@ -235,6 +235,12 @@ function UNIT_deepCopy(_value, _dpt=infinity, _nameMethodClone="_clone") {
 
 #region __private
 
+enum ___UNIT_DEEP_COPY_CODE { 
+	_CREATE_CELL = 0x1,
+	_EXISTS_CELL = 0x2,
+	_WRITE_IN_CELL = 0x4,
+};
+
 function __UNIT_deepCopy_isRef(_value) {
 	var _type = typeof(_value);
 	return (_type == "array" || _type == "struct");
@@ -245,7 +251,7 @@ function __UNIT_deepCopy_metaRef(_id, _ref) {
 	if (_meta == undefined) {
 		
 		_meta = {
-			code: 0x1,
+			code: ___UNIT_DEEP_COPY_CODE._CREATE_CELL,
 			sarr: [],
 			sstc: [],
 		}
@@ -254,13 +260,13 @@ function __UNIT_deepCopy_metaRef(_id, _ref) {
 		return _meta;
 	}
 	
-	_meta.code = max(0x2, _meta.code);
+	_meta.code = max(___UNIT_DEEP_COPY_CODE._EXISTS_CELL, _meta.code);
 	return _meta;
 }
 
 function __UNIT_deepCopy_metaArrSet(_array, _key, _id, _ref) {
 	var _meta = __UNIT_deepCopy_metaRef(_id, _ref);
-	if (_meta.code == 0x4) {
+	if (_meta.code == ___UNIT_DEEP_COPY_CODE._WRITE_IN_CELL) {
 		array_set(_array, _key, _meta.ref);
 	}
 	else {
@@ -271,7 +277,7 @@ function __UNIT_deepCopy_metaArrSet(_array, _key, _id, _ref) {
 
 function __UNIT_deepCopy_metaStcSet(_struct, _key, _id, _ref) {
 	var _meta = __UNIT_deepCopy_metaRef(_id, _ref);
-	if (_meta.code == 0x4) {
+	if (_meta.code == ___UNIT_DEEP_COPY_CODE._WRITE_IN_CELL) {
 		variable_struct_set(_struct, _key, _meta.ref);
 	}
 	else {
@@ -329,14 +335,14 @@ function __UNIT_deepCopy_nd_valueSet(_sname, _sSet, _sMetaSet, _rmap, _value, _d
 		var _ref = __UNIT_deepCopy_metaRef(_rmap, _value);
 		array_push(_ref[$ _sname], _data, _key);
 		
-		if (_ref.code == 0x1) {
+		if (_ref.code == ___UNIT_DEEP_COPY_CODE._CREATE_CELL) {
 			array_push(_refs_meth, _value);
 		}
 	}
 	else
 	if (__UNIT_deepCopy_isRef(_value)) {
 		
-		if (_sMetaSet(_data, _key, _rmap, _value) == 0x1) {
+		if (_sMetaSet(_data, _key, _rmap, _value) == ___UNIT_DEEP_COPY_CODE._CREATE_CELL) {
 			array_push(_refs_next, _value);
 		}
 	}
