@@ -1,0 +1,29 @@
+
+Main libs
+
+1. UNIT_array
+2. UNIT_struct
+3. UNIT_bufferText
+4. UNIT_functors
+5. UNIT_compare
+6. UNIT_macro
+7. UNIT_dsList
+8. UNIT_pragma
+9. UNIT_event
+10. UNIT_sort
+11. UNIT_deepCopy
+12. UNIT_toString
+13. UNIT_getter
+
+Additional libs
+
+1. UNIT_angle
+2. UNIT_simpleCollision
+3. UNIT_tilemap
+
+Not significant / not developed
+
+1. UNIT_grid
+2. UNIT_math
+3. UNIT_tilemap
+4. UNIT_wrap

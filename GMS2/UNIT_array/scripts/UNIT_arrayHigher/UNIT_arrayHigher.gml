@@ -1,17 +1,24 @@
 
-
 #region modify
 
-//					f = function(value, index, data)
-/// @function		UNIT_arrMap(array, f, [data]);
+// f = function(value, index, data)
+
+/// @func UNIT_arrMap(array, f, [data])
+/// @param {Array<Any>} array
+/// @param {Function} f
+/// @param {Any} [data]
 function UNIT_arrMap(_array, _f, _data) {
 	var _size = array_length(_array);
-	for (var _i = 0; _i < _size; ++_i) 
+	for (var _i = 0; _i < _size; ++_i) {
 		array_set(_array, _i, _f(_array[_i], _i, _data));
+	}
 }
+
+
 
 //					f = function(value, index, data)
 /// @function		UNIT_arrFilter(array, f, [data]);
+
 function UNIT_arrFilter(_array, _f, _data) {
 	
 	var _size = array_length(_array);
@@ -141,6 +148,10 @@ function UNIT_arrForEach(_array, _f, _data, _index=0) {
 		if (_f(_array[_index], _index, _data)) return _index;
 	
 	return -1;
+}
+
+function UNIT_arrGroup(_array, _f, _data) {
+	
 }
 
 //					f = function(value, data)

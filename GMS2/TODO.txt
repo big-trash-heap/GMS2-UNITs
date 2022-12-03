@@ -1,10 +1,4 @@
 
-UNIT::timer:
-	1 1 1 &2 1 clear &8 222 444 fff() 444 222 clearAll 0 fff() end hello
-	
-	Требуется полный редизайн, упрощение и улучшение
-
-
 UNIT::simpleCollision
 	
 	1. Пересечения с тайлами

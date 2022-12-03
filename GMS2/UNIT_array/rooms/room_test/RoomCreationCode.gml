@@ -1,8 +1,11 @@
+
+
 function apiFunctorId(_value) {
+	var _ = argument[1];
 	return _value;
 }
 
-function apiDebugAssert(_assert, _mess) {
+function apiDebugAssert(_assert=undefined, _mess=undefined) {
 	if (!_assert) {
 		
 		clipboard_set_text("\"" + _mess + "\"");
@@ -11,7 +14,7 @@ function apiDebugAssert(_assert, _mess) {
 }
 
 var _f = apiFunctorId;
-var _array;
+var array;
 		
 #region UNIT_arrPlace
 		
@@ -154,6 +157,7 @@ show_debug_message("\t UNIT_arrInsEm \t\tis work");
 #region UNIT_arrUnshift
 		
 _array = [1, 2, 3, 4, 5];
+
 apiDebugAssert(
 	array_equals(
 		_f(_array, UNIT_arrUnshift(_array, 8, 9)), 
@@ -611,7 +615,7 @@ show_debug_message("\t UNIT_arrIns  \t\t\tis work");
 
 
 var _f = function(_value) { return _value > 5; };
-var _array;
+var array;
 		
 var _sample0 = [1, 8, 4, 1, 10, 20, -1, 3, 7, 11, 1];
 var _sample1 = [1, "hello", 1, 2, undefined, "world", [], {}, 123, 1];

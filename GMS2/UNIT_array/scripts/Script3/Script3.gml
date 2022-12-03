@@ -1,10 +1,14 @@
 
+function constr() constructor {
+	
+	self.name = "kirill";
+	
+	static met = method({ cont: "hello" }, function() {
+		
+		show_debug_message(self);
+		show_debug_message(other);
+	});
+}
 
-//var _method = "@@Dispose@@";
-
-//var struct = {}
-//struct[$ _method] = function() {
-//	show_message("destroyed");	
-//}
-
-//delete struct;
+var nn = new constr();
+nn.met();
